@@ -65,11 +65,24 @@ replace() {
     # TODO: Check available disk space
     # Should use report_serious_problem
 
-    if [ -e "$2" ]; then
-	echo mv "$2" "$3"
-	echo ln -s "$3" "$2"
-	return 0;
+    if [ "$1" == "d" ]; then
+	if [ -d "$2" ]; then
+	    echo mv "$2" "$3"
+	    echo ln -s "$3" "$2"
+	else
+	    report_serious_problem "$2" "Unexpected type (not a directory)"
+	    return 1
+	fi
+    elif [ "$1" == "d" ]; then
+	if [ -f "$2" ]; then
+	    echo mv "$2" "$3"
+	    echo ln -s "$3" "$2"
+	else
+	    report_serious_problem "$2" "Unexpected type (not a file)"
+	    return 1
+	fi
     fi
+    return 0
 }
 
 
