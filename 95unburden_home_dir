@@ -21,12 +21,16 @@ if [ "${UNBURDEN_HOME_DIR}" != "false" -a \
 	test -r "${list}" || continue
 
 	# Clean up this and that
-	cat "${list}" | while read item replacement ; do
-	    if [ -z "${item}" ]; then
+	cat "${list}" | while read type item replacement ; do
+	    if [ -z "${type}" ]; then
 		continue
 	    fi
-	    if [ -z "${replacement}" ]; then
-		echo "Can't parse '${item}', skipping..." 1>&2
+	    if [ -z "${item}" -o -z "${replacement}" ]; then
+		echo "Can't parse '${type} ${item} ${replacement}', skipping..." 1>&2
+		continue
+	    fi
+	    if [ "${type}" != "d" -a  "${type}" != "f"  ]; then
+		echo "Can't parse type '${type}', must be 'd' or 'f', skipping..." 1>&2
 		continue
 	    fi
 
@@ -34,7 +38,7 @@ if [ "${UNBURDEN_HOME_DIR}" != "false" -a \
                                    sed "s|%u|$(id -u -n)|g;s|%s|${replacement}|g;")"
 	    for i in ${HOME}/${item}; do
 		if [ -e "${i}" ]; then
-		    echo "${i} => ${target}"
+		    echo "${type}: ${i} => ${target}"
 		fi
 	    done
 	done
