@@ -5,6 +5,7 @@
 BASENAME=unburden_home_dir
 TARGETDIR=/scratch
 FILELAYOUT='.%u-%s'
+DEBUG=echo
 
 if [ -e /etc/default/"${BASENAME}" ]; then
         . /etc/default/"${BASENAME}"
@@ -53,10 +54,10 @@ replace() {
 	else
 	    # Case 1: directory
 	    if [ "$1" == "d" ]; then
-		echo mkdir -p "$3"
+		${DEBUG} mkdir -p "$3"
 	    # Case 2: file
 	    elif [ "$1" == "f" ]; then
-		echo touch "$3"
+		${DEBUG} touch "$3"
 	    fi
 	fi
 	return 0
@@ -67,16 +68,16 @@ replace() {
 
     if [ "$1" == "d" ]; then
 	if [ -d "$2" ]; then
-	    echo mv "$2" "$3"
-	    echo ln -s "$3" "$2"
+	    ${DEBUG} mv "$2" "$3"
+	    ${DEBUG} ln -s "$3" "$2"
 	else
 	    report_serious_problem "$2" "Unexpected type (not a directory)"
 	    return 1
 	fi
     elif [ "$1" == "d" ]; then
 	if [ -f "$2" ]; then
-	    echo mv "$2" "$3"
-	    echo ln -s "$3" "$2"
+	    ${DEBUG} mv "$2" "$3"
+	    ${DEBUG} ln -s "$3" "$2"
 	else
 	    report_serious_problem "$2" "Unexpected type (not a file)"
 	    return 1
