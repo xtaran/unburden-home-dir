@@ -15,7 +15,11 @@ if [ -e "${HOME}/.${BASENAME}" ]; then
 fi
 
 report_problem() {
-    echo "Can't handle $1: $2" 1>&2
+    echo "WARNING: Can't handle $1: $2" 1>&2
+}
+
+report_serious_problem() {
+    echo "ERROR: Can't handle $1: $2" 1>&2
 }
 
 replace() {
@@ -59,6 +63,7 @@ replace() {
     fi
 
     # TODO: Check available disk space
+    # Should use report_serious_problem
 
     if [ -e "$2" ]; then
 	echo mv "$2" "$3"
