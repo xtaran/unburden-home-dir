@@ -15,12 +15,16 @@ if [ -e "${HOME}/.${BASENAME}" ]; then
         . "${HOME}/.${BASENAME}"
 fi
 
+warn() {
+    echo "$1" 1>&2
+}
+
 report_problem() {
-    echo "WARNING: Can't handle $1: $2" 1>&2
+    warn "WARNING: Can't handle $1: $2"
 }
 
 report_serious_problem() {
-    echo "ERROR: Can't handle $1: $2" 1>&2
+    warn "ERROR: Can't handle $1: $2"
 }
 
 replace() {
@@ -99,11 +103,11 @@ if [ "${UNBURDEN_HOME_DIR}" != "false" -a \
 		continue
 	    fi
 	    if [ -z "${item}" -o -z "${replacement}" ]; then
-		echo "Can't parse '${type} ${item} ${replacement}', skipping..." 1>&2
+		warn "Can't parse '${type} ${item} ${replacement}', skipping..."
 		continue
 	    fi
 	    if [ "${type}" != "d" -a  "${type}" != "f"  ]; then
-		echo "Can't parse type '${type}', must be 'd' or 'f', skipping..." 1>&2
+		warn "Can't parse type '${type}', must be 'd' or 'f', skipping..."
 		continue
 	    fi
 
