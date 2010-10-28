@@ -2,13 +2,22 @@
 # /etc/X11/Xsession.d/95unburden_home_dir
 # This file is sourced by Xsession(5), not executed.
 
-if [ -e /etc/default/unburden_home_dir ]; then
-        . /etc/default/unburden_home_dir
+BASENAME=unburden_home_dir
+TARGETDIR=/scratch/
+FILELAYOUT='.%u-%s'
+
+if [ -e /etc/default/"${BASENAME}" ]; then
+        . /etc/default/"${BASENAME}"
 fi
 
 if [ "${UNBURDEN_HOME_DIR}" != "false" -a \
      "${UNBURDEN_HOME_DIR}" != "no" ]; then
 
-    # Clean up this and that
+    for list in "/etc/${BASENAME}_list" "${HOME}/.${BASENAME}_list"; do
 
+	# Clean up this and that
+	cat "${list}" | while read item; do
+
+	done
+    done
 fi
