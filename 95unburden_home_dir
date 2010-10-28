@@ -81,7 +81,7 @@ replace() {
 	else
 	    # Case 1: directory
 	    if [ "$1" = "d" ]; then
-		${DEBUG} mkdir -p "$3"
+		${DEBUG} mkdir -pv "$3"
 	    # Case 2: file
 	    elif [ "$1" = "f" ]; then
 		${DEBUG} touch "$3"
@@ -96,12 +96,12 @@ replace() {
     if [ "$1" = "d" ]; then
 	if [ -d "$2" ]; then
 	    if [ "${REMOVAL}" = "yes" ]; then
-		${DEBUG} rm -r "$2"
-		${DEBUG} mkdir -p "$3"
+		${DEBUG} rm -rv "$2"
+		${DEBUG} mkdir -pv "$3"
 	    else
-		${DEBUG} mv "$2" "$3"
+		${DEBUG} mv -v "$2" "$3"
 	    fi
-	    ${DEBUG} ln -s "$3" "$2"
+	    ${DEBUG} ln -vs "$3" "$2"
 	else
 	    report_serious_problem "$2" "Unexpected type (not a directory)"
 	    return 1
@@ -109,12 +109,12 @@ replace() {
     elif [ "$1" = "d" ]; then
 	if [ -f "$2" ]; then
 	    if [ "${REMOVAL}" = "yes" ]; then
-		${DEBUG} rm "$2"
+		${DEBUG} rm -v "$2"
 		${DEBUG} touch "$3"
 	    else
-		${DEBUG} mv "$2" "$3"
+		${DEBUG} mv -v "$2" "$3"
 	    fi
-	    ${DEBUG} ln -s "$3" "$2"
+	    ${DEBUG} ln -vs "$3" "$2"
 	else
 	    report_serious_problem "$2" "Unexpected type (not a file)"
 	    return 1
