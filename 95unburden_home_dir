@@ -21,7 +21,7 @@ if [ "${UNBURDEN_HOME_DIR}" != "false" -a \
 	test -r "${list}" || continue
 
 	# Clean up this and that
-	cat "${list}" | while read type item replacement ; do
+	grep -v '^#' "${list}" | while read type item replacement ; do
 	    if [ -z "${type}" ]; then
 		continue
 	    fi
