@@ -10,6 +10,10 @@ if [ -e /etc/default/"${BASENAME}" ]; then
         . /etc/default/"${BASENAME}"
 fi
 
+if [ -e "${HOME}/.${BASENAME}" ]; then
+        . "${HOME}/.${BASENAME}"
+fi
+
 if [ "${UNBURDEN_HOME_DIR}" != "false" -a \
      "${UNBURDEN_HOME_DIR}" != "no" ]; then
 
