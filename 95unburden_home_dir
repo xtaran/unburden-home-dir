@@ -39,6 +39,11 @@ if [ -e "${HOME}/.${BASENAME}" ]; then
         . "${HOME}/.${BASENAME}"
 fi
 
+# Set proper umask when creating files or directories. Save current
+# umask before.
+OLDUMASK=$(umask)
+umask 077
+
 warn() {
     echo "$1" 1>&2
 }
@@ -182,3 +187,6 @@ if [ "${UNBURDEN_HOME_DIR}" != "false" -a \
 	done
     done
 fi
+
+# Restore original umask
+umask "$OLDUMASK"
