@@ -28,6 +28,7 @@ BASENAME=unburden_home_dir
 TARGETDIR=/scratch
 FILELAYOUT='.%u-%s'
 REMOVAL=no
+CREATE=yes
 DEBUG=echo
 
 if [ -e /etc/default/"${BASENAME}" ]; then
@@ -50,7 +51,36 @@ report_serious_problem() {
     warn "ERROR: Can't handle $1: $2"
 }
 
+create_symlink_and_parents() {
+    ${DEBUG} mkdir -pv $(dirname "$2")
+    ${DEBUG} ln -vi "$1" "$2"
+}
+
 replace() {
+    # Check if the source exists
+    if [ ! -e "$2" ]; then
+	# Shall we create not yet existing directories as symlink?
+	if [ "${CREATE}" = "yes" ]; then
+	    # Case 1: Wildcard entry -> ignore anyway
+	    if echo "$2" | egrep '[*?]' -q; then
+		warn "Skipping creation of '$2' due to wildcard."
+		return 0
+	    fi
+
+	    # Case 2: directory
+	    if [ "$1" = "d" ]; then
+		${DEBUG} mkdir -pv "$3"
+		create_symlink_and_parents "$3" "$2"
+
+	    # Case 3: file
+	    elif [ "$1" = "f" ]; then
+		${DEBUG} touch "$3"
+		create_symlink_and_parents "$3" "$2"
+	    fi
+	fi
+	return 0
+    fi
+
     # Check if source is already a symlink
     if [ -L "$2" ]; then
 	link="$(readlink "$2")"
@@ -147,9 +177,7 @@ if [ "${UNBURDEN_HOME_DIR}" != "false" -a \
 	    target="${TARGETDIR}/$(echo "${FILELAYOUT}" | \
                                    sed "s|%u|$(id -u -n)|g;s|%s|${replacement}|g;")"
 	    for i in ${HOME}/${item}; do
-		if [ -e "${i}" ]; then
-		    replace "${type}" "${i}" "${target}"
-		fi
+		replace "${type}" "${i}" "${target}"
 	    done
 	done
     done
