@@ -1,0 +1,14 @@
+# -*- shell-script -*-
+# /etc/X11/Xsession.d/95unburden_home_dir
+# This file is sourced by Xsession(5), not executed.
+
+if [ -e /etc/default/unburden_home_dir ]; then
+        . /etc/default/unburden_home_dir
+fi
+
+if [ "${UNBURDEN_HOME_DIR}" != "false" -a \
+     "${UNBURDEN_HOME_DIR}" != "no" ]; then
+
+    # Clean up this and that
+
+fi
