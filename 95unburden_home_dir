@@ -3,7 +3,7 @@
 # This file is sourced by Xsession(5), not executed.
 
 BASENAME=unburden_home_dir
-TARGETDIR=/scratch/
+TARGETDIR=/scratch
 FILELAYOUT='.%u-%s'
 
 if [ -e /etc/default/"${BASENAME}" ]; then
@@ -18,10 +18,25 @@ if [ "${UNBURDEN_HOME_DIR}" != "false" -a \
      "${UNBURDEN_HOME_DIR}" != "no" ]; then
 
     for list in "/etc/${BASENAME}_list" "${HOME}/.${BASENAME}_list"; do
+	test -r "${list}" || continue
 
 	# Clean up this and that
-	cat "${list}" | while read item; do
+	cat "${list}" | while read item replacement ; do
+	    if [ -z "${item}" ]; then
+		continue
+	    fi
+	    if [ -z "${replacement}" ]; then
+		echo "Can't parse '${item}', skipping..." 1>&2
+		continue
+	    fi
 
+	    target="${TARGETDIR}/$(echo "${FILELAYOUT}" | \
+                                   sed "s|%u|$(id -u -n)|g;s|%s|${replacement}|g;")"
+	    for i in ${HOME}/${item}; do
+		if [ -e "${i}" ]; then
+		    echo "${i} => ${target}"
+		fi
+	    done
 	done
     done
 fi
