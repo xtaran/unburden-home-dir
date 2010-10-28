@@ -40,14 +40,14 @@ replace() {
 	# Check if target exists and is same type
 	if [ -e "$3" ]; then
 	    # Case 1: directory
-	    if [ "$1" == "d" ]; then
+	    if [ "$1" = "d" ]; then
 		# Does target exist?
 		if [ ! -d "$3" ]; then
 		    report_problem "$2" "Unexpected type (not a directory)"
 		    return 1
 		fi
 	    # Case 2: file
-	    elif [ "$1" == "f" ]; then
+	    elif [ "$1" = "f" ]; then
 		# Does target exist?
 		if [ ! -f "$3" ]; then
 		    report_problem "$2" "Unexpected type (not a regular file)"
@@ -57,10 +57,10 @@ replace() {
 	# Symlink is there, but file or directory not
 	else
 	    # Case 1: directory
-	    if [ "$1" == "d" ]; then
+	    if [ "$1" = "d" ]; then
 		${DEBUG} mkdir -p "$3"
 	    # Case 2: file
-	    elif [ "$1" == "f" ]; then
+	    elif [ "$1" = "f" ]; then
 		${DEBUG} touch "$3"
 	    fi
 	fi
@@ -70,7 +70,7 @@ replace() {
     # TODO: Check available disk space
     # Should use report_serious_problem
 
-    if [ "$1" == "d" ]; then
+    if [ "$1" = "d" ]; then
 	if [ -d "$2" ]; then
 	    ${DEBUG} mv "$2" "$3"
 	    ${DEBUG} ln -s "$3" "$2"
@@ -78,7 +78,7 @@ replace() {
 	    report_serious_problem "$2" "Unexpected type (not a directory)"
 	    return 1
 	fi
-    elif [ "$1" == "d" ]; then
+    elif [ "$1" = "d" ]; then
 	if [ -f "$2" ]; then
 	    ${DEBUG} mv "$2" "$3"
 	    ${DEBUG} ln -s "$3" "$2"
