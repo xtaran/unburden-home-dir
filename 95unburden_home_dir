@@ -14,6 +14,60 @@ if [ -e "${HOME}/.${BASENAME}" ]; then
         . "${HOME}/.${BASENAME}"
 fi
 
+report_problem() {
+    echo "Can't handle $1: $2" 1>&2
+}
+
+replace() {
+    # Check if source is already a symlink
+    if [ -L "$2" ]; then
+	link="$(readlink "$2")"
+	# Check if link target is wanted target
+	if [ "${link}" != "$3" ]; then
+	    report_problem "$2" "${link} not equal $3"
+	    return 1
+	fi
+
+	# Check if target exists and is same type
+	if [ -e "$3" ]; then
+	    # Case 1: directory
+	    if [ "$1" == "d" ]; then
+		# Does target exist?
+		if [ ! -d "$3" ]; then
+		    report_problem "$2" "Unexpected type (not a directory)"
+		    return 1
+		fi
+	    # Case 2: file
+	    elif [ "$1" == "f" ]; then
+		# Does target exist?
+		if [ ! -f "$3" ]; then
+		    report_problem "$2" "Unexpected type (not a regular file)"
+		    return 1
+		fi
+	    fi
+	# Symlink is there, but file or directory not
+	else
+	    # Case 1: directory
+	    if [ "$1" == "d" ]; then
+		echo mkdir -p "$3"
+	    # Case 2: file
+	    elif [ "$1" == "f" ]; then
+		echo touch "$3"
+	    fi
+	fi
+	return 0
+    fi
+
+    # TODO: Check available disk space
+
+    if [ -e "$2" ]; then
+	echo mv "$2" "$3"
+	echo ln -s "$3" "$2"
+	return 0;
+    fi
+}
+
+
 if [ "${UNBURDEN_HOME_DIR}" != "false" -a \
      "${UNBURDEN_HOME_DIR}" != "no" ]; then
 
@@ -38,7 +92,7 @@ if [ "${UNBURDEN_HOME_DIR}" != "false" -a \
                                    sed "s|%u|$(id -u -n)|g;s|%s|${replacement}|g;")"
 	    for i in ${HOME}/${item}; do
 		if [ -e "${i}" ]; then
-		    echo "${type}: ${i} => ${target}"
+		    replace "${type}" "${i}" "${target}"
 		fi
 	    done
 	done
