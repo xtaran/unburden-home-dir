@@ -68,18 +68,12 @@ create_parent_directories() {
 possibly_create_non_existing_stuff() {
     # Shall we create not yet existing directories as symlink?
     if [ "${CREATE}" = "yes" ]; then
-	# Case 1: Wildcard entry -> ignore anyway
-	if echo "$2" | egrep '[*?]' -q; then
-	    warn "Skipping creation of '$2' due to wildcard."
-	    return 0
-	fi
-
-	# Case 2: directory
+	# Case 1: directory
 	if [ "$1" = "d" ]; then
 	    ${DEBUG} mkdir -pv "$3"
 	    create_symlink_and_parents "$3" "$2"
 
-	# Case 3: file
+	# Case 2: file
 	elif [ "$1" = "f" ]; then
 	    create_parent_directories "$3"
 	    ${DEBUG} touch "$3"
@@ -166,19 +160,34 @@ do_it() {
 }
 
 replace() {
+    # replace $type $i $item $replacement
+    type="$1"
+    itemexpanded="$2"
+    itemglob="$3"
+    replacement="$4"
+
+    # Skip entries where wildcard where passed
+    if echo "${itemexpanded}" | egrep '[][*?]' -q; then
+	warn "Skipping '${itemexpanded}' due to unmatched wildcard."
+	return 0
+    fi
+
+    target="${TARGETDIR}/$(echo "${FILELAYOUT}" | \
+                           sed "s|%u|$(id -un)|g;s|%s|${replacement}|g;")"
+
     # Check if the source exists
-    if [ ! -e "$2" ]; then
-	possibly_create_non_existing_stuff "$@"
+    if [ ! -e "${itemexpanded}" ]; then
+	possibly_create_non_existing_stuff "${type}" "${itemexpanded}" "${target}"
     # Check if source is already a symlink
     elif [ -L "$2" ]; then
-	fix_dangling_links "$@"
+	fix_dangling_links "${type}" "${itemexpanded}" "${target}"
 
     # TODO: Check available disk space
     # Should use report_serious_problem
 
     # No symlink yet, then actually move or remove!
     else
-	do_it "$@"
+	do_it "${type}" "${itemexpanded}" "${target}"
     fi
 }
 
@@ -203,10 +212,8 @@ if [ "${UNBURDEN_HOME_DIR}" != "false" -a \
 		continue
 	    fi
 
-	    target="${TARGETDIR}/$(echo "${FILELAYOUT}" | \
-                                   sed "s|%u|$(id -un)|g;s|%s|${replacement}|g;")"
 	    for i in ${HOME}/${item}; do
-		replace "${type}" "${i}" "${target}"
+		replace "${type}" "${i}" "${item}" "${replacement}"
 	    done
 	done
     done
