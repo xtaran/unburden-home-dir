@@ -57,8 +57,12 @@ report_serious_problem() {
 }
 
 create_symlink_and_parents() {
-    ${DEBUG} mkdir -pv $(dirname "$2")
+    create_parent_directories "$2"
     ${DEBUG} ln -vi "$1" "$2"
+}
+
+create_parent_directories() {
+    ${DEBUG} mkdir -pv $(dirname "$1")
 }
 
 possibly_create_non_existing_stuff() {
@@ -77,6 +81,7 @@ possibly_create_non_existing_stuff() {
 
 	# Case 3: file
 	elif [ "$1" = "f" ]; then
+	    create_parent_directories "$3"
 	    ${DEBUG} touch "$3"
 	    create_symlink_and_parents "$3" "$2"
 	fi
@@ -116,6 +121,7 @@ fix_dangling_links() {
 	    ${DEBUG} mkdir -pv "$3"
 	# Case 2: file
 	elif [ "$1" = "f" ]; then
+	    create_parent_directories "$3"
 	    ${DEBUG} touch "$3"
 	fi
     fi
@@ -129,6 +135,7 @@ do_it() {
 		${DEBUG} rm -rv "$2"
 		${DEBUG} mkdir -pv "$3"
 	    else
+		create_parent_directories "$3"
 		${DEBUG} mv -v "$2" "$3"
 	    fi
 	    ${DEBUG} ln -vs "$3" "$2"
@@ -140,8 +147,10 @@ do_it() {
 	if [ -f "$2" ]; then
 	    if [ "${REMOVAL}" = "yes" ]; then
 		${DEBUG} rm -v "$2"
+		create_parent_directories "$3"
 		${DEBUG} touch "$3"
 	    else
+		create_parent_directories "$3"
 		${DEBUG} mv -v "$2" "$3"
 	    fi
 	    ${DEBUG} ln -vs "$3" "$2"
