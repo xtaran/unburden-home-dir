@@ -22,6 +22,10 @@ f .xsession-errors xsession-errors
 d .Trash trash
 d .local/Trash trash
 
+First column: Type (directory or file)
+Second column: Path relative to $HOME to move off to some other location
+Third column: identifier for file or directory in the other location
+
 File format still subject to change.
 
 License:
