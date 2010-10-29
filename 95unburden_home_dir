@@ -159,19 +159,18 @@ do_it() {
 replace() {
     # Check if the source exists
     if [ ! -e "$2" ]; then
-	return possibly_create_non_existing_stuff "$@"
-    fi
-
+	possibly_create_non_existing_stuff "$@"
     # Check if source is already a symlink
-    if [ -L "$2" ]; then
-	return fix_dangling_links "$@"
-    fi
+    elif [ -L "$2" ]; then
+	fix_dangling_links "$@"
 
     # TODO: Check available disk space
     # Should use report_serious_problem
 
     # No symlink yet, then actually move or remove!
-    do_it "$@"
+    else
+	do_it "$@"
+    fi
 }
 
 
