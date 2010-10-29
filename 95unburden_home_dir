@@ -175,6 +175,28 @@ replace() {
     target="${TARGETDIR}/$(echo "${FILELAYOUT}" | \
                            sed "s|%u|$(id -un)|g;s|%s|${replacement}|g;")"
 
+    # Replace %<n> (e.g. %1) with the n-th wildcard match. Uses perl
+    # here as it would be too complicated and way less readable if
+    # written as (bourne) shell script.
+
+    target="$(perl -e '
+
+	my $itemglob     = $ARGV[0];
+	my $itemexpanded = $ARGV[1];
+	my $target       = $ARGV[2];
+
+	# Change from globbing to regexp
+	$itemglob =~ s/\?/(.)/;
+	$itemglob =~ s/\*/(.*)/;
+
+	my @result = $itemexpanded =~ m($itemglob)g;
+
+	$target =~ s/\%(\d+)/$result[$1-1]/eg;
+
+	print $target;
+
+    ' "${itemglob}" "${itemexpanded}" "${target}")"
+
     # Check if the source exists
     if [ ! -e "${itemexpanded}" ]; then
 	possibly_create_non_existing_stuff "${type}" "${itemexpanded}" "${target}"
