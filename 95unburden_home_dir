@@ -141,7 +141,7 @@ replace() {
 	    report_serious_problem "$2" "Unexpected type (not a directory)"
 	    return 1
 	fi
-    elif [ "$1" = "d" ]; then
+    elif [ "$1" = "f" ]; then
 	if [ -f "$2" ]; then
 	    if [ "${REMOVAL}" = "yes" ]; then
 		${DEBUG} rm -v "$2"
@@ -154,6 +154,9 @@ replace() {
 	    report_serious_problem "$2" "Unexpected type (not a file)"
 	    return 1
 	fi
+    else
+	warn "This should never happen."
+	return 255
     fi
     return 0
 }
