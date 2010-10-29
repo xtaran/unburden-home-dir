@@ -5,6 +5,11 @@ them with symbolic links.
 See http://wiki.phys.ethz.ch/readme/application_cache_files for the
 reasoning behind this project.
 
+You should always find the newest code via git at either
+http://git.phys.ethz.ch/?p=unburden_home_dir.git (primary site) or
+http://github.com/xtaran/unburden_home_dir (mirror, or in case you
+prefer to use social forking :-).
+
 An example unburden_home_dir_list file looks like this:
 
 d .cache cache
