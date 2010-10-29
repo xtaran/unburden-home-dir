@@ -180,7 +180,7 @@ if [ "${UNBURDEN_HOME_DIR}" != "false" -a \
 	    fi
 
 	    target="${TARGETDIR}/$(echo "${FILELAYOUT}" | \
-                                   sed "s|%u|$(id -u -n)|g;s|%s|${replacement}|g;")"
+                                   sed "s|%u|$(id -un)|g;s|%s|${replacement}|g;")"
 	    for i in ${HOME}/${item}; do
 		replace "${type}" "${i}" "${target}"
 	    done
