@@ -61,73 +61,68 @@ create_symlink_and_parents() {
     ${DEBUG} ln -vi "$1" "$2"
 }
 
-replace() {
-    # Check if the source exists
-    if [ ! -e "$2" ]; then
-	# Shall we create not yet existing directories as symlink?
-	if [ "${CREATE}" = "yes" ]; then
-	    # Case 1: Wildcard entry -> ignore anyway
-	    if echo "$2" | egrep '[*?]' -q; then
-		warn "Skipping creation of '$2' due to wildcard."
-		return 0
-	    fi
-
-	    # Case 2: directory
-	    if [ "$1" = "d" ]; then
-		${DEBUG} mkdir -pv "$3"
-		create_symlink_and_parents "$3" "$2"
-
-	    # Case 3: file
-	    elif [ "$1" = "f" ]; then
-		${DEBUG} touch "$3"
-		create_symlink_and_parents "$3" "$2"
-	    fi
+possibly_create_non_existing_stuff() {
+    # Shall we create not yet existing directories as symlink?
+    if [ "${CREATE}" = "yes" ]; then
+	# Case 1: Wildcard entry -> ignore anyway
+	if echo "$2" | egrep '[*?]' -q; then
+	    warn "Skipping creation of '$2' due to wildcard."
+	    return 0
 	fi
-	return 0
+
+	# Case 2: directory
+	if [ "$1" = "d" ]; then
+	    ${DEBUG} mkdir -pv "$3"
+	    create_symlink_and_parents "$3" "$2"
+
+	# Case 3: file
+	elif [ "$1" = "f" ]; then
+	    ${DEBUG} touch "$3"
+	    create_symlink_and_parents "$3" "$2"
+	fi
+    fi
+    return 0
+}
+
+fix_dangling_links() {
+    link="$(readlink "$2")"
+    # Check if link target is wanted target
+    if [ "${link}" != "$3" ]; then
+	report_problem "$2" "${link} not equal $3"
+	return 1
     fi
 
-    # Check if source is already a symlink
-    if [ -L "$2" ]; then
-	link="$(readlink "$2")"
-	# Check if link target is wanted target
-	if [ "${link}" != "$3" ]; then
-	    report_problem "$2" "${link} not equal $3"
-	    return 1
-	fi
-
-	# Check if target exists and is same type
-	if [ -e "$3" ]; then
-	    # Case 1: directory
-	    if [ "$1" = "d" ]; then
-		# Does target exist?
-		if [ ! -d "$3" ]; then
-		    report_problem "$2" "Unexpected type (not a directory)"
-		    return 1
-		fi
-	    # Case 2: file
-	    elif [ "$1" = "f" ]; then
-		# Does target exist?
-		if [ ! -f "$3" ]; then
-		    report_problem "$2" "Unexpected type (not a regular file)"
-		    return 1
-		fi
+    # Check if target exists and is same type
+    if [ -e "$3" ]; then
+	# Case 1: directory
+	if [ "$1" = "d" ]; then
+	    # Does target exist?
+	    if [ ! -d "$3" ]; then
+		report_problem "$2" "Unexpected type (not a directory)"
+		return 1
 	    fi
-	# Symlink is there, but file or directory not
-	else
-	    # Case 1: directory
-	    if [ "$1" = "d" ]; then
-		${DEBUG} mkdir -pv "$3"
-	    # Case 2: file
-	    elif [ "$1" = "f" ]; then
-		${DEBUG} touch "$3"
+	# Case 2: file
+	elif [ "$1" = "f" ]; then
+	    # Does target exist?
+	    if [ ! -f "$3" ]; then
+		report_problem "$2" "Unexpected type (not a regular file)"
+		return 1
 	    fi
 	fi
-	return 0
+    # Symlink is there, but file or directory not
+    else
+	# Case 1: directory
+	if [ "$1" = "d" ]; then
+	    ${DEBUG} mkdir -pv "$3"
+	# Case 2: file
+	elif [ "$1" = "f" ]; then
+	    ${DEBUG} touch "$3"
+	fi
     fi
+    return 0
+}
 
-    # TODO: Check available disk space
-    # Should use report_serious_problem
-
+do_it() {
     if [ "$1" = "d" ]; then
 	if [ -d "$2" ]; then
 	    if [ "${REMOVAL}" = "yes" ]; then
@@ -159,6 +154,24 @@ replace() {
 	return 255
     fi
     return 0
+}
+
+replace() {
+    # Check if the source exists
+    if [ ! -e "$2" ]; then
+	return possibly_create_non_existing_stuff "$@"
+    fi
+
+    # Check if source is already a symlink
+    if [ -L "$2" ]; then
+	return fix_dangling_links "$@"
+    fi
+
+    # TODO: Check available disk space
+    # Should use report_serious_problem
+
+    # No symlink yet, then actually move or remove!
+    do_it "$@"
 }
 
 
