@@ -13,11 +13,11 @@ prefer to use social forking :-).
 An example unburden_home_dir_list file looks like this:
 
 d .cache cache
-f .config/google-chrome/*/Thumbnails google-chrome-thumbnails
-d .mozilla/firefox/*/Cache firefox-cache
-d .thunderbird/*/Cache thunderbird-cache
-d .mozilla-thunderbird/*/Cache debian-thunderbird-cache
-d .conkeror.mozdev.org/conkeror/*/Cache conkeror-cache
+f .config/google-chrome/*/Thumbnails google-chrome-thumbnails-%1
+d .mozilla/firefox/*/Cache firefox-cache-%1
+d .thunderbird/*/Cache thunderbird-cache-%1
+d .mozilla-thunderbird/*/Cache debian-thunderbird-cache-%1
+d .conkeror.mozdev.org/conkeror/*/Cache conkeror-cache-%1
 d .kazehakase/mozilla/kazehakase/Cache kazehakase-cache
 d .opera/cache opera-cache
 d .opera/opcache opera-opcache
