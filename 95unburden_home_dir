@@ -35,6 +35,10 @@ if [ -e /etc/default/"${BASENAME}" ]; then
         . /etc/default/"${BASENAME}"
 fi
 
+if [ -e /etc/"${BASENAME}" ]; then
+        . /etc/"${BASENAME}"
+fi
+
 if [ -e "${HOME}/.${BASENAME}" ]; then
         . "${HOME}/.${BASENAME}"
 fi
