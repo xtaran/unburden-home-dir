@@ -25,11 +25,11 @@
 #
 
 BASENAME=unburden_home_dir
-TARGETDIR=/scratch
-FILELAYOUT='.%u-%s'
+TARGETDIR=/tmp
+FILELAYOUT='.unburden-%u/%s'
 REMOVAL=no
-CREATE=yes
-DEBUG=echo
+CREATE=no
+DEBUG=
 
 if [ -e /etc/default/"${BASENAME}" ]; then
         . /etc/default/"${BASENAME}"
