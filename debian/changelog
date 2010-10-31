@@ -1,0 +1,5 @@
+unburden-home-dir (0.0.20101031) unstable; urgency=low
+
+  * Initial release (Closes: #602045)
+
+ -- Axel Beckert <abe@debian.org>  Sun, 31 Oct 2010 19:48:11 +0100

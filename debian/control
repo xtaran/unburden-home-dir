@@ -1,0 +1,34 @@
+Source: unburden-home-dir
+Section: x11
+Priority: extra
+Maintainer: Axel Beckert <abe@debian.org>
+Build-Depends: debhelper (>= 7.0.50~), devscripts
+Standards-Version: 3.9.1
+Homepage: http://wiki.phys.ethz.ch/readme/application_cache_files
+Vcs-Git: http://git.phys.ethz.ch/unburden-home-dir.git
+Vcs-Browser: http://git.phys.ethz.ch/?p=unburden-home-dir.git
+
+Package: unburden-home-dir
+Architecture: all
+Depends: x11-common, ${misc:Depends}
+Enhances: x11-common
+Description: Remove or move cache files automatically from user's home
+ unburden-home-dir is an Xsession hook which allows administrators and
+ optionally also users to move cache files from browsers, etc. off
+ their home directory, i.e. on a local harddisk or tmpfs and replace
+ them with a symbolic link to the new location (e.g. on /tmp/ or
+ /scratch/) upon login. Optionally the contents of the directories and
+ files can be removed instead of moved.
+ .
+ This is helpful in at least two cases:
+ .
+ One case are big workstation setups where $HOME is on NFS and all
+ those caches put an unnecessary burden (hence the name) on the file
+ server since caching over NFS doesn't have the best performance and
+ may clog the NFS server, too.
+ .
+ The other case are devices with small disk space but a lot of RAM as
+ seen often on boxes with flash disks or early netbooks, especially
+ the EeePC, where configurations with 4GB disk space and 2GB RAM are
+ not seldom. In this case you want to move off cache files, etc. to
+ some tmpfs filesystem, e.g. /tmp/.
