@@ -16,7 +16,8 @@ installations) for example files.
 Explanation of the unburden_home_dir_list file format:
 
 1st column: Action ("d, "r", or "m": delete/remove or move)
-2nd column: Type ("d" or "f": directory or file)
+2nd column: Type ("d", "D", "f" or "F": directory or file, capital
+	    letter means "create it if it doesn't exist")
 3rd column: Path relative to $HOME to move off to some other location
 4th column: identifier for file or directory in the other location
 

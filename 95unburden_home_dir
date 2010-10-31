@@ -27,7 +27,6 @@
 BASENAME=unburden_home_dir
 TARGETDIR=/tmp
 FILELAYOUT='.unburden-%u/%s'
-CREATE=no
 DEBUG=
 
 if [ -e /etc/default/"${BASENAME}" ]; then
@@ -69,19 +68,17 @@ create_parent_directories() {
 }
 
 possibly_create_non_existing_stuff() {
-    # Shall we create not yet existing directories as symlink?
-    if [ "${CREATE}" = "yes" ]; then
-	# Case 1: directory
-	if [ "$1" = "d" ]; then
-	    ${DEBUG} mkdir -pv "$3"
-	    create_symlink_and_parents "$3" "$2"
+    # Shall we create not yet existing directories or files as symlink?
+    # Case 1: directory
+    if [ "$1" = "D" ]; then
+	${DEBUG} mkdir -pv "$3"
+	create_symlink_and_parents "$3" "$2"
 
-	# Case 2: file
-	elif [ "$1" = "f" ]; then
-	    create_parent_directories "$3"
-	    ${DEBUG} touch "$3"
-	    create_symlink_and_parents "$3" "$2"
-	fi
+    # Case 2: file
+    elif [ "$1" = "F" ]; then
+	create_parent_directories "$3"
+	${DEBUG} touch "$3"
+	create_symlink_and_parents "$3" "$2"
     fi
     return 0
 }
@@ -97,14 +94,14 @@ fix_dangling_links() {
     # Check if target exists and is same type
     if [ -e "$3" ]; then
 	# Case 1: directory
-	if [ "$1" = "d" ]; then
+	if [ "$1" = "d" -o "$1" = 'D' ]; then
 	    # Does target exist?
 	    if [ ! -d "$3" ]; then
 		report_problem "$2" "Unexpected type (not a directory)"
 		return 1
 	    fi
 	# Case 2: file
-	elif [ "$1" = "f" ]; then
+	elif [ "$1" = "f" -o "$1" = 'F' ]; then
 	    # Does target exist?
 	    if [ ! -f "$3" ]; then
 		report_problem "$2" "Unexpected type (not a regular file)"
@@ -114,10 +111,10 @@ fix_dangling_links() {
     # Symlink is there, but file or directory not
     else
 	# Case 1: directory
-	if [ "$1" = "d" ]; then
+	if [ "$1" = "d" -o "$1" = 'D' ]; then
 	    ${DEBUG} mkdir -pv "$3"
 	# Case 2: file
-	elif [ "$1" = "f" ]; then
+	elif [ "$1" = "f" -o "$1" = 'F' ]; then
 	    create_parent_directories "$3"
 	    ${DEBUG} touch "$3"
 	fi
@@ -126,7 +123,7 @@ fix_dangling_links() {
 }
 
 do_it() {
-    if [ "$1" = "d" ]; then
+    if [ "$1" = "d" -o "$1" = 'D' ]; then
 	if [ -d "$2" ]; then
 	    if [ "$4" = "r" -o "$4" = "d" ]; then
 		${DEBUG} rm -rv "$2"
@@ -143,7 +140,7 @@ do_it() {
 	    report_serious_problem "$2" "Unexpected type (not a directory)"
 	    return 1
 	fi
-    elif [ "$1" = "f" ]; then
+    elif [ "$1" = "f" -o "$1" = 'F' ]; then
 	if [ -f "$2" ]; then
 	    if [ "$4" = "r" -o "$4" = "d" ]; then
 		${DEBUG} rm -v "$2"
@@ -239,8 +236,9 @@ if [ "${UNBURDEN_HOME_DIR}" != "false" -a \
 		warn "Can't parse '${type} ${item} ${replacement}', skipping..."
 		continue
 	    fi
-	    if [ "${type}" != "d" -a  "${type}" != "f"  ]; then
-		warn "Can't parse type '${type}', must be 'd' or 'f', skipping..."
+	    if [ "${type}" != "d" -a  "${type}" != "f" -a \
+		 "${type}" != "D" -a  "${type}" != "F" ]; then
+		warn "Can't parse type '${type}', must be 'd', 'D', 'f' or 'F', skipping..."
 		continue
 	    fi
 	    if [ "${action}" != "d" -a "${action}" != "r" -a "${action}" != "m"  ]; then
