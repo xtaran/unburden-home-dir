@@ -1,0 +1,12 @@
+d .cache cache
+f .config/google-chrome/*/Thumbnails google-chrome-thumbnails-%1
+d .mozilla/firefox/*/Cache firefox-cache-%1
+d .thunderbird/*/Cache thunderbird-cache-%1
+d .mozilla-thunderbird/*/Cache debian-thunderbird-cache-%1
+d .conkeror.mozdev.org/conkeror/*/Cache conkeror-cache-%1
+d .kazehakase/mozilla/kazehakase/Cache kazehakase-cache
+d .opera/cache opera-cache
+d .opera/opcache opera-opcache
+d .thumbnails thumbnails
+d .Trash trash
+d .local/Trash local-trash
