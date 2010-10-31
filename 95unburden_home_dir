@@ -27,7 +27,6 @@
 BASENAME=unburden_home_dir
 TARGETDIR=/tmp
 FILELAYOUT='.unburden-%u/%s'
-REMOVAL=no
 CREATE=no
 DEBUG=
 
@@ -129,12 +128,15 @@ fix_dangling_links() {
 do_it() {
     if [ "$1" = "d" ]; then
 	if [ -d "$2" ]; then
-	    if [ "${REMOVAL}" = "yes" ]; then
+	    if [ "$4" = "r" -o "$4" = "d" ]; then
 		${DEBUG} rm -rv "$2"
 		${DEBUG} mkdir -pv "$3"
-	    else
+	    elif [ "$4" = "m" ]; then
 		create_parent_directories "$3"
 		${DEBUG} mv -v "$2" "$3"
+	    else
+		warn "Unknown action '$4'. This should never happen."
+		return 255
 	    fi
 	    ${DEBUG} ln -vs "$3" "$2"
 	else
@@ -143,13 +145,16 @@ do_it() {
 	fi
     elif [ "$1" = "f" ]; then
 	if [ -f "$2" ]; then
-	    if [ "${REMOVAL}" = "yes" ]; then
+	    if [ "$4" = "r" -o "$4" = "d" ]; then
 		${DEBUG} rm -v "$2"
 		create_parent_directories "$3"
 		${DEBUG} touch "$3"
-	    else
+	    elif [ "$4" = "m" ]; then
 		create_parent_directories "$3"
 		${DEBUG} mv -v "$2" "$3"
+	    else
+		warn "Unknown action '$4'. This should never happen."
+		return 255
 	    fi
 	    ${DEBUG} ln -vs "$3" "$2"
 	else
@@ -169,6 +174,7 @@ replace() {
     itemexpanded="$2"
     itemglob="$3"
     replacement="$4"
+    action="$5"
 
     # Skip entries where wildcard where passed
     if echo "${itemexpanded}" | egrep '[][*?]' -q; then
@@ -213,7 +219,7 @@ replace() {
 
     # No symlink yet, then actually move or remove!
     else
-	do_it "${type}" "${itemexpanded}" "${target}"
+	do_it "${type}" "${itemexpanded}" "${target}" "${action}"
     fi
 }
 
@@ -225,8 +231,8 @@ if [ "${UNBURDEN_HOME_DIR}" != "false" -a \
 	test -r "${list}" || continue
 
 	# Clean up this and that
-	grep -v '^#' "${list}" | while read type item replacement ; do
-	    if [ -z "${type}" ]; then
+	grep -v '^#' "${list}" | while read action type item replacement ; do
+	    if [ -z "${action}" ]; then
 		continue
 	    fi
 	    if [ -z "${item}" -o -z "${replacement}" ]; then
@@ -237,9 +243,13 @@ if [ "${UNBURDEN_HOME_DIR}" != "false" -a \
 		warn "Can't parse type '${type}', must be 'd' or 'f', skipping..."
 		continue
 	    fi
+	    if [ "${action}" != "d" -a "${action}" != "r" -a "${action}" != "m"  ]; then
+		warn "Can't parse action '${action}', must be 'd', 'r' or 'm', skipping..."
+		continue
+	    fi
 
 	    for i in ${HOME}/${item}; do
-		replace "${type}" "${i}" "${item}" "${replacement}"
+		replace "${type}" "${i}" "${item}" "${replacement}" "${action}"
 	    done
 	done
     done

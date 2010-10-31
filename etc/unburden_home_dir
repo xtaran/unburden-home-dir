@@ -4,6 +4,5 @@
 
 TARGETDIR=/tmp
 FILELAYOUT='.unburden-%u/%s'
-REMOVAL=no
 CREATE=no
 #DEBUG=
