@@ -1,9 +1,30 @@
-This project mainly consists of an Xsession.d entry to automatically
-move given files and directories off the home directory and replace
-them with symbolic links.
+This project mainly consists of an Xsession hook which allows
+administrators and optionally also users to move cache files from
+browsers, etc. off their home directory, i.e. on a local harddisk or
+tmpfs and replace them with a symbolic link to the new location
+(e.g. on /tmp/ or /scratch/) upon login. Optionally the contents of
+the directories and files can be removed instead of moved.
+
+This is helpful in at least three cases:
+
+The idea giving case are big workstation setups where $HOME is on NFS
+and all those caches put an unnecessary burden (hence the name) on the
+file server since caching over NFS doesn't have the best performance
+and may clog the NFS server, too.
+
+The second case are devices with small disk space but a lot of RAM as
+seen often on boxes with flash disks or early netbooks, especially the
+EeePC, where configurations with 4GB disk space and 2GB RAM are not
+seldom. In this case you want to move off cache files, etc. to some
+tmpfs filesystem, e.g. /tmp/.
+
+The third case is to keep those files in places where they don't get
+backed up and so don't take up backup disk space. In that case it's an
+alternative to keeping the blacklist in your backup software
+up-to-date.
 
 See http://wiki.phys.ethz.ch/readme/application_cache_files for the
-reasoning behind this project.
+detailed reasoning behind this project.
 
 You should always find the newest code via git at either
 http://git.phys.ethz.ch/?p=unburden_home_dir.git (primary site) or
