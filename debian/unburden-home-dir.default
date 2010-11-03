@@ -1,0 +1,10 @@
+# Defaults for unburden-home-dir Xsession hook
+# sourced by /etc/X11/Xsession.d/95unburden_home_dir
+# installed at /etc/default/unburden-home-dir by the maintainer scripts
+
+#
+# This is a POSIX shell fragment
+#
+
+# Uncomment to disable automatic unburdening completely
+#UNBURDEN_HOME=false
