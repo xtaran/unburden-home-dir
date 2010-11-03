@@ -24,21 +24,21 @@
 # along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 
-BASENAME=unburden_home_dir
+UNBURDEN_BASENAME=unburden_home_dir
 TARGETDIR=/tmp
 FILELAYOUT='.unburden-%u/%s'
-DEBUG=
+UNBURDEN_DEBUG=
 
-if [ -e /etc/default/"${BASENAME}" ]; then
-        . /etc/default/"${BASENAME}"
+if [ -e /etc/default/"${UNBURDEN_BASENAME}" ]; then
+        . /etc/default/"${UNBURDEN_BASENAME}"
 fi
 
-if [ -e /etc/"${BASENAME}" ]; then
-        . /etc/"${BASENAME}"
+if [ -e /etc/"${UNBURDEN_BASENAME}" ]; then
+        . /etc/"${UNBURDEN_BASENAME}"
 fi
 
-if [ -e "${HOME}/.${BASENAME}" ]; then
-        . "${HOME}/.${BASENAME}"
+if [ -e "${HOME}/.${UNBURDEN_BASENAME}" ]; then
+        . "${HOME}/.${UNBURDEN_BASENAME}"
 fi
 
 # Set proper umask when creating files or directories. Save current
@@ -60,24 +60,24 @@ report_serious_problem() {
 
 create_symlink_and_parents() {
     create_parent_directories "$2"
-    ${DEBUG} ln -vs "$1" "$2"
+    ${UNBURDEN_DEBUG} ln -vs "$1" "$2"
 }
 
 create_parent_directories() {
-    ${DEBUG} mkdir -pv $(dirname "$1")
+    ${UNBURDEN_DEBUG} mkdir -pv $(dirname "$1")
 }
 
 possibly_create_non_existing_stuff() {
     # Shall we create not yet existing directories or files as symlink?
     # Case 1: directory
     if [ "$1" = "D" ]; then
-	${DEBUG} mkdir -pv "$3"
+	${UNBURDEN_DEBUG} mkdir -pv "$3"
 	create_symlink_and_parents "$3" "$2"
 
     # Case 2: file
     elif [ "$1" = "F" ]; then
 	create_parent_directories "$3"
-	${DEBUG} touch "$3"
+	${UNBURDEN_DEBUG} touch "$3"
 	create_symlink_and_parents "$3" "$2"
     fi
     return 0
@@ -112,11 +112,11 @@ fix_dangling_links() {
     else
 	# Case 1: directory
 	if [ "$1" = "d" -o "$1" = 'D' ]; then
-	    ${DEBUG} mkdir -pv "$3"
+	    ${UNBURDEN_DEBUG} mkdir -pv "$3"
 	# Case 2: file
 	elif [ "$1" = "f" -o "$1" = 'F' ]; then
 	    create_parent_directories "$3"
-	    ${DEBUG} touch "$3"
+	    ${UNBURDEN_DEBUG} touch "$3"
 	fi
     fi
     return 0
@@ -126,16 +126,16 @@ do_it() {
     if [ "$1" = "d" -o "$1" = 'D' ]; then
 	if [ -d "$2" ]; then
 	    if [ "$4" = "r" -o "$4" = "d" ]; then
-		${DEBUG} rm -rv "$2"
-		${DEBUG} mkdir -pv "$3"
+		${UNBURDEN_DEBUG} rm -rv "$2"
+		${UNBURDEN_DEBUG} mkdir -pv "$3"
 	    elif [ "$4" = "m" ]; then
 		create_parent_directories "$3"
-		${DEBUG} mv -v "$2" "$3"
+		${UNBURDEN_DEBUG} mv -v "$2" "$3"
 	    else
 		warn "Unknown action '$4'. This should never happen."
 		return 255
 	    fi
-	    ${DEBUG} ln -vs "$3" "$2"
+	    ${UNBURDEN_DEBUG} ln -vs "$3" "$2"
 	else
 	    report_serious_problem "$2" "Unexpected type (not a directory)"
 	    return 1
@@ -143,17 +143,17 @@ do_it() {
     elif [ "$1" = "f" -o "$1" = 'F' ]; then
 	if [ -f "$2" ]; then
 	    if [ "$4" = "r" -o "$4" = "d" ]; then
-		${DEBUG} rm -v "$2"
+		${UNBURDEN_DEBUG} rm -v "$2"
 		create_parent_directories "$3"
-		${DEBUG} touch "$3"
+		${UNBURDEN_DEBUG} touch "$3"
 	    elif [ "$4" = "m" ]; then
 		create_parent_directories "$3"
-		${DEBUG} mv -v "$2" "$3"
+		${UNBURDEN_DEBUG} mv -v "$2" "$3"
 	    else
 		warn "Unknown action '$4'. This should never happen."
 		return 255
 	    fi
-	    ${DEBUG} ln -vs "$3" "$2"
+	    ${UNBURDEN_DEBUG} ln -vs "$3" "$2"
 	else
 	    report_serious_problem "$2" "Unexpected type (not a file)"
 	    return 1
@@ -224,7 +224,8 @@ replace() {
 if [ "${UNBURDEN_HOME_DIR}" != "false" -a \
      "${UNBURDEN_HOME_DIR}" != "no" ]; then
 
-    for list in "/etc/${BASENAME}_list" "${HOME}/.${BASENAME}_list"; do
+    for list in "/etc/${UNBURDEN_BASENAME}_list" \
+                "${HOME}/.${UNBURDEN_BASENAME}_list"; do
 	test -r "${list}" || continue
 
 	# Clean up this and that
