@@ -1,7 +1,7 @@
 build:
 
 test:
-	checkbashisms 95unburden_home_dir
+	checkbashisms Xsession.d/95unburden_home_dir
 	checkbashisms bin/unburden-home-dir
 
 install:
