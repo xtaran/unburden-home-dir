@@ -228,7 +228,7 @@ replace() {
     if [ ! -e "${itemexpanded}" ]; then
 	possibly_create_non_existing_stuff "${type}" "${itemexpanded}" "${target}"
     # Check if source is already a symlink
-    elif [ -L "$2" ]; then
+    elif [ -L "${itemexpanded}" ]; then
 	fix_dangling_links "${type}" "${itemexpanded}" "${target}"
 
     # TODO: Check available disk space
