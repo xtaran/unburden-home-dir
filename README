@@ -1,9 +1,8 @@
-This project mainly consists of an Xsession hook which allows
-administrators and optionally also users to move cache files from
-browsers, etc. off their home directory, i.e. on a local harddisk or
-tmpfs and replace them with a symbolic link to the new location
-(e.g. on /tmp/ or /scratch/) upon login. Optionally the contents of
-the directories and files can be removed instead of moved.
+unburden-home-dir allows users to move cache files from browsers,
+etc. off their home directory, i.e. on a local harddisk or tmpfs and
+replace them with a symbolic link to the new location (e.g. on /tmp/
+or /scratch/) upon login. Optionally the contents of the directories
+and files can be removed instead of moved.
 
 This is helpful in at least three cases:
 
@@ -22,6 +21,10 @@ The third case is to keep those files in places where they don't get
 backed up and so don't take up backup disk space. In that case it's an
 alternative to keeping the blacklist in your backup software
 up-to-date.
+
+This project initially started as an Xsession hook. It now consists of
+a shell script which optionally can also be called from a provided
+Xsession hook.
 
 See http://wiki.phys.ethz.ch/readme/application_cache_files for the
 detailed reasoning behind this project.

@@ -13,12 +13,11 @@ Architecture: all
 Depends: x11-common, ${misc:Depends}
 Enhances: x11-common
 Description: Remove or move cache files automatically from user's home
- unburden-home-dir is an Xsession hook which allows administrators and
- optionally also users to move cache files from browsers, etc. off
- their home directory, i.e. on a local harddisk or tmpfs and replace
- them with a symbolic link to the new location (e.g. on /tmp/ or
- /scratch/) upon login. Optionally the contents of the directories and
- files can be removed instead of moved.
+ unburden-home-dir allows users to move cache files from browsers,
+ etc. off their home directory, i.e. on a local harddisk or tmpfs and
+ replace them with a symbolic link to the new location (e.g. on /tmp/
+ or /scratch/) upon login. Optionally the contents of the directories
+ and files can be removed instead of moved.
  .
  This is helpful in at least three cases:
  .
@@ -35,3 +34,8 @@ Description: Remove or move cache files automatically from user's home
  .
  The third case is to keep those files in places where they don't get
  backed up and so don't take up backup disk space.
+ .
+ The package also contains an Xsession hook which calls this script on
+ X login for every user. But by default no files or directories are
+ configured to be moved elsewhere, so nothing will happen
+ automatically without configuration.
