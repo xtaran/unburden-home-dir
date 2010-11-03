@@ -24,8 +24,8 @@ if [ -f "./${SCRIPTNAME}" ]; then
     . "./${SCRIPTNAME}"
 # Source directory
 elif [ "$(basename "$(dirname "$0")")" = "bin" -a \
-       -f "$(dirname "$0")/../${SCRIPTNAME}" ]; then
-    . "$(dirname "$0")/../${SCRIPTNAME}"
+       -f "$(dirname "$0")/../Xsession.d/${SCRIPTNAME}" ]; then
+    . "$(dirname "$0")/../Xsession.d/${SCRIPTNAME}"
 elif [ -f "$(dirname "$0")/${SCRIPTNAME}" ]; then
     . "$(dirname "$0")/${SCRIPTNAME}"
 elif [ -f "/etc/X11/Xsession.d/${SCRIPTNAME}" ]; then
