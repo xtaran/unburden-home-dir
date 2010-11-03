@@ -24,10 +24,16 @@
 # along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 
-UNBURDEN_BASENAME=unburden_home_dir
+# Configuration variables to be used in configuration files
 TARGETDIR=/tmp
 FILELAYOUT='.unburden-%u/%s'
+
+# Should only be used in configuration files to enabled debugging
 UNBURDEN_DEBUG=
+
+# Probably should never be used in configuration files. If you use it
+# there, you are mostly on your own.
+UNBURDEN_BASENAME=unburden_home_dir
 
 if [ -e /etc/default/"${UNBURDEN_BASENAME}" ]; then
         . /etc/default/"${UNBURDEN_BASENAME}"
