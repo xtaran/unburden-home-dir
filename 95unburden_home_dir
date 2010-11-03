@@ -60,7 +60,7 @@ report_serious_problem() {
 
 create_symlink_and_parents() {
     create_parent_directories "$2"
-    ${DEBUG} ln -vi "$1" "$2"
+    ${DEBUG} ln -vs "$1" "$2"
 }
 
 create_parent_directories() {
