@@ -1,0 +1,36 @@
+#!/bin/sh
+
+SCRIPTNAME=95unburden_home_dir
+
+HELP="Unburden Home Directory
+
+Usage: $0 [-n|-h]
+
+  -n -- dry run (show what would be done)
+  -h -- show this help
+"
+
+# Parse command line options
+while getopts nh opt; do
+    case "${opt}" in
+        n) UNBURDEN_DEBUG=echo;;
+        h) echo "${HELP}"; exit 0;;
+    esac
+done
+shift $(expr $OPTIND - 1)
+
+# Current directory
+if [ -f "./${SCRIPTNAME}" ]; then
+    . "./${SCRIPTNAME}"
+# Source directory
+elif [ "$(basename "$(dirname "$0")")" = "bin" -a \
+       -f "$(dirname "$0")/../${SCRIPTNAME}" ]; then
+    . "$(dirname "$0")/../${SCRIPTNAME}"
+elif [ -f "$(dirname "$0")/${SCRIPTNAME}" ]; then
+    . "$(dirname "$0")/${SCRIPTNAME}"
+elif [ -f "/etc/X11/Xsession.d/${SCRIPTNAME}" ]; then
+    . "/etc/X11/Xsession.d/${SCRIPTNAME}"
+else
+    echo "${SCRIPTNAME} not found. Bailing out." 1>&2
+    exit 1
+fi

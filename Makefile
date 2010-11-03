@@ -2,6 +2,7 @@ build:
 
 test:
 	checkbashisms 95unburden_home_dir
+	checkbashisms bin/unburden-home-dir
 
 install:
 	install -d $(DESTDIR)/etc/X11/Xsession.d/

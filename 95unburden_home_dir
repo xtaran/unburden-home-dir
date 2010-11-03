@@ -28,8 +28,9 @@
 TARGETDIR=/tmp
 FILELAYOUT='.unburden-%u/%s'
 
-# Should only be used in configuration files to enabled debugging
-UNBURDEN_DEBUG=
+# Should only be used in configuration files to enable debugging. Not
+# set by default to let wrapper scripts set it, too.
+#UNBURDEN_DEBUG=
 
 # Probably should never be used in configuration files. If you use it
 # there, you are mostly on your own.
