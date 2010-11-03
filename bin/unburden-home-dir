@@ -1,6 +1,48 @@
 #!/bin/sh
+#
+# This file causes a list of directories to be removed or moved off
+# the users home directory into a given other directory. Usually this
+# is used to relief NFS home directories of the burden of caches and
+# other performance needing directories.
+#
+# Copyright (C) 2010 by Axel Beckert <beckert@phys.ethz.ch>,
+# Department of Physics, ETH Zurich.
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see http://www.gnu.org/licenses/.
+#
 
-SCRIPTNAME=95unburden_home_dir
+# Configuration variables to be used in configuration files
+TARGETDIR=/tmp
+FILELAYOUT='.unburden-%u/%s'
+
+# Should only be used in configuration files to enable debugging. Not
+# set by default to let wrapper scripts set it, too.
+#UNBURDEN_DEBUG=
+
+# Probably should never be used in configuration files. If you use it
+# there, you are mostly on your own.
+UNBURDEN_BASENAME=unburden_home_dir
+
+# Check for a system wide configuration file
+if [ -e /etc/"${UNBURDEN_BASENAME}" ]; then
+        . /etc/"${UNBURDEN_BASENAME}"
+fi
+
+# Check for a user configuration file
+if [ -e "${HOME}/.${UNBURDEN_BASENAME}" ]; then
+        . "${HOME}/.${UNBURDEN_BASENAME}"
+fi
 
 HELP="Unburden Home Directory
 
@@ -19,18 +61,213 @@ while getopts nh opt; do
 done
 shift $(expr $OPTIND - 1)
 
-# Current directory
-if [ -f "./${SCRIPTNAME}" ]; then
-    . "./${SCRIPTNAME}"
-# Source directory
-elif [ "$(basename "$(dirname "$0")")" = "bin" -a \
-       -f "$(dirname "$0")/../Xsession.d/${SCRIPTNAME}" ]; then
-    . "$(dirname "$0")/../Xsession.d/${SCRIPTNAME}"
-elif [ -f "$(dirname "$0")/${SCRIPTNAME}" ]; then
-    . "$(dirname "$0")/${SCRIPTNAME}"
-elif [ -f "/etc/X11/Xsession.d/${SCRIPTNAME}" ]; then
-    . "/etc/X11/Xsession.d/${SCRIPTNAME}"
-else
-    echo "${SCRIPTNAME} not found. Bailing out." 1>&2
-    exit 1
-fi
+# Set proper umask when creating files or directories. Save current
+# umask before.
+OLDUMASK=$(umask)
+umask 077
+
+warn() {
+    echo "$1" 1>&2
+}
+
+report_problem() {
+    warn "WARNING: Can't handle $1: $2"
+}
+
+report_serious_problem() {
+    warn "ERROR: Can't handle $1: $2"
+}
+
+create_symlink_and_parents() {
+    create_parent_directories "$2"
+    ${UNBURDEN_DEBUG} ln -vs "$1" "$2"
+}
+
+create_parent_directories() {
+    ${UNBURDEN_DEBUG} mkdir -pv $(dirname "$1")
+}
+
+possibly_create_non_existing_stuff() {
+    # Shall we create not yet existing directories or files as symlink?
+    # Case 1: directory
+    if [ "$1" = "D" ]; then
+	${UNBURDEN_DEBUG} mkdir -pv "$3"
+	create_symlink_and_parents "$3" "$2"
+
+    # Case 2: file
+    elif [ "$1" = "F" ]; then
+	create_parent_directories "$3"
+	${UNBURDEN_DEBUG} touch "$3"
+	create_symlink_and_parents "$3" "$2"
+    fi
+    return 0
+}
+
+fix_dangling_links() {
+    link="$(readlink "$2")"
+    # Check if link target is wanted target
+    if [ "${link}" != "$3" ]; then
+	report_problem "$2" "${link} not equal $3"
+	return 1
+    fi
+
+    # Check if target exists and is same type
+    if [ -e "$3" ]; then
+	# Case 1: directory
+	if [ "$1" = "d" -o "$1" = 'D' ]; then
+	    # Does target exist?
+	    if [ ! -d "$3" ]; then
+		report_problem "$2" "Unexpected type (not a directory)"
+		return 1
+	    fi
+	# Case 2: file
+	elif [ "$1" = "f" -o "$1" = 'F' ]; then
+	    # Does target exist?
+	    if [ ! -f "$3" ]; then
+		report_problem "$2" "Unexpected type (not a regular file)"
+		return 1
+	    fi
+	fi
+    # Symlink is there, but file or directory not
+    else
+	# Case 1: directory
+	if [ "$1" = "d" -o "$1" = 'D' ]; then
+	    ${UNBURDEN_DEBUG} mkdir -pv "$3"
+	# Case 2: file
+	elif [ "$1" = "f" -o "$1" = 'F' ]; then
+	    create_parent_directories "$3"
+	    ${UNBURDEN_DEBUG} touch "$3"
+	fi
+    fi
+    return 0
+}
+
+do_it() {
+    if [ "$1" = "d" -o "$1" = 'D' ]; then
+	if [ -d "$2" ]; then
+	    if [ "$4" = "r" -o "$4" = "d" ]; then
+		${UNBURDEN_DEBUG} rm -rv "$2"
+		${UNBURDEN_DEBUG} mkdir -pv "$3"
+	    elif [ "$4" = "m" ]; then
+		create_parent_directories "$3"
+		${UNBURDEN_DEBUG} mv -v "$2" "$3"
+	    else
+		warn "Unknown action '$4'. This should never happen."
+		return 255
+	    fi
+	    ${UNBURDEN_DEBUG} ln -vs "$3" "$2"
+	else
+	    report_serious_problem "$2" "Unexpected type (not a directory)"
+	    return 1
+	fi
+    elif [ "$1" = "f" -o "$1" = 'F' ]; then
+	if [ -f "$2" ]; then
+	    if [ "$4" = "r" -o "$4" = "d" ]; then
+		${UNBURDEN_DEBUG} rm -v "$2"
+		create_parent_directories "$3"
+		${UNBURDEN_DEBUG} touch "$3"
+	    elif [ "$4" = "m" ]; then
+		create_parent_directories "$3"
+		${UNBURDEN_DEBUG} mv -v "$2" "$3"
+	    else
+		warn "Unknown action '$4'. This should never happen."
+		return 255
+	    fi
+	    ${UNBURDEN_DEBUG} ln -vs "$3" "$2"
+	else
+	    report_serious_problem "$2" "Unexpected type (not a file)"
+	    return 1
+	fi
+    else
+	warn "This should never happen."
+	return 255
+    fi
+    return 0
+}
+
+replace() {
+    # replace $type $i $item $replacement
+    type="$1"
+    itemexpanded="$2"
+    itemglob="$3"
+    replacement="$4"
+    action="$5"
+
+    # Skip entries where wildcard where passed
+    if echo "${itemexpanded}" | egrep '[][*?]' -q; then
+	warn "Skipping '${itemexpanded}' due to unmatched wildcard."
+	return 0
+    fi
+
+    target="${TARGETDIR}/$(echo "${FILELAYOUT}" | \
+                           sed "s|%u|$(id -un)|g;s|%s|${replacement}|g;")"
+
+    # Replace %<n> (e.g. %1) with the n-th wildcard match. Uses perl
+    # here as it would be too complicated and way less readable if
+    # written as (bourne) shell script.
+
+    target="$(perl -e '
+
+	my $itemglob     = $ARGV[0];
+	my $itemexpanded = $ARGV[1];
+	my $target       = $ARGV[2];
+
+	# Change from globbing to regexp
+	$itemglob =~ s/\?/(.)/;
+	$itemglob =~ s/\*/(.*)/;
+
+	my @result = $itemexpanded =~ m($itemglob)g;
+
+	$target =~ s/\%(\d+)/$result[$1-1]/eg;
+
+	print $target;
+
+    ' "${itemglob}" "${itemexpanded}" "${target}")"
+
+    # Check if the source exists
+    if [ ! -e "${itemexpanded}" ]; then
+	possibly_create_non_existing_stuff "${type}" "${itemexpanded}" "${target}"
+    # Check if source is already a symlink
+    elif [ -L "$2" ]; then
+	fix_dangling_links "${type}" "${itemexpanded}" "${target}"
+
+    # TODO: Check available disk space
+    # Should use report_serious_problem
+
+    # No symlink yet, then actually move or remove!
+    else
+	do_it "${type}" "${itemexpanded}" "${target}" "${action}"
+    fi
+}
+
+for list in "/etc/${UNBURDEN_BASENAME}_list" \
+            "${HOME}/.${UNBURDEN_BASENAME}_list"; do
+    test -r "${list}" || continue
+
+    # Clean up this and that
+    grep -v '^#' "${list}" | while read action type item replacement ; do
+	if [ -z "${action}" ]; then
+	    continue
+	fi
+	if [ -z "${item}" -o -z "${replacement}" ]; then
+	    warn "Can't parse '${type} ${item} ${replacement}', skipping..."
+	    continue
+	fi
+	if [ "${type}" != "d" -a  "${type}" != "f" -a \
+	    "${type}" != "D" -a  "${type}" != "F" ]; then
+	    warn "Can't parse type '${type}', must be 'd', 'D', 'f' or 'F', skipping..."
+	    continue
+	fi
+	if [ "${action}" != "d" -a "${action}" != "r" -a "${action}" != "m"  ]; then
+	    warn "Can't parse action '${action}', must be 'd', 'r' or 'm', skipping..."
+	    continue
+	fi
+
+	for i in ${HOME}/${item}; do
+	    replace "${type}" "${i}" "${item}" "${replacement}" "${action}"
+	done
+    done
+done
+
+# Restore original umask
+umask "$OLDUMASK"
