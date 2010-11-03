@@ -225,7 +225,7 @@ replace() {
     ' "${itemglob}" "${itemexpanded}" "${target}")"
 
     # Check if the source exists
-    if [ ! -e "${itemexpanded}" ]; then
+    if [ ! -e "${itemexpanded}" -a ! -L "${itemexpanded}" ]; then
 	possibly_create_non_existing_stuff "${type}" "${itemexpanded}" "${target}"
     # Check if source is already a symlink
     elif [ -L "${itemexpanded}" ]; then
