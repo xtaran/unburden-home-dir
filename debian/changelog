@@ -1,7 +1,6 @@
 unburden-home-dir (0.0.20101110) UNRELEASED; urgency=low
 
-  * Suggest corekeeper which can help for the similar issues with core
-    dumps.
+  * Suggest corekeeper which can help for similar issues with core dumps.
 
  -- Axel Beckert <abe@debian.org>  Wed, 10 Nov 2010 00:14:51 +0100
 
