@@ -1,0 +1,8 @@
+TODO
+====
+
+Undo function which reverts what unburden-home-dir does (suggested
+commandline option "-u")
+
+Documentation that it should be used on either all or none
+machineswhich use the same home directory.
