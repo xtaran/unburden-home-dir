@@ -70,6 +70,7 @@ if ( -e "$ENV{HOME}/.$BASENAME" ) {
 $UID =~ s/\s+//gs;
 
 foreach my $key (keys %$CONFIG) {
+    chomp($CONFIG->{$key});
     $CONFIG->{$key} =~ s/^([\'\"])(.*)\1$/$2/;
 }
 
