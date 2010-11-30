@@ -26,8 +26,10 @@ use strict;
 use warnings;
 
 # Configuration variables to be used in configuration files
-my $TARGETDIR  = '/tmp';
-my $FILELAYOUT = '.unburden-%u/%s';
+my $CONFIG = {
+    TARGETDIR  => '/tmp',
+    FILELAYOUT => '.unburden-%u/%s',
+};
 
 # Should only be used in configuration files to enable debugging. Not
 # set by default to let wrapper scripts set it, too.
@@ -47,20 +49,20 @@ use File::Copy;
 use Data::Dumper;
 
 # Declare and initialise some variables
-my $CONFIG = {};
 my %OPTIONS = ();
 
 # Check for a system wide configuration file
 if ( -e "/etc/$BASENAME" ) {
-    $CONFIG = Config::File::read_config_file("/etc/$BASENAME");
+    $CONFIG = { %$CONFIG,
+		%{Config::File::read_config_file("/etc/$BASENAME")} };
 }
 
 # Check for a user configuration file
 if ( -e "$ENV{HOME}/.$BASENAME" ) {
     my $cfg = new Config::Simple(filename => "$ENV{HOME}/.$BASENAME",
 				 syntax => 'simple');
-    %$CONFIG = ( %$CONFIG,
-		 %{Config::File::read_config_file("$ENV{HOME}/.$BASENAME")} );
+    $CONFIG = { %$CONFIG,
+		%{Config::File::read_config_file("$ENV{HOME}/.$BASENAME")} };
 }
 
 my $HELP = "Unburden Home Directory
@@ -241,10 +243,10 @@ sub replace {
 	return 0
     }
 
-    my $target = $FILELAYOUT;
+    my $target = $CONFIG->{FILELAYOUT};
     $target =~ s|%u|`id -un`|ge;
     $target =~ s|%s|$replacement|g;
-    $target = "$TARGETDIR/$target";
+    $target = $CONFIG->{TARGETDIR}."/$target";
 
     # Replace %<n> (e.g. %1) with the n-th wildcard match. Uses perl
     # here as it would be too complicated and way less readable if
