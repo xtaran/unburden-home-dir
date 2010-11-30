@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/perl -l
 #
 # This file causes a list of directories to be removed or moved off
 # the users home directory into a given other directory. Usually this
@@ -22,195 +22,226 @@
 # along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 
+use strict;
+use warnings;
+
 # Configuration variables to be used in configuration files
-TARGETDIR=/tmp
-FILELAYOUT='.unburden-%u/%s'
+my $TARGETDIR  = '/tmp';
+my $FILELAYOUT = '.unburden-%u/%s';
 
 # Should only be used in configuration files to enable debugging. Not
 # set by default to let wrapper scripts set it, too.
-#DEBUG=
+my $DEBUG = undef;
 
 # Probably should never be used in configuration files. If you use it
 # there, you are mostly on your own.
-BASENAME=unburden_home_dir
+my $BASENAME = 'unburden_home_dir';
+
+# Load Modules
+use Config::Simple;
+use Getopt::Std;
+use File::Path qw(make_path remove_tree);
+use File::Basename;
+use File::Touch;
+use File::Copy;
+
+# Declare and initialise some variables
+my %CONFIG = ();
+my %OPTIONS = ();
 
 # Check for a system wide configuration file
-if [ -e /etc/"${BASENAME}" ]; then
-        . /etc/"${BASENAME}"
-fi
+if ( -e "/etc/$BASENAME" ) {
+    my $cfg = new Config::Simple("/etc/$BASENAME");
+    %CONFIG = $cfg->vars();
+}
 
 # Check for a user configuration file
-if [ -e "${HOME}/.${BASENAME}" ]; then
-        . "${HOME}/.${BASENAME}"
-fi
+if ( -e "$ENV{HOME}/.$BASENAME" ) {
+    my $cfg = new Config::Simple("$ENV{HOME}/.$BASENAME");
+    %CONFIG = %CONFIG, $cfg->vars();
+}
 
-HELP="Unburden Home Directory
+my $HELP = "Unburden Home Directory
 
 Usage: $0 [-n|-h]
 
   -n -- dry run (show what would be done)
   -h -- show this help
-"
+";
 
 # Parse command line options
-while getopts nh opt; do
-    case "${opt}" in
-        n) DEBUG=echo;;
-        h) echo "${HELP}"; exit 0;;
-    esac
-done
-shift $(expr $OPTIND - 1)
+getopt('hn', \%OPTIONS);
+if ($OPTIONS{n}) {
+    $DEBUG = 1;
+}
+
+if ($OPTIONS{h}) {
+    print $HELP; exit 0;;
+}
 
 # Set proper umask when creating files or directories. Save current
 # umask before.
-OLDUMASK=$(umask)
-umask 077
+my $OLDUMASK = umask();
+umask(077);
 
-warn() {
-    echo "$1" 1>&2
+sub report_problem {
+    warn "WARNING: Can't handle $_[0]: $_[1]";
 }
 
-report_problem() {
-    warn "WARNING: Can't handle $1: $2"
+sub report_serious_problem {
+    warn "ERROR: Can't handle $_[0]: $_[1]";
 }
 
-report_serious_problem() {
-    warn "ERROR: Can't handle $1: $2"
+sub create_symlink_and_parents {
+    create_parent_directories($_[1]);
+    $DEBUG && print join(' -> ', @_);
+    symlink($_[0], $_[1]) or die "Couldn't symlink ".join(' -> ', @_).": $!";
 }
 
-create_symlink_and_parents() {
-    create_parent_directories "$2"
-    ${DEBUG} ln -vs "$1" "$2"
+sub create_parent_directories {
+    make_path(dirname($_[0]), { verbose => $DEBUG });
 }
 
-create_parent_directories() {
-    ${DEBUG} mkdir -pv $(dirname "$1")
-}
-
-possibly_create_non_existing_stuff() {
+sub possibly_create_non_existing_stuff {
     # Shall we create not yet existing directories or files as symlink?
     # Case 1: directory
-    if [ "$1" = "D" ]; then
-	${DEBUG} mkdir -pv "$3"
-	create_symlink_and_parents "$3" "$2"
+    if ( $_[0] eq "D" ) {
+	create_parent_directories($_[2]);
+	create_symlink_and_parents($_[2], $_[1]);
+    }
 
     # Case 2: file
-    elif [ "$1" = "F" ]; then
-	create_parent_directories "$3"
-	${DEBUG} touch "$3"
-	create_symlink_and_parents "$3" "$2"
-    fi
+    elsif ( $_[0] eq "F" ) {
+	create_parent_directories($_[2]);
+	$DEBUG && print "Touching $_[2]";
+	touch($_[2]);
+	create_symlink_and_parents($_[2], $_[1])
+    }
     return 0
 }
 
-fix_dangling_links() {
-    link="$(readlink "$2")"
+sub fix_dangling_links {
+    my $link = readlink($_[1]);
     # Check if link target is wanted target
-    if [ "${link}" != "$3" ]; then
-	report_problem "$2" "${link} not equal $3"
+    if ( $link ne $_[2] ) {
+	report_problem($_[1], "$link not equal $_[2]");
 	return 1
-    fi
+    }
 
     # Check if target exists and is same type
-    if [ -e "$3" ]; then
+    if ( -e $_[2] ) {
 	# Case 1: directory
-	if [ "$1" = "d" -o "$1" = 'D' ]; then
+	if ( $_[0] eq "d" or $_[0] eq 'D' ) {
 	    # Does target exist?
-	    if [ ! -d "$3" ]; then
-		report_problem "$2" "Unexpected type (not a directory)"
+	    if ( ! -d $_[2] ) {
+		report_problem($_[1], "Unexpected type (not a directory)");
 		return 1
-	    fi
+	    }
+	}
 	# Case 2: file
-	elif [ "$1" = "f" -o "$1" = 'F' ]; then
+	elsif ( $_[0] eq "f" or $_[0] eq 'F' ) {
 	    # Does target exist?
-	    if [ ! -f "$3" ]; then
-		report_problem "$2" "Unexpected type (not a regular file)"
+	    if ( ! -f $_[2] ) {
+		report_problem($_[1], "Unexpected type (not a regular file)");
 		return 1
-	    fi
-	fi
+	    }
+	}
+    }
     # Symlink is there, but file or directory not
-    else
+    else {
 	# Case 1: directory
-	if [ "$1" = "d" -o "$1" = 'D' ]; then
-	    ${DEBUG} mkdir -pv "$3"
+	if ( $_[0] eq "d" or $_[0] eq 'D' ) {
+	    make_path($_[2], { verbose => $DEBUG });
+	}
 	# Case 2: file
-	elif [ "$1" = "f" -o "$1" = 'F' ]; then
-	    create_parent_directories "$3"
-	    ${DEBUG} touch "$3"
-	fi
-    fi
+	elsif ( $_[0] eq "f" or "$_[0]" eq 'F' ) {
+	    create_parent_directories($_[2]);
+	    $DEBUG && print "Touching $_[2]";
+	    touch($_[2]);
+	}
+    }
     return 0
 }
 
-do_it() {
-    if [ "$1" = "d" -o "$1" = 'D' ]; then
-	if [ -d "$2" ]; then
-	    if [ "$4" = "r" -o "$4" = "d" ]; then
-		${DEBUG} rm -rv "$2"
-		${DEBUG} mkdir -pv "$3"
-	    elif [ "$4" = "m" ]; then
-		create_parent_directories "$3"
-		${DEBUG} mv -v "$2" "$3"
-	    else
-		warn "Unknown action '$4'. This should never happen."
+sub do_it {
+    if ( $_[0] eq "d" or $_[0] eq 'D' ) {
+	if ( -d $_[1] ) {
+	    if ( $_[3] eq "r" or $_[3] eq "d" ) {
+		remove_tree($_[1], { verbose => $DEBUG });
+		make_path($_[2], { verbose => $DEBUG });
+	    }
+	    elsif ( $_[3] eq "m" ) {
+		create_parent_directories($_[2]);
+		$DEBUG && print "$_[1] -> $_[2]";
+		move(@_[1,2]) or die "Couldn't move $_[1] -> $_[2]: $!";
+	    }
+	    else {
+		warn "Unknown action '$_[3]'. This should never happen.";
 		return 255
-	    fi
-	    ${DEBUG} ln -vs "$3" "$2"
-	else
-	    report_serious_problem "$2" "Unexpected type (not a directory)"
+	    }
+	    $DEBUG && print "$_[2] ->  $_[1]";
+	    symlink($_[2], $_[1]) or die "Couldn't symlink $_[2] ->  $_[1]: $!";
+	}
+	else {
+	    report_serious_problem($_[1], "Unexpected type (not a directory)");
 	    return 1
-	fi
-    elif [ "$1" = "f" -o "$1" = 'F' ]; then
-	if [ -f "$2" ]; then
-	    if [ "$4" = "r" -o "$4" = "d" ]; then
-		${DEBUG} rm -v "$2"
-		create_parent_directories "$3"
-		${DEBUG} touch "$3"
-	    elif [ "$4" = "m" ]; then
-		create_parent_directories "$3"
-		${DEBUG} mv -v "$2" "$3"
-	    else
-		warn "Unknown action '$4'. This should never happen."
+	}
+    }
+    elsif ( $_[0] eq "f" or $_[0] eq 'F' ) {
+	if ( -f $_[1] ) {
+	    if ( $_[3] eq "r" or $_[3] eq "d" ) {
+		$DEBUG && print "Deleting $_[1]";
+		unlink($_[1]) or die "Couldn't delete $_[1]: $!";
+		create_parent_directories($_[2]);
+		$DEBUG && print "Touching $_[2]";
+		touch($_[2]);
+	    }
+	    elsif ( $_[3] eq "m" ) {
+		create_parent_directories($_[2]);
+		$DEBUG && print "$_[1] -> $_[2]";
+		move(@_[1,2]) or die "Couldn't move $_[1] -> $_[2]: $!";
+	    }
+	    else {
+		warn "Unknown action '$_[3]'. This should never happen.";
 		return 255
-	    fi
-	    ${DEBUG} ln -vs "$3" "$2"
-	else
-	    report_serious_problem "$2" "Unexpected type (not a file)"
+	    }
+	    $DEBUG && print "$_[2] ->  $_[1]";
+	    symlink($_[2], $_[1]) or die "Couldn't symlink $_[2] ->  $_[1]: $!";
+	}
+	else {
+	    report_serious_problem($_[1], "Unexpected type (not a file)");
 	    return 1
-	fi
-    else
-	warn "This should never happen."
+	}
+    }
+    else {
+	warn "This should never happen.";
 	return 255
-    fi
+    }
     return 0
 }
 
-replace() {
+sub replace {
     # replace $type $i $item $replacement
-    type="$1"
-    itemexpanded="$2"
-    itemglob="$3"
-    replacement="$4"
-    action="$5"
+    my $type = $_[0];
+    my $itemexpanded = $_[1];
+    my $itemglob = $_[2];
+    my $replacement = $_[3];
+    my $action = $_[4];
 
     # Skip entries where wildcard where passed
-    if echo "${itemexpanded}" | egrep '[][*?]' -q; then
-	warn "Skipping '${itemexpanded}' due to unmatched wildcard."
+    if ($itemexpanded =~ /[][*?]/) {
+	warn "Skipping '$itemexpanded' due to unmatched wildcard.";
 	return 0
-    fi
+    }
 
-    target="${TARGETDIR}/$(echo "${FILELAYOUT}" | \
-                           sed "s|%u|$(id -un)|g;s|%s|${replacement}|g;")"
+    my $target = $FILELAYOUT;
+    $target =~ s|%u|`id -un`|ge;
+    $target =~ s|%s|$replacement|g;
+    $target = "$TARGETDIR/$target";
 
     # Replace %<n> (e.g. %1) with the n-th wildcard match. Uses perl
     # here as it would be too complicated and way less readable if
     # written as (bourne) shell script.
-
-    target="$(perl -e '
-
-	my $itemglob     = $ARGV[0];
-	my $itemexpanded = $ARGV[1];
-	my $target       = $ARGV[2];
 
 	# Change from globbing to regexp
 	$itemglob =~ s/\?/(.)/;
@@ -218,56 +249,60 @@ replace() {
 
 	my @result = $itemexpanded =~ m($itemglob)g;
 
-	$target =~ s/\%(\d+)/$result[$1-1]/eg;
-
-	print $target;
-
-    ' "${itemglob}" "${itemexpanded}" "${target}")"
+	$target =~ s/\%(\d+)/$result[$_[0]-1]/eg;
 
     # Check if the source exists
-    if [ ! -e "${itemexpanded}" -a ! -L "${itemexpanded}" ]; then
-	possibly_create_non_existing_stuff "${type}" "${itemexpanded}" "${target}"
+    if ( ! -e $itemexpanded and ! -l $itemexpanded ) {
+	possibly_create_non_existing_stuff($type, $itemexpanded, $target);
+    }
     # Check if source is already a symlink
-    elif [ -L "${itemexpanded}" ]; then
-	fix_dangling_links "${type}" "${itemexpanded}" "${target}"
+    elsif ( -l $itemexpanded ) {
+	fix_dangling_links($type, $itemexpanded, $target);
+    }
 
     # TODO: Check available disk space
     # Should use report_serious_problem
 
     # No symlink yet, then actually move or remove!
-    else
-	do_it "${type}" "${itemexpanded}" "${target}" "${action}"
-    fi
+    else {
+	do_it($type, $itemexpanded, $target, $action);
+    }
 }
 
-for list in "/etc/${BASENAME}_list" \
-            "${HOME}/.${BASENAME}_list"; do
-    test -r "${list}" || continue
+for my $list ("/etc/${BASENAME}_list",
+	      "$ENV{HOME}/.${BASENAME}_list") {
+    next unless -r $list;
 
     # Clean up this and that
-    grep -v '^#' "${list}" | while read action type item replacement ; do
-	if [ -z "${action}" ]; then
-	    continue
-	fi
-	if [ -z "${item}" -o -z "${replacement}" ]; then
-	    warn "Can't parse '${type} ${item} ${replacement}', skipping..."
-	    continue
-	fi
-	if [ "${type}" != "d" -a  "${type}" != "f" -a \
-	    "${type}" != "D" -a  "${type}" != "F" ]; then
-	    warn "Can't parse type '${type}', must be 'd', 'D', 'f' or 'F', skipping..."
-	    continue
-	fi
-	if [ "${action}" != "d" -a "${action}" != "r" -a "${action}" != "m"  ]; then
-	    warn "Can't parse action '${action}', must be 'd', 'r' or 'm', skipping..."
-	    continue
-	fi
+    open(LIST, '<', $list) or die "Can't open $list: $!";
+    while (<LIST>) {
+	next if /^#/;
 
-	for i in ${HOME}/${item}; do
-	    replace "${type}" "${i}" "${item}" "${replacement}" "${action}"
-	done
-    done
-done
+	chomp;
+	my ($action, $type, $item, $replacement) = split;
+
+	next unless defined $action;
+	#next if $action eq '';
+
+	if (!defined($item) or !defined($replacement)) {
+	    warn "Can't parse '$_', skipping...";
+	    next
+	}
+	if ( $type ne "d" and  $type ne "f" and
+	     $type ne "D" and  $type ne "F" ) {
+	    warn "Can't parse type '$type', must be 'd', 'D', 'f' or 'F', skipping...";
+	    next
+	}
+	if ( $action ne "d" and $action ne "r" and $action ne "m"  ) {
+	    warn "Can't parse action '$action', must be 'd', 'r' or 'm', skipping...";
+	    next
+	}
+
+	for my $i (glob("$ENV{HOME}/$item")) {
+	    replace($type, $i, $item, $replacement, $action);
+	}
+    }
+}
 
 # Restore original umask
-umask "$OLDUMASK"
+umask($OLDUMASK);
