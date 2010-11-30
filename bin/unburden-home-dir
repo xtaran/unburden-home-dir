@@ -231,11 +231,7 @@ sub do_it {
 
 sub replace {
     # replace $type $i $item $replacement
-    my $type = $_[0];
-    my $itemexpanded = $_[1];
-    my $itemglob = $_[2];
-    my $replacement = $_[3];
-    my $action = $_[4];
+    my ($type, $itemexpanded, $itemglob, $replacement, $action) = @_;
 
     # Skip entries where wildcard where passed
     if ($itemexpanded =~ /[][*?]/) {
