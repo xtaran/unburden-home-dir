@@ -45,7 +45,6 @@ use Getopt::Std;
 use File::Path qw(make_path remove_tree);
 use File::Basename;
 use File::Touch;
-use File::Copy;
 use Data::Dumper;
 
 # Declare and initialise some variables
@@ -103,6 +102,15 @@ sub report_problem {
 
 sub report_serious_problem {
     warn "ERROR: Can't handle $_[0]: $_[1]";
+}
+
+sub move {
+    print "Moving ".join(', ', @_[0..($#_-1)])." -> $_[$#_]";
+    unless ($DRYRUN) {
+	my $rc = system(qw(mv -vi), @_);
+	return !($? >> 8);
+    }
+    return 1;
 }
 
 sub create_symlink_and_parents {
@@ -190,7 +198,6 @@ sub do_it {
 	    }
 	    elsif ( $_[3] eq "m" ) {
 		create_parent_directories($_[2]);
-		print "Moving $_[1] -> $_[2]";
 		move(@_[1,2]) || die "Couldn't move $_[1] -> $_[2]: $!"
 		    unless $DRYRUN
 	    }
