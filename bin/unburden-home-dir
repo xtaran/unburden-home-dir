@@ -50,6 +50,7 @@ use Data::Dumper;
 
 # Declare and initialise some variables
 my %OPTIONS = ();
+my $UID = `id -un`;
 
 # Check for a system wide configuration file
 if ( -e "/etc/$BASENAME" ) {
@@ -64,6 +65,9 @@ if ( -e "$ENV{HOME}/.$BASENAME" ) {
     $CONFIG = { %$CONFIG,
 		%{Config::File::read_config_file("$ENV{HOME}/.$BASENAME")} };
 }
+
+# Fix some values
+$UID =~ s/\s+//gs;
 
 foreach my $key (keys %$CONFIG) {
     $CONFIG->{$key} =~ s/^([\'\"])(.*)\1$/$2/;
@@ -248,7 +252,7 @@ sub replace {
     }
 
     my $target = $CONFIG->{FILELAYOUT};
-    $target =~ s|%u|`id -un`|ge;
+    $target =~ s|%u|$UID|ge;
     $target =~ s|%s|$replacement|g;
     $target = $CONFIG->{TARGETDIR}."/$target";
 
