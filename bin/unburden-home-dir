@@ -83,7 +83,7 @@ Usage: $0 [-n|-h]
 
 # Parse command line options
 getopt('hn', \%OPTIONS);
-if ($OPTIONS{n}) {
+if (exists($OPTIONS{n})) {
     $DRYRUN = 1;
 }
 
