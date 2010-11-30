@@ -65,6 +65,10 @@ if ( -e "$ENV{HOME}/.$BASENAME" ) {
 		%{Config::File::read_config_file("$ENV{HOME}/.$BASENAME")} };
 }
 
+foreach my $key (keys %$CONFIG) {
+    $CONFIG->{$key} =~ s/^([\'\"])(.*)\1$/$2/;
+}
+
 my $HELP = "Unburden Home Directory
 
 Usage: $0 [-n|-h]
