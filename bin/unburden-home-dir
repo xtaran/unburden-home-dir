@@ -59,7 +59,8 @@ if ( -e "/etc/$BASENAME" ) {
 if ( -e "$ENV{HOME}/.$BASENAME" ) {
     my $cfg = new Config::Simple(filename => "$ENV{HOME}/.$BASENAME",
 				 syntax => 'simple');
-    %$CONFIG = %$CONFIG, %{Config::File::read_config_file("$ENV{HOME}/.$BASENAME")};
+    %$CONFIG = ( %$CONFIG,
+		 %{Config::File::read_config_file("$ENV{HOME}/.$BASENAME")} );
 }
 
 my $HELP = "Unburden Home Directory
