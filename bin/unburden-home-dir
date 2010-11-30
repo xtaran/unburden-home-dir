@@ -38,27 +38,28 @@ my $DRYRUN = undef;
 my $BASENAME = 'unburden_home_dir';
 
 # Load Modules
-use Config::Simple;
+use Config::File;
 use Getopt::Std;
 use File::Path qw(make_path remove_tree);
 use File::Basename;
 use File::Touch;
 use File::Copy;
+use Data::Dumper;
 
 # Declare and initialise some variables
-my %CONFIG = ();
+my $CONFIG = {};
 my %OPTIONS = ();
 
 # Check for a system wide configuration file
 if ( -e "/etc/$BASENAME" ) {
-    my $cfg = new Config::Simple("/etc/$BASENAME");
-    %CONFIG = $cfg->vars();
+    $CONFIG = Config::File::read_config_file("/etc/$BASENAME");
 }
 
 # Check for a user configuration file
 if ( -e "$ENV{HOME}/.$BASENAME" ) {
-    my $cfg = new Config::Simple("$ENV{HOME}/.$BASENAME");
-    %CONFIG = %CONFIG, $cfg->vars();
+    my $cfg = new Config::Simple(filename => "$ENV{HOME}/.$BASENAME",
+				 syntax => 'simple');
+    %$CONFIG = %$CONFIG, %{Config::File::read_config_file("$ENV{HOME}/.$BASENAME")};
 }
 
 my $HELP = "Unburden Home Directory
