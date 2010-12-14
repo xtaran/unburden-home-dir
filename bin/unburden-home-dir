@@ -259,6 +259,24 @@ sub calculate_target {
     return $CONFIG->{TARGETDIR}."/$target";
 }
 
+sub fill_in_wildcard_matches {
+    my ($itemglob, $itemexpanded, $target) = @_;
+
+    # Replace %<n> (e.g. %1) with the n-th wildcard match. Uses perl
+    # here as it would be too complicated and way less readable if
+    # written as (bourne) shell script.
+
+    # Change from globbing to regexp
+    $itemglob =~ s/\?/(.)/;
+    $itemglob =~ s/\*/(.*)/;
+
+    my @result = $itemexpanded =~ m($itemglob)g;
+
+    $target =~ s/\%(\d+)/$result[$1-1]/eg;
+
+    return $target;
+}
+
 sub replace {
     # replace $type $i $item $replacement
     my ($type, $itemexpanded, $itemglob, $replacement, $action) = @_;
@@ -270,18 +288,7 @@ sub replace {
     }
 
     my $target = &calculate_target($replacement);
-
-    # Replace %<n> (e.g. %1) with the n-th wildcard match. Uses perl
-    # here as it would be too complicated and way less readable if
-    # written as (bourne) shell script.
-
-	# Change from globbing to regexp
-	$itemglob =~ s/\?/(.)/;
-	$itemglob =~ s/\*/(.*)/;
-
-	my @result = $itemexpanded =~ m($itemglob)g;
-
-	$target =~ s/\%(\d+)/$result[$1-1]/eg;
+    $target = &fill_in_wildcard_matches($itemglob, $itemexpanded, $target);
 
     # Check if the source exists
     if ( ! -e $itemexpanded and ! -l $itemexpanded ) {
