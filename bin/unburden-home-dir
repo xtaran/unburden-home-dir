@@ -249,6 +249,16 @@ sub do_it {
     return 0
 }
 
+sub calculate_target {
+    my $replacement = shift;
+    my $target = $CONFIG->{FILELAYOUT};
+
+    $target =~ s|%u|$UID|ge;
+    $target =~ s|%s|$replacement|g;
+
+    return $CONFIG->{TARGETDIR}."/$target";
+}
+
 sub replace {
     # replace $type $i $item $replacement
     my ($type, $itemexpanded, $itemglob, $replacement, $action) = @_;
@@ -259,10 +269,7 @@ sub replace {
 	return 0
     }
 
-    my $target = $CONFIG->{FILELAYOUT};
-    $target =~ s|%u|$UID|ge;
-    $target =~ s|%s|$replacement|g;
-    $target = $CONFIG->{TARGETDIR}."/$target";
+    my $target = &calculate_target($replacement);
 
     # Replace %<n> (e.g. %1) with the n-th wildcard match. Uses perl
     # here as it would be too complicated and way less readable if
