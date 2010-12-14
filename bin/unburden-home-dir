@@ -287,8 +287,8 @@ sub replace {
 	return 0
     }
 
-    my $target = &calculate_target($replacement);
-    $target = &fill_in_wildcard_matches($itemglob, $itemexpanded, $target);
+    my $target = &fill_in_wildcard_matches($itemglob, $itemexpanded,
+					   &calculate_target($replacement));
 
     # Check if the source exists
     if ( ! -e $itemexpanded and ! -l $itemexpanded ) {
