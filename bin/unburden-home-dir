@@ -265,7 +265,7 @@ sub replace {
 
     # Skip entries where wildcard where passed
     if ($itemexpanded =~ /[][*?]/) {
-	warn "Skipping '$itemexpanded' due to unmatched wildcard.";
+	warn "Skipping '$itemexpanded' due to unmatched wildcard.\n";
 	return 0
     }
 
