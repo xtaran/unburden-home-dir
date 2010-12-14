@@ -35,6 +35,9 @@ my $CONFIG = {
 # set by default to let wrapper scripts set it, too.
 my $DRYRUN = undef;
 
+# Undo feature
+my $REVERT = 0;
+
 # Probably should never be used in configuration files. If you use it
 # there, you are mostly on your own.
 my $BASENAME = 'unburden_home_dir';
@@ -78,17 +81,23 @@ my $HELP = "Unburden Home Directory
 Usage: $0 [-n|-h]
 
   -n -- dry run (show what would be done)
+  -u -- undo (reverse the functionality and put stuff back into the
+        home directory)
   -h -- show this help
 ";
 
 # Parse command line options
-getopts('hn', \%OPTIONS);
+getopts('hnu', \%OPTIONS);
 if (exists($OPTIONS{n})) {
     $DRYRUN = 1;
 }
 
 if (exists($OPTIONS{h})) {
     print $HELP; exit 0;;
+}
+
+if (exists($OPTIONS{u})) {
+    $REVERT = 1;
 }
 
 # Set proper umask when creating files or directories. Save current
@@ -308,6 +317,45 @@ sub replace {
     }
 }
 
+sub revert {
+    my ($itemexpanded, $item_in_home, $target_glob) = @_;
+
+    # Skip entries where wildcard where passed
+    if ($itemexpanded =~ /[][*?]/) {
+	warn "Skipping '$target_glob' due to unmatched wildcard.\n";
+	return 0
+    }
+
+    $item_in_home = "$ENV{HOME}/" .
+	&fill_in_wildcard_matches($target_glob, $itemexpanded, $item_in_home);
+    print "Trying to revert $itemexpanded to $item_in_home";
+
+    if (-l $item_in_home) {
+	my $link_target = readlink($item_in_home);
+	if ($itemexpanded eq $link_target) {
+	    print "Removing symlink $item_in_home";
+	    unlink($item_in_home) unless $DRYRUN;
+	    move($itemexpanded, $item_in_home);
+	} else {
+	    warn "Ignoring symlink $item_in_home as it points to $link_target ".
+		 "and not to $itemexpanded as expected.\n";
+	}
+    }
+}
+
+sub exchange_wildcards_and_replacements {
+    my ($wildcard, $replacement) = @_;
+    my $i = 1;
+    while ($replacement =~ /\%(\d+)/) {
+	my $number = $1;
+	my $prev = $number-1;
+	$wildcard =~ s/^(([^*]*[*?]){$prev}[^*]*)([?*])/"$1\%".$i++/e;
+	my $wildcardtype = $3;
+	$replacement =~ s/\%(\d+)/$wildcardtype/;
+    }
+    return ($wildcard, $replacement);
+}
+
 for my $list ("/etc/${BASENAME}_list",
 	      "$ENV{HOME}/.${BASENAME}_list") {
     next unless -r $list;
@@ -337,8 +385,17 @@ for my $list ("/etc/${BASENAME}_list",
 	    next
 	}
 
-	for my $i (glob("$ENV{HOME}/$item")) {
-	    replace($type, $i, $item, $replacement, $action);
+	if ($REVERT) {
+	    ($item, $replacement) = &exchange_wildcards_and_replacements($item, $replacement);
+
+	    my $replacement_path = &calculate_target($replacement);
+	    for my $i (glob($replacement_path)) {
+		revert($i, $item, $replacement);
+	    }
+	} else {
+	    for my $i (glob("$ENV{HOME}/$item")) {
+		replace($type, $i, $item, $replacement, $action);
+	    }
 	}
     }
 }
