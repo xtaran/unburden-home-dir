@@ -42,7 +42,7 @@ my $BASENAME = 'unburden_home_dir';
 # Load Modules
 use Config::File;
 use Getopt::Std;
-use File::Path qw(make_path remove_tree);
+use File::Path qw(mkpath rmtree);
 use File::Basename;
 use File::Touch;
 use Data::Dumper;
@@ -122,7 +122,7 @@ sub create_symlink_and_parents {
 
 sub create_parent_directories {
     print "Create directory ".dirname($_[0]);
-    make_path(dirname($_[0]), { verbose => 1 }) unless $DRYRUN;
+    mkpath(dirname($_[0]), { verbose => 1 }) unless $DRYRUN;
 }
 
 sub possibly_create_non_existing_stuff {
@@ -175,7 +175,7 @@ sub fix_dangling_links {
 	# Case 1: directory
 	if ( $_[0] eq "d" or $_[0] eq 'D' ) {
 	    print "Create directory $_[2]";
-	    make_path($_[2], { verbose => 1 }) unless $DRYRUN;
+	    mkpath($_[2], { verbose => 1 }) unless $DRYRUN;
 	}
 	# Case 2: file
 	elsif ( $_[0] eq "f" or "$_[0]" eq 'F' ) {
@@ -192,9 +192,9 @@ sub do_it {
 	if ( -d $_[1] ) {
 	    if ( $_[3] eq "r" or $_[3] eq "d" ) {
 		print "Delete directory $_[1]";
-		remove_tree($_[1], { verbose => 1 }) unless $DRYRUN;
+		rmtree($_[1], { verbose => 1 }) unless $DRYRUN;
 		print "Create directory $_[2]";
-		make_path($_[2], { verbose => 1 }) unless $DRYRUN;
+		mkpath($_[2], { verbose => 1 }) unless $DRYRUN;
 	    }
 	    elsif ( $_[3] eq "m" ) {
 		create_parent_directories($_[2]);
