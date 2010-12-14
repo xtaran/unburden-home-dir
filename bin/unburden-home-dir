@@ -87,7 +87,7 @@ if (exists($OPTIONS{n})) {
     $DRYRUN = 1;
 }
 
-if ($OPTIONS{h}) {
+if (exists($OPTIONS{h})) {
     print $HELP; exit 0;;
 }
 
