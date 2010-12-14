@@ -281,7 +281,7 @@ sub replace {
 
 	my @result = $itemexpanded =~ m($itemglob)g;
 
-	$target =~ s/\%(\d+)/$result[$_[0]-1]/eg;
+	$target =~ s/\%(\d+)/$result[$1-1]/eg;
 
     # Check if the source exists
     if ( ! -e $itemexpanded and ! -l $itemexpanded ) {
