@@ -78,7 +78,7 @@ foreach my $key (keys %$CONFIG) {
 
 my $HELP = "Unburden Home Directory
 
-Usage: $0 [-n|-h]
+Usage: $0 [-n|-u|-h]
 
   -n -- dry run (show what would be done)
   -u -- undo (reverse the functionality and put stuff back into the
