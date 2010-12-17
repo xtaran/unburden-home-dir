@@ -55,6 +55,7 @@ use Data::Dumper;
 
 # Declare and initialise some variables
 my %OPTIONS = ();
+my $FILTER = undef;
 my $UID = getpwuid($<);
 
 # Check for a system wide configuration file
@@ -88,9 +89,12 @@ sub VERSION_MESSAGE {
 sub HELP_MESSAGE {
     my ($fh, $getoptpkg, $getoptversion, $cmdlineargs) = @_;
 
-    print $fh "Usage: $0 [-n|-u]
+    print $fh "Usage: $0 [-n|-u|-f filter]
        $0 (-h|--help|--version)
 
+  -f -- just unburden those directory matched by the given filter
+        (a perl regular expression) -- matches the already unburdened
+        directories if used together with -u.
   -n -- dry run (show what would be done)
   -u -- undo (reverse the functionality and put stuff back into the
         home directory)
@@ -99,7 +103,7 @@ sub HELP_MESSAGE {
 }
 
 # Parse command line options
-getopts('hnu', \%OPTIONS);
+getopts('hnuf:', \%OPTIONS);
 
 if (exists($OPTIONS{h})) {
     my $fh = IO::Handle->new_from_fd(fileno(STDERR),'w');
@@ -114,6 +118,13 @@ if (exists($OPTIONS{n})) {
 
 if (exists($OPTIONS{u})) {
     $REVERT = 1;
+}
+if (exists($OPTIONS{f})) {
+    eval { $FILTER = qr/$OPTIONS{f}/; };
+    if ($@) {
+	&report_serious_problem("parameter to -f", "\n$@");
+	exit 2;
+    }
 }
 
 # Set proper umask when creating files or directories. Save current
@@ -406,10 +417,16 @@ for my $list ("/etc/${BASENAME}_list",
 
 	    my $replacement_path = &calculate_target($replacement);
 	    for my $i (glob($replacement_path)) {
+		if (defined($FILTER)) {
+		    next unless ($i =~ $FILTER);
+		}
 		revert($i, $item, $replacement);
 	    }
 	} else {
 	    for my $i (glob("$ENV{HOME}/$item")) {
+		if (defined($FILTER)) {
+		    next unless ($i =~ $FILTER);
+		}
 		replace($type, $i, $item, $replacement, $action);
 	    }
 	}
