@@ -1,0 +1,54 @@
+.TH UNBURDEN-HOME-DIR "1" "December 2010" "Unburden Home Directory" "User Commands"
+.SH NAME
+Unburden Home Directory \- unburdens home directories from caches
+.SH SYNOPSIS
+.B unburden\-home\-dir
+[ \fB-n\fR | \fB-u\fR | \fB-f\fR \fIfilter\fR ]
+.br
+.B unburden\-home\-dir
+( \fB\-h\fR | \fB\-\-help\fR | \fB\-\-version\fR )
+.SH DESCRIPTION
+unburden\-home\-dir unburdens the home directory from files and
+directory which cause high I/O or disk usage but are neither important
+if they are lost, e.g. caches or trash directory.
+.PP
+When being run it moves the files and directories given in the
+configuration file to a location outside the home directory,
+e.g. \fI/tmp\fR or \fI/scratch\fR, and puts appropriate symbolic links
+in the home directory instead.
+.SH OPTIONS
+.TP
+\fB\-f\fR
+just unburden those directory matched by the given filter (a perl
+regular expression) \fB\-\-\fR matches the already unburdened
+directories if used together with \fB\-u\fR.
+.TP
+\fB\-n\fR
+dry run (show what would be done)
+.TP
+\fB\-u\fR
+undo (reverse the functionality and put stuff back into the home
+directory)
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+show this help
+.TP
+\fB\-\-version\fR
+show the program's version
+.SH FILES
+\fB/etc/unburden_home_dir\fR,
+\fB/etc/unburden_home_dir_list\fR,
+\fB~/.unburden_home_dir\fR,
+\fB~/.unburden_home_dir_list\fR,
+\fB/etc/default/unburden-home-dir\fR,
+\fB/etc/X11/Xsession.d/95unburden_home_dir\fR
+.SH "SEE ALSO"
+\fBcorekeeper\fR (\fIhttp://openvswitch.org/cgi-bin/gitweb.cgi?p=corekeeper\fR),
+\fBautotrash\fR(1),
+example configuration files in \fB/usr/share/doc/unburden-home-dir/examples\fR
+.SH AUTHOR
+Unburden Home Dir is written and maintained by Axel Beckert
+<\fIbeckert@phys.ethz.ch\fR>
+.SH LICENSE
+Unburden Home Dir is available under the terms of the GNU General
+Public License (GPL) version 2 or any later version at your option.
