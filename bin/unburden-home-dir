@@ -88,7 +88,8 @@ sub VERSION_MESSAGE {
 sub HELP_MESSAGE {
     my ($fh, $getoptpkg, $getoptversion, $cmdlineargs) = @_;
 
-    print $fh "Usage: $0 [-n|-u|-h]
+    print $fh "Usage: $0 [-n|-u]
+       $0 (-h|--help|--version)
 
   -n -- dry run (show what would be done)
   -u -- undo (reverse the functionality and put stuff back into the
