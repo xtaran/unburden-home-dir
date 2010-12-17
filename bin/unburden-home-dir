@@ -25,7 +25,7 @@
 use strict;
 use warnings;
 
-my $VERSION = '0.0.20101217';
+our $VERSION = '0.0.20101217';
 
 # Configuration variables to be used in configuration files
 my $CONFIG = {
@@ -46,10 +46,11 @@ my $BASENAME = 'unburden_home_dir';
 
 # Load Modules
 use Config::File;
-use Getopt::Std;
+use Getopt::Std; $Getopt::Std::STANDARD_HELP_VERSION = 1;
 use File::Path qw(mkpath rmtree);
 use File::Basename;
 use File::Touch;
+use IO::Handle;
 use Data::Dumper;
 
 # Declare and initialise some variables
@@ -78,15 +79,23 @@ foreach my $key (keys %$CONFIG) {
     $CONFIG->{$key} =~ s/^([\'\"])(.*)\1$/$2/;
 }
 
-my $HELP = "Unburden Home Directory $VERSION
+sub VERSION_MESSAGE {
+    my ($fh, $getoptpkg, $getoptversion, $cmdlineargs) = @_;
 
-Usage: $0 [-n|-u|-h]
+    print $fh "Unburden Home Directory $VERSION\n";
+}
+
+sub HELP_MESSAGE {
+    my ($fh, $getoptpkg, $getoptversion, $cmdlineargs) = @_;
+
+    print $fh "Usage: $0 [-n|-u|-h]
 
   -n -- dry run (show what would be done)
   -u -- undo (reverse the functionality and put stuff back into the
         home directory)
   -h -- show this help
 ";
+}
 
 # Parse command line options
 getopts('hnu', \%OPTIONS);
@@ -95,7 +104,10 @@ if (exists($OPTIONS{n})) {
 }
 
 if (exists($OPTIONS{h})) {
-    print $HELP; exit 0;;
+    my $fh = IO::Handle->new_from_fd(fileno(STDERR),'w');
+    VERSION_MESSAGE($fh);
+    HELP_MESSAGE($fh);
+    exit 0;
 }
 
 if (exists($OPTIONS{u})) {
