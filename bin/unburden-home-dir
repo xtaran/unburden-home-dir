@@ -100,15 +100,16 @@ sub HELP_MESSAGE {
 
 # Parse command line options
 getopts('hnu', \%OPTIONS);
-if (exists($OPTIONS{n})) {
-    $DRYRUN = 1;
-}
 
 if (exists($OPTIONS{h})) {
     my $fh = IO::Handle->new_from_fd(fileno(STDERR),'w');
     VERSION_MESSAGE($fh);
     HELP_MESSAGE($fh);
     exit 0;
+}
+
+if (exists($OPTIONS{n})) {
+    $DRYRUN = 1;
 }
 
 if (exists($OPTIONS{u})) {
