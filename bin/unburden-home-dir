@@ -89,16 +89,21 @@ sub VERSION_MESSAGE {
 sub HELP_MESSAGE {
     my ($fh, $getoptpkg, $getoptversion, $cmdlineargs) = @_;
 
-    print $fh "Usage: $0 [-n|-u|-f filter]
-       $0 (-h|--help|--version)
+    print $fh "Usage: $0 [ -n | -u | -f filter ]
+       $0 ( -h | --help | --version )
 
-  -f -- just unburden those directory matched by the given filter
-        (a perl regular expression) -- matches the already unburdened
-        directories if used together with -u.
-  -n -- dry run (show what would be done)
-  -u -- undo (reverse the functionality and put stuff back into the
-        home directory)
-  -h -- show this help
+  -f  just unburden those directory matched by the given filter (a perl
+      regular expression) -- matches the already unburdened
+      directories if used together with -u.
+
+  -n  dry run (show what would be done)
+
+  -u  undo (reverse the functionality and put stuff back into the home
+      directory)
+
+  -h, --help show this help
+
+  --version  show the program's version
 ";
 }
 
