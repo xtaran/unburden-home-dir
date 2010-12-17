@@ -52,7 +52,7 @@ use Data::Dumper;
 
 # Declare and initialise some variables
 my %OPTIONS = ();
-my $UID = `id -un`;
+my $UID = getpwuid($<);
 
 # Check for a system wide configuration file
 if ( -e "/etc/$BASENAME" ) {
