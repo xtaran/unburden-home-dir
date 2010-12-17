@@ -2,7 +2,7 @@ build:
 
 test:
 	checkbashisms Xsession.d/95unburden_home_dir
-	checkbashisms bin/unburden-home-dir
+	perl -c bin/unburden-home-dir
 
 install:
 	install -d $(DESTDIR)/etc/X11/Xsession.d/
