@@ -10,7 +10,7 @@ Vcs-Browser: http://git.phys.ethz.ch/?p=unburden-home-dir.git
 
 Package: unburden-home-dir
 Architecture: all
-Depends: x11-common, ${misc:Depends}
+Depends: x11-common, ${perl:Depends}, ${misc:Depends}
 Enhances: x11-common
 Suggests: corekeeper, autotrash
 Description: Remove or move cache files automatically from user's home
