@@ -1,4 +1,4 @@
-unburden-home-dir (0.0.20101110) UNRELEASED; urgency=low
+unburden-home-dir (0.0.20101217) UNRELEASED; urgency=low
 
   * Suggest corekeeper which can help for similar issues with core dumps.
   * Suggest autotrash which can help for similar issues with the desktop

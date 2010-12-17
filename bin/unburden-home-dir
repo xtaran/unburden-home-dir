@@ -25,6 +25,8 @@
 use strict;
 use warnings;
 
+my $VERSION = '0.0.20101217';
+
 # Configuration variables to be used in configuration files
 my $CONFIG = {
     TARGETDIR  => '/tmp',
@@ -76,7 +78,7 @@ foreach my $key (keys %$CONFIG) {
     $CONFIG->{$key} =~ s/^([\'\"])(.*)\1$/$2/;
 }
 
-my $HELP = "Unburden Home Directory
+my $HELP = "Unburden Home Directory $VERSION
 
 Usage: $0 [-n|-u|-h]
 
