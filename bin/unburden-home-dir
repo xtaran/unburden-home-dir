@@ -110,6 +110,7 @@ if (exists($OPTIONS{n})) {
 if (exists($OPTIONS{u})) {
     $REVERT = 1;
 }
+
 if (exists($OPTIONS{f})) {
     eval { $FILTER = qr/$OPTIONS{f}/; };
     if ($@) {
