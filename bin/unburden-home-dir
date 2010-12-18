@@ -56,29 +56,6 @@ my %OPTIONS = ();
 my $FILTER = undef;
 my $UID = getpwuid($<);
 
-# Check for a system wide configuration file
-if ( -e "/etc/$BASENAME" ) {
-    $CONFIG = { %$CONFIG,
-		%{Config::File::read_config_file("/etc/$BASENAME")} };
-}
-
-# Check for a user configuration file
-if ( -e "$ENV{HOME}/.$BASENAME" ) {
-    my $cfg = new Config::Simple(filename => "$ENV{HOME}/.$BASENAME",
-				 syntax => 'simple');
-    $CONFIG = { %$CONFIG,
-		%{Config::File::read_config_file("$ENV{HOME}/.$BASENAME")} };
-}
-
-# Fix some values
-$UID =~ s/\s+//gs;
-
-# Remove quotes and line-feeds from values
-foreach my $key (keys %$CONFIG) {
-    chomp($CONFIG->{$key});
-    $CONFIG->{$key} =~ s/^([\'\"])(.*)\1$/$2/;
-}
-
 # Some messages for Getopt::Std
 sub VERSION_MESSAGE {
     my ($fh, $getoptpkg, $getoptversion, $cmdlineargs) = @_;
@@ -130,6 +107,29 @@ if (exists($OPTIONS{f})) {
 	&report_serious_problem("parameter to -f", "\n$@");
 	exit 2;
     }
+}
+
+# Check for a system wide configuration file
+if ( -e "/etc/$BASENAME" ) {
+    $CONFIG = { %$CONFIG,
+		%{Config::File::read_config_file("/etc/$BASENAME")} };
+}
+
+# Check for a user configuration file
+if ( -e "$ENV{HOME}/.$BASENAME" ) {
+    my $cfg = new Config::Simple(filename => "$ENV{HOME}/.$BASENAME",
+				 syntax => 'simple');
+    $CONFIG = { %$CONFIG,
+		%{Config::File::read_config_file("$ENV{HOME}/.$BASENAME")} };
+}
+
+# Fix some values
+$UID =~ s/\s+//gs;
+
+# Remove quotes and line-feeds from values
+foreach my $key (keys %$CONFIG) {
+    chomp($CONFIG->{$key});
+    $CONFIG->{$key} =~ s/^([\'\"])(.*)\1$/$2/;
 }
 
 # Set proper umask when creating files or directories. Save current
