@@ -337,8 +337,8 @@ sub fill_in_wildcard_matches {
     # written as (bourne) shell script.
 
     # Change from globbing to regexp
-    $itemglob =~ s/\?/(.)/;
-    $itemglob =~ s/\*/(.*)/;
+    $itemglob =~ s/\?/(.)/g;
+    $itemglob =~ s/\*/(.*)/g;
 
     my @result = $itemexpanded =~ m($itemglob)g;
 
