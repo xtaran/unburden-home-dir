@@ -33,15 +33,13 @@ my $CONFIG = {
     FILELAYOUT => '.unburden-%u/%s',
 };
 
-# Should only be used in configuration files to enable debugging. Not
-# set by default to let wrapper scripts set it, too.
+# Just show what would be done
 my $DRYRUN = undef;
 
 # Undo feature
 my $REVERT = 0;
 
-# Probably should never be used in configuration files. If you use it
-# there, you are mostly on your own.
+# Defaul base name
 my $BASENAME = 'unburden_home_dir';
 
 # Load Modules
@@ -81,6 +79,7 @@ foreach my $key (keys %$CONFIG) {
     $CONFIG->{$key} =~ s/^([\'\"])(.*)\1$/$2/;
 }
 
+# Some messages for Getopt::Std
 sub VERSION_MESSAGE {
     my ($fh, $getoptpkg, $getoptversion, $cmdlineargs) = @_;
 
