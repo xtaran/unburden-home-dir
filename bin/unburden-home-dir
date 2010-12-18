@@ -66,10 +66,14 @@ sub VERSION_MESSAGE {
 sub HELP_MESSAGE {
     my ($fh, $getoptpkg, $getoptversion, $cmdlineargs) = @_;
 
-    print $fh "Usage: $0 [ -n | -u | -b basename | -f filter ]
+    print $fh "Usage: $0 [ -n | -u | -b basename | ( -c | -C ) configfile | -f filter ]
        $0 ( -h | --help | --version )
 
   -b  use the given string as basename instead of $BASENAME.
+
+  -c  read an additional configuration file
+
+  -C  read only the given configuration file
 
   -f  just unburden those directory matched by the given filter (a perl
       regular expression) -- matches the already unburdened
@@ -87,7 +91,7 @@ sub HELP_MESSAGE {
 }
 
 # Parse command line options
-getopts('hnuf:b:', \%OPTIONS);
+getopts('hnuf:b:c:C:', \%OPTIONS);
 
 if (exists($OPTIONS{h})) {
     my $fh = IO::Handle->new_from_fd(fileno(STDERR),'w');
@@ -102,6 +106,14 @@ if (exists($OPTIONS{b})) {
 
 # By default check for a system wide and a user configuration file
 my @CONFFILES = ("/etc/$BASENAME", "$ENV{HOME}/.$BASENAME");
+
+if (exists($OPTIONS{C})) {
+    @CONFFILES = ($OPTIONS{C});
+}
+
+if (exists($OPTIONS{c})) {
+    push(@CONFFILES, $OPTIONS{c});
+}
 
 if (exists($OPTIONS{n})) {
     $DRYRUN = 1;
