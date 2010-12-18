@@ -66,8 +66,10 @@ sub VERSION_MESSAGE {
 sub HELP_MESSAGE {
     my ($fh, $getoptpkg, $getoptversion, $cmdlineargs) = @_;
 
-    print $fh "Usage: $0 [ -n | -u | -f filter ]
+    print $fh "Usage: $0 [ -n | -u | -b basename | -f filter ]
        $0 ( -h | --help | --version )
+
+  -b  use the given string as basename instead of $BASENAME.
 
   -f  just unburden those directory matched by the given filter (a perl
       regular expression) -- matches the already unburdened
@@ -85,13 +87,17 @@ sub HELP_MESSAGE {
 }
 
 # Parse command line options
-getopts('hnuf:', \%OPTIONS);
+getopts('hnuf:b:', \%OPTIONS);
 
 if (exists($OPTIONS{h})) {
     my $fh = IO::Handle->new_from_fd(fileno(STDERR),'w');
     VERSION_MESSAGE($fh);
     HELP_MESSAGE($fh);
     exit 0;
+}
+
+if (exists($OPTIONS{b})) {
+    $BASENAME = $OPTIONS{b};
 }
 
 if (exists($OPTIONS{n})) {
