@@ -123,8 +123,6 @@ if ( -e "/etc/$BASENAME" ) {
 
 # Check for a user configuration file
 if ( -e "$ENV{HOME}/.$BASENAME" ) {
-    my $cfg = new Config::Simple(filename => "$ENV{HOME}/.$BASENAME",
-				 syntax => 'simple');
     $CONFIG = { %$CONFIG,
 		%{Config::File::read_config_file("$ENV{HOME}/.$BASENAME")} };
 }
