@@ -104,8 +104,9 @@ if (exists($OPTIONS{b})) {
     $BASENAME = $OPTIONS{b};
 }
 
-# By default check for a system wide and a user configuration file
+# By default check for a system wide and a user configuration and list file
 my @CONFFILES = ("/etc/$BASENAME", "$ENV{HOME}/.$BASENAME");
+my @LISTFILES = ("/etc/${BASENAME}_list", "$ENV{HOME}/.${BASENAME}_list");
 
 if (exists($OPTIONS{C})) {
     @CONFFILES = ($OPTIONS{C});
@@ -404,8 +405,7 @@ sub exchange_wildcards_and_replacements {
     return ($wildcard, $replacement);
 }
 
-for my $list ("/etc/${BASENAME}_list",
-	      "$ENV{HOME}/.${BASENAME}_list") {
+for my $list (@LISTFILES) {
     next unless -r $list;
 
     # Clean up this and that
