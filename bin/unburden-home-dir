@@ -100,6 +100,9 @@ if (exists($OPTIONS{b})) {
     $BASENAME = $OPTIONS{b};
 }
 
+# By default check for a system wide and a user configuration file
+my @CONFFILES = ("/etc/$BASENAME", "$ENV{HOME}/.$BASENAME");
+
 if (exists($OPTIONS{n})) {
     $DRYRUN = 1;
 }
@@ -115,16 +118,12 @@ if (exists($OPTIONS{f})) {
     }
 }
 
-# Check for a system wide configuration file
-if ( -e "/etc/$BASENAME" ) {
-    $CONFIG = { %$CONFIG,
-		%{Config::File::read_config_file("/etc/$BASENAME")} };
-}
-
-# Check for a user configuration file
-if ( -e "$ENV{HOME}/.$BASENAME" ) {
-    $CONFIG = { %$CONFIG,
-		%{Config::File::read_config_file("$ENV{HOME}/.$BASENAME")} };
+# Check for configuration files and read them
+foreach my $configfile (@CONFFILES) {
+    if ( -e $configfile ) {
+	$CONFIG = { %$CONFIG,
+		    %{Config::File::read_config_file($configfile)} };
+    }
 }
 
 # Fix some values
