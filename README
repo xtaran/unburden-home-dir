@@ -46,7 +46,6 @@ Explanation of the unburden_home_dir_list file format:
 3rd column: Path relative to $HOME to move off to some other location
 4th column: identifier for file or directory in the other location
 
-File format still subject to change.
 
 Edit /etc/default/unburden-home-dir if you want to enable
 unburden-home-dir for all users of a machine.on an Xsession based
