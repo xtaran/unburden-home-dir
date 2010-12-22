@@ -6,7 +6,7 @@ and files can be removed instead of moved.
 
 This is helpful in at least three cases:
 
-The idea giving case are big workstation setups where $HOME is on NFS
+The idea-giving case are big workstation setups where $HOME is on NFS
 and all those caches put an unnecessary burden (hence the name) on the
 file server since caching over NFS doesn't have the best performance
 and may clog the NFS server, too.
