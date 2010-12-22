@@ -48,6 +48,12 @@ Explanation of the unburden_home_dir_list file format:
 
 File format still subject to change.
 
+Edit /etc/default/unburden-home-dir if you want to enable
+unburden-home-dir for all users of a machine.on an Xsession based
+login. But please be aware that if you do that on a machine with NFS
+homes, you should do that on all (Unix) machines which have those NFS
+homes mounted.
+
 License:
 
 All stuff in here is free software: you can redistribute it and/or

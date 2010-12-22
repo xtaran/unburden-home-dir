@@ -1,8 +1,5 @@
 TODO
 ====
 
-Documentation that it should be used on either all or none
-machines which use the same home directory.
-
 Add warnings if either $HOME or $TARGET do not begin with a
 slash. This can cause broken symlinks.

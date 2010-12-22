@@ -6,5 +6,5 @@
 # This is a POSIX shell fragment
 #
 
-# Uncomment to disable automatic unburdening completely
-#UNBURDEN_HOME=false
+# Uncomment to activate automatic unburdening of home directories
+#UNBURDEN_HOME=true
