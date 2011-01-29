@@ -14,7 +14,7 @@ my $PREFIX = "u";
 $ENV{HOME} = $HOME;
 
 # 1 - 3
-ok( mkpath("$HOME/.foobar/blatest", "$TARGET/$PREFIX-barba-blatest-foobar"), "Create test environment (directories)" );
+ok( mkpath("$HOME/.foobar/blatest", "$TARGET/$PREFIX-barba-blatest-foobar", {}), "Create test environment (directories)" );
 ok( -d "$TARGET", "Target directory has been created" );
 ok( symlink("$TARGET/$PREFIX-barba-blatest-foobar", "$HOME/.foobar/blatest/barba"), "Create test environment (symlink)" );
 
