@@ -1,6 +1,6 @@
-#!/usr/bin/perl -wl
+#!/usr/bin/perl -w
 
-use Test::Simple tests => 10;
+use Test::Simple tests => 13;
 use File::Path qw(mkpath rmtree);
 use File::Slurp;
 use Data::Dumper;
@@ -13,23 +13,43 @@ my $PREFIX = "u";
 # Set a debug environment
 $ENV{HOME} = $HOME;
 
-# 1 - 3
+# Clean up possible remainders of aborted tests
+rmtree("$BASE");
+
+# 1 - 4
 ok( mkpath("$HOME/.foobar/blatest", "$TARGET/$PREFIX-barba-blatest-foobar", {}), "Create test environment (directories)" );
 ok( -d "$TARGET", "Target directory has been created" );
 ok( symlink("$TARGET/$PREFIX-barba-blatest-foobar", "$HOME/.foobar/blatest/barba"), "Create test environment (symlink)" );
+ok( -l "$HOME/.foobar/blatest/barba", "Symlink has been created" );
 
-# 4 + 5
+# 5 + 6
 ok( write_file("$BASE/list", 'm d .foo*/bla*/bar* bar%3-bla%2-foo%1'), "Create list" );
 ok( write_file("$BASE/config", "TARGETDIR=$TARGET\nFILELAYOUT=$PREFIX-\%s"), "Create config" );
 
-# 6
+# 7
 my $cmd = "bin/unburden-home-dir -u -C $BASE/config -L $BASE/list > $BASE/output 2> $BASE/stderr";
 ok( system($cmd) == 0, "Call '$cmd'" );
 
-# 7 - 9
+# 8
+my $wanted = <<EOF;
+Trying to revert $TARGET/$PREFIX-barba-blatest-foobar to $HOME/.foobar/blatest/barba
+Removing symlink $HOME/.foobar/blatest/barba
+Moving $TARGET/$PREFIX-barba-blatest-foobar -> $HOME/.foobar/blatest/barba
+\`$TARGET/$PREFIX-barba-blatest-foobar\' -> \`$HOME/.foobar/blatest/barba\'
+EOF
+my $contents = read_file("$BASE/output");
+print "Want:\n\n$wanted\nGot:\n\n$contents\n";
+ok( $contents eq $wanted, "Check command output" );
+
+# 9
+my $stderr = read_file("$BASE/stderr");
+print "\nSTDERR:\n\n$stderr\n";
+ok( $stderr eq '', "Check command STDERR output (should be empty)" );
+
+# 10 - 12
 ok( -d "$TARGET", "Base directory still exists" );
 ok( ! -e "$TARGET/$PREFIX-barba-blatest-foobar", "Directory no more exists" );
 ok( -d "$HOME/.foobar/blatest/barba", "Symlink is a directory again" );
 
-# 10
+# 13
 ok( rmtree("$BASE"), "Remove test environment" );
