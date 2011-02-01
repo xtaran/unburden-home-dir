@@ -1,6 +1,6 @@
 #!/usr/bin/perl -wl
 
-use Test::Simple tests => 10;
+use Test::Simple tests => 2 * 14;
 use File::Path qw(mkpath rmtree);
 use File::Slurp;
 use Data::Dumper;
@@ -16,35 +16,44 @@ $ENV{HOME} = $HOME;
 # Clean up possible remainders of aborted tests
 rmtree("$BASE");
 
+foreach my $example (qw(/foobar ../foobar)) {
 # Create test environment
 # 1 + 2
 ok( mkpath("$HOME/foobar", {}), "Create test environment (directories)" );
 ok( -d "$HOME/foobar", "Original directory has been created" );
 
 # 3 + 4
-ok( write_file("$BASE/list", "m d ../foobar foobar") );
+ok( ! -d "$BASE/foobar", "$BASE/foobar does not exist (check for safe environment)" );
+ok( ! -d "/foobar", "$BASE/foobar does not exist (check for safe environment)" );
+
+# 5 + 6
+ok( write_file("$BASE/list", "m d $example foobar") );
 ok( write_file("$BASE/config", "TARGETDIR=$TARGET\nFILELAYOUT=$PREFIX-\%s") );
 
-# 5
+# 7
 my $cmd = "bin/unburden-home-dir -C $BASE/config -L $BASE/list > $BASE/output 2> $BASE/stderr";
 ok( system($cmd) == 0, "Call '$cmd'" );
 
-# 6
-my $wanted = <<EOF;
-../foobar would be outside of the home directory, skipping...
-EOF
+# 8
+my $wanted = "$example would be outside of the home directory, skipping...\n";
+
 my $stderr = read_file("$BASE/stderr");
 print "Want:\n\n$wanted\nGot:\n\n$stderr\n";
 ok( $stderr eq $wanted, "Check command STDERR output" );
 
-# 7
+# 9
 my $output = read_file("$BASE/output");
 print "\nSTDOUT:\n\n$stderr\n";
 ok( $output eq '', "Check command STDOUT (should be empty)" );
 
-# 8 + 9
+# 10 + 11
 ok( ! -d "$TARGET/$PREFIX-foobar", "Nothing created" );
 ok( ! -d "$TARGET", "Nothing created" );
 
-# 10
+# 12 + 13
+ok( ! -d "$BASE/foobar", "$BASE/foobar still does not exist" );
+ok( ! -d "/foobar", "$BASE/foobar still does not exist" );
+
+# 14
 ok( rmtree("$BASE"), "Clean up" );
+}
