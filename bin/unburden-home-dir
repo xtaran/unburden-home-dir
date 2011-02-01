@@ -347,6 +347,27 @@ sub fill_in_wildcard_matches {
     return $target;
 }
 
+# Check if the path to something to unburden already contains a symlink
+sub symlink_in_path {
+    my $path = shift;
+    # Remove home directory, i.e. check just from below the home directory
+    if ($path =~ s($ENV{HOME}/?)()) {
+	# Split up into components, but remove the last one (which we
+	# are requested to handle, so we shouldn't check that now)
+	my @path_elements = split(m(/), $path);
+	pop(@path_elements);
+
+	foreach my $i (0..$#path_elements) {
+	    my $path_to_check = $ENV{HOME}.'/'.join("/", @path_elements[0..$i]);
+	    print "Check if $path_to_check is a symlink";
+	    return $path_to_check if -l $path_to_check;
+	}
+	return 0;
+    } else {
+	report_serious_problem("Can't find home directory ($ENV{HOME}) in $path!");
+    }
+}
+
 sub replace {
     # replace $type $i $item $replacement
     my ($type, $itemexpanded, $itemglob, $replacement, $action) = @_;
@@ -355,6 +376,11 @@ sub replace {
     if ($itemexpanded =~ /[][*?]/) {
 	warn "Skipping '$itemexpanded' due to unmatched wildcard.\n";
 	return 0
+    }
+
+    if (my $symlink = &symlink_in_path($itemexpanded)) {
+	warn "Skipping '$itemexpanded' due to symlink in path: $symlink\n";
+	return 0;
     }
 
     my $target = &fill_in_wildcard_matches($itemglob, $itemexpanded,
