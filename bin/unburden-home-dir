@@ -445,6 +445,11 @@ for my $list (@LISTFILES) {
 	    next
 	}
 
+	if ( $item =~ m(^(\.\.)?/) ) {
+	    warn "$item would be outside of the home directory, skipping...\n";
+	    next
+	}
+
 	if ($REVERT) {
 	    ($item, $replacement) = &exchange_wildcards_and_replacements($item, $replacement);
 
