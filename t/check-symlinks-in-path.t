@@ -5,7 +5,7 @@ use File::Path qw(mkpath rmtree);
 use File::Slurp;
 use Data::Dumper;
 
-my $BASE = 't/skip-non-home';
+my $BASE = 't/check-symlinks-in-path';
 my $HOME = "$BASE/1";
 my $TARGET = "$BASE/2";
 my $PREFIX = "u";
@@ -36,8 +36,8 @@ my $cmd = "bin/unburden-home-dir -C $BASE/config -L $BASE/list > $BASE/output 2>
 ok( system($cmd) == 0, "Call '$cmd'" );
 
 # 11
-my $wanted = "Skipping 't/skip-non-home/1/.fnord/bla' due to symlink in path: t/skip-non-home/1/.fnord
-Skipping 't/skip-non-home/1/.foobar/blafasel/bla' due to symlink in path: t/skip-non-home/1/.foobar/blafasel
+my $wanted = "Skipping '$HOME/.fnord/bla' due to symlink in path: $HOME/.fnord
+Skipping '$HOME/.foobar/blafasel/bla' due to symlink in path: $HOME/.foobar/blafasel
 ";
 
 my $stderr = read_file("$BASE/stderr");
@@ -45,10 +45,10 @@ print "Want:\n\n$wanted\nGot:\n\n$stderr\n";
 ok( $stderr eq $wanted, "Check command STDERR output" );
 
 # 12
-$wanted = "Create directory t/skip-non-home/2
-Moving t/skip-non-home/1/.foobar/fnord/bla -> t/skip-non-home/2/u-foobar-fnord-bla
-`t/skip-non-home/1/.foobar/fnord/bla' -> `t/skip-non-home/2/u-foobar-fnord-bla'
-Symlinking t/skip-non-home/2/u-foobar-fnord-bla ->  t/skip-non-home/1/.foobar/fnord/bla
+$wanted = "Create directory $TARGET
+Moving $HOME/.foobar/fnord/bla -> $TARGET/u-foobar-fnord-bla
+`$HOME/.foobar/fnord/bla' -> `$TARGET/u-foobar-fnord-bla'
+Symlinking $TARGET/u-foobar-fnord-bla ->  $HOME/.foobar/fnord/bla
 ";
 
 my $output = read_file("$BASE/output");
