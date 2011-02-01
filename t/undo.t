@@ -35,7 +35,9 @@ my $wanted = <<EOF;
 Trying to revert $TARGET/$PREFIX-barba-blatest-foobar to $HOME/.foobar/blatest/barba
 Removing symlink $HOME/.foobar/blatest/barba
 Moving $TARGET/$PREFIX-barba-blatest-foobar -> $HOME/.foobar/blatest/barba
-\`$TARGET/$PREFIX-barba-blatest-foobar\' -> \`$HOME/.foobar/blatest/barba\'
+sending incremental file list
+created directory $HOME/.foobar/blatest/barba
+./
 EOF
 my $contents = read_file("$BASE/output");
 print "Want:\n\n$wanted\nGot:\n\n$contents\n";

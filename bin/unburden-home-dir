@@ -48,6 +48,7 @@ use Getopt::Std; $Getopt::Std::STANDARD_HELP_VERSION = 1;
 use File::Path qw(mkpath rmtree);
 use File::Basename;
 use File::Touch;
+use File::Rsync;
 use IO::Handle;
 use Data::Dumper;
 
@@ -166,6 +167,14 @@ foreach my $key (keys %$CONFIG) {
 my $OLDUMASK = umask();
 umask(077);
 
+# Initialize rsync object
+my $rsync = File::Rsync->new({
+    archive => 1,
+    verbose => 1,
+    outfun => sub { my $_ = shift; chomp; print unless m(^sent |^total size|^\s*$); },
+    errfun => sub { chomp; warn "$_[0]\n"; },
+});
+
 sub report_problem {
     warn "WARNING: Can't handle $_[0]: $_[1]";
 }
@@ -174,11 +183,23 @@ sub report_serious_problem {
     warn "ERROR: Can't handle $_[0]: $_[1]";
 }
 
-sub move {
-    print "Moving ".join(', ', @_[0..($#_-1)])." -> $_[$#_]";
+sub move ($$) {
+    my ($from, $to) = @_;
+    print "Moving $from -> $to";
     unless ($DRYRUN) {
-	my $rc = system(qw(mv -vi), @_);
-	return !($? >> 8);
+	if (-d $from) {
+	    $from .= '/' unless $from =~ m(/$);
+	    $to .= '/' unless $to =~ m(/$);
+
+	    my $rc = $rsync->exec({
+		src => $from,
+		dst => $to,
+	    });
+	    rmtree($from);
+	} else {
+	    my $rc = system(qw(mv -vi), $from, $to);
+	    return !($? >> 8);
+	}
     }
     return 1;
 }

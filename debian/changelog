@@ -1,3 +1,11 @@
+unburden-home-dir (0.0.20110202) experimental; urgency=low
+
+  * Fix bug when moving stuff and the target directory already exists. Use
+    File::Rsync for that and add proper dependency to libfile-rsync-perl
+    for that.
+
+ -- Axel Beckert <abe@debian.org>  Tue, 01 Feb 2011 23:00:58 +0100
+
 unburden-home-dir (0.0.20110201) experimental; urgency=low
 
   * Rewritten in Perl.
