@@ -359,7 +359,7 @@ sub symlink_in_path {
 
 	foreach my $i (0..$#path_elements) {
 	    my $path_to_check = $ENV{HOME}.'/'.join("/", @path_elements[0..$i]);
-	    print "Check if $path_to_check is a symlink";
+	    #print "Check if $path_to_check is a symlink";
 	    return $path_to_check if -l $path_to_check;
 	}
 	return 0;
