@@ -43,7 +43,7 @@ ok( $stderr eq $wanted, "Check command STDERR output" );
 
 # 9
 my $output = read_file("$BASE/output");
-print "\nSTDOUT:\n\n$stderr\n";
+print "\nSTDOUT:\n\n$output\n";
 ok( $output eq '', "Check command STDOUT (should be empty)" );
 
 # 10 + 11
