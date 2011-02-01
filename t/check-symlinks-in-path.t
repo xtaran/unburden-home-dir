@@ -55,7 +55,7 @@ Symlinking $TARGET/u-foobar-fnord-bla ->  $HOME/.foobar/fnord/bla
 
 my $output = read_file("$BASE/output");
 print "Want:\n\n$wanted\nGot:\n\n$output\n";
-ok( $output eq $wanted, "Check command STDOUT (should be empty)" );
+ok( $output eq $wanted, "Check command STDOUT" );
 
 # 13 - 15
 ok( -d "$TARGET/$PREFIX-foobar-fnord-bla", "First directory moved" );
