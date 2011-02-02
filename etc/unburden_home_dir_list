@@ -3,11 +3,13 @@ m f .config/google-chrome/*/Thumbnails google-chrome-thumbnails-%1
 m f .config/google-chrome/*/Thumbnails-journal google-chrome-thumbnails-journal-%1
 m f .config/chromium/*/Thumbnails google-chrome-thumbnails-%1
 m f .config/chromium/*/Thumbnails-journal google-chrome-thumbnails-journal-%1
+m d .mozilla/default/*/Cache mozilla-default-cache-%1
 m d .mozilla/firefox/*/Cache firefox-cache-%1
 m d .mozilla/firefox/*/Cache.Trash firefox-cache-trash-%1
 m d .thunderbird/*/Cache thunderbird-cache-%1
 m d .mozilla-thunderbird/*/Cache debian-thunderbird-cache-%1
 m d .conkeror.mozdev.org/conkeror/*/Cache conkeror-cache-%1
+m d .conkeror.mozdev.org/conkeror/*/Cache.Trash conkeror-cache-trash-%1
 m d .kazehakase/mozilla/kazehakase/Cache kazehakase-cache
 m d .opera/cache opera-cache
 m d .opera/opcache opera-opcache
