@@ -216,7 +216,7 @@ sub create_parent_directories {
     my $parent_dir = dirname($file);
     unless (-d $parent_dir) {
 	print "Create parent directories for $file";
-	mkpath(dirname($file), { verbose => 1 }) unless $DRYRUN;
+	mkpath($parent_dir, { verbose => 1 }) unless $DRYRUN;
     }
 }
 
