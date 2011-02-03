@@ -221,18 +221,20 @@ sub create_parent_directories {
 }
 
 sub possibly_create_non_existing_stuff {
+    my ($type, $item, $target) = @_;
+
     # Shall we create not yet existing directories or files as symlink?
     # Case 1: directory
-    if ( $_[0] eq "D" ) {
-	create_symlink_and_parents($_[2], $_[1]);
+    if ( $type eq "D" ) {
+	create_symlink_and_parents($target, $item);
     }
 
     # Case 2: file
-    elsif ( $_[0] eq "F" ) {
-	create_parent_directories($_[2]);
-	print "Touching $_[2]";
+    elsif ( $type eq "F" ) {
+	create_parent_directories($target);
+	print "Touching $target";
 	touch($_[2]) unless $DRYRUN;
-	create_symlink_and_parents($_[2], $_[1])
+	create_symlink_and_parents($target, $item)
     }
     return 0
 }
