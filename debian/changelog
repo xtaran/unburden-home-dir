@@ -7,8 +7,10 @@ unburden-home-dir (0.0.20110203) experimental; urgency=low
     created.
   * Reduce probability of false positives when looking for issues in the
     logs.
+  * Add two more common cases to the example configuration:
+    .conkeror[...]/Cache.Trash and .mozilla/default/[...]/Cache
 
- -- Axel Beckert <abe@debian.org>  Thu, 03 Feb 2011 18:29:57 +0100
+ -- Axel Beckert <abe@debian.org>  Thu, 03 Feb 2011 20:12:56 +0100
 
 unburden-home-dir (0.0.20110201) experimental; urgency=low
 
