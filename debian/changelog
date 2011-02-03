@@ -3,6 +3,8 @@ unburden-home-dir (0.0.20110203) experimental; urgency=low
   * Fix bug when moving stuff and the target directory already exists. Use
     File::Rsync for that and add proper dependency to libfile-rsync-perl
     for that.
+  * Fix bug where only the parent of an empty target directory has been
+    created.
   * Reduce probability of false positives when looking for issues in the
     logs.
 

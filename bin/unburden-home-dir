@@ -227,6 +227,10 @@ sub possibly_create_non_existing_stuff {
     # Shall we create not yet existing directories or files as symlink?
     # Case 1: directory
     if ( $type eq "D" ) {
+	# TODO: Refactor create_symlink_and_parents so that its
+	# create_parent_directories call isn't redundant in this case.
+	print "Create directory $target and parents";
+	mkpath($target, { verbose => 1 }) unless $DRYRUN;
 	create_symlink_and_parents($target, $item);
     }
 
