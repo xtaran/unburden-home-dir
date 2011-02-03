@@ -224,7 +224,6 @@ sub possibly_create_non_existing_stuff {
     # Shall we create not yet existing directories or files as symlink?
     # Case 1: directory
     if ( $_[0] eq "D" ) {
-	create_parent_directories($_[2]);
 	create_symlink_and_parents($_[2], $_[1]);
     }
 
