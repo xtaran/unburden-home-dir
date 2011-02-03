@@ -1,10 +1,12 @@
-unburden-home-dir (0.0.20110202) experimental; urgency=low
+unburden-home-dir (0.0.20110203) experimental; urgency=low
 
   * Fix bug when moving stuff and the target directory already exists. Use
     File::Rsync for that and add proper dependency to libfile-rsync-perl
     for that.
+  * Reduce probability of false positives when looking for issues in the
+    logs.
 
- -- Axel Beckert <abe@debian.org>  Tue, 01 Feb 2011 23:00:58 +0100
+ -- Axel Beckert <abe@debian.org>  Thu, 03 Feb 2011 18:29:57 +0100
 
 unburden-home-dir (0.0.20110201) experimental; urgency=low
 

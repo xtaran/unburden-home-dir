@@ -25,10 +25,13 @@ ok( system("bin/unburden-home-dir -n -C $BASE/config -L $BASE/list > $BASE/outpu
 
 # 5
 my $wanted = <<EOF;
-Create directory $TARGET
+Create parent directories for $TARGET/u-barba-blatest-foobar
 Symlinking $TARGET/u-barba-blatest-foobar ->  $HOME/.foobar/blatest/barba
 EOF
-ok( read_file("$BASE/output") eq $wanted );
+
+my $output = read_file("$BASE/output");
+print "Wanted:\n\n$wanted\nGot:\n\n$output\n";
+ok( $output eq $wanted );
 
 # 5 - 7
 ok( ! -e "$TARGET/$PREFIX-barba-blatest-foobar" );

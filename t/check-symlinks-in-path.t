@@ -45,8 +45,7 @@ print "Want:\n\n$wanted\nGot:\n\n$stderr\n";
 ok( $stderr eq $wanted, "Check command STDERR output" );
 
 # 12
-$wanted = "Create directory $TARGET
-Moving $HOME/.foobar/fnord/bla -> $TARGET/u-foobar-fnord-bla
+$wanted = "Moving $HOME/.foobar/fnord/bla -> $TARGET/u-foobar-fnord-bla
 sending incremental file list
 created directory $TARGET/u-foobar-fnord-bla
 ./

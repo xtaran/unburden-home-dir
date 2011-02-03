@@ -43,19 +43,16 @@ print "Want:\n\n$wanted\nGot:\n\n$stderr\n";
 ok( $stderr eq $wanted, "Check command STDERR output (should be empty)" );
 
 # 11
-$wanted = "Create directory $TARGET
-Moving $HOME/.foobar/fnord -> $TARGET/u-foobar-fnord
+$wanted = "Moving $HOME/.foobar/fnord -> $TARGET/u-foobar-fnord
 sending incremental file list
 created directory $TARGET/u-foobar-fnord
 ./
 bla
 Symlinking $TARGET/u-foobar-fnord ->  $HOME/.foobar/fnord
-Create directory $TARGET
 Moving $HOME/.foobar/gnarz -> $TARGET/u-foobar-gnarz
 sending incremental file list
 goo
 Symlinking $TARGET/u-foobar-gnarz ->  $HOME/.foobar/gnarz
-Create directory $TARGET
 Moving $HOME/.foobar/foo -> $TARGET/u-foobar-foo
 Moving $HOME/.foobar/foo -> $TARGET/u-foobar-foo
 `$HOME/.foobar/foo' -> `$TARGET/u-foobar-foo'
