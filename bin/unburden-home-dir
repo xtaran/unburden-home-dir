@@ -205,9 +205,10 @@ sub move ($$) {
 }
 
 sub create_symlink_and_parents {
-    create_parent_directories($_[1]);
-    print 'Symlinking '.join(' -> ', @_);
-    symlink($_[0], $_[1]) || die "Couldn't symlink ".join(' -> ', @_).": $!"
+    my ($old, $new) = @_;
+    create_parent_directories($new);
+    print "Symlinking $new -> $old";
+    symlink($old, $new) || die "Couldn't symlink $new -> $old: $!"
 	unless $DRYRUN;
 }
 
