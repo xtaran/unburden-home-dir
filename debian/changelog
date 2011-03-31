@@ -1,3 +1,10 @@
+unburden-home-dir (0.0.20110401) UNRELEASED; urgency=low
+
+  * Improve README
+  * Add tmpreaper and agedu to "Suggests".
+
+ -- Axel Beckert <beckert@phys.ethz.ch>  Fri, 01 Apr 2011 01:19:29 +0200
+
 unburden-home-dir (0.0.20110203) experimental; urgency=low
 
   * Fix bug when moving stuff and the target directory already exists. Use
