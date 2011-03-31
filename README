@@ -23,7 +23,7 @@ alternative to keeping the blacklist in your backup software
 up-to-date.
 
 This project initially started as an Xsession hook. It now consists of
-a shell script which optionally can also be called from a provided
+a perl script which optionally can also be called from a provided
 Xsession hook.
 
 See http://wiki.phys.ethz.ch/readme/application_cache_files for the
