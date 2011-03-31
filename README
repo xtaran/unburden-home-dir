@@ -35,8 +35,8 @@ http://gitorious.org/unburden-home-dir/ or
 http://github.com/xtaran/unburden_home_dir (mirrors, or in case you
 prefer to use social forking :-).
 
-See etc/ (or /usr/share/doc/unburden-home-dir/examples/ on debianoid
-installations) for example files.
+See /usr/share/doc/unburden-home-dir/examples/ on debianoid
+installations or etc/ in the source tar ball for example files.
 
 Explanation of the unburden_home_dir_list file format:
 
