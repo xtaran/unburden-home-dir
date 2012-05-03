@@ -5,7 +5,7 @@
 UNBURDEN_BASENAME=unburden-home-dir
 
 if [ -e /etc/default/"${UNBURDEN_BASENAME}" ]; then
-        . /etc/default/"${UNBURDEN_BASENAME}"
+    . /etc/default/"${UNBURDEN_BASENAME}"
 fi
 
 if [ "${UNBURDEN_HOME}" = "true" ] || \

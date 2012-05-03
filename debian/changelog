@@ -3,8 +3,9 @@ unburden-home-dir (0.0.20120305) UNRELEASED; urgency=low
   * Improve README
   * Add tmpreaper and agedu to "Suggests".
   * Make Xsession.d snippet POSIX-compatible (Thanks Carsten Hey!)
+  * Fix indentation in Xsession.d snippet
 
- -- Axel Beckert <beckert@phys.ethz.ch>  Fri, 01 Apr 2011 01:19:29 +0200
+ -- Axel Beckert <abe@debian.org>  Thu, 03 May 2012 15:16:32 +0200
 
 unburden-home-dir (0.0.20110203) experimental; urgency=low
 
