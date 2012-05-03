@@ -8,8 +8,8 @@ if [ -e /etc/default/"${UNBURDEN_BASENAME}" ]; then
         . /etc/default/"${UNBURDEN_BASENAME}"
 fi
 
-if [ "${UNBURDEN_HOME}" = "true" -o \
-     "${UNBURDEN_HOME}" = "yes" ]; then
+if [ "${UNBURDEN_HOME}" = "true" ] || \
+   [ "${UNBURDEN_HOME}" = "yes" ]; then
 
     /usr/bin/unburden-home-dir
 fi
