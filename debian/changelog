@@ -6,6 +6,7 @@ unburden-home-dir (0.0.20120305) UNRELEASED; urgency=low
   * Bump Standards-Version to 3.9.3 (no changes)
   * Make Xsession.d snippet POSIX-compatible (Thanks Carsten Hey!)
   * Fix lintian warning helper-templates-in-copyright
+  * Update copyright years in debian/copyright
   * Fix indentation in Xsession.d snippet
 
  -- Axel Beckert <abe@debian.org>  Thu, 03 May 2012 15:16:32 +0200
