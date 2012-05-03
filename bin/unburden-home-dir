@@ -40,7 +40,7 @@ my $DRYRUN = undef;
 my $REVERT = 0;
 
 # Defaul base name
-my $BASENAME = 'unburden_home_dir';
+my $BASENAME = 'unburden-home-dir';
 
 # Load Modules
 use Config::File;

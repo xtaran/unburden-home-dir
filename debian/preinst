@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+# Move around configuration files from earlier experimental versions
+dpkg-maintscript-helper mv_conffile \
+  /etc/X11/Xsession.d/95unburden_home_dir /etc/X11/Xsession.d/95unburden-home-dir \
+  0.0.20110401 -- "$@"
+dpkg-maintscript-helper mv_conffile \
+  /etc/unburden_home_dir_list /etc/unburden-home-dir.list \
+  0.0.20110401 -- "$@"
+dpkg-maintscript-helper mv_conffile \
+  /etc/unburden_home_dir /etc/unburden-home-dir \
+  0.0.20110401 -- "$@"
+
+#DEBHELPER#

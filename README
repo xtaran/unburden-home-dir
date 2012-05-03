@@ -38,7 +38,7 @@ prefer to use social forking :-).
 See /usr/share/doc/unburden-home-dir/examples/ on debianoid
 installations or etc/ in the source tar ball for example files.
 
-Explanation of the unburden_home_dir_list file format:
+Explanation of the unburden-home-dir.list file format:
 
 1st column: Action ("d"/"r" or "m": delete/remove or move; the first
 	    two are equivalent)

@@ -1,5 +1,5 @@
 # Defaults for unburden-home-dir Xsession hook
-# sourced by /etc/X11/Xsession.d/95unburden_home_dir
+# sourced by /etc/X11/Xsession.d/95unburden-home-dir
 # installed at /etc/default/unburden-home-dir by the maintainer scripts
 
 #
