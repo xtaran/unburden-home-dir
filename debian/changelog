@@ -1,7 +1,8 @@
 unburden-home-dir (0.0.20120305) UNRELEASED; urgency=low
 
   * Improve README
-  * Add tmpreaper and agedu to "Suggests".
+  * Add tmpreaper and agedu and some more comfortable "du"-like tools to
+    "Suggests".
   * Bump Standards-Version to 3.9.3 (no changes)
   * Make Xsession.d snippet POSIX-compatible (Thanks Carsten Hey!)
   * Fix indentation in Xsession.d snippet
