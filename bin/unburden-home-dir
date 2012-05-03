@@ -245,28 +245,29 @@ sub possibly_create_non_existing_stuff {
 }
 
 sub fix_dangling_links {
-    my $link = readlink($_[1]);
+    my ($type, $itemexpanded, $target) = @_;
+    my $link = readlink($itemexpanded);
     # Check if link target is wanted target
-    if ( $link ne $_[2] ) {
-	report_problem($_[1], "$link not equal $_[2]");
+    if ( $link ne $target ) {
+	report_problem($itemexpanded, "$link not equal $target");
 	return 1
     }
 
     # Check if target exists and is same type
-    if ( -e $_[2] ) {
+    if ( -e $target ) {
 	# Case 1: directory
-	if ( $_[0] eq "d" or $_[0] eq 'D' ) {
+	if ( $type eq "d" or $type eq 'D' ) {
 	    # Does target exist?
-	    if ( ! -d $_[2] ) {
-		report_problem($_[1], "Unexpected type (not a directory)");
+	    if ( ! -d $target ) {
+		report_problem($itemexpanded, "Unexpected type (not a directory)");
 		return 1
 	    }
 	}
 	# Case 2: file
-	elsif ( $_[0] eq "f" or $_[0] eq 'F' ) {
+	elsif ( $type eq "f" or $type eq 'F' ) {
 	    # Does target exist?
-	    if ( ! -f $_[2] ) {
-		report_problem($_[1], "Unexpected type (not a regular file)");
+	    if ( ! -f $target ) {
+		report_problem($itemexpanded, "Unexpected type (not a regular file)");
 		return 1
 	    }
 	}
@@ -274,15 +275,15 @@ sub fix_dangling_links {
     # Symlink is there, but file or directory not
     else {
 	# Case 1: directory
-	if ( $_[0] eq "d" or $_[0] eq 'D' ) {
-	    print "Create directory $_[2]";
-	    mkpath($_[2], { verbose => 1 }) unless $DRYRUN;
+	if ( $type eq "d" or $type eq 'D' ) {
+	    print "Create directory $target";
+	    mkpath($target, { verbose => 1 }) unless $DRYRUN;
 	}
 	# Case 2: file
-	elsif ( $_[0] eq "f" or "$_[0]" eq 'F' ) {
-	    create_parent_directories($_[2]);
-	    print "Touching $_[2]";
-	    touch($_[2]) unless $DRYRUN;
+	elsif ( $type eq "f" or "$type" eq 'F' ) {
+	    create_parent_directories($target);
+	    print "Touching $target";
+	    touch($target) unless $DRYRUN;
 	}
     }
     return 0
