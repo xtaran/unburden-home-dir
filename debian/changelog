@@ -6,13 +6,13 @@ unburden-home-dir (0.0.20120305) UNRELEASED; urgency=low
       dpkg-maintscript-helper to rename conffiles.
   * Let Xsession.d snippet also source ~/.unburden-home-dir to allow per
     User execution
-    + Add test for Xsession.d snippet
     + Call unburden-home-dir without hardcoded path
   * Refactoring:
     + Use speaking variable names in fix_dangling_links() and do_it()
     + Reindent and reformat some overlong lines in bin/unburden-home-dir
     + Add semicolons on all return statements before block ends
     + Define list file suffix just once
+  * Add further tests to the test suite
   * Improve README
   * Add tmpreaper, eatmydata, agedu, bleachbit and some more comfortable
     "du"-like tools to "Suggests".
