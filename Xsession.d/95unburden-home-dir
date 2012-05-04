@@ -2,7 +2,7 @@
 # /etc/X11/Xsession.d/95unburden_home_dir
 # This file is sourced by Xsession(5), not executed.
 
-UNBURDEN_BASENAME=unburden-home-dir
+UNBURDEN_BASENAME=${UNBURDEN_BASENAME:-unburden-home-dir}
 
 if [ -e /etc/default/"${UNBURDEN_BASENAME}" ]; then
     . /etc/default/"${UNBURDEN_BASENAME}"
