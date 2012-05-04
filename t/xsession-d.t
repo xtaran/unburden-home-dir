@@ -1,6 +1,6 @@
 #!/usr/bin/perl -wl
 
-use Test::Simple tests => 15;
+use Test::Simple tests => 19;
 use File::Path qw(mkpath rmtree);
 use File::Copy;
 use File::Slurp;
@@ -40,37 +40,41 @@ ok( write_file("$HOME/.$BASENAME", "UNBURDEN_HOME=yes\n"), "Configure Xsession.d
 $cmd = "/bin/run-parts --list $XSESSIOND > $BASE/output 2> $BASE/stderr";
 ok( system($cmd) == 0, "Call '$cmd'" );
 
-# 10
+# 10 - 11
 $wanted = "";
 
 $stderr = read_file("$BASE/stderr");
 print "Want:\n\n$wanted\nGot:\n\n$stderr\n";
 ok( $stderr eq $wanted, "Check run-parts STDERR output" );
+ok( unlink("$BASE/stderr"), "Clean output" );
 
-# 11
+# 12 - 13
 $wanted = "$XSESSIOND/$RPSCRIPT\n";
 
 $output = read_file("$BASE/output");
 print "Want:\n\n$wanted\nGot:\n\n$output\n";
 ok( $output eq $wanted, "Check run-parts STDOUT" );
+ok( unlink("$BASE/output"), "Clean output" );
 
-# 12
+# 14
 $cmd = "/bin/sh $XSESSIOND/$RPSCRIPT > $BASE/output 2> $BASE/stderr";
 ok( system($cmd) == 0, "Call '$cmd'" );
 
-# 13
+# 15 - 16
 $wanted = "";
 
 $stderr = read_file("$BASE/stderr");
 print "Want:\n\n$wanted\nGot:\n\n$stderr\n";
 ok( $stderr eq $wanted, "Check Xsession.d STDERR output" );
+ok( unlink("$BASE/stderr"), "Clean output" );
 
-# 14
+# 17 - 18
 $wanted = "$BINDIR/unburden-home-dir called\n";
 
 $output = read_file("$BASE/output");
 print "Want:\n\n$wanted\nGot:\n\n$output\n";
 ok( $output eq $wanted, "Check Xsession.d STDOUT" );
+ok( unlink("$BASE/output"), "Clean output" );
 
-# 15
+# 19
 ok( rmtree("$BASE"), "Clean up" );
