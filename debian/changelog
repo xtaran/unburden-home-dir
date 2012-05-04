@@ -1,4 +1,4 @@
-unburden-home-dir (0.0.20120305) UNRELEASED; urgency=low
+unburden-home-dir (0.0.20120504) UNRELEASED; urgency=low
 
   * Uses consistently the basename "unburden-home-dir" instead of
     "unburden_home_dir".
