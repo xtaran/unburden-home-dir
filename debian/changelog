@@ -30,7 +30,7 @@ unburden-home-dir (0.0.20120305) UNRELEASED; urgency=low
   * Update copyright years in debian/copyright
   * Fix indentation in Xsession.d snippet and debian/copyright
 
- -- Axel Beckert <abe@debian.org>  Fri, 04 May 2012 19:57:03 +0200
+ -- Axel Beckert <abe@debian.org>  Fri, 04 May 2012 23:03:26 +0200
 
 unburden-home-dir (0.0.20110203) experimental; urgency=low
 
