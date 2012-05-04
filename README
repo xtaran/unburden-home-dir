@@ -43,34 +43,36 @@ Xsession hook.
 See http://wiki.phys.ethz.ch/readme/application_cache_files for the
 detailed reasoning behind this project.
 
+
+Source Code
+===========
+
 You should always find the newest code via git at either
 http://git.phys.ethz.ch/?p=unburden-home-dir.git (primary site),
 http://gitorious.org/unburden-home-dir/ or
 http://github.com/xtaran/unburden-home-dir (mirrors, or in case you
 prefer to use social forking :-).
 
+
 Configuration files
 ===================
 
 There are five configuration files for unburden-home-dir:
 
-/etc/unburden-home-dir      -- Global configuration file
-/etc/unburden-home-dir.list -- Global list of files to take care of
-~/.unburden-home-dir        -- Per user configuration file
-~/.unburden-home-dir.list   -- Per user list of files to take care of
-
-See /usr/share/doc/unburden-home-dir/examples/ on debianoid
-installations or etc/ in the source tar ball for example files.
+  /etc/unburden-home-dir         -- Global configuration file
+  /etc/unburden-home-dir.list    -- Global list of files to take care of
+  ~/.unburden-home-dir           -- Per user configuration file
+  ~/.unburden-home-dir.list      -- Per user list of files to take care of
+  /etc/default/unburden-home-dir -- Xsession hook configuration file
 
 Explanation of the unburden-home-dir.list file format:
 
-1st column: Action ("d"/"r" or "m": delete/remove or move; the first
-	    two are equivalent)
-2nd column: Type ("d", "D", "f" or "F": directory or file, capital
-	    letter means "create it if it doesn't exist")
-3rd column: Path relative to $HOME to move off to some other location
-4th column: identifier for file or directory in the other location
-
+  1st column: Action ("d"/"r" or "m": delete/remove or move; the first
+              two are equivalent)
+  2nd column: Type ("d", "D", "f" or "F": directory or file, capital
+              letter means "create it if it doesn't exist")
+  3rd column: Path relative to $HOME to move off to some other location
+  4th column: identifier for file or directory in the other location
 
 Edit /etc/default/unburden-home-dir if you want to enable
 unburden-home-dir for all users of a machine.on an Xsession based
@@ -85,7 +87,12 @@ the Xsession startup script in the same way as
 /etc/default/unburden-home-dir (while being a configuration file for
 unburden-home-dir itself at the same time, too).
 
-License:
+See /usr/share/doc/unburden-home-dir/examples/ on debianoid
+installations or etc/ in the source tar ball for example files.
+
+
+License
+=======
 
 All stuff in here is free software: you can redistribute it and/or
 modify it under the terms of the GNU General Public License as
