@@ -212,8 +212,10 @@ sub create_symlink_and_parents {
     my ($old, $new) = @_;
     create_parent_directories($new);
     print "Symlinking $new -> $old";
-    symlink($old, $new) || die "Couldn't symlink $new -> $old: $!"
-	unless $DRYRUN;
+    unless ($DRYRUN) {
+	symlink($old, $new)
+	    or die "Couldn't symlink $new -> $old: $!";
+    }
 }
 
 sub create_parent_directories {
@@ -307,16 +309,20 @@ sub do_it {
 	    }
 	    elsif ( $action eq "m" ) {
 		&create_parent_directories($target);
-		&move(@_[1,2]) || die "Couldn't move $itemexpanded -> $target: $!"
-		    unless $DRYRUN
+		unless ($DRYRUN) {
+		    &move(@_[1,2])
+			or die "Couldn't move $itemexpanded -> $target: $!";
+		}
 	    }
 	    else {
 		warn "Unknown action '$action'. This should never happen.";
 		return 255
 	    }
 	    print "Symlinking $target ->  $itemexpanded";
-	    symlink($target, $itemexpanded) || die "Couldn't symlink $target ->  $itemexpanded: $!"
-		unless $DRYRUN;
+	    unless ($DRYRUN) {
+		symlink($target, $itemexpanded)
+		    or die "Couldn't symlink $target ->  $itemexpanded: $!";
+	    }
 	}
 	else {
 	    report_serious_problem($itemexpanded,
@@ -328,7 +334,10 @@ sub do_it {
 	if ( -f $itemexpanded ) {
 	    if ( $action eq "r" or $action eq "d" ) {
 		print "Deleting $itemexpanded";
-		unlink($itemexpanded) || die "Couldn't delete $itemexpanded: $!" unless $DRYRUN;
+		unless ($DRYRUN) {
+		    unlink($itemexpanded)
+			or die "Couldn't delete $itemexpanded: $!";
+		}
 		&create_parent_directories($target);
 		print "Touching $target";
 		touch($target) unless $DRYRUN;
@@ -336,19 +345,24 @@ sub do_it {
 	    elsif ( $action eq "m" ) {
 		&create_parent_directories($target);
 		print "Moving $itemexpanded -> $target";
-		&move(@_[1,2]) || die "Couldn't move $itemexpanded -> $target: $!"
-		    unless $DRYRUN;
+		unless ($DRYRUN) {
+		    &move(@_[1,2])
+			or die "Couldn't move $itemexpanded -> $target: $!";
+		}
 	    }
 	    else {
 		warn "Unknown action '$action'. This should never happen.";
 		return 255
 	    }
 	    print "$target ->  $itemexpanded";
-	    symlink($target, $itemexpanded) || die "Couldn't symlink $target ->  $itemexpanded: $!"
-		unless $DRYRUN;
+	    unless ($DRYRUN) {
+		symlink($target, $itemexpanded)
+		    or die "Couldn't symlink $target ->  $itemexpanded: $!";
+	    }
 	}
 	else {
-	    report_serious_problem($itemexpanded, "Unexpected type (not a file)");
+	    report_serious_problem($itemexpanded,
+				   "Unexpected type (not a file)");
 	    return 1
 	}
     }
