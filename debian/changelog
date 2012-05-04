@@ -12,6 +12,7 @@ unburden-home-dir (0.0.20120305) UNRELEASED; urgency=low
     + Use speaking variable names in fix_dangling_links() and do_it()
     + Reindent and reformat some overlong lines in bin/unburden-home-dir
     + Add semicolons on all return statements before block ends
+    + Define list file suffix just once
   * Improve README
   * Add tmpreaper, eatmydata, agedu, bleachbit and some more comfortable
     "du"-like tools to "Suggests".

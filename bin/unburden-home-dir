@@ -41,6 +41,7 @@ my $REVERT = 0;
 
 # Defaul base name
 my $BASENAME = 'unburden-home-dir';
+my $LISTSUFFIX = '.list';
 
 # Load Modules
 use Config::File;
@@ -111,7 +112,7 @@ if (exists($OPTIONS{b})) {
 
 # By default check for a system wide and a user configuration and list file
 my @CONFFILES = ("/etc/$BASENAME", "$ENV{HOME}/.$BASENAME");
-my @LISTFILES = ("/etc/${BASENAME}.list", "$ENV{HOME}/.${BASENAME}.list");
+my @LISTFILES = ("/etc/$BASENAME$LISTSUFFIX", "$ENV{HOME}/.$BASENAME$LISTSUFFIX");
 
 if (exists($OPTIONS{C})) {
     @CONFFILES = ($OPTIONS{C});
