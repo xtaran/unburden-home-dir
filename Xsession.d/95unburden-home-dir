@@ -15,5 +15,5 @@ fi
 if [ "${UNBURDEN_HOME}" = "true" ] || \
    [ "${UNBURDEN_HOME}" = "yes" ]; then
 
-    /usr/bin/unburden-home-dir
+    unburden-home-dir
 fi

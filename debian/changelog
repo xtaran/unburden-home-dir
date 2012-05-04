@@ -7,6 +7,7 @@ unburden-home-dir (0.0.20120305) UNRELEASED; urgency=low
   * Let Xsession.d snippet also source ~/.unburden-home-dir to allow per
     User execution
     + Add test for Xsession.d snippet
+    + Call unburden-home-dir without hardcoded path
   * Refactoring:
     + Use speaking variable names in fix_dangling_links() and do_it()
     + Reindent and reformat some overlong lines in bin/unburden-home-dir
