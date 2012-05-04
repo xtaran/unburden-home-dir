@@ -171,7 +171,11 @@ umask(077);
 my $rsync = File::Rsync->new({
     archive => 1,
     verbose => 1,
-    outfun => sub { my $_ = shift; chomp; print unless m(^sent |^total size|^\s*$); },
+    outfun => sub {
+	my $_ = shift;
+	chomp;
+	print unless m(^sent |^total size|^\s*$);
+    },
     errfun => sub { chomp; warn "$_[0]\n"; },
 });
 
@@ -259,7 +263,8 @@ sub fix_dangling_links {
 	if ( $type eq "d" or $type eq 'D' ) {
 	    # Does target exist?
 	    if ( ! -d $target ) {
-		report_problem($itemexpanded, "Unexpected type (not a directory)");
+		report_problem($itemexpanded,
+			       "Unexpected type (not a directory)");
 		return 1
 	    }
 	}
@@ -267,7 +272,8 @@ sub fix_dangling_links {
 	elsif ( $type eq "f" or $type eq 'F' ) {
 	    # Does target exist?
 	    if ( ! -f $target ) {
-		report_problem($itemexpanded, "Unexpected type (not a regular file)");
+		report_problem($itemexpanded,
+			       "Unexpected type (not a regular file)");
 		return 1
 	    }
 	}
@@ -313,7 +319,8 @@ sub do_it {
 		unless $DRYRUN;
 	}
 	else {
-	    report_serious_problem($itemexpanded, "Unexpected type (not a directory)");
+	    report_serious_problem($itemexpanded,
+				   "Unexpected type (not a directory)");
 	    return 1
 	}
     }

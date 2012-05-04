@@ -6,6 +6,7 @@ unburden-home-dir (0.0.20120305) UNRELEASED; urgency=low
       dpkg-maintscript-helper to rename conffiles.
   * Refactoring:
     + Use speaking variable names in fix_dangling_links() and do_it()
+    + Reindent some overlong lines in bin/unburden-home-dir
   * Improve README
   * Add tmpreaper, eatmydata, agedu, bleachbit and some more comfortable
     "du"-like tools to "Suggests".
