@@ -247,7 +247,7 @@ sub possibly_create_non_existing_stuff {
 	touch($target) unless $DRYRUN;
 	create_symlink_and_parents($target, $item)
     }
-    return 0
+    return 0;
 }
 
 sub fix_dangling_links {
@@ -256,7 +256,7 @@ sub fix_dangling_links {
     # Check if link target is wanted target
     if ( $link ne $target ) {
 	report_problem($itemexpanded, "$link not equal $target");
-	return 1
+	return 1;
     }
 
     # Check if target exists and is same type
@@ -267,7 +267,7 @@ sub fix_dangling_links {
 	    if ( ! -d $target ) {
 		report_problem($itemexpanded,
 			       "Unexpected type (not a directory)");
-		return 1
+		return 1;
 	    }
 	}
 	# Case 2: file
@@ -276,7 +276,7 @@ sub fix_dangling_links {
 	    if ( ! -f $target ) {
 		report_problem($itemexpanded,
 			       "Unexpected type (not a regular file)");
-		return 1
+		return 1;
 	    }
 	}
     }
@@ -316,7 +316,7 @@ sub do_it {
 	    }
 	    else {
 		warn "Unknown action '$action'. This should never happen.";
-		return 255
+		return 255;
 	    }
 	    print "Symlinking $target ->  $itemexpanded";
 	    unless ($DRYRUN) {
@@ -327,7 +327,7 @@ sub do_it {
 	else {
 	    report_serious_problem($itemexpanded,
 				   "Unexpected type (not a directory)");
-	    return 1
+	    return 1;
 	}
     }
     elsif ( $type eq "f" or $type eq 'F' ) {
@@ -363,14 +363,14 @@ sub do_it {
 	else {
 	    report_serious_problem($itemexpanded,
 				   "Unexpected type (not a file)");
-	    return 1
+	    return 1;
 	}
     }
     else {
 	warn "This should never happen.";
-	return 255
+	return 255;
     }
-    return 0
+    return 0;
 }
 
 sub calculate_target {
