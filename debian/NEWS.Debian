@@ -5,8 +5,8 @@ unburden-home-dir (0.0.20120305) unstable; urgency=low
   
   Changed:
   
-    /etc/unburden_home_dir → /etc/unburden-home-dir
-    /etc/unburden_home_dir_list → /etc/unburden-home-dir.list
+    /etc/unburden_home_dir                  → /etc/unburden-home-dir
+    /etc/unburden_home_dir_list             → /etc/unburden-home-dir.list
     /etc/X11/Xsession.d/95unburden_home_dir → /etc/X11/Xsession.d/95unburden-home-dir
   
   Unchanged:
@@ -14,9 +14,9 @@ unburden-home-dir (0.0.20120305) unstable; urgency=low
     /etc/default/unburden-home-dir
   
   dpkg should handle the renaming of the global conffiles gracefully, but
-  some user configuration files may need to be renamed:
+  some user configuration files may need to be renamed manually:
 
-    ~/.unburden_home_dir → ~/.unburden-home-dir
-    ~/.unburden_home_dir_list → ~/.unburden-home-dir.list
+    ~/.unburden_home_dir       →  ~/.unburden-home-dir
+    ~/.unburden_home_dir_list  →  ~/.unburden-home-dir.list
 
  -- Axel Beckert <abe@debian.org>  Thu, 03 May 2012 17:44:54 +0200
