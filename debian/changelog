@@ -1,5 +1,6 @@
-unburden-home-dir (0.0.20120504) UNRELEASED; urgency=low
+unburden-home-dir (0.1) unstable; urgency=low
 
+  * First release thought for production use. Upload to unstable.
   * Uses consistently the basename "unburden-home-dir" instead of
     "unburden_home_dir".
     + Add Pre-Depends on dpkg >= 1.15.7.2 for usage of
@@ -30,7 +31,7 @@ unburden-home-dir (0.0.20120504) UNRELEASED; urgency=low
   * Update copyright years in debian/copyright
   * Fix indentation in Xsession.d snippet and debian/copyright
 
- -- Axel Beckert <abe@debian.org>  Fri, 04 May 2012 23:03:26 +0200
+ -- Axel Beckert <abe@debian.org>  Sat, 05 May 2012 00:29:11 +0200
 
 unburden-home-dir (0.0.20110203) experimental; urgency=low
 
