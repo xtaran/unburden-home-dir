@@ -111,7 +111,7 @@ if (exists($OPTIONS{b})) {
 
 # By default check for a system wide and a user configuration and list file
 my @CONFFILES = ("/etc/$BASENAME", "$ENV{HOME}/.$BASENAME");
-my @LISTFILES = ("/etc/${BASENAME}_list", "$ENV{HOME}/.${BASENAME}_list");
+my @LISTFILES = ("/etc/${BASENAME}.list", "$ENV{HOME}/.${BASENAME}.list");
 
 if (exists($OPTIONS{C})) {
     @CONFFILES = ($OPTIONS{C});

@@ -2,6 +2,6 @@ unburden-home-dir for Debian
 ----------------------------
 
 By default, nothing is done on Debian. Uncomment or add files in
-/etc/unburden_home_dir_list to enable unburden_home_dir.
+/etc/unburden-home-dir-list to enable unburden-home-dir.
 
- -- Axel Beckert <abe@debian.org>, Sun, 31 Oct 2010 21:18:16 +0100
+ -- Axel Beckert <abe@debian.org>, Fri,  4 May 2012 22:12:01 +0200
