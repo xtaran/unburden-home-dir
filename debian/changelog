@@ -15,13 +15,15 @@ unburden-home-dir (0.0.20120305) UNRELEASED; urgency=low
     + Split EXAMPLES and SEE ALSO
     + Update SEE ALSO
     + Typeset em dash properly
+  * Add a further use case to the long description and README. (Thanks
+    Pietro Abate!) Rewrite parts of the use cases section in both files.
   * Bump Standards-Version to 3.9.3 (no changes)
   * Make Xsession.d snippet POSIX-compatible (Thanks Carsten Hey!)
   * Fix lintian warning helper-templates-in-copyright
   * Update copyright years in debian/copyright
   * Fix indentation in Xsession.d snippet and debian/copyright
 
- -- Axel Beckert <abe@debian.org>  Thu, 03 May 2012 15:16:32 +0200
+ -- Axel Beckert <abe@debian.org>  Fri, 04 May 2012 19:57:03 +0200
 
 unburden-home-dir (0.0.20110203) experimental; urgency=low
 
