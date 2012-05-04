@@ -290,57 +290,58 @@ sub fix_dangling_links {
 }
 
 sub do_it {
-    if ( $_[0] eq "d" or $_[0] eq 'D' ) {
-	if ( -d $_[1] ) {
-	    if ( $_[3] eq "r" or $_[3] eq "d" ) {
-		print "Delete directory $_[1]";
-		rmtree($_[1], { verbose => 1 }) unless $DRYRUN;
-		print "Create directory $_[2]";
-		mkpath($_[2], { verbose => 1 }) unless $DRYRUN;
+    my ($type, $itemexpanded, $target, $action) = @_;
+    if ( $type eq "d" or $type eq 'D' ) {
+	if ( -d $itemexpanded ) {
+	    if ( $action eq "r" or $action eq "d" ) {
+		print "Delete directory $itemexpanded";
+		rmtree($itemexpanded, { verbose => 1 }) unless $DRYRUN;
+		print "Create directory $target";
+		mkpath($target, { verbose => 1 }) unless $DRYRUN;
 	    }
-	    elsif ( $_[3] eq "m" ) {
-		&create_parent_directories($_[2]);
-		&move(@_[1,2]) || die "Couldn't move $_[1] -> $_[2]: $!"
+	    elsif ( $action eq "m" ) {
+		&create_parent_directories($target);
+		&move(@_[1,2]) || die "Couldn't move $itemexpanded -> $target: $!"
 		    unless $DRYRUN
 	    }
 	    else {
-		warn "Unknown action '$_[3]'. This should never happen.";
+		warn "Unknown action '$action'. This should never happen.";
 		return 255
 	    }
-	    print "Symlinking $_[2] ->  $_[1]";
-	    symlink($_[2], $_[1]) || die "Couldn't symlink $_[2] ->  $_[1]: $!"
+	    print "Symlinking $target ->  $itemexpanded";
+	    symlink($target, $itemexpanded) || die "Couldn't symlink $target ->  $itemexpanded: $!"
 		unless $DRYRUN;
 	}
 	else {
-	    report_serious_problem($_[1], "Unexpected type (not a directory)");
+	    report_serious_problem($itemexpanded, "Unexpected type (not a directory)");
 	    return 1
 	}
     }
-    elsif ( $_[0] eq "f" or $_[0] eq 'F' ) {
-	if ( -f $_[1] ) {
-	    if ( $_[3] eq "r" or $_[3] eq "d" ) {
-		print "Deleting $_[1]";
-		unlink($_[1]) || die "Couldn't delete $_[1]: $!" unless $DRYRUN;
-		&create_parent_directories($_[2]);
-		print "Touching $_[2]";
-		touch($_[2]) unless $DRYRUN;
+    elsif ( $type eq "f" or $type eq 'F' ) {
+	if ( -f $itemexpanded ) {
+	    if ( $action eq "r" or $action eq "d" ) {
+		print "Deleting $itemexpanded";
+		unlink($itemexpanded) || die "Couldn't delete $itemexpanded: $!" unless $DRYRUN;
+		&create_parent_directories($target);
+		print "Touching $target";
+		touch($target) unless $DRYRUN;
 	    }
-	    elsif ( $_[3] eq "m" ) {
-		&create_parent_directories($_[2]);
-		print "Moving $_[1] -> $_[2]";
-		&move(@_[1,2]) || die "Couldn't move $_[1] -> $_[2]: $!"
+	    elsif ( $action eq "m" ) {
+		&create_parent_directories($target);
+		print "Moving $itemexpanded -> $target";
+		&move(@_[1,2]) || die "Couldn't move $itemexpanded -> $target: $!"
 		    unless $DRYRUN;
 	    }
 	    else {
-		warn "Unknown action '$_[3]'. This should never happen.";
+		warn "Unknown action '$action'. This should never happen.";
 		return 255
 	    }
-	    print "$_[2] ->  $_[1]";
-	    symlink($_[2], $_[1]) || die "Couldn't symlink $_[2] ->  $_[1]: $!"
+	    print "$target ->  $itemexpanded";
+	    symlink($target, $itemexpanded) || die "Couldn't symlink $target ->  $itemexpanded: $!"
 		unless $DRYRUN;
 	}
 	else {
-	    report_serious_problem($_[1], "Unexpected type (not a file)");
+	    report_serious_problem($itemexpanded, "Unexpected type (not a file)");
 	    return 1
 	}
     }
