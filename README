@@ -65,6 +65,13 @@ login. But please be aware that if you do that on a machine with NFS
 homes, you should do that on all (Unix) machines which have those NFS
 homes mounted.
 
+For installations where each user should be able to decide on his own
+if unburden-home-dir should be run on X session start, add a line
+saying "UNBURDEN_HOME=yes" to ~/.unburden-home-dir which is sourced by
+the Xsession startup script in the same way as
+/etc/default/unburden-home-dir (while being a configuration file for
+unburden-home-dir itself at the same time, too).
+
 License:
 
 All stuff in here is free software: you can redistribute it and/or
