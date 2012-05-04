@@ -9,7 +9,10 @@ unburden-home-dir (0.0.20120305) UNRELEASED; urgency=low
     "Suggests".
   * Remove corekeeper from Suggests but keep it in the man page's SEE ALSO
     section.
-  * Update man page (EXAMPLES, SEE ALSO)
+  * Update man page
+    + Split EXAMPLES and SEE ALSO
+    + Update SEE ALSO
+    + Typeset em dash properly
   * Bump Standards-Version to 3.9.3 (no changes)
   * Make Xsession.d snippet POSIX-compatible (Thanks Carsten Hey!)
   * Fix lintian warning helper-templates-in-copyright
