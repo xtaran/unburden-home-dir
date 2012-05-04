@@ -1,3 +1,6 @@
+Unburden Your Home Directory
+============================
+
 unburden-home-dir allows users to move cache files from browsers,
 etc. off their home directory, i.e. on a local harddisk or tmpfs and
 replace them with a symbolic link to the new location (e.g. on /tmp/
@@ -45,6 +48,16 @@ http://git.phys.ethz.ch/?p=unburden-home-dir.git (primary site),
 http://gitorious.org/unburden-home-dir/ or
 http://github.com/xtaran/unburden-home-dir (mirrors, or in case you
 prefer to use social forking :-).
+
+Configuration files
+===================
+
+There are five configuration files for unburden-home-dir:
+
+/etc/unburden-home-dir      -- Global configuration file
+/etc/unburden-home-dir.list -- Global list of files to take care of
+~/.unburden-home-dir        -- Per user configuration file
+~/.unburden-home-dir.list   -- Per user list of files to take care of
 
 See /usr/share/doc/unburden-home-dir/examples/ on debianoid
 installations or etc/ in the source tar ball for example files.
