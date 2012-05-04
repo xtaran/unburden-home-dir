@@ -30,9 +30,9 @@ See http://wiki.phys.ethz.ch/readme/application_cache_files for the
 detailed reasoning behind this project.
 
 You should always find the newest code via git at either
-http://git.phys.ethz.ch/?p=unburden_home_dir.git (primary site),
+http://git.phys.ethz.ch/?p=unburden-home-dir.git (primary site),
 http://gitorious.org/unburden-home-dir/ or
-http://github.com/xtaran/unburden_home_dir (mirrors, or in case you
+http://github.com/xtaran/unburden-home-dir (mirrors, or in case you
 prefer to use social forking :-).
 
 See /usr/share/doc/unburden-home-dir/examples/ on debianoid
