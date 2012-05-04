@@ -7,6 +7,8 @@ unburden-home-dir (0.0.20120305) UNRELEASED; urgency=low
   * Improve README
   * Add tmpreaper, agedu, bleachbit and some more comfortable "du"-like tools to
     "Suggests".
+  * Remove corekeeper from Suggests but keep it in the man page's SEE ALSO
+    section.
   * Update man page (EXAMPLES, SEE ALSO)
   * Bump Standards-Version to 3.9.3 (no changes)
   * Make Xsession.d snippet POSIX-compatible (Thanks Carsten Hey!)

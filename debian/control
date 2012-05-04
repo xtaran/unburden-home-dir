@@ -13,7 +13,7 @@ Architecture: all
 Depends: x11-common, ${perl:Depends}, ${misc:Depends}, libconfig-file-perl, libfile-touch-perl, libfile-rsync-perl
 Pre-Depends: dpkg (>= 1.15.7.2)
 Enhances: x11-common
-Suggests: corekeeper, autotrash, tmpreaper, agedu, bleachbit, ncdu | baobab | filelight | xdiskusage | xdu
+Suggests: autotrash, tmpreaper, agedu, bleachbit, ncdu | baobab | filelight | xdiskusage | xdu
 Description: Remove or move cache files automatically from user's home
  unburden-home-dir allows users to move cache files from browsers,
  etc. off their home directory, i.e. on a local harddisk or tmpfs and
