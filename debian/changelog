@@ -12,6 +12,8 @@ unburden-home-dir (0.1.1~0.20120505) UNRELEASED; urgency=low
   * Update list of caches in the example unburden-home-dir.list for the
     following applications: Opera, Mozilla based browsers
   * Comment the example unburden-home-dir.list, group entries by category
+  * Add a test that verifies that lists with comments and blank lines can
+    be parsed
 
  -- Axel Beckert <abe@debian.org>  Sat, 05 May 2012 13:48:49 +0200
 
