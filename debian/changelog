@@ -1,3 +1,9 @@
+unburden-home-dir (0.2~0.20120505) UNRELEASED; urgency=low
+
+  * Add caches of Galeon and Epiphany to the example unburden-home-dir.list
+
+ -- Axel Beckert <abe@debian.org>  Sat, 05 May 2012 02:52:42 +0200
+
 unburden-home-dir (0.1) unstable; urgency=low
 
   * First release thought for production use. Upload to unstable.
