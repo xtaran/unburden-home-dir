@@ -5,6 +5,7 @@ unburden-home-dir (0.1.1~0.20120505) UNRELEASED; urgency=low
   * Fix FTBFS: Ignore locales in moving-to-existing-subdir.t
 
   [ Axel Beckert ]
+  * Also ignore blank lines in unburden-home-dir.list.
   * Add the caches of the following applications to the example
     unburden-home-dir.list: Galeon, Epiphany, xxxterm, Battle for Wesnoth,
     Gaia, Adobe Acrobat, Java, Forg, Buzzbird

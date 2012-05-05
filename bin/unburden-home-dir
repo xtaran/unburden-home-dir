@@ -504,7 +504,7 @@ for my $list (@LISTFILES) {
     # Clean up this and that
     open(LIST, '<', $list) or die "Can't open $list: $!";
     while (<LIST>) {
-	next if /^#/;
+	next if /^#|^ *$/;
 
 	chomp;
 	my ($action, $type, $item, $replacement) = split;
