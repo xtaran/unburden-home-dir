@@ -2,4 +2,12 @@ TODO
 ====
 
 Add warnings if either $HOME or $TARGET do not begin with a
-slash. This can cause broken symlinks.
+slash. This can cause broken symlinks but may also break the test
+suite. :-)
+
+Idea from Pietro Abate: Excludes for wildcards, like "all from
+.cache/* except .cache/duplicity".
+
+Honor $XDG_ variables for unburden-home-dir's own configuration files
+(at least optional), but possibly also in unburden-home-dir.list for
+alternative locations of .cache and friends.
