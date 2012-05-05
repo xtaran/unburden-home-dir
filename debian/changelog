@@ -9,6 +9,8 @@ unburden-home-dir (0.1.1~0.20120505) UNRELEASED; urgency=low
     to the example unburden-home-dir.list
   * Add startupCaches of several Mozilla based browsers to the example
     unburden-home-dir.list
+  * Update list of Opera cache location in the example
+    unburden-home-dir.list
 
  -- Axel Beckert <abe@debian.org>  Sat, 05 May 2012 13:48:49 +0200
 

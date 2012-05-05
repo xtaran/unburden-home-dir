@@ -21,6 +21,7 @@ m d .xxxterm/cache xxxterm-cache
 m d .wesnoth*/cache wesnoth%1-cache
 m d .gaia/cache gaia-cache
 m d .opera/cache opera-cache
+m d .opera/cache4 opera-cache4
 m d .opera/opcache opera-opcache
 m d .opera/cacheOp opera-cacheOp
 m D .thumbnails thumbnails
