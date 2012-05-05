@@ -90,6 +90,11 @@ unburden-home-dir itself at the same time, too).
 See /usr/share/doc/unburden-home-dir/examples/ on debianoid
 installations or etc/ in the source tar ball for example files.
 
+A good start what kind of caches you have in your home directory is
+running
+
+  find ~ -type d -iname '*cache*' -not -path '*/.git/*' -not -path '*/.hg/*' \
+         -print0 | xargs -0 du -sh | sort -h
 
 License
 =======
