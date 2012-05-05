@@ -17,13 +17,17 @@ m d .conkeror.mozdev.org/conkeror/*/Cache.Trash conkeror-cache-trash-%1
 m d .kazehakase/mozilla/kazehakase/Cache kazehakase-cache
 m d .galeon/mozilla/galeon/Cache galeon-cache
 m d .gnome2/epiphany/mozilla/epiphany/Cache epiphany-cache
+m d .buzzbird/*/Cache buzzbird-cache
 m d .xxxterm/cache xxxterm-cache
+m d .forg/cache forg-cache
 m d .wesnoth*/cache wesnoth%1-cache
 m d .gaia/cache gaia-cache
+m d .java/deployment/cache java-deployment-cache
 m d .opera/cache opera-cache
 m d .opera/cache4 opera-cache4
 m d .opera/opcache opera-opcache
 m d .opera/cacheOp opera-cacheOp
+m d .adobe/Acrobat/*/Cache adobe-acrobat-%1-cache
 m D .thumbnails thumbnails
 r D .Trash trash
 r D .local/Trash local-trash

@@ -5,12 +5,11 @@ unburden-home-dir (0.1.1~0.20120505) UNRELEASED; urgency=low
   * Fix FTBFS: Ignore locales in moving-to-existing-subdir.t
 
   [ Axel Beckert ]
-  * Add caches of Galeon, Epiphany, xxxterm, Battle for Wesnoth and Gaia
-    to the example unburden-home-dir.list
-  * Add startupCaches of several Mozilla based browsers to the example
-    unburden-home-dir.list
-  * Update list of Opera cache location in the example
-    unburden-home-dir.list
+  * Add the caches of the following applications to the example
+    unburden-home-dir.list: Galeon, Epiphany, xxxterm, Battle for Wesnoth,
+    Gaia, Adobe Acrobat, Java, Forg, Buzzbird
+  * Update list of caches in the example unburden-home-dir.list for the
+    following applications: Opera, Mozilla based browsers
 
  -- Axel Beckert <abe@debian.org>  Sat, 05 May 2012 13:48:49 +0200
 
