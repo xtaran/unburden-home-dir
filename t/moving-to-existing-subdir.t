@@ -12,6 +12,7 @@ my $PREFIX = "u";
 
 # Set a debug environment
 $ENV{HOME} = $HOME;
+$ENV{LANG} = 'C';
 
 # Clean up possible remainders of aborted tests
 rmtree("$BASE");
