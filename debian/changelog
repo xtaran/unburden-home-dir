@@ -1,4 +1,4 @@
-unburden-home-dir (0.1.1~0.20120505) UNRELEASED; urgency=low
+unburden-home-dir (0.2~0.20120505) UNRELEASED; urgency=low
 
   [ Klaus Umbach ]
   * Fix FTBFS: Add missing build-dependency on libfile-rsync-perl
@@ -15,7 +15,7 @@ unburden-home-dir (0.1.1~0.20120505) UNRELEASED; urgency=low
   * Add a test that verifies that lists with comments and blank lines can
     be parsed
 
- -- Axel Beckert <abe@debian.org>  Sat, 05 May 2012 13:48:49 +0200
+ -- Axel Beckert <abe@debian.org>  Sat, 05 May 2012 16:30:28 +0200
 
 unburden-home-dir (0.1) unstable; urgency=low
 
