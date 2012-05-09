@@ -36,6 +36,7 @@ m d .wesnoth*/cache wesnoth%1-cache
 m d .gaia/cache gaia-cache
 m d .java/deployment/cache java-deployment-cache
 m d .adobe/Acrobat/*/Cache adobe-acrobat-%1-cache
+m d .shotwell/thumbs shotwell-thumbs
 
 # Trash locations
 r D .Trash trash
