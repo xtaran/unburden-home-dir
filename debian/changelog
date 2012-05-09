@@ -1,4 +1,4 @@
-unburden-home-dir (0.2~0.20120505) UNRELEASED; urgency=low
+unburden-home-dir (0.2~0.20120509) UNRELEASED; urgency=low
 
   [ Klaus Umbach ]
   * Fix FTBFS: Add missing build-dependency on libfile-rsync-perl
@@ -17,7 +17,7 @@ unburden-home-dir (0.2~0.20120505) UNRELEASED; urgency=low
   * Suggest a find command in the README to find most caches in a home
     directory
 
- -- Axel Beckert <abe@debian.org>  Sat, 05 May 2012 16:30:28 +0200
+ -- Axel Beckert <abe@debian.org>  Wed, 09 May 2012 13:59:21 +0200
 
 unburden-home-dir (0.1) unstable; urgency=low
 
