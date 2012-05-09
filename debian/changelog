@@ -5,6 +5,8 @@ unburden-home-dir (0.2~0.20120509) UNRELEASED; urgency=low
   * Fix FTBFS: Ignore locales in moving-to-existing-subdir.t
 
   [ Axel Beckert ]
+  * Unconditionally move files (no more uses "mv -i", likely a debugging
+    leftover)
   * Also ignore blank lines in unburden-home-dir.list.
   * Add the caches of the following applications to the example
     unburden-home-dir.list: Galeon, Epiphany, xxxterm, Battle for Wesnoth,

@@ -202,7 +202,7 @@ sub move ($$) {
 	    });
 	    rmtree($from);
 	} else {
-	    my $rc = system(qw(mv -vi), $from, $to);
+	    my $rc = system(qw(mv -v), $from, $to);
 	    return !($? >> 8);
 	}
     }
