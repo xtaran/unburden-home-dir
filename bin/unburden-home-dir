@@ -254,6 +254,13 @@ sub possibly_create_non_existing_stuff {
 sub fix_dangling_links {
     my ($type, $itemexpanded, $target) = @_;
     my $link = readlink($itemexpanded);
+    
+    
+    # Accept symlinks without trailing slash
+    if ( $type eq "d" or $type eq 'D' ) {
+      $link = $link."/" if ((!($link =~ /\/$/)) and -d $link);
+    }
+    
     # Check if link target is wanted target
     if ( $link ne $target ) {
 	report_problem($itemexpanded, "$link not equal $target");
