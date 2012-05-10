@@ -233,7 +233,7 @@ sub possibly_create_non_existing_stuff {
 
     # Shall we create not yet existing directories or files as symlink?
     # Case 1: directory
-    if ( $type eq "D" ) {
+    if ( $type eq 'D' ) {
 	# TODO: Refactor create_symlink_and_parents so that its
 	# create_parent_directories call isn't redundant in this case.
 	print "Create directory $target and parents";
@@ -242,7 +242,7 @@ sub possibly_create_non_existing_stuff {
     }
 
     # Case 2: file
-    elsif ( $type eq "F" ) {
+    elsif ( $type eq 'F' ) {
 	create_parent_directories($target);
 	print "Touching $target";
 	touch($target) unless $DRYRUN;
@@ -256,8 +256,8 @@ sub fix_dangling_links {
     my $link = readlink($itemexpanded);
 
     # Accept symlinks without trailing slash
-    if ( $type eq "d" or $type eq 'D' ) {
-	$link = $link."/" if ((!($link =~ /\/$/)) and -d $link);
+    if ( $type eq 'd' or $type eq 'D' ) {
+	$link .= '/' if ((!($link =~ /\/$/)) and -d $link);
     }
 
     # Check if link target is wanted target
@@ -269,20 +269,20 @@ sub fix_dangling_links {
     # Check if target exists and is same type
     if ( -e $target ) {
 	# Case 1: directory
-	if ( $type eq "d" or $type eq 'D' ) {
+	if ( $type eq 'd' or $type eq 'D' ) {
 	    # Does target exist?
 	    if ( ! -d $target ) {
 		report_problem($itemexpanded,
-			       "Unexpected type (not a directory)");
+			       'Unexpected type (not a directory)');
 		return 1;
 	    }
 	}
 	# Case 2: file
-	elsif ( $type eq "f" or $type eq 'F' ) {
+	elsif ( $type eq 'f' or $type eq 'F' ) {
 	    # Does target exist?
 	    if ( ! -f $target ) {
 		report_problem($itemexpanded,
-			       "Unexpected type (not a regular file)");
+			       'Unexpected type (not a regular file)');
 		return 1;
 	    }
 	}
@@ -290,12 +290,12 @@ sub fix_dangling_links {
     # Symlink is there, but file or directory not
     else {
 	# Case 1: directory
-	if ( $type eq "d" or $type eq 'D' ) {
+	if ( $type eq 'd' or $type eq 'D' ) {
 	    print "Create directory $target";
 	    mkpath($target, { verbose => 1 }) unless $DRYRUN;
 	}
 	# Case 2: file
-	elsif ( $type eq "f" or "$type" eq 'F' ) {
+	elsif ( $type eq 'f' or $type eq 'F' ) {
 	    create_parent_directories($target);
 	    print "Touching $target";
 	    touch($target) unless $DRYRUN;
@@ -306,15 +306,15 @@ sub fix_dangling_links {
 
 sub do_it {
     my ($type, $itemexpanded, $target, $action) = @_;
-    if ( $type eq "d" or $type eq 'D' ) {
+    if ( $type eq 'd' or $type eq 'D' ) {
 	if ( -d $itemexpanded ) {
-	    if ( $action eq "r" or $action eq "d" ) {
+	    if ( $action eq 'r' or $action eq 'd' ) {
 		print "Delete directory $itemexpanded";
 		rmtree($itemexpanded, { verbose => 1 }) unless $DRYRUN;
 		print "Create directory $target";
 		mkpath($target, { verbose => 1 }) unless $DRYRUN;
 	    }
-	    elsif ( $action eq "m" ) {
+	    elsif ( $action eq 'm' ) {
 		&create_parent_directories($target);
 		unless ($DRYRUN) {
 		    &move(@_[1,2])
@@ -333,13 +333,13 @@ sub do_it {
 	}
 	else {
 	    report_serious_problem($itemexpanded,
-				   "Unexpected type (not a directory)");
+				   'Unexpected type (not a directory)');
 	    return 1;
 	}
     }
-    elsif ( $type eq "f" or $type eq 'F' ) {
+    elsif ( $type eq 'f' or $type eq 'F' ) {
 	if ( -f $itemexpanded ) {
-	    if ( $action eq "r" or $action eq "d" ) {
+	    if ( $action eq 'r' or $action eq 'd' ) {
 		print "Deleting $itemexpanded";
 		unless ($DRYRUN) {
 		    unlink($itemexpanded)
@@ -349,7 +349,7 @@ sub do_it {
 		print "Touching $target";
 		touch($target) unless $DRYRUN;
 	    }
-	    elsif ( $action eq "m" ) {
+	    elsif ( $action eq 'm' ) {
 		&create_parent_directories($target);
 		print "Moving $itemexpanded -> $target";
 		unless ($DRYRUN) {
@@ -369,12 +369,12 @@ sub do_it {
 	}
 	else {
 	    report_serious_problem($itemexpanded,
-				   "Unexpected type (not a file)");
+				   'Unexpected type (not a file)');
 	    return 1;
 	}
     }
     else {
-	warn "This should never happen.";
+	warn 'This should never happen.';
 	return 255;
     }
     return 0;
@@ -419,7 +419,7 @@ sub symlink_in_path {
 	pop(@path_elements);
 
 	foreach my $i (0..$#path_elements) {
-	    my $path_to_check = $ENV{HOME}.'/'.join("/", @path_elements[0..$i]);
+	    my $path_to_check = $ENV{HOME}.'/'.join('/', @path_elements[0..$i]);
 	    #print "Check if $path_to_check is a symlink";
 	    return $path_to_check if -l $path_to_check;
 	}
@@ -522,12 +522,12 @@ for my $list (@LISTFILES) {
 	    warn "Can't parse '$_', skipping...";
 	    next
 	}
-	if ( $type ne "d" and  $type ne "f" and
-	     $type ne "D" and  $type ne "F" ) {
+	if ( $type ne 'd' and  $type ne 'f' and
+	     $type ne 'D' and  $type ne 'F' ) {
 	    warn "Can't parse type '$type', must be 'd', 'D', 'f' or 'F', skipping...";
 	    next
 	}
-	if ( $action ne "d" and $action ne "r" and $action ne "m"  ) {
+	if ( $action ne 'd' and $action ne 'r' and $action ne 'm'  ) {
 	    warn "Can't parse action '$action', must be 'd', 'r' or 'm', skipping...";
 	    next
 	}
