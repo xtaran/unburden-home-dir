@@ -1,4 +1,4 @@
-unburden-home-dir (0.2~0.20120509) UNRELEASED; urgency=low
+unburden-home-dir (0.2~0.20120518) UNRELEASED; urgency=low
 
   [ Klaus Umbach ]
   * Fix FTBFS: Add missing build-dependency on libfile-rsync-perl
@@ -7,6 +7,9 @@ unburden-home-dir (0.2~0.20120509) UNRELEASED; urgency=low
   [ Axel Beckert ]
   * Unconditionally move files (no more uses "mv -i", likely a debugging
     leftover)
+  * Handle symlinks to and unburden-home-dir.list entries for directories
+    identical independent of trailing slashes. (Thanks Johan van den
+    Dorpe! cf. GitHub Pull Request #2)
   * Also ignore blank lines in unburden-home-dir.list.
   * Add the caches of the following applications to the example
     unburden-home-dir.list: Galeon, Epiphany, xxxterm, Battle for Wesnoth,
@@ -19,7 +22,7 @@ unburden-home-dir (0.2~0.20120509) UNRELEASED; urgency=low
   * Suggest a find command in the README to find most caches in a home
     directory
 
- -- Axel Beckert <abe@debian.org>  Wed, 09 May 2012 13:59:21 +0200
+ -- Axel Beckert <abe@debian.org>  Fri, 18 May 2012 23:02:38 +0200
 
 unburden-home-dir (0.1) unstable; urgency=low
 
