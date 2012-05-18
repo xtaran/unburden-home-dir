@@ -255,9 +255,12 @@ sub fix_dangling_links {
     my ($type, $itemexpanded, $target) = @_;
     my $link = readlink($itemexpanded);
 
-    # Accept symlinks without trailing slash
-    if ( $type eq 'd' or $type eq 'D' ) {
-	$link .= '/' if ((!($link =~ /\/$/)) and -d $link);
+    # Accept existing symlinks or unburden-home-dir.list entries for
+    # directories with or without trailing slash
+    if ($type eq 'd' or $type eq 'D') {
+	$link =~ s{/$}{};
+	$itemexpanded =~ s{/$}{};
+	$target =~ s{/$}{};
     }
 
     # Check if link target is wanted target
