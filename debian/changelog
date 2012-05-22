@@ -1,3 +1,9 @@
+unburden-home-dir (0.3) UNRELEASED; urgency=low
+
+  * Fix typo in README.Debian (Closes: #673912)
+
+ -- Axel Beckert <abe@debian.org>  Tue, 22 May 2012 19:10:07 +0200
+
 unburden-home-dir (0.2) unstable; urgency=low
 
   [ Klaus Umbach ]
