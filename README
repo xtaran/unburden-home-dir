@@ -40,6 +40,17 @@ This project initially started as an Xsession hook. It now consists of
 a perl script which optionally can also be called from a provided
 Xsession hook.
 
+While the default configuration includes no logout hook as Debian's
+Xsession script, you can run "unburden-home-dir -u" to reverse the
+effect of unburden-home-dir and to move all (moved) directories back
+to your home directory.
+
+Nevertheless unburden-home-dir was written with non-valuable data
+(cache files, pid files, thumbnails, temporary data, etc.) in mind and
+not for preservation of the handled data. So it is likely less
+suitable for cases where the handled data should be preserved on
+logout or shutdown.
+
 See http://wiki.phys.ethz.ch/readme/application_cache_files for the
 detailed reasoning behind this project.
 
