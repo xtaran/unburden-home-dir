@@ -32,6 +32,7 @@ m d .icedove/*/Cache icedove-cache-%1
 m d .buzzbird/*/Cache buzzbird-cache
 
 # Other applications' caches
+m d .aptitude/cache aptitude-cache
 m d .wesnoth*/cache wesnoth%1-cache
 m d .gaia/cache gaia-cache
 m d .java/deployment/cache java-deployment-cache
