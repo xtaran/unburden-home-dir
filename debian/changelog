@@ -4,7 +4,7 @@ unburden-home-dir (0.2+2012.05.24) UNRELEASED; urgency=low
     - Add some paragraphs about reversing unburden-home-dir's effect
       (Closes: #673909)
     - Add sections How To and Common Issues + Troubleshooting
-    - Reorder sections
+    - Reorder sections and add subsections to get a nice outline
   * Renamed README to README.md so it will be parsed as Markdown on GitHub
   * Added THANKS file
   * Add ~/.aptitude/cache to unburden-home-dir.list. (cf. #671780)

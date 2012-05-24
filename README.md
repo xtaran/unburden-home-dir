@@ -145,7 +145,8 @@ There are five configuration files for unburden-home-dir:
 * ~/.unburden-home-dir.list      -- Per user list of files to take care of
 * /etc/default/unburden-home-dir -- Xsession hook configuration file
 
-Explanation of the unburden-home-dir.list file format:
+File Format of unburden-home-dir.list
+-------------------------------------
 
 1. column: Action ("d"/"r" or "m": delete/remove or move; the first two
            are equivalent)
@@ -154,11 +155,29 @@ Explanation of the unburden-home-dir.list file format:
 3. column: Path relative to $HOME to move off to some other location
 4. column: identifier for file or directory in the other location
 
+What To Unburden?
+-----------------
+
+The Debian package comes with a lot of commented examples in
+/etc/unburden-home-dir.list. See etc/unburden-home-dir.list in the Git
+repository or source tar ball.
+
+A good start for checking what kind of caches you have in your own
+home directory is running
+
+> find ~ -type d -iname '*cache*' -not -path '*/.git/*' -not -path '*/.hg/*' -print0 | xargs -0 du -sh | sort -h
+
+Enabling unburden-home-dir Globally
+-----------------------------------
+
 Edit /etc/default/unburden-home-dir if you want to enable
 unburden-home-dir for all users of a machine.on an Xsession based
 login. But please be aware that if you do that on a machine with NFS
 homes, you should do that on all (Unix) machines which have those NFS
 homes mounted.
+
+Enabling unburden-home-dir Per User
+-----------------------------------
 
 For installations where each user should be able to decide on his own
 if unburden-home-dir should be run on X session start, add a line
@@ -170,13 +189,11 @@ to ~/.unburden-home-dir which is sourced by the Xsession startup script
 in the same way as /etc/default/unburden-home-dir (while being a
 configuration file for unburden-home-dir itself at the same time, too).
 
+Example Configuration Files
+---------------------------
+
 See /usr/share/doc/unburden-home-dir/examples/ on debianoid
 installations or etc/ in the source tar ball for example files.
-
-A good start for checking what kind of caches you have in your home
-directory is running
-
-> find ~ -type d -iname '*cache*' -not -path '*/.git/*' -not -path '*/.hg/*' -print0 | xargs -0 du -sh | sort -h
 
 
 Source Code
