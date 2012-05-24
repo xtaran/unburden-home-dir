@@ -64,6 +64,8 @@ sub VERSION_MESSAGE {
     my ($fh, $getoptpkg, $getoptversion, $cmdlineargs) = @_;
 
     say $fh "Unburden Home Directory $VERSION\n";
+
+    return;
 }
 
 sub HELP_MESSAGE {
@@ -98,6 +100,8 @@ sub HELP_MESSAGE {
 
   --version  show the program's version
 ";
+
+    return;
 }
 
 # Parse command line options
@@ -178,10 +182,12 @@ if ($which_lsof eq 'lsof not found' or $which_lsof eq '') {
 
 sub report_problem {
     warn "WARNING: Can't handle $_[0]: $_[1]";
+    return;
 }
 
 sub report_serious_problem {
     warn "ERROR: Can't handle $_[0]: $_[1]";
+    return;
 }
 
 sub move ($$) {
@@ -213,6 +219,7 @@ sub create_symlink_and_parents {
 	symlink($old, $new)
 	    or die "Couldn't symlink $new -> $old: $!";
     }
+    return;
 }
 
 sub create_parent_directories {
@@ -222,6 +229,7 @@ sub create_parent_directories {
 	say "Create parent directories for $file";
 	mkpath($parent_dir, { verbose => 1 }) unless $DRYRUN;
     }
+    return;
 }
 
 sub possibly_create_non_existing_stuff {
@@ -300,7 +308,7 @@ sub fix_dangling_links {
 	    touch($target) unless $DRYRUN;
 	}
     }
-    return 0
+    return 0;
 }
 
 sub parse_lsof_output {
@@ -343,7 +351,7 @@ sub files_in_use {
 	$lsof_output = `lsof -F c '$item'`;
     } else {
 	report_problem("Not checking for open files in $item: neither file nor directory");
-	return undef;
+	return;
     }
 
     my $lsof_parsed = parse_lsof_output($lsof_output);
@@ -416,7 +424,7 @@ sub do_it {
 	    }
 	    else {
 		warn "Unknown action '$action'. This should never happen.";
-		return 255
+		return 255;
 	    }
 	    say "$target ->  $itemexpanded";
 	    unless ($DRYRUN) {
@@ -484,6 +492,8 @@ sub symlink_in_path {
     } else {
 	report_serious_problem("Can't find home directory ($ENV{HOME}) in $path!");
     }
+
+    return;
 }
 
 sub replace {
@@ -493,7 +503,7 @@ sub replace {
     # Skip entries where wildcard where passed
     if ($itemexpanded =~ /[][*?]/) {
 	warn "Skipping '$itemexpanded' due to unmatched wildcard.\n";
-	return 0
+	return 0;
     }
 
     if (my $symlink = &symlink_in_path($itemexpanded)) {
@@ -520,6 +530,8 @@ sub replace {
     else {
 	do_it($type, $itemexpanded, $target, $action);
     }
+
+    return;
 }
 
 sub revert {
@@ -528,7 +540,7 @@ sub revert {
     # Skip entries where wildcard where passed
     if ($itemexpanded =~ /[][*?]/) {
 	warn "Skipping '$target_glob' due to unmatched wildcard.\n";
-	return 0
+	return 0;
     }
 
     $item_in_home = "$ENV{HOME}/" .
@@ -546,6 +558,8 @@ sub revert {
 		 "and not to $itemexpanded as expected.\n";
 	}
     }
+
+    return;
 }
 
 sub exchange_wildcards_and_replacements {
@@ -577,21 +591,21 @@ for my $list (@LISTFILES) {
 
 	if (!defined($item) or !defined($replacement)) {
 	    warn "Can't parse '$_', skipping...";
-	    next
+	    next;
 	}
 	if ( $type ne 'd' and  $type ne 'f' and
 	     $type ne 'D' and  $type ne 'F' ) {
 	    warn "Can't parse type '$type', must be 'd', 'D', 'f' or 'F', skipping...";
-	    next
+	    next;
 	}
 	if ( $action ne 'd' and $action ne 'r' and $action ne 'm'  ) {
 	    warn "Can't parse action '$action', must be 'd', 'r' or 'm', skipping...";
-	    next
+	    next;
 	}
 
 	if ( $item =~ m(^(\.\.)?/) ) {
 	    warn "$item would be outside of the home directory, skipping...\n";
-	    next
+	    next;
 	}
 
 	if ($REVERT) {

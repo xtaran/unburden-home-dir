@@ -9,6 +9,7 @@ unburden-home-dir (0.3~2012.05.24) UNRELEASED; urgency=low
       newlines printed by modules..
     - use for and when instead of tons of if blocks
     - replace last use of @_[...]
+    - add missing trailing semicolons and explicit returns
   * Remove no more necessary eval in regexp replacement
   * Add missing close();
   * More documentation in README:
