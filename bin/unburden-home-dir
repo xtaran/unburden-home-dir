@@ -364,6 +364,36 @@ sub files_in_use {
     }
 }
 
+sub action_move {
+    my ($itemexpanded, $target) = @_;
+
+    create_parent_directories($target);
+    say "Moving $itemexpanded -> $target";
+    unless ($DRYRUN) {
+	move($itemexpanded, $target)
+	    or die "Couldn't move $itemexpanded -> $target: $!";
+    }
+    return;
+}
+
+sub unknown_action {
+    my ($action) = @_;
+
+    warn "Unknown action '$action'. This should never happen.";
+    return 255;
+}
+
+sub create_symlink {
+    my ($itemexpanded, $target) = @_;
+
+    say "Symlinking $target ->  $itemexpanded";
+    unless ($DRYRUN) {
+	symlink($target, $itemexpanded)
+	    or die "Couldn't symlink $target ->  $itemexpanded: $!";
+    }
+    return;
+}
+
 sub do_it {
     my ($type, $itemexpanded, $target, $action) = @_;
 
@@ -380,21 +410,13 @@ sub do_it {
 		mkpath($target, { verbose => 1 }) unless $DRYRUN;
 	    }
 	    elsif ( $action eq 'm' ) {
-		create_parent_directories($target);
-		unless ($DRYRUN) {
-		    move($itemexpanded, $target)
-			or die "Couldn't move $itemexpanded -> $target: $!";
-		}
+		action_move($itemexpanded, $target);
 	    }
 	    else {
-		warn "Unknown action '$action'. This should never happen.";
-		return 255;
+		return unknown_action($action);
 	    }
-	    say "Symlinking $target ->  $itemexpanded";
-	    unless ($DRYRUN) {
-		symlink($target, $itemexpanded)
-		    or die "Couldn't symlink $target ->  $itemexpanded: $!";
-	    }
+
+	    create_symlink($itemexpanded, $target);
 	}
 	else {
 	    report_serious_problem($itemexpanded,
@@ -415,22 +437,13 @@ sub do_it {
 		touch($target) unless $DRYRUN;
 	    }
 	    elsif ( $action eq 'm' ) {
-		create_parent_directories($target);
-		say "Moving $itemexpanded -> $target";
-		unless ($DRYRUN) {
-		    move($itemexpanded, $target)
-			or die "Couldn't move $itemexpanded -> $target: $!";
-		}
+		action_move($itemexpanded, $target);
 	    }
 	    else {
-		warn "Unknown action '$action'. This should never happen.";
-		return 255;
+		return unknown_action($action);
 	    }
-	    say "$target ->  $itemexpanded";
-	    unless ($DRYRUN) {
-		symlink($target, $itemexpanded)
-		    or die "Couldn't symlink $target ->  $itemexpanded: $!";
-	    }
+
+	    create_symlink($itemexpanded, $target);
 	}
 	else {
 	    report_serious_problem($itemexpanded,
