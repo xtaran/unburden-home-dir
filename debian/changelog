@@ -10,6 +10,7 @@ unburden-home-dir (0.3~2012.05.24) UNRELEASED; urgency=low
     - use for and when instead of tons of if blocks
     - replace last use of @_[...]
   * Remove no more necessary eval in regexp replacement
+  * Add missing close();
   * More documentation in README:
     - Add some paragraphs about reversing unburden-home-dir's effect
       (Closes: #673909)
