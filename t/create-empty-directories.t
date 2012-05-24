@@ -40,10 +40,8 @@ ok( $stderr eq $wanted, "Check command STDERR output (should be empty)" );
 # 9
 $wanted = "Create directory t/create-empty-directories/target/u-foobar-fnord and parents
 mkdir t/create-empty-directories/target/u-foobar-fnord
-
 Create parent directories for $HOME/.foobar/fnord
 mkdir $HOME/.foobar
-
 Symlinking $HOME/.foobar/fnord -> $TARGET/u-foobar-fnord
 ";
 

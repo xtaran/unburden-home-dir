@@ -43,9 +43,7 @@ ok( $stderr eq $wanted, "Check command STDERR output" );
 # 9
 $wanted = "Create directory $TARGET/u-foobar-fnord
 mkdir $TARGET
-
 mkdir $TARGET/u-foobar-fnord
-
 ";
 
 my $output = read_file("$BASE/output");

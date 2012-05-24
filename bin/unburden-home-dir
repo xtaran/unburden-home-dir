@@ -1,4 +1,4 @@
-#!/usr/bin/perl -l
+#!/usr/bin/perl
 #
 # This file causes a list of directories to be removed or moved off
 # the users home directory into a given other directory. Usually this
@@ -63,13 +63,13 @@ my $LSOF_CMD = undef;
 sub VERSION_MESSAGE {
     my ($fh, $getoptpkg, $getoptversion, $cmdlineargs) = @_;
 
-    print $fh "Unburden Home Directory $VERSION\n";
+    say $fh "Unburden Home Directory $VERSION\n";
 }
 
 sub HELP_MESSAGE {
     my ($fh, $getoptpkg, $getoptversion, $cmdlineargs) = @_;
 
-    print $fh "Usage: $0 [ -n | -u | -b basename | ( -c | -C ) configfile | -f filter ]
+    say $fh "Usage: $0 [ -n | -u | -b basename | ( -c | -C ) configfile | -f filter ]
        $0 ( -h | --help | --version )
 
   -b  use the given string as basename instead of $BASENAME.
@@ -183,7 +183,7 @@ my $rsync = File::Rsync->new({
     outfun => sub {
 	my $_ = shift;
 	chomp;
-	print unless m(^sent |^total size|^\s*$);
+	say unless m(^sent |^total size|^\s*$);
     },
     errfun => sub { chomp; warn "$_[0]\n"; },
 });
@@ -206,7 +206,7 @@ sub report_serious_problem {
 
 sub move ($$) {
     my ($from, $to) = @_;
-    print "Moving $from -> $to";
+    say "Moving $from -> $to";
     unless ($DRYRUN) {
 	if (-d $from) {
 	    $from .= '/' unless $from =~ m(/$);
@@ -228,7 +228,7 @@ sub move ($$) {
 sub create_symlink_and_parents {
     my ($old, $new) = @_;
     create_parent_directories($new);
-    print "Symlinking $new -> $old";
+    say "Symlinking $new -> $old";
     unless ($DRYRUN) {
 	symlink($old, $new)
 	    or die "Couldn't symlink $new -> $old: $!";
@@ -239,7 +239,7 @@ sub create_parent_directories {
     my $file = shift;
     my $parent_dir = dirname($file);
     unless (-d $parent_dir) {
-	print "Create parent directories for $file";
+	say "Create parent directories for $file";
 	mkpath($parent_dir, { verbose => 1 }) unless $DRYRUN;
     }
 }
@@ -252,7 +252,7 @@ sub possibly_create_non_existing_stuff {
     if ( $type eq 'D' ) {
 	# TODO: Refactor create_symlink_and_parents so that its
 	# create_parent_directories call isn't redundant in this case.
-	print "Create directory $target and parents";
+	say "Create directory $target and parents";
 	mkpath($target, { verbose => 1 }) unless $DRYRUN;
 	create_symlink_and_parents($target, $item);
     }
@@ -260,7 +260,7 @@ sub possibly_create_non_existing_stuff {
     # Case 2: file
     elsif ( $type eq 'F' ) {
 	create_parent_directories($target);
-	print "Touching $target";
+	say "Touching $target";
 	touch($target) unless $DRYRUN;
 	create_symlink_and_parents($target, $item)
     }
@@ -310,13 +310,13 @@ sub fix_dangling_links {
     else {
 	# Case 1: directory
 	if ( $type eq 'd' or $type eq 'D' ) {
-	    print "Create directory $target";
+	    say "Create directory $target";
 	    mkpath($target, { verbose => 1 }) unless $DRYRUN;
 	}
 	# Case 2: file
 	elsif ( $type eq 'f' or $type eq 'F' ) {
 	    create_parent_directories($target);
-	    print "Touching $target";
+	    say "Touching $target";
 	    touch($target) unless $DRYRUN;
 	}
     }
@@ -386,9 +386,9 @@ sub do_it {
     if ( $type eq 'd' or $type eq 'D' ) {
 	if ( -d $itemexpanded ) {
 	    if ( $action eq 'r' or $action eq 'd' ) {
-		print "Delete directory $itemexpanded";
+		say "Delete directory $itemexpanded";
 		rmtree($itemexpanded, { verbose => 1 }) unless $DRYRUN;
-		print "Create directory $target";
+		say "Create directory $target";
 		mkpath($target, { verbose => 1 }) unless $DRYRUN;
 	    }
 	    elsif ( $action eq 'm' ) {
@@ -402,7 +402,7 @@ sub do_it {
 		warn "Unknown action '$action'. This should never happen.";
 		return 255;
 	    }
-	    print "Symlinking $target ->  $itemexpanded";
+	    say "Symlinking $target ->  $itemexpanded";
 	    unless ($DRYRUN) {
 		symlink($target, $itemexpanded)
 		    or die "Couldn't symlink $target ->  $itemexpanded: $!";
@@ -417,18 +417,18 @@ sub do_it {
     elsif ( $type eq 'f' or $type eq 'F' ) {
 	if ( -f $itemexpanded ) {
 	    if ( $action eq 'r' or $action eq 'd' ) {
-		print "Deleting $itemexpanded";
+		say "Deleting $itemexpanded";
 		unless ($DRYRUN) {
 		    unlink($itemexpanded)
 			or die "Couldn't delete $itemexpanded: $!";
 		}
 		&create_parent_directories($target);
-		print "Touching $target";
+		say "Touching $target";
 		touch($target) unless $DRYRUN;
 	    }
 	    elsif ( $action eq 'm' ) {
 		&create_parent_directories($target);
-		print "Moving $itemexpanded -> $target";
+		say "Moving $itemexpanded -> $target";
 		unless ($DRYRUN) {
 		    &move(@_[1,2])
 			or die "Couldn't move $itemexpanded -> $target: $!";
@@ -438,7 +438,7 @@ sub do_it {
 		warn "Unknown action '$action'. This should never happen.";
 		return 255
 	    }
-	    print "$target ->  $itemexpanded";
+	    say "$target ->  $itemexpanded";
 	    unless ($DRYRUN) {
 		symlink($target, $itemexpanded)
 		    or die "Couldn't symlink $target ->  $itemexpanded: $!";
@@ -497,7 +497,7 @@ sub symlink_in_path {
 
 	foreach my $i (0..$#path_elements) {
 	    my $path_to_check = $ENV{HOME}.'/'.join('/', @path_elements[0..$i]);
-	    #print "Check if $path_to_check is a symlink";
+	    #say "Check if $path_to_check is a symlink";
 	    return $path_to_check if -l $path_to_check;
 	}
 	return 0;
@@ -553,12 +553,12 @@ sub revert {
 
     $item_in_home = "$ENV{HOME}/" .
 	&fill_in_wildcard_matches($target_glob, $itemexpanded, $item_in_home);
-    print "Trying to revert $itemexpanded to $item_in_home";
+    say "Trying to revert $itemexpanded to $item_in_home";
 
     if (-l $item_in_home) {
 	my $link_target = readlink($item_in_home);
 	if ($itemexpanded eq $link_target) {
-	    print "Removing symlink $item_in_home";
+	    say "Removing symlink $item_in_home";
 	    unlink($item_in_home) unless $DRYRUN;
 	    &move($itemexpanded, $item_in_home);
 	} else {
