@@ -373,10 +373,10 @@ sub action_move {
     return;
 }
 
-sub unknown_action {
-    my ($action) = @_;
+sub unknown_element {
+    my ($what, $unknown) = @_;
 
-    warn "Unknown action '$action'. This should never happen.";
+    warn "Unknown $what '$unknown'. This should never happen.";
     return 255;
 }
 
@@ -410,7 +410,7 @@ sub do_it {
 		action_move($itemexpanded, $target);
 	    }
 	    else {
-		return unknown_action($action);
+		return unknown_element('action', $action);
 	    }
 
 	    create_symlink($itemexpanded, $target);
@@ -437,7 +437,7 @@ sub do_it {
 		action_move($itemexpanded, $target);
 	    }
 	    else {
-		return unknown_action($action);
+		return unknown_element('action', $action);
 	    }
 
 	    create_symlink($itemexpanded, $target);
@@ -449,8 +449,7 @@ sub do_it {
 	}
     }
     else {
-	warn 'This should never happen.';
-	return 255;
+	return unknown_element('type', $type);
     }
     return 0;
 }
