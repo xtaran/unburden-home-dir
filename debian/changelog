@@ -3,6 +3,8 @@ unburden-home-dir (0.3~2012.05.24) UNRELEASED; urgency=low
   * If lsof is available, check if files to (re)move are still in use
     before (re)moving them.
     - Recommend lsof
+  * Some Refactoring:
+    - use Modern::Perl; add libmodern-perl-perl as dependencies.
   * More documentation in README:
     - Add some paragraphs about reversing unburden-home-dir's effect
       (Closes: #673909)

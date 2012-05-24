@@ -2,7 +2,7 @@ Source: unburden-home-dir
 Section: x11
 Priority: extra
 Maintainer: Axel Beckert <abe@debian.org>
-Build-Depends: debhelper (>= 7.0.50~), devscripts, libconfig-file-perl, libfile-touch-perl, libfile-slurp-perl, libfile-rsync-perl
+Build-Depends: debhelper (>= 7.0.50~), devscripts, libconfig-file-perl, libfile-touch-perl, libfile-slurp-perl, libfile-rsync-perl, libmodern-perl-perl
 Standards-Version: 3.9.3
 Homepage: http://wiki.phys.ethz.ch/readme/application_cache_files
 Vcs-Git: http://git.phys.ethz.ch/unburden-home-dir.git
@@ -10,7 +10,7 @@ Vcs-Browser: http://git.phys.ethz.ch/?p=unburden-home-dir.git
 
 Package: unburden-home-dir
 Architecture: all
-Depends: x11-common, ${perl:Depends}, ${misc:Depends}, libconfig-file-perl, libfile-touch-perl, libfile-rsync-perl
+Depends: x11-common, ${perl:Depends}, ${misc:Depends}, libconfig-file-perl, libfile-touch-perl, libfile-rsync-perl, libmodern-perl-perl
 Pre-Depends: dpkg (>= 1.15.7.2)
 Recommends: lsof
 Enhances: x11-common
