@@ -441,7 +441,7 @@ sub calculate_target {
     my $replacement = shift;
     my $target = $CONFIG->{FILELAYOUT};
 
-    $target =~ s|%u|$UID|ge;
+    $target =~ s|%u|$UID|g;
     $target =~ s|%s|$replacement|g;
 
     return $CONFIG->{TARGETDIR}."/$target";
