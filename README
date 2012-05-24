@@ -79,6 +79,14 @@ following:
   be necessary if the target is on the same file system, but that's
   usually not the case.)
 
+  Also exit shells or file browser windows (Nautilus, Konqueror, Caja,
+  etc.) which have any of the to-be-unburdened directories open.
+
+  If you use a full featured desktop (GNOME, KDE, Unity) including
+  desktop search or similar tools (Zeitgeist, gvfs, etc.) it's likely
+  the best to logout from your X session and do the remaining steps in
+  a failsafe session, on the text console or remotely via SSH.
+
 * Run "unburden-home-dir".
 
 * Start your applications again.
@@ -86,8 +94,8 @@ following:
 * If everything works fine, uncomment "UNBURDEN_HOME=true" in
   /etc/default/unburden-home-dir to enable unburden-home-dir for X
   sessions of all users or add "UNBURDEN_HOME=true" to
-  ~/.unburden-home-dir to enable it just on a per-user base.
-
+  ~/.unburden-home-dir to enable it just on a per-user base. (Create
+  the file if it doesn't exist yet.)
 
 Common Issues / Troubleshooting
 ===============================
