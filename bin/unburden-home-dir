@@ -5,7 +5,7 @@
 # is used to relief NFS home directories of the burden of caches and
 # other performance needing directories.
 #
-# Copyright (C) 2010 by Axel Beckert <beckert@phys.ethz.ch>,
+# Copyright (C) 2010-2012 by Axel Beckert <beckert@phys.ethz.ch>,
 # Department of Physics, ETH Zurich.
 #
 # This program is free software: you can redistribute it and/or modify
