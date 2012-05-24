@@ -132,7 +132,7 @@ for (keys %OPTIONS) {
     when('f') {
 	eval { $FILTER = qr/$OPTIONS{f}/; };
 	if ($@) {
-	    &report_serious_problem("parameter to -f", "\n$@");
+	    report_serious_problem("parameter to -f", "\n$@");
 	    exit 2;
 	}
     }
@@ -380,9 +380,9 @@ sub do_it {
 		mkpath($target, { verbose => 1 }) unless $DRYRUN;
 	    }
 	    elsif ( $action eq 'm' ) {
-		&create_parent_directories($target);
+		create_parent_directories($target);
 		unless ($DRYRUN) {
-		    &move($itemexpanded, $target)
+		    move($itemexpanded, $target)
 			or die "Couldn't move $itemexpanded -> $target: $!";
 		}
 	    }
@@ -410,15 +410,15 @@ sub do_it {
 		    unlink($itemexpanded)
 			or die "Couldn't delete $itemexpanded: $!";
 		}
-		&create_parent_directories($target);
+		create_parent_directories($target);
 		say "Touching $target";
 		touch($target) unless $DRYRUN;
 	    }
 	    elsif ( $action eq 'm' ) {
-		&create_parent_directories($target);
+		create_parent_directories($target);
 		say "Moving $itemexpanded -> $target";
 		unless ($DRYRUN) {
-		    &move($itemexpanded, $target)
+		    move($itemexpanded, $target)
 			or die "Couldn't move $itemexpanded -> $target: $!";
 		}
 	    }
@@ -506,13 +506,13 @@ sub replace {
 	return 0;
     }
 
-    if (my $symlink = &symlink_in_path($itemexpanded)) {
+    if (my $symlink = symlink_in_path($itemexpanded)) {
 	warn "Skipping '$itemexpanded' due to symlink in path: $symlink\n";
 	return 0;
     }
 
-    my $target = &fill_in_wildcard_matches($itemglob, $itemexpanded,
-					   &calculate_target($replacement));
+    my $target = fill_in_wildcard_matches($itemglob, $itemexpanded,
+					  calculate_target($replacement));
 
     # Check if the source exists
     if ( ! -e $itemexpanded and ! -l $itemexpanded ) {
@@ -544,7 +544,7 @@ sub revert {
     }
 
     $item_in_home = "$ENV{HOME}/" .
-	&fill_in_wildcard_matches($target_glob, $itemexpanded, $item_in_home);
+	fill_in_wildcard_matches($target_glob, $itemexpanded, $item_in_home);
     say "Trying to revert $itemexpanded to $item_in_home";
 
     if (-l $item_in_home) {
@@ -552,7 +552,7 @@ sub revert {
 	if ($itemexpanded eq $link_target) {
 	    say "Removing symlink $item_in_home";
 	    unlink($item_in_home) unless $DRYRUN;
-	    &move($itemexpanded, $item_in_home);
+	    move($itemexpanded, $item_in_home);
 	} else {
 	    warn "Ignoring symlink $item_in_home as it points to $link_target ".
 		 "and not to $itemexpanded as expected.\n";
@@ -609,9 +609,9 @@ for my $list (@LISTFILES) {
 	}
 
 	if ($REVERT) {
-	    ($item, $replacement) = &exchange_wildcards_and_replacements($item, $replacement);
+	    ($item, $replacement) = exchange_wildcards_and_replacements($item, $replacement);
 
-	    my $replacement_path = &calculate_target($replacement);
+	    my $replacement_path = calculate_target($replacement);
 	    for my $i (glob($replacement_path)) {
 		if (defined($FILTER)) {
 		    next unless ($i =~ $FILTER);
