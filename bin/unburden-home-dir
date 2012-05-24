@@ -399,11 +399,6 @@ sub type_is_file {
     return (lc(shift) eq 'f');
 }
 
-sub type_is_correct {
-    my ($type) = @_;
-    return (type_is_file($type) or type_is_directory($type));
-}
-
 sub do_it {
     my ($type, $itemexpanded, $target, $action) = @_;
 
@@ -411,7 +406,10 @@ sub do_it {
 	return 0;
     }
 
-    unless (type_is_correct($type)) {
+    my $is_file = type_is_file($type);
+    my $is_dir  = type_is_directory($type);
+
+    unless ($is_file or $is_dir) {
 	return unknown_element('type', $type);
     }
 
