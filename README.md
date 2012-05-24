@@ -74,13 +74,15 @@ following:
 
   > unburden-home-dir -n
   
-  to see what unburden-home-dir would do. Check the above steps until
-  you're satisfied.
+  to see what unburden-home-dir would do. If you have lsof installed
+  it should warn you if any of the files are currently in use.
 
-* Exit all potentially affected applications as them having files open
-  which should be moved can cause unburden-home-dir to fail. (May not
-  be necessary if the target is on the same file system, but that's
-  usually not the case.)
+  Check the above steps until you're satisfied.
+
+* Exit all affected applications (guess if no lsof is available, fuser
+  may help if available) as opened files which should be moved can
+  cause unburden-home-dir to fail. (May not be necessary if the target
+  is on the same file system, but that's usually not the case.)
 
   Also exit shells or file browser windows (Nautilus, Konqueror, Caja,
   etc.) which have any of the to-be-unburdened directories open.

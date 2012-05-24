@@ -25,7 +25,7 @@
 use strict;
 use warnings;
 
-our $VERSION = '0.0.20101217';
+our $VERSION = '0.3~dev';
 
 # Configuration variables to be used in configuration files
 my $CONFIG = {
@@ -57,6 +57,8 @@ use Data::Dumper;
 my %OPTIONS = ();
 my $FILTER = undef;
 my $UID = getpwuid($<);
+my $USE_LSOF = 1;
+my $LSOF_CMD = undef;
 
 # Some messages for Getopt::Std
 sub VERSION_MESSAGE {
@@ -81,6 +83,9 @@ sub HELP_MESSAGE {
       regular expression) -- matches the already unburdened
       directories if used together with -u.
 
+  -F  Do not check if to-be-(re)moved files and directories are still
+      in use (aka *F*orce (re)moving).
+
   -l  read an additional list file
 
   -L  read only the given list file
@@ -97,7 +102,7 @@ sub HELP_MESSAGE {
 }
 
 # Parse command line options
-getopts('hnuf:b:c:C:l:L:', \%OPTIONS);
+getopts('hnufF:b:c:C:l:L:', \%OPTIONS);
 
 if (exists($OPTIONS{h})) {
     my $fh = IO::Handle->new_from_fd(fileno(STDERR),'w');
@@ -136,6 +141,10 @@ if (exists($OPTIONS{n})) {
 
 if (exists($OPTIONS{u})) {
     $REVERT = 1;
+}
+
+if (exists($OPTIONS{F})) {
+    $USE_LSOF = 0;
 }
 
 if (exists($OPTIONS{f})) {
@@ -179,6 +188,14 @@ my $rsync = File::Rsync->new({
     },
     errfun => sub { chomp; warn "$_[0]\n"; },
 });
+
+# Check for lsof in search path
+my $which_lsof = `which lsof`;
+chomp($which_lsof);
+if ($which_lsof eq 'lsof not found' or $which_lsof eq '') {
+    warn "WARNING: lsof not found, not checking for files in use";
+    $USE_LSOF = 0;
+}
 
 sub report_problem {
     warn "WARNING: Can't handle $_[0]: $_[1]";
@@ -307,8 +324,66 @@ sub fix_dangling_links {
     return 0
 }
 
+sub parse_lsof_output {
+    my ($output) = @_;
+    chomp($output);
+    my @lines = split(/\n/, $output);
+
+    my $result = '';
+    my $pid;
+    my $cmd;
+
+    foreach my $line (@lines) {
+	if ($line =~ /^p(.*)$/) {
+	    $pid = $1;
+	    $cmd = undef;
+	} elsif ($line =~ /^c(.*)$/) {
+	    $cmd = $1;
+	    unless ($pid) {
+		report_problem("lsof output", "No pid before command: $line");
+		next;
+	    }
+	    $result .= sprintf("  %5i (%s)\n", $pid, $cmd);
+	    $pid = undef;
+	} else {
+	    report_problem("line in lsof output", $line);
+	}
+    }
+
+    return $result;
+
+}
+
+sub files_in_use {
+    my ($item) = @_;
+    my $lsof_output = undef;
+
+    if (-d $item) {
+	$lsof_output = `find '$item' -print0 | xargs -0 lsof -F c`;
+    } elsif (-f _) {
+	$lsof_output = `lsof -F c '$item'`;
+    } else {
+	report_problem("Not checking for open files in $item: neither file nor directory");
+	return undef;
+    }
+
+    my $lsof_parsed = parse_lsof_output($lsof_output);
+
+    if ($lsof_parsed) {
+	report_problem($item, "in use, not (re)moving. Process list:\n$lsof_parsed");
+	return 1;
+    } else {
+	return 0;
+    }
+}
+
 sub do_it {
     my ($type, $itemexpanded, $target, $action) = @_;
+
+    if ( $USE_LSOF and files_in_use($itemexpanded) ) {
+	return 0;
+    }
+
     if ( $type eq 'd' or $type eq 'D' ) {
 	if ( -d $itemexpanded ) {
 	    if ( $action eq 'r' or $action eq 'd' ) {
