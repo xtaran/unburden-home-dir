@@ -70,9 +70,12 @@ following:
   and/or copy it to ~/.unburden-home-dir and then edit it there for
   per-user settings.
 
-* Make a dry run with "unburden-home-dir -n" to see what
-  unburden-home-dir would do. Check the above steps until you're
-  satisfied.
+* Make a dry run with
+
+  > unburden-home-dir -n
+  
+  to see what unburden-home-dir would do. Check the above steps until
+  you're satisfied.
 
 * Exit all potentially affected applications as them having files open
   which should be moved can cause unburden-home-dir to fail. (May not
@@ -87,23 +90,26 @@ following:
   the best to logout from your X session and do the remaining steps in
   a failsafe session, on the text console or remotely via SSH.
 
-* Run "unburden-home-dir".
+* Run
+
+  > unburden-home-dir
 
 * Start your applications again.
 
-* If everything works fine, uncomment "UNBURDEN_HOME=true" in
-  /etc/default/unburden-home-dir to enable unburden-home-dir for X
-  sessions of all users or add "UNBURDEN_HOME=true" to
-  ~/.unburden-home-dir to enable it just on a per-user base. (Create
-  the file if it doesn't exist yet.)
+* If everything works fine, uncomment
+
+  > UNBURDEN_HOME=true
+
+  in /etc/default/unburden-home-dir to enable unburden-home-dir for X
+  sessions of all users or add it to ~/.unburden-home-dir to enable it
+  just on a per-user base. (Create the file if it doesn't exist yet.)
 
 Common Issues / Troubleshooting
 ===============================
 
 * If you get error messages like
 
-    cannot remove directory for ~/.something/Cache: Directory not
-    empty at /usr/bin/unburden-home-dir line 203
+  > cannot remove directory for ~/.something/Cache: Directory not empty at /usr/bin/unburden-home-dir line 203
 
   there is likely a process running which still has files open in that
   directory or a subdirectory thereof.
@@ -113,9 +119,12 @@ Common Issues / Troubleshooting
 
 * In case unburden-home-dir moved something it wasn't expected to, you
   can try to undo all of unburden-home-dir's doing by running
-  "unburden-home-dir -u". Nevertheless this functionality is less well
-  tested as unburden-home-dir's normal operation mode, so it may not
-  be able to undo everything.
+
+  > unburden-home-dir -u
+
+  Nevertheless this functionality is less well tested as
+  unburden-home-dir's normal operation mode, so it may not be able to
+  undo everything.
 
   unburden-home-dir's undo mode (of course) can't undo modifications
   where it has been told to remove all files and create an empty
@@ -128,20 +137,20 @@ Configuration Files
 
 There are five configuration files for unburden-home-dir:
 
-  /etc/unburden-home-dir         -- Global configuration file
-  /etc/unburden-home-dir.list    -- Global list of files to take care of
-  ~/.unburden-home-dir           -- Per user configuration file
-  ~/.unburden-home-dir.list      -- Per user list of files to take care of
-  /etc/default/unburden-home-dir -- Xsession hook configuration file
+* /etc/unburden-home-dir         -- Global configuration file
+* /etc/unburden-home-dir.list    -- Global list of files to take care of
+* ~/.unburden-home-dir           -- Per user configuration file
+* ~/.unburden-home-dir.list      -- Per user list of files to take care of
+* /etc/default/unburden-home-dir -- Xsession hook configuration file
 
 Explanation of the unburden-home-dir.list file format:
 
-  1st column: Action ("d"/"r" or "m": delete/remove or move; the first
-              two are equivalent)
-  2nd column: Type ("d", "D", "f" or "F": directory or file, capital
-              letter means "create it if it doesn't exist")
-  3rd column: Path relative to $HOME to move off to some other location
-  4th column: identifier for file or directory in the other location
+1. column: Action ("d"/"r" or "m": delete/remove or move; the first two
+           are equivalent)
+2. column: Type ("d", "D", "f" or "F": directory or file, capital letter
+           means "create it if it doesn't exist")
+3. column: Path relative to $HOME to move off to some other location
+4. column: identifier for file or directory in the other location
 
 Edit /etc/default/unburden-home-dir if you want to enable
 unburden-home-dir for all users of a machine.on an Xsession based
@@ -151,10 +160,13 @@ homes mounted.
 
 For installations where each user should be able to decide on his own
 if unburden-home-dir should be run on X session start, add a line
-saying "UNBURDEN_HOME=yes" to ~/.unburden-home-dir which is sourced by
-the Xsession startup script in the same way as
-/etc/default/unburden-home-dir (while being a configuration file for
-unburden-home-dir itself at the same time, too).
+saying
+
+> UNBURDEN_HOME=yes
+
+to ~/.unburden-home-dir which is sourced by the Xsession startup script
+in the same way as /etc/default/unburden-home-dir (while being a
+configuration file for unburden-home-dir itself at the same time, too).
 
 See /usr/share/doc/unburden-home-dir/examples/ on debianoid
 installations or etc/ in the source tar ball for example files.
@@ -162,18 +174,19 @@ installations or etc/ in the source tar ball for example files.
 A good start for checking what kind of caches you have in your home
 directory is running
 
-  find ~ -type d -iname '*cache*' -not -path '*/.git/*' -not -path '*/.hg/*' \
-         -print0 | xargs -0 du -sh | sort -h
+> find ~ -type d -iname '*cache*' -not -path '*/.git/*' -not -path '*/.hg/*' -print0 | xargs -0 du -sh | sort -h
 
 
 Source Code
 ===========
 
 You should always find the newest code via git at either
-http://git.phys.ethz.ch/?p=unburden-home-dir.git (primary site),
-http://gitorious.org/unburden-home-dir/ or
-http://github.com/xtaran/unburden-home-dir (mirrors, or in case you
-prefer to use social forking :-).
+
+* http://git.phys.ethz.ch/?p=unburden-home-dir.git (primary site),
+* http://gitorious.org/unburden-home-dir/ or
+* http://github.com/xtaran/unburden-home-dir
+
+(mirrors, or in case you prefer to use social forking :-).
 
 
 License
