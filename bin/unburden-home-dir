@@ -373,6 +373,29 @@ sub action_move {
     return;
 }
 
+sub action_delete_and_recreate {
+    my ($type, $itemexpanded, $target) = @_;
+
+    my $is_file = type_is_file($type);
+    my $is_dir  = type_is_directory($type);
+
+    say "Delete $itemexpanded";
+    unless ($DRYRUN) {
+	$is_dir  and rmtree($itemexpanded, { verbose => 1 }) ;
+	$is_file and (unlink($itemexpanded)
+		      || die "Couldn't delete $itemexpanded: $!");
+    }
+    say "Create $target";
+    unless ($DRYRUN) {
+	$is_dir  and mkpath($target, { verbose => 1 });
+	$is_file and do { say "Touching $target";
+			  touch($target)
+			      || die "Couldn't touch $target: $!" ; };
+    }
+
+    return;
+}
+
 sub unknown_element {
     my ($what, $unknown) = @_;
 
@@ -413,56 +436,29 @@ sub do_it {
 	return unknown_element('type', $type);
     }
 
-    if (type_is_directory($type)) {
-	if ( -d $itemexpanded ) {
-	    if ( $action eq 'r' or $action eq 'd' ) {
-		say "Delete directory $itemexpanded";
-		rmtree($itemexpanded, { verbose => 1 }) unless $DRYRUN;
-		say "Create directory $target";
-		mkpath($target, { verbose => 1 }) unless $DRYRUN;
-	    }
-	    elsif ( $action eq 'm' ) {
-		action_move($itemexpanded, $target);
-	    }
-	    else {
-		return unknown_element('action', $action);
-	    }
-
-	    create_symlink($itemexpanded, $target);
-	}
-	else {
-	    report_serious_problem($itemexpanded,
-				   'Unexpected type (not a directory)');
-	    return 1;
-	}
+    if ($is_file and !-f $itemexpanded) {
+	report_serious_problem($itemexpanded,
+			       'Unexpected type (not a file)');
+	return 1;
     }
-    elsif (type_is_file($type)) {
-	if ( -f $itemexpanded ) {
-	    if ( $action eq 'r' or $action eq 'd' ) {
-		say "Deleting $itemexpanded";
-		unless ($DRYRUN) {
-		    unlink($itemexpanded)
-			or die "Couldn't delete $itemexpanded: $!";
-		}
-		create_parent_directories($target);
-		say "Touching $target";
-		touch($target) unless $DRYRUN;
-	    }
-	    elsif ( $action eq 'm' ) {
-		action_move($itemexpanded, $target);
-	    }
-	    else {
-		return unknown_element('action', $action);
-	    }
 
-	    create_symlink($itemexpanded, $target);
-	}
-	else {
-	    report_serious_problem($itemexpanded,
-				   'Unexpected type (not a file)');
-	    return 1;
-	}
+    if ($is_dir and !-d $itemexpanded) {
+	report_serious_problem($itemexpanded,
+			       'Unexpected type (not a directory)');
+	return 1;
     }
+
+    if ( $action eq 'r' or $action eq 'd' ) {
+	action_delete_and_recreate($type, $itemexpanded, $target);
+    }
+    elsif ( $action eq 'm' ) {
+	action_move($itemexpanded, $target);
+    }
+    else {
+	return unknown_element('action', $action);
+    }
+
+    create_symlink($itemexpanded, $target);
 
     return 0;
 }
