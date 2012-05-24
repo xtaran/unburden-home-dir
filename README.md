@@ -85,10 +85,12 @@ following:
   Also exit shells or file browser windows (Nautilus, Konqueror, Caja,
   etc.) which have any of the to-be-unburdened directories open.
 
-  If you use a full featured desktop (GNOME, KDE, Unity) including
-  desktop search or similar tools (Zeitgeist, gvfs, etc.) it's likely
-  the best to logout from your X session and do the remaining steps in
-  a failsafe session, on the text console or remotely via SSH.
+  If you use a full featured desktop (GNOME, KDE, Unity,
+  Enlightenment/E17) including desktop search or similar tools which
+  have some files in ~/.cache permanently opened (Zeitgeist, gvfs,
+  etc.) it's likely the best to logout from your X session and do the
+  remaining steps in a failsafe session, on the text console or
+  remotely via SSH.
 
 * Run
 
