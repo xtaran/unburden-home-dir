@@ -103,54 +103,34 @@ sub HELP_MESSAGE {
 # Parse command line options
 getopts('hnufF:b:c:C:l:L:', \%OPTIONS);
 
-if (exists($OPTIONS{h})) {
-    my $fh = IO::Handle->new_from_fd(fileno(STDERR),'w');
-    VERSION_MESSAGE($fh);
-    HELP_MESSAGE($fh);
-    exit 0;
-}
-
-if (exists($OPTIONS{b})) {
-    $BASENAME = $OPTIONS{b};
+for (keys %OPTIONS) {
+    when('h') {
+	my $fh = IO::Handle->new_from_fd(fileno(STDERR),'w');
+	VERSION_MESSAGE($fh);
+	HELP_MESSAGE($fh);
+	exit 0;
+    }
+    when('b') { $BASENAME = $OPTIONS{b}; }
 }
 
 # By default check for a system wide and a user configuration and list file
 my @CONFFILES = ("/etc/$BASENAME", "$ENV{HOME}/.$BASENAME");
 my @LISTFILES = ("/etc/$BASENAME$LISTSUFFIX", "$ENV{HOME}/.$BASENAME$LISTSUFFIX");
 
-if (exists($OPTIONS{C})) {
-    @CONFFILES = ($OPTIONS{C});
-}
-
-if (exists($OPTIONS{c})) {
-    push(@CONFFILES, $OPTIONS{c});
-}
-
-if (exists($OPTIONS{L})) {
-    @LISTFILES = ($OPTIONS{L});
-}
-
-if (exists($OPTIONS{l})) {
-    push(@LISTFILES, $OPTIONS{l});
-}
-
-if (exists($OPTIONS{n})) {
-    $DRYRUN = 1;
-}
-
-if (exists($OPTIONS{u})) {
-    $REVERT = 1;
-}
-
-if (exists($OPTIONS{F})) {
-    $USE_LSOF = 0;
-}
-
-if (exists($OPTIONS{f})) {
-    eval { $FILTER = qr/$OPTIONS{f}/; };
-    if ($@) {
-	&report_serious_problem("parameter to -f", "\n$@");
-	exit 2;
+for (keys %OPTIONS) {
+    when('C') {      @CONFFILES = ($OPTIONS{C}); }
+    when('c') { push(@CONFFILES,   $OPTIONS{c}); }
+    when('L') {      @LISTFILES = ($OPTIONS{L}); }
+    when('l') { push(@LISTFILES,   $OPTIONS{l}); }
+    when('n') { $DRYRUN   = 1; }
+    when('u') { $REVERT   = 1; }
+    when('F') { $USE_LSOF = 0; }
+    when('f') {
+	eval { $FILTER = qr/$OPTIONS{f}/; };
+	if ($@) {
+	    &report_serious_problem("parameter to -f", "\n$@");
+	    exit 2;
+	}
     }
 }
 
