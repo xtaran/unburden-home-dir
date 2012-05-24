@@ -55,9 +55,8 @@ sending incremental file list
 goo
 Symlinking $TARGET/u-foobar-gnarz ->  $HOME/.foobar/gnarz
 Moving $HOME/.foobar/foo -> $TARGET/u-foobar-foo
-Moving $HOME/.foobar/foo -> $TARGET/u-foobar-foo
 `$HOME/.foobar/foo' -> `$TARGET/u-foobar-foo'
-$TARGET/u-foobar-foo ->  $HOME/.foobar/foo
+Symlinking $TARGET/u-foobar-foo ->  $HOME/.foobar/foo
 ";
 
 my $output = read_file("$BASE/output");

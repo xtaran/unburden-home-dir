@@ -26,6 +26,7 @@ ok( system("bin/unburden-home-dir -n -C $BASE/config -L $BASE/list > $BASE/outpu
 # 5
 my $wanted = <<EOF;
 Create parent directories for $TARGET/u-barba-blatest-foobar
+Moving $HOME/.foobar/blatest/barba -> $TARGET/u-barba-blatest-foobar
 Symlinking $TARGET/u-barba-blatest-foobar ->  $HOME/.foobar/blatest/barba
 EOF
 
