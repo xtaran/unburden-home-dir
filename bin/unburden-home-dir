@@ -398,7 +398,7 @@ sub do_it {
 	return 0;
     }
 
-    if ( $type eq 'd' or $type eq 'D' ) {
+    if ( lc($type) eq 'd' ) {
 	if ( -d $itemexpanded ) {
 	    if ( $action eq 'r' or $action eq 'd' ) {
 		say "Delete directory $itemexpanded";
@@ -421,7 +421,7 @@ sub do_it {
 	    return 1;
 	}
     }
-    elsif ( $type eq 'f' or $type eq 'F' ) {
+    elsif ( lc($type) eq 'f' ) {
 	if ( -f $itemexpanded ) {
 	    if ( $action eq 'r' or $action eq 'd' ) {
 		say "Deleting $itemexpanded";

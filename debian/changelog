@@ -12,6 +12,7 @@ unburden-home-dir (0.3~2012.05.24) UNRELEASED; urgency=low
     - add missing trailing semicolons and explicit returns
     - remove all subroutine calls with "&" sigil
     - remove code duplication
+    - use lc($var) eq 'c' instead of two string comparisons
   * Remove no more necessary eval in regexp replacement
   * Add missing close();
   * More documentation in README:
