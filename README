@@ -115,16 +115,6 @@ Common Issues / Troubleshooting
   section below.
 
 
-Source Code
-===========
-
-You should always find the newest code via git at either
-http://git.phys.ethz.ch/?p=unburden-home-dir.git (primary site),
-http://gitorious.org/unburden-home-dir/ or
-http://github.com/xtaran/unburden-home-dir (mirrors, or in case you
-prefer to use social forking :-).
-
-
 Configuration Files
 ===================
 
@@ -166,6 +156,16 @@ directory is running
 
   find ~ -type d -iname '*cache*' -not -path '*/.git/*' -not -path '*/.hg/*' \
          -print0 | xargs -0 du -sh | sort -h
+
+
+Source Code
+===========
+
+You should always find the newest code via git at either
+http://git.phys.ethz.ch/?p=unburden-home-dir.git (primary site),
+http://gitorious.org/unburden-home-dir/ or
+http://github.com/xtaran/unburden-home-dir (mirrors, or in case you
+prefer to use social forking :-).
 
 
 License
