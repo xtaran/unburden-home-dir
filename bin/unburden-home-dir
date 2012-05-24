@@ -374,7 +374,7 @@ sub do_it {
 	    elsif ( $action eq 'm' ) {
 		&create_parent_directories($target);
 		unless ($DRYRUN) {
-		    &move(@_[1,2])
+		    &move($itemexpanded, $target)
 			or die "Couldn't move $itemexpanded -> $target: $!";
 		}
 	    }
@@ -410,7 +410,7 @@ sub do_it {
 		&create_parent_directories($target);
 		say "Moving $itemexpanded -> $target";
 		unless ($DRYRUN) {
-		    &move(@_[1,2])
+		    &move($itemexpanded, $target)
 			or die "Couldn't move $itemexpanded -> $target: $!";
 		}
 	    }
