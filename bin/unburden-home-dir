@@ -368,11 +368,8 @@ sub action_move {
     my ($itemexpanded, $target) = @_;
 
     create_parent_directories($target);
-    say "Moving $itemexpanded -> $target";
-    unless ($DRYRUN) {
-	move($itemexpanded, $target)
-	    or die "Couldn't move $itemexpanded -> $target: $!";
-    }
+    move($itemexpanded, $target)
+	or die "Couldn't move $itemexpanded -> $target: $!";
     return;
 }
 
