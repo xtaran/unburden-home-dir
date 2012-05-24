@@ -201,11 +201,13 @@ Source Code
 
 You should always find the newest code via git at either
 
-* http://git.phys.ethz.ch/?p=unburden-home-dir.git (primary site),
-* http://gitorious.org/unburden-home-dir/ or
 * http://github.com/xtaran/unburden-home-dir
+* http://git.phys.ethz.ch/?p=unburden-home-dir.git or
+* http://gitorious.org/unburden-home-dir/
 
-(mirrors, or in case you prefer to use social forking :-).
+GitHub is used as primary hub, git.phys.ethz.ch is usually up-to-date,
+too, Gitorious gets pushed less often, but should get all major
+updates in time, too.
 
 
 License
