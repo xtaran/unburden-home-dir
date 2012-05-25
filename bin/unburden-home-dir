@@ -605,7 +605,6 @@ for my $list (@LISTFILES) {
 	my ($action, $type, $item, $replacement) = split;
 
 	next unless defined $action;
-	#next if $action eq '';
 
 	if (!defined($item) or !defined($replacement)) {
 	    warn "Can't parse '$_', skipping...";
