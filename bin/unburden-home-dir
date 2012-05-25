@@ -277,24 +277,8 @@ sub fix_dangling_links {
 
     # Check if target exists and is same type
     if ( -e $target ) {
-	# Case 1: directory
-	if ($is_dir) {
-	    # Does target exist?
-	    if ( ! -d $target ) {
-		report_problem($itemexpanded,
-			       'Unexpected type (not a directory)');
-		return 1;
-	    }
-	}
-	# Case 2: file
-	elsif ($is_file) {
-	    # Does target exist?
-	    if ( ! -f $target ) {
-		report_problem($itemexpanded,
-			       'Unexpected type (not a regular file)');
-		return 1;
-	    }
-	}
+	my $unexpected_type = check_for_unexpected_type($type, $target);
+	return $unexpected_type if $unexpected_type;
     }
     # Symlink is there, but file or directory not
     else {
@@ -426,12 +410,8 @@ sub type_is_file {
     return (lc(shift) eq 'f');
 }
 
-sub do_it {
-    my ($type, $itemexpanded, $target, $action) = @_;
-
-    if ( $USE_LSOF and files_in_use($itemexpanded) ) {
-	return 0;
-    }
+sub check_for_unexpected_type {
+    my ($type, $itemexpanded) = @_;
 
     my $is_file = type_is_file($type);
     my $is_dir  = type_is_directory($type);
@@ -451,6 +431,19 @@ sub do_it {
 			       'Unexpected type (not a directory)');
 	return 1;
     }
+
+    return;
+}
+
+sub do_it {
+    my ($type, $itemexpanded, $target, $action) = @_;
+
+    if ( $USE_LSOF and files_in_use($itemexpanded) ) {
+	return 0;
+    }
+
+    my $unexpected_type = check_for_unexpected_type($type, $itemexpanded);
+    return $unexpected_type if $unexpected_type;
 
     if ( $action eq 'r' or $action eq 'd' ) {
 	action_delete_and_recreate($type, $itemexpanded, $target);
