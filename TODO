@@ -26,3 +26,5 @@ open in moved directories more gracefully. Current example error:
   cannot remove directory for /home/user/.thunderbird/qfdw0evd.default/Cache: Directory not empty at /usr/bin/unburden-home-dir line 203
   Symlinking /scratch/.unburden-user/thunderbird-cache-qfdw0evd.default ->  /home/user/.thunderbird/qfdw0evd.default/Cache
   Couldn't symlink /scratch/.unburden-user/thunderbird-cache-qfdw0evd.default ->  /home/user/.thunderbird/qfdw0evd.default/Cache: File exists at /usr/bin/unburden-home-dir line 333, <LIST> line 7.
+
+Sorting and commenting subroutines.
