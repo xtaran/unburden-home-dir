@@ -258,10 +258,12 @@ sub possibly_create_non_existing_stuff {
 sub fix_dangling_links {
     my ($type, $itemexpanded, $target) = @_;
     my $link = readlink($itemexpanded);
+    my $is_dir  = type_is_directory($type);
+    my $is_file = type_is_file($type);
 
     # Accept existing symlinks or unburden-home-dir.list entries for
     # directories with or without trailing slash
-    if ($type eq 'd' or $type eq 'D') {
+    if ($is_dir) {
 	$link =~ s{/$}{};
 	$itemexpanded =~ s{/$}{};
 	$target =~ s{/$}{};
@@ -276,7 +278,7 @@ sub fix_dangling_links {
     # Check if target exists and is same type
     if ( -e $target ) {
 	# Case 1: directory
-	if ( $type eq 'd' or $type eq 'D' ) {
+	if ($is_dir) {
 	    # Does target exist?
 	    if ( ! -d $target ) {
 		report_problem($itemexpanded,
@@ -285,7 +287,7 @@ sub fix_dangling_links {
 	    }
 	}
 	# Case 2: file
-	elsif ( $type eq 'f' or $type eq 'F' ) {
+	elsif ($is_file) {
 	    # Does target exist?
 	    if ( ! -f $target ) {
 		report_problem($itemexpanded,
@@ -297,12 +299,12 @@ sub fix_dangling_links {
     # Symlink is there, but file or directory not
     else {
 	# Case 1: directory
-	if ( $type eq 'd' or $type eq 'D' ) {
+	if ($is_dir) {
 	    say "Create directory $target";
 	    mkpath($target, { verbose => 1 }) unless $DRYRUN;
 	}
 	# Case 2: file
-	elsif ( $type eq 'f' or $type eq 'F' ) {
+	elsif ($is_file) {
 	    create_parent_directories($target);
 	    say "Touching $target";
 	    touch($target) unless $DRYRUN;
@@ -610,8 +612,7 @@ for my $list (@LISTFILES) {
 	    warn "Can't parse '$_', skipping...";
 	    next;
 	}
-	if ( $type ne 'd' and  $type ne 'f' and
-	     $type ne 'D' and  $type ne 'F' ) {
+	unless ( type_is_directory($type) or type_is_file($type) ) {
 	    warn "Can't parse type '$type', must be 'd', 'D', 'f' or 'F', skipping...";
 	    next;
 	}
