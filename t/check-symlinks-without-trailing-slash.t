@@ -41,7 +41,7 @@ print "Want:\n\n$wanted\nGot:\n\n$stderr\n";
 ok( $stderr eq $wanted, "Check command STDERR output" );
 
 # 9
-$wanted = "Create directory $TARGET/u-foobar-fnord
+$wanted = "Create $TARGET/u-foobar-fnord
 mkdir $TARGET
 mkdir $TARGET/u-foobar-fnord
 ";

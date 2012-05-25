@@ -298,17 +298,7 @@ sub fix_dangling_links {
     }
     # Symlink is there, but file or directory not
     else {
-	# Case 1: directory
-	if ($is_dir) {
-	    say "Create directory $target";
-	    mkpath($target, { verbose => 1 }) unless $DRYRUN;
-	}
-	# Case 2: file
-	elsif ($is_file) {
-	    create_parent_directories($target);
-	    say "Touching $target";
-	    touch($target) unless $DRYRUN;
-	}
+	create_object_of_type($type, $target);
     }
     return 0;
 }
@@ -387,12 +377,24 @@ sub action_delete_and_recreate {
 	$is_file and (unlink($itemexpanded)
 		      || die "Couldn't delete $itemexpanded: $!");
     }
+    create_object_of_type($type, $target);
+
+    return;
+}
+
+sub create_object_of_type {
+    my ($type, $target) = @_;
+
     say "Create $target";
     unless ($DRYRUN) {
-	$is_dir  and mkpath($target, { verbose => 1 });
-	$is_file and do { say "Touching $target";
-			  touch($target)
-			      || die "Couldn't touch $target: $!" ; };
+	if (type_is_directory($type)) {
+	    mkpath($target, { verbose => 1 });
+	}
+	elsif (type_is_file($type)) {
+	    create_parent_directories($target);
+	    say "Touching $target";
+	    touch($target) || die "Couldn't touch $target: $!";
+	}
     }
 
     return;
