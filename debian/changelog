@@ -1,4 +1,4 @@
-unburden-home-dir (0.3~2012.05.25) UNRELEASED; urgency=low
+unburden-home-dir (0.3) unstable; urgency=low
 
   * If lsof is available, check if files to (re)move are still in use
     before (re)moving them.
@@ -25,7 +25,7 @@ unburden-home-dir (0.3~2012.05.25) UNRELEASED; urgency=low
   * Add ~/.aptitude/cache to unburden-home-dir.list. (cf. #671780)
   * Fix typo in README.Debian (Closes: #673912; Thanks Touko Korpela!)
 
- -- Axel Beckert <abe@debian.org>  Fri, 25 May 2012 02:29:32 +0200
+ -- Axel Beckert <abe@debian.org>  Tue, 12 Jun 2012 16:38:06 +0200
 
 unburden-home-dir (0.2) unstable; urgency=low
 
