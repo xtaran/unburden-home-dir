@@ -3,6 +3,7 @@
 use Test::Simple tests => 16;
 use File::Path qw(mkpath rmtree);
 use File::Slurp;
+use File::Which;
 use Data::Dumper;
 
 my $BASE = 't/find-per-user-stuff';
@@ -40,6 +41,9 @@ ok( system($cmd) == 0, "Call '$cmd'" );
 my $wanted = "Skipping '$HOME/.fnord/bla' due to symlink in path: $HOME/.fnord
 Skipping '$HOME/.foobar/blafasel/bla' due to symlink in path: $HOME/.foobar/blafasel
 ";
+unless (which('lsof')) {
+    $wanted = "WARNING: lsof not found, not checking for files in use\n".$wanted;
+}
 
 my $stderr = read_file("$BASE/stderr");
 print "Want:\n\n$wanted\nGot:\n\n$stderr\n";

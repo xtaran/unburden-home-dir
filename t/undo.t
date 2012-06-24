@@ -3,6 +3,7 @@
 use Test::Simple tests => 13;
 use File::Path qw(mkpath rmtree);
 use File::Slurp;
+use File::Which;
 use Data::Dumper;
 
 my $BASE = 't/undo';
@@ -44,9 +45,14 @@ print "Want:\n\n$wanted\nGot:\n\n$contents\n";
 ok( $contents eq $wanted, "Check command output" );
 
 # 9
+my $wanted = '';
+unless (which('lsof')) {
+    $wanted = "WARNING: lsof not found, not checking for files in use\n".$wanted;
+}
+
 my $stderr = read_file("$BASE/stderr");
 print "\nSTDERR:\n\n$stderr\n";
-ok( $stderr eq '', "Check command STDERR output (should be empty)" );
+ok( $stderr eq $wanted, "Check command STDERR output (should be empty)" );
 
 # 10 - 12
 ok( -d "$TARGET", "Base directory still exists" );

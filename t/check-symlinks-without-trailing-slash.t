@@ -3,6 +3,7 @@
 use Test::Simple tests => 11;
 use File::Path qw(mkpath rmtree);
 use File::Slurp;
+use File::Which;
 use Data::Dumper;
 
 my $BASE = 't/check-symlinks-without-trailing-slash';
@@ -35,6 +36,9 @@ ok( system($cmd) == 0, "Call '$cmd'" );
 
 # 8
 my $wanted = "";
+unless (which('lsof')) {
+    $wanted = "WARNING: lsof not found, not checking for files in use\n".$wanted;
+}
 
 my $stderr = read_file("$BASE/stderr");
 print "Want:\n\n$wanted\nGot:\n\n$stderr\n";
