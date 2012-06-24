@@ -43,9 +43,6 @@ ok( system($cmd) == 0, "Call '$cmd'" );
 
 # 10 - 11
 $wanted = "";
-unless (which('lsof')) {
-    $wanted = "WARNING: lsof not found, not checking for files in use.\n".$wanted;
-}
 
 $stderr = read_file("$BASE/stderr");
 print "Want:\n\n$wanted\nGot:\n\n$stderr\n";
