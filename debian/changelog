@@ -6,6 +6,7 @@ unburden-home-dir (0.3.1) UNRELEASED; urgency=low
   * Use a copy of README.md named just README to be installed in the
     Debian binary package to avoid any associations with Linux' software
     RAID. (Closes: #678630)
+  * Minor refactoring of t/undo.t for not confusing syntax highlighting
 
  -- Axel Beckert <abe@debian.org>  Sun, 24 Jun 2012 16:43:25 +0200
 

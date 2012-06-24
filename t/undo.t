@@ -32,20 +32,20 @@ my $cmd = "bin/unburden-home-dir -u -C $BASE/config -L $BASE/list > $BASE/output
 ok( system($cmd) == 0, "Call '$cmd'" );
 
 # 8
-my $wanted = <<EOF;
-Trying to revert $TARGET/$PREFIX-barba-blatest-foobar to $HOME/.foobar/blatest/barba
+my $wanted = "Trying to revert $TARGET/$PREFIX-barba-blatest-foobar to $HOME/.foobar/blatest/barba
 Removing symlink $HOME/.foobar/blatest/barba
 Moving $TARGET/$PREFIX-barba-blatest-foobar -> $HOME/.foobar/blatest/barba
 sending incremental file list
 created directory $HOME/.foobar/blatest/barba
 ./
-EOF
+";
+
 my $contents = read_file("$BASE/output");
 print "Want:\n\n$wanted\nGot:\n\n$contents\n";
 ok( $contents eq $wanted, "Check command output" );
 
 # 9
-my $wanted = '';
+$wanted = '';
 unless (which('lsof')) {
     $wanted = "WARNING: lsof not found, not checking for files in use\n".$wanted;
 }
