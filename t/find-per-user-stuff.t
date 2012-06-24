@@ -42,7 +42,7 @@ my $wanted = "Skipping '$HOME/.fnord/bla' due to symlink in path: $HOME/.fnord
 Skipping '$HOME/.foobar/blafasel/bla' due to symlink in path: $HOME/.foobar/blafasel
 ";
 unless (which('lsof')) {
-    $wanted = "WARNING: lsof not found, not checking for files in use\n".$wanted;
+    $wanted = "WARNING: lsof not found, not checking for files in use.\n".$wanted;
 }
 
 my $stderr = read_file("$BASE/stderr");

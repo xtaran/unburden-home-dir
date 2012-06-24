@@ -47,7 +47,7 @@ ok( $contents eq $wanted, "Check command output" );
 # 9
 $wanted = '';
 unless (which('lsof')) {
-    $wanted = "WARNING: lsof not found, not checking for files in use\n".$wanted;
+    $wanted = "WARNING: lsof not found, not checking for files in use.\n".$wanted;
 }
 
 my $stderr = read_file("$BASE/stderr");

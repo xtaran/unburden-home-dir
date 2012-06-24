@@ -38,7 +38,7 @@ ok( system($cmd) == 0, "Call '$cmd'" );
 # 8
 my $wanted = "$example would be outside of the home directory, skipping...\n";
 unless (which('lsof')) {
-    $wanted = "WARNING: lsof not found, not checking for files in use\n".$wanted;
+    $wanted = "WARNING: lsof not found, not checking for files in use.\n".$wanted;
 }
 
 my $stderr = read_file("$BASE/stderr");

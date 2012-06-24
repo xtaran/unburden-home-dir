@@ -176,7 +176,7 @@ my $rsync = File::Rsync->new({
 my $which_lsof = `which lsof`;
 chomp($which_lsof);
 if ($which_lsof eq 'lsof not found' or $which_lsof eq '') {
-    warn "WARNING: lsof not found, not checking for files in use";
+    warn "WARNING: lsof not found, not checking for files in use.\n";
     $USE_LSOF = 0;
 }
 
