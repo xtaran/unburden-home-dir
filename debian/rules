@@ -11,3 +11,7 @@
 
 %:
 	dh $@
+
+# Don't run test suite on kfreebsd or hurd, i.e. only run it on linux-any
+override_dh_auto_test:
+	if dpkg-architecture -qDEB_BUILD_ARCH_OS | grep -q linux; then dh_auto_test; fi

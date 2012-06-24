@@ -1,3 +1,13 @@
+unburden-home-dir (0.3.1) UNRELEASED; urgency=low
+
+  * Add lsof to build-dependencies (Closes: #678780)
+    + Restrict build-dependency on linux-any and run test suite only on
+      linux-any, would fail on kfreebsd and hurd as the test suite needs
+      lsof which is currently not available on kfreebsd-any and hurd-any.
+      See #589103 and #661575.
+
+ -- Axel Beckert <abe@debian.org>  Sun, 24 Jun 2012 15:47:06 +0200
+
 unburden-home-dir (0.3) unstable; urgency=low
 
   * If lsof is available, check if files to (re)move are still in use
