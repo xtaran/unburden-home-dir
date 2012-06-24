@@ -5,8 +5,11 @@ unburden-home-dir (0.3.1) UNRELEASED; urgency=low
       linux-any, would fail on kfreebsd and hurd as the test suite needs
       lsof which is currently not available on kfreebsd-any and hurd-any.
       See #589103 and #661575.
+  * Use a copy of README.md named just README to be installed in the
+    Debian binary package to avoid any associations with Linux' software
+    RAID. (Closes: #678630)
 
- -- Axel Beckert <abe@debian.org>  Sun, 24 Jun 2012 15:47:06 +0200
+ -- Axel Beckert <abe@debian.org>  Sun, 24 Jun 2012 15:53:14 +0200
 
 unburden-home-dir (0.3) unstable; urgency=low
 
