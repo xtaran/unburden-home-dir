@@ -28,6 +28,3 @@ open in moved directories more gracefully. Current example error:
   Couldn't symlink /scratch/.unburden-user/thunderbird-cache-qfdw0evd.default ->  /home/user/.thunderbird/qfdw0evd.default/Cache: File exists at /usr/bin/unburden-home-dir line 333, <LIST> line 7.
 
 Sorting and commenting subroutines.
-
-Use File::Which instead of `which` in unburden-home-dir itself
-(i.e. not only in the testsuite).

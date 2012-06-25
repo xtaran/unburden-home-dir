@@ -49,6 +49,7 @@ use File::Path qw(mkpath rmtree);
 use File::Basename;
 use File::Touch;
 use File::Rsync;
+use File::Which;
 use IO::Handle;
 use Data::Dumper;
 
@@ -173,9 +174,8 @@ my $rsync = File::Rsync->new({
 });
 
 # Check for lsof in search path
-my $which_lsof = `which lsof`;
-chomp($which_lsof);
-if ($which_lsof eq 'lsof not found' or $which_lsof eq '') {
+my $which_lsof = which('lsof');
+if (!$which_lsof) {
     warn "WARNING: lsof not found, not checking for files in use.\n";
     $USE_LSOF = 0;
 }

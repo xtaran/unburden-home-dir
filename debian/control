@@ -10,7 +10,7 @@ Vcs-Browser: http://git.phys.ethz.ch/?p=unburden-home-dir.git
 
 Package: unburden-home-dir
 Architecture: all
-Depends: x11-common, ${perl:Depends}, ${misc:Depends}, libconfig-file-perl, libfile-touch-perl, libfile-rsync-perl, libmodern-perl-perl
+Depends: x11-common, ${perl:Depends}, ${misc:Depends}, libconfig-file-perl, libfile-touch-perl, libfile-rsync-perl, libmodern-perl-perl, libfile-which-perl
 Pre-Depends: dpkg (>= 1.15.7.2)
 Recommends: lsof
 Enhances: x11-common

@@ -2,7 +2,8 @@ unburden-home-dir (0.3.1) UNRELEASED; urgency=low
 
   * Make test suite check if lsof is available or not and expect different
     output in both cases. (Closes: #678780)
-    + Add build-dependency on libfile-which-perl
+  * Use which('lsof') from File::Which instead of `which lsof`
+    + Add dependency and build-dependency on libfile-which-perl
   * Use a copy of README.md named just README to be installed in the
     Debian binary package to avoid any associations with Linux' software
     RAID. (Closes: #678630)
