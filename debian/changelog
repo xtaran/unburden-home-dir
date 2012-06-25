@@ -1,4 +1,4 @@
-unburden-home-dir (0.3.1) UNRELEASED; urgency=low
+unburden-home-dir (0.3.1) unstable; urgency=low
 
   * Make test suite check if lsof is available or not and expect different
     output in both cases. (Closes: #678780)
@@ -9,7 +9,7 @@ unburden-home-dir (0.3.1) UNRELEASED; urgency=low
     RAID. (Closes: #678630)
   * Minor refactoring of t/undo.t for not confusing syntax highlighting
 
- -- Axel Beckert <abe@debian.org>  Sun, 24 Jun 2012 16:43:25 +0200
+ -- Axel Beckert <abe@debian.org>  Mon, 25 Jun 2012 15:34:34 +0200
 
 unburden-home-dir (0.3) unstable; urgency=low
 
