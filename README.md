@@ -136,7 +136,7 @@ Common Issues / Troubleshooting
 
   unburden-home-dir's undo mode (of course) can't undo modifications
   where it has been told to remove all files and create an empty
-  directory instead. See the "r" action in the Configuration Files
+  directory instead. See the `r` action in the Configuration Files
   section below.
 
 
