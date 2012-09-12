@@ -161,8 +161,12 @@ interpreted as follows:
            are equivalent)
 2. column: Type ("d", "D", "f" or "F": directory or file, capital letter
            means "create it if it doesn't exist")
-3. column: Path relative to $HOME to move off to some other location
-4. column: identifier for file or directory in the other location
+3. column: Path relative to $HOME to move off to some other location.
+           Must be of the same type as given in the second column.
+4. column: identifier for file or directory in the other
+           location. Must be of the same type as given in the second
+           column.
+
 
 What To Unburden?
 -----------------
