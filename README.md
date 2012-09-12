@@ -161,13 +161,14 @@ Each lines contains space separated values. The columns are
 interpreted as follows:
 
 
-1. column: Action (`d`/`r` or `m`: delete/remove or move; the first two
-           are equivalent)
-2. column: Type (`d`, `D`, `f` or `F`: directory or file, capital letter
-           means "create it if it doesn't exist")
-3. column: Path relative to `$HOME` to move off to some other location.
-           Must be of the same type as given in the second column.
-4. column: Identifier for file or directory in the other
+1. column: **Action** (`d`/`r` or `m`: delete/remove or move; the
+           first two are equivalent)
+2. column: **Type** (`d`, `D`, `f` or `F`: directory or file, capital
+           letter means "create it if it doesn't exist")
+3. column: **Path** relative to `$HOME` to move off to some other
+           location. Must be of the same type as given in the second
+           column.
+4. column: **Identifier** for file or directory in the other
            location. Must be of the same type as given in the second
            column.
 
