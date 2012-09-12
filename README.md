@@ -167,7 +167,7 @@ interpreted as follows:
            means "create it if it doesn't exist")
 3. column: Path relative to `$HOME` to move off to some other location.
            Must be of the same type as given in the second column.
-4. column: identifier for file or directory in the other
+4. column: Identifier for file or directory in the other
            location. Must be of the same type as given in the second
            column.
 
