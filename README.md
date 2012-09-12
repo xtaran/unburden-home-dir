@@ -122,8 +122,8 @@ Common Issues / Troubleshooting
   there is likely a process running which still has files open in that
   directory or a subdirectory thereof.
 
-  Exit that program and try again. `unburden-home-dir` works
-  incrementally.
+  Exit that program and try again. `unburden-home-dir` is idempotent,
+  i.e. it can be called several times without doing different things.
 
 * In case `unburden-home-dir` moved something it wasn't expected to, you
   can try to undo all of unburden-home-dir's doing by running
@@ -183,6 +183,13 @@ A good start for checking what kind of caches you have in your own
 home directory is running
 
 > find ~ -type d -iname '*cache*' -not -path '*/.git/*' -not -path '*/.hg/*' -print0 | xargs -0 du -sh | sort -h
+
+Older versions of the `sort` utility (e.g. GNU Coreutils versions
+before 7.5, i.e. before Debian 6.0 Squeeze) don't have the `-h`
+option. In that case drop the `-h` from the `du` call as well and use
+`sort -n` instead:
+
+> find ~ -type d -iname '*cache*' -not -path '*/.git/*' -not -path '*/.hg/*' -print0 | xargs -0 du -s | sort -n
 
 Enabling unburden-home-dir Globally
 -----------------------------------
