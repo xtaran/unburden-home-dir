@@ -145,11 +145,11 @@ Configuration Files
 
 There are five configuration files for unburden-home-dir:
 
-* `/etc/unburden-home-dir`         -- Global configuration file
-* `/etc/unburden-home-dir.list`    -- Global list of files to take care of
-* `~/.unburden-home-dir`           -- Per user configuration file
-* `~/.unburden-home-dir.list`      -- Per user list of files to take care of
-* `/etc/default/unburden-home-dir` -- Xsession hook configuration file
+* `/etc/unburden-home-dir`         — Global configuration file
+* `/etc/unburden-home-dir.list`    — Global list of files to take care of
+* `~/.unburden-home-dir`           — Per user configuration file
+* `~/.unburden-home-dir.list`      — Per user list of files to take care of
+* `/etc/default/unburden-home-dir` — Xsession hook configuration file
 
 File Format of unburden-home-dir.list
 -------------------------------------
