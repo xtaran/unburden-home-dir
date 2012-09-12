@@ -166,11 +166,16 @@ interpreted as follows:
 2. column: **Type** (`d`, `D`, `f` or `F`: directory or file, capital
            letter means "create it if it doesn't exist")
 3. column: **Path** relative to `$HOME` to move off to some other
-           location. Must be of the same type as given in the second
-           column.
+           location.
 4. column: **Identifier** for file or directory in the other
-           location. Must be of the same type as given in the second
-           column.
+           location.
+
+The (partial) path names given in the third and fourth column
+initially must be of the type declared in the second column, i.e. you
+can't list a file's name in the third column but then only give the
+path to the subdirectory to where it should be unburden in the fourth
+column. The fourth column must contain the path to the symlink target
+itself, too.
 
 
 What To Unburden?
