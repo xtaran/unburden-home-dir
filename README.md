@@ -51,7 +51,8 @@ not for preservation of the handled data. So it is likely less
 suitable for cases where the handled data should be preserved on
 logout or shutdown.
 
-See http://wiki.phys.ethz.ch/readme/application_cache_files for the
+See [this wiki page about application cache files]
+(http://wiki.phys.ethz.ch/readme/application_cache_files) for the
 detailed reasoning behind this project.
 
 
