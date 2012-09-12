@@ -150,6 +150,13 @@ There are five configuration files for unburden-home-dir:
 File Format of unburden-home-dir.list
 -------------------------------------
 
+unburden-home-dir.list lists files and directories to take care of and
+how to take care of them.
+
+Each lines contains space separated values. The columns are
+interpreted as follows:
+
+
 1. column: Action ("d"/"r" or "m": delete/remove or move; the first two
            are equivalent)
 2. column: Type ("d", "D", "f" or "F": directory or file, capital letter
