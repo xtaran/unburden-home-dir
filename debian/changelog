@@ -1,3 +1,9 @@
+unburden-home-dir (0.3.2) UNRELEASED; urgency=low
+
+  * Better and more documentation
+
+ -- Axel Beckert <abe@debian.org>  Wed, 12 Sep 2012 19:43:58 +0200
+
 unburden-home-dir (0.3.1) unstable; urgency=low
 
   * Make test suite check if lsof is available or not and expect different
