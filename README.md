@@ -51,9 +51,11 @@ not for preservation of the handled data. So it is likely less
 suitable for cases where the handled data should be preserved on
 logout or shutdown.
 
-See [this wiki page about application cache files]
-(http://wiki.phys.ethz.ch/readme/application_cache_files) for the
+See [this wiki page about application cache files][wiki] for the
 detailed reasoning behind this project.
+
+[wiki]: http://wiki.phys.ethz.ch/readme/application_cache_files
+ (General thoughts about application cache files in home directories)
 
 
 How To
@@ -232,9 +234,9 @@ Source Code
 
 You should always find the newest code via git at either
 
-* http://github.com/xtaran/unburden-home-dir
-* http://git.phys.ethz.ch/?p=unburden-home-dir.git or
-* http://gitorious.org/unburden-home-dir/
+* [GitHub](http://github.com/xtaran/unburden-home-dir),
+* the [Git Repository at D-PHYS](http://git.phys.ethz.ch/?p=unburden-home-dir.git), or
+* [Gitorious](http://gitorious.org/unburden-home-dir/).
 
 GitHub is used as primary hub, git.phys.ethz.ch is usually up-to-date,
 too, Gitorious gets pushed less often, but should get all major
@@ -256,4 +258,4 @@ General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program in the file COPYING.  If not, see
-http://www.gnu.org/licenses/.
+[GNU's license web page](http://www.gnu.org/licenses/).
