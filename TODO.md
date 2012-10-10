@@ -13,7 +13,7 @@ TODO
   `unburden-home-dir.list` for alternative locations of `.cache` and
   friends.
 
-* Write test so that mv doesn't fall into interactive mode. Basically
+* Write test so that `mv` doesn't fall into interactive mode. Basically
   test what the previous commit ("2ec069d Unconditionally move files")
   fixed. To reproduce: Have directories to move off as well as a
   directory which is already moved off.
