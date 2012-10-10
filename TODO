@@ -28,3 +28,7 @@ open in moved directories more gracefully. Current example error:
   Couldn't symlink /scratch/.unburden-user/thunderbird-cache-qfdw0evd.default ->  /home/user/.thunderbird/qfdw0evd.default/Cache: File exists at /usr/bin/unburden-home-dir line 333, <LIST> line 7.
 
 Sorting and commenting subroutines.
+
+Split off documentation so that it can be shipped as man pages as well
+as viewed in the web. The idea is to use something like "pandoc -t man
+-s -o README.1 README.md"
