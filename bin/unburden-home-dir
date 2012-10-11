@@ -24,7 +24,7 @@
 
 use Modern::Perl;
 
-our $VERSION = '0.3.1.2';
+our $VERSION = '0.3.2';
 
 # Configuration variables to be used in configuration files
 my $CONFIG = {
@@ -322,7 +322,7 @@ sub files_in_use {
     my $lsof_output = undef;
 
     if (-d $item) {
-	$lsof_output = `find '$item' -print0 | xargs -0 lsof -F c`;
+	$lsof_output = `find '$item' -print0 | buffer | xargs -0 lsof -F c`;
     } elsif (-f _) {
 	$lsof_output = `lsof -F c '$item'`;
     } else {

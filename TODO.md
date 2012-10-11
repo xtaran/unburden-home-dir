@@ -27,14 +27,17 @@ TODO
   well as viewed in the web. The idea is to use something like `pandoc
   -t man -s -o README.1 README.md`
 
-* `find | xargs lsof -F c` (bin/unburden-home-dir:325) will find the
-  `find` process if the list of files output by `find` is so long that
-  `xargs` will split up the list and call `lsof` more than once.
+* `find | buffer | xargs lsof -F c` (bin/unburden-home-dir:325) will
+  find the `find` process if the list of files output by `find` is
+  larger than 1 MB, so that `buffer` starts piping them to `xargs`
+  before `find` finishes. `xargs` will then split up the list and call
+  `lsof` more than once, which again will list the `find` process as
+  having the directory open.
 
   Possible solutions:
 
   * Store `find` output in a temporary file and then `cat` that file
     to `xargs`. Should use `mktemp` and friends.
 
-  * Use the command `buffer`. Needs a maximum value, i.e. just delays
-    the issue to even bigger directories.
+  * Use a bigger buffer size for `buffer`. Can't be infinite,
+    i.e. just delays the issue to even bigger directories.
