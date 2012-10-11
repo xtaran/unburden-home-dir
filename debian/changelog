@@ -2,6 +2,11 @@ unburden-home-dir (0.3.2) UNRELEASED; urgency=low
 
   * Use "buffer" to prevent "find" still running when "lsof" is started by
     "xargs". Add dependency and build-dependency (for test-suite) on "buffer".
+
+ -- Axel Beckert <abe@debian.org>  Thu, 11 Oct 2012 21:23:31 +0200
+
+unburden-home-dir (0.3.1.2) UNRELEASED; urgency=low
+  
   * Fix comment about usage in etc/unburden-home-dir — it's no more a POSIX
     shell fragment, but parsed by Config::File.
   * Minor bugfix for example config files
