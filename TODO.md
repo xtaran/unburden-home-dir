@@ -26,3 +26,15 @@ TODO
 * Split off documentation so that it can be shipped as man pages as
   well as viewed in the web. The idea is to use something like `pandoc
   -t man -s -o README.1 README.md`
+
+* `find | xargs lsof -F c` (bin/unburden-home-dir:325) will find the
+  `find` process if the list of files output by `find` is so long that
+  `xargs` will split up the list and call `lsof` more than once.
+
+  Possible solutions:
+
+  * Store `find` output in a temporary file and then `cat` that file
+    to `xargs`. Should use `mktemp` and friends.
+
+  * Use the command `buffer`. Needs a maximum value, i.e. just delays
+    the issue to even bigger directories.
