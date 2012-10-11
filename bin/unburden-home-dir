@@ -24,7 +24,7 @@
 
 use Modern::Perl;
 
-our $VERSION = '0.3';
+our $VERSION = '0.3.1.2';
 
 # Configuration variables to be used in configuration files
 my $CONFIG = {
