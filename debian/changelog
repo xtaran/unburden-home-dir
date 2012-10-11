@@ -1,3 +1,9 @@
+unburden-home-dir (0.3.1.2) UNRELEASED; urgency=low
+
+  * Minor bugfix for example config files
+
+ -- Axel Beckert <abe@debian.org>  Thu, 11 Oct 2012 13:53:58 +0200
+
 unburden-home-dir (0.3.1.1) unstable; urgency=low
 
   * Better and more documentation
