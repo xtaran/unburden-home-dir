@@ -1,12 +1,12 @@
 unburden-home-dir (0.3.1.2) UNRELEASED; urgency=low
 
   * Fix comment about usage in etc/unburden-home-dir — it's no more a POSIX
-    shell fragment, but parsed by Config::File.
-  * Minor bugfix for example config files
+    shell fragment, but parsed by Config::File. (Closes: #690266)
+  * Minor bugfix for example config files (Closes: #690268)
   * Update $VERSION in bin/unburden-home-dir which had been forgotten
-    since 0.3. Add test so that this doesn't happen again.
+    since 0.3. Add test so that this doesn't happen again. (Closes: #690265)
 
- -- Axel Beckert <abe@debian.org>  Thu, 11 Oct 2012 13:53:58 +0200
+ -- Axel Beckert <abe@debian.org>  Thu, 11 Oct 2012 21:53:36 +0200
 
 unburden-home-dir (0.3.1.1) unstable; urgency=low
 
