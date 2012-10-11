@@ -1,6 +1,6 @@
-# Configuration for and sourced by /etc/X11/Xsession.d/95unburden_home_dir
+# Configuration for unburden-home-dir
 #
-# This is a POSIX shell fragment.
+# Parsed by Config::File
 
 TARGETDIR=/tmp
 FILELAYOUT='.unburden-%u/%s'
