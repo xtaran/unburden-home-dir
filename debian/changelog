@@ -5,6 +5,7 @@ unburden-home-dir (0.3.1.2) UNRELEASED; urgency=low
   * Minor bugfix for example config files (Closes: #690268)
   * Update $VERSION in bin/unburden-home-dir which had been forgotten
     since 0.3. Add test so that this doesn't happen again. (Closes: #690265)
+  * Add missing options to --help message and reorder it slightly.
 
  -- Axel Beckert <abe@debian.org>  Thu, 11 Oct 2012 21:53:36 +0200
 
