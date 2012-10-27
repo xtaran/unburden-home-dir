@@ -110,7 +110,7 @@ Options without parameters:
 }
 
 # Parse command line options
-getopts('hnufF:b:c:C:l:L:', \%OPTIONS);
+getopts('hnufFb:c:C:l:L:', \%OPTIONS);
 
 for (keys %OPTIONS) {
     when('h') {
