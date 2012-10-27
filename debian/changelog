@@ -1,4 +1,4 @@
-unburden-home-dir (0.3.1.2) UNRELEASED; urgency=low
+unburden-home-dir (0.3.1.2) unstable; urgency=low
 
   * Option -F doesn't have a parameter, so don't let it consume one (which
     could be another option which then will be ignored, e.g. the dry-run
@@ -9,8 +9,9 @@ unburden-home-dir (0.3.1.2) UNRELEASED; urgency=low
   * Update $VERSION in bin/unburden-home-dir which had been forgotten
     since 0.3. Add test so that this doesn't happen again. (Closes: #690265)
   * Add missing options to --help message and reorder it slightly.
+  * More documentation updates and fixes.
 
- -- Axel Beckert <abe@debian.org>  Thu, 11 Oct 2012 21:53:36 +0200
+ -- Axel Beckert <abe@debian.org>  Sat, 27 Oct 2012 17:25:44 +0200
 
 unburden-home-dir (0.3.1.1) unstable; urgency=low
 
