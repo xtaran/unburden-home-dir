@@ -72,8 +72,10 @@ sub VERSION_MESSAGE {
 sub HELP_MESSAGE {
     my ($fh, $getoptpkg, $getoptversion, $cmdlineargs) = @_;
 
-    say $fh "Usage: $0 [ -n | -u | -b basename | ( -c | -C ) configfile | -f filter ]
+    say $fh "Usage: $0 [ -F | -n | -u | -b basename | (-c|-C) conffile | -f filter | (-l|-L) listfile ]
        $0 ( -h | --help | --version )
+
+Options with parameters:
 
   -b  use the given string as basename instead of $BASENAME.
 
@@ -85,12 +87,14 @@ sub HELP_MESSAGE {
       regular expression) -- matches the already unburdened
       directories if used together with -u.
 
-  -F  Do not check if to-be-(re)moved files and directories are still
-      in use (aka *F*orce (re)moving).
-
   -l  read an additional list file
 
   -L  read only the given list file
+
+Options without parameters:
+
+  -F  Do not check if to-be-(re)moved files and directories are still
+      in use (aka *F*orce (re)moving).
 
   -n  dry run (show what would be done)
 
@@ -106,7 +110,7 @@ sub HELP_MESSAGE {
 }
 
 # Parse command line options
-getopts('hnufF:b:c:C:l:L:', \%OPTIONS);
+getopts('hnufFb:c:C:l:L:', \%OPTIONS);
 
 for (keys %OPTIONS) {
     when('h') {
