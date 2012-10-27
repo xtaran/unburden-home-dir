@@ -38,3 +38,6 @@ TODO
 
   * Use the command `buffer`. Needs a maximum value, i.e. just delays
     the issue to even bigger directories.
+
+* Call rsync in dry-run mode if unburden-home-dir is called in dry-run
+  mode instead of not calling rsync at all in that case.
