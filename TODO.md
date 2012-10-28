@@ -27,6 +27,8 @@ TODO
   well as viewed in the web. The idea is to use something like `pandoc
   -t man -s -o README.1 README.md`
 
+  * Maybe use POD instead of Markdown as base format.
+
 * `find | buffer | xargs lsof -F c` (bin/unburden-home-dir:325) will
   find the `find` process if the list of files output by `find` is
   larger than 1 MB, so that `buffer` starts piping them to `xargs`
