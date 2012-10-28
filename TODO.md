@@ -44,3 +44,8 @@ TODO
 
 * Call rsync in dry-run mode if unburden-home-dir is called in dry-run
   mode instead of not calling rsync at all in that case.
+
+* Find a nice way to handle the global unburden-home-dir.list, maybe
+  by by using something like /etc/unburden-home-dir.list.d/ or maybe
+  even put symlinks to the (splited) example file(s) in
+  /etc/unburden-home-dir.list.d/.
