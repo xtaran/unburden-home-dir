@@ -1,6 +1,6 @@
 #!/usr/bin/perl -wl
 
-use Test::Simple tests => 13;
+use Test::More;
 use Test::Differences;
 use File::Path qw(mkpath rmtree);
 use File::Slurp;
@@ -18,21 +18,17 @@ $ENV{HOME} = $HOME;
 # Clean up possible remainders of aborted tests
 rmtree("$BASE");
 
-# 1 - 4
 ok( mkpath("$HOME", "$TARGET", {}), "Create test environment (directories)" );
 ok( -d "$HOME", "Original directory has been created" );
 ok( -d "$TARGET", "Target directory has been created" );
 ok( ! -d "$TARGET/$PREFIX-foobar-fnord", "unburden directory doesn't yet exist" );
 
-# 5 - 6
 ok( write_file("$BASE/list", "r D .foobar/fnord foobar-fnord"), "Create list" );
 ok( write_file("$BASE/config", "TARGETDIR=$TARGET\nFILELAYOUT=$PREFIX-\%s"), "Create config" );
 
-# 7
 my $cmd = "bin/unburden-home-dir -C $BASE/config -L $BASE/list > $BASE/output 2> $BASE/stderr";
 ok( system($cmd) == 0, "Call '$cmd'" );
 
-# 8
 my $wanted = "";
 unless (which('lsof')) {
     $wanted = "WARNING: lsof not found, not checking for files in use.\n".$wanted;
@@ -41,7 +37,6 @@ unless (which('lsof')) {
 my $stderr = read_file("$BASE/stderr");
 eq_or_diff_text( $stderr, $wanted, "Check command STDERR output (should be empty)" );
 
-# 9
 $wanted = "Create directory t/create-empty-directories/target/u-foobar-fnord and parents
 mkdir t/create-empty-directories/target/u-foobar-fnord
 Create parent directories for $HOME/.foobar/fnord
@@ -52,10 +47,10 @@ Symlinking $HOME/.foobar/fnord -> $TARGET/u-foobar-fnord
 my $output = read_file("$BASE/output");
 eq_or_diff_text( $output, $wanted, "Check command STDOUT" );
 
-# 10 - 12
 ok( -d "$TARGET/$PREFIX-foobar-fnord", "Directory has been created" );
 ok( -d "$HOME/.foobar", "Parent directory of symlink has been created." );
 ok( -l "$HOME/.foobar/fnord", "Symlink has been created." );
 
-# 13
 ok( rmtree("$BASE"), "Clean up" );
+
+done_testing();
