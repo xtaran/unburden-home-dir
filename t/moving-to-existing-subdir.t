@@ -21,7 +21,7 @@ rmtree("$BASE");
 
 # 1 - 3
 ok( mkpath("$HOME/.foobar/fnord", "$HOME/.foobar/gnarz",
-	   "$TARGET/$PREFIX-foobar-gnarz", {}), "Create test environment (directories)" );
+           "$TARGET/$PREFIX-foobar-gnarz", {}), "Create test environment (directories)" );
 ok( -d "$HOME/.foobar/fnord", "Original directory has been created" );
 ok( -d "$TARGET", "Target directory has been created" );
 
