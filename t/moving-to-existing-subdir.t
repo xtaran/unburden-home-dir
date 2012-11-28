@@ -1,6 +1,7 @@
 #!/usr/bin/perl -wl
 
 use Test::Simple tests => 17;
+use Test::Differences;
 use File::Path qw(mkpath rmtree);
 use File::Slurp;
 use File::Which;
@@ -44,8 +45,7 @@ unless (which('lsof')) {
 }
 
 my $stderr = read_file("$BASE/stderr");
-print "Want:\n\n$wanted\nGot:\n\n$stderr\n";
-ok( $stderr eq $wanted, "Check command STDERR output (should be empty)" );
+eq_or_diff_text( $stderr, $wanted, "Check command STDERR output (should be empty)" );
 
 # 11
 $wanted = "Moving $HOME/.foobar/fnord -> $TARGET/u-foobar-fnord
@@ -64,8 +64,7 @@ Symlinking $TARGET/u-foobar-foo ->  $HOME/.foobar/foo
 ";
 
 my $output = read_file("$BASE/output");
-print "Want:\n\n$wanted\nGot:\n\n$output\n";
-ok( $output eq $wanted, "Check command STDOUT" );
+eq_or_diff_text( $output, $wanted, "Check command STDOUT" );
 
 # 12 - 16
 ok( -d "$TARGET/$PREFIX-foobar-fnord", "First directory moved" );

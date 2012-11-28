@@ -1,6 +1,7 @@
 #!/usr/bin/perl -wl
 
 use Test::Simple tests => 9;
+use Test::Differences;
 use File::Path qw(mkpath rmtree);
 use File::Slurp;
 use Data::Dumper;
@@ -31,8 +32,7 @@ Symlinking $TARGET/u-barba-blatest-foobar ->  $HOME/.foobar/blatest/barba
 EOF
 
 my $output = read_file("$BASE/output");
-print "Wanted:\n\n$wanted\nGot:\n\n$output\n";
-ok( $output eq $wanted );
+eq_or_diff_text( $output, $wanted, "Check output if as expected" );
 
 # 5 - 7
 ok( ! -e "$TARGET/$PREFIX-barba-blatest-foobar" );

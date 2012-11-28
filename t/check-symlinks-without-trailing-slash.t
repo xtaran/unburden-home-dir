@@ -1,6 +1,7 @@
 #!/usr/bin/perl -wl
 
 use Test::Simple tests => 11;
+use Test::Differences;
 use File::Path qw(mkpath rmtree);
 use File::Slurp;
 use File::Which;
@@ -41,8 +42,7 @@ unless (which('lsof')) {
 }
 
 my $stderr = read_file("$BASE/stderr");
-print "Want:\n\n$wanted\nGot:\n\n$stderr\n";
-ok( $stderr eq $wanted, "Check command STDERR output" );
+eq_or_diff_text( $stderr, $wanted, "Check command STDERR output" );
 
 # 9
 $wanted = "Create $TARGET/u-foobar-fnord
@@ -51,8 +51,7 @@ mkdir $TARGET/u-foobar-fnord
 ";
 
 my $output = read_file("$BASE/output");
-print "Want:\n\n$wanted\nGot:\n\n$output\n";
-ok( $output eq $wanted, "Check command STDOUT" );
+eq_or_diff_text( $output, $wanted, "Check command STDOUT" );
 
 # 10
 ok( -d "$TARGET/u-foobar-fnord", "Directory created" );

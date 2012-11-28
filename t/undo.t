@@ -1,6 +1,7 @@
 #!/usr/bin/perl -w
 
 use Test::Simple tests => 13;
+use Test::Differences;
 use File::Path qw(mkpath rmtree);
 use File::Slurp;
 use File::Which;
@@ -41,8 +42,7 @@ created directory $HOME/.foobar/blatest/barba
 ";
 
 my $contents = read_file("$BASE/output");
-print "Want:\n\n$wanted\nGot:\n\n$contents\n";
-ok( $contents eq $wanted, "Check command output" );
+eq_or_diff_text( $contents, $wanted, "Check command output" );
 
 # 9
 $wanted = '';
@@ -52,7 +52,7 @@ unless (which('lsof')) {
 
 my $stderr = read_file("$BASE/stderr");
 print "\nSTDERR:\n\n$stderr\n";
-ok( $stderr eq $wanted, "Check command STDERR output (should be empty)" );
+eq_or_diff_text( $stderr, $wanted, "Check command STDERR output (should be empty)" );
 
 # 10 - 12
 ok( -d "$TARGET", "Base directory still exists" );

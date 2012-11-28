@@ -1,6 +1,7 @@
 #!/usr/bin/perl -wl
 
 use Test::Simple tests => 12;
+use Test::Differences;
 use File::Path qw(mkpath rmtree);
 use File::Slurp;
 use Data::Dumper;
@@ -33,14 +34,15 @@ Removing symlink $HOME/.foobar/blatest/barba
 Moving $TARGET/u-barba-blatest-foobar -> $HOME/.foobar/blatest/barba
 EOF
 my $contents = read_file("$BASE/output");
-print "Want:\n\n$wanted\nGot:\n\n$contents\n";
-ok( $contents eq $wanted, "Check command output" );
+eq_or_diff_text( $contents, $wanted, "Check command output" );
 
 # 8 - 11
 ok( -d "$TARGET", "Base directory still exists" );
 ok( -d "$TARGET/$PREFIX-barba-blatest-foobar", "Directory still exists" );
 ok( -l "$HOME/.foobar/blatest/barba", "Symlink still exists" );
-ok( "$TARGET/$PREFIX-barba-blatest-foobar" eq readlink("$HOME/.foobar/blatest/barba"), "Symlink still has right target" );
+eq_or_diff_text( "$TARGET/$PREFIX-barba-blatest-foobar",
+                 readlink("$HOME/.foobar/blatest/barba"),
+                 "Symlink still has right target" );
 
 # 12
 ok( rmtree("$BASE"), "Remove test environment" );

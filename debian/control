@@ -10,7 +10,9 @@ Build-Depends: buffer,
                libfile-slurp-perl,
                libfile-touch-perl,
                libfile-which-perl,
-               libmodern-perl-perl
+               libmodern-perl-perl,
+# Test suite dependencies
+               libtest-differences-perl
 Standards-Version: 3.9.3
 Homepage: http://wiki.phys.ethz.ch/readme/application_cache_files
 Vcs-Git: http://git.phys.ethz.ch/unburden-home-dir.git

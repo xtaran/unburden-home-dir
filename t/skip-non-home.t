@@ -1,6 +1,7 @@
 #!/usr/bin/perl -wl
 
 use Test::Simple tests => 2 * 14;
+use Test::Differences;
 use File::Path qw(mkpath rmtree);
 use File::Slurp;
 use File::Which;
@@ -42,13 +43,12 @@ unless (which('lsof')) {
 }
 
 my $stderr = read_file("$BASE/stderr");
-print "Want:\n\n$wanted\nGot:\n\n$stderr\n";
-ok( $stderr eq $wanted, "Check command STDERR output" );
+eq_or_diff_text( $stderr, $wanted, "Check command STDERR output" );
 
 # 9
 my $output = read_file("$BASE/output");
 print "\nSTDOUT:\n\n$output\n";
-ok( $output eq '', "Check command STDOUT (should be empty)" );
+eq_or_diff_text( $output, '', "Check command STDOUT (should be empty)" );
 
 # 10 + 11
 ok( ! -d "$TARGET/$PREFIX-foobar", "Nothing created" );

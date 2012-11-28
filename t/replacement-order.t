@@ -1,6 +1,7 @@
 #!/usr/bin/perl -wl
 
 use Test::Simple tests => 8;
+use Test::Differences;
 use File::Path qw(mkpath rmtree);
 use File::Slurp;
 use Data::Dumper;
@@ -26,7 +27,9 @@ ok( system(qw(bin/unburden-home-dir -C), "$BASE/config", qw(-L), "$BASE/list" ) 
 # 5 - 7
 ok( -d "$TARGET/$PREFIX-barba-blatest-foobar" );
 ok( -l "$HOME/.foobar/blatest/barba" );
-ok( "$TARGET/$PREFIX-barba-blatest-foobar" eq readlink("$HOME/.foobar/blatest/barba") );
+eq_or_diff_text( "$TARGET/$PREFIX-barba-blatest-foobar",
+                 readlink("$HOME/.foobar/blatest/barba"),
+                 "Symlink points to expected location." );
 
 # 8
 ok( rmtree("$BASE") );

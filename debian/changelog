@@ -5,6 +5,8 @@ unburden-home-dir (0.3.2) UNRELEASED; urgency=low
   * Fix trailing slashes on revert (GitHub issue #5, thanks Johan van den
     Dorpe!)
   * debian/control: Apply wrap-and-sort
+  * Refactor test suite
+    + Some tests use Test::Differences now. Add as build dependency.
 
  -- Axel Beckert <abe@debian.org>  Thu, 11 Oct 2012 21:23:31 +0200
 

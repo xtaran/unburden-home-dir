@@ -1,6 +1,7 @@
 #!/usr/bin/perl -wl
 
 use Test::Simple tests => 25;
+use Test::Differences;
 use File::Path qw(mkpath rmtree);
 use File::Copy;
 use File::Slurp;
@@ -45,16 +46,14 @@ ok( system($cmd) == 0, "Call '$cmd'" );
 $wanted = "";
 
 $stderr = read_file("$BASE/stderr");
-print "Want:\n\n$wanted\nGot:\n\n$stderr\n";
-ok( $stderr eq $wanted, "Check run-parts STDERR output" );
+eq_or_diff_text( $stderr, $wanted, "Check run-parts STDERR output" );
 ok( unlink("$BASE/stderr"), "Clean output" );
 
 # 12 - 13
 $wanted = "$XSESSIOND/$RPSCRIPT\n";
 
 $output = read_file("$BASE/output");
-print "Want:\n\n$wanted\nGot:\n\n$output\n";
-ok( $output eq $wanted, "Check run-parts STDOUT" );
+eq_or_diff_text( $output, $wanted, "Check run-parts STDOUT" );
 ok( unlink("$BASE/output"), "Clean output" );
 
 # 14
@@ -65,16 +64,14 @@ ok( system($cmd) == 0, "Call '$cmd'" );
 $wanted = "";
 
 $stderr = read_file("$BASE/stderr");
-print "Want:\n\n$wanted\nGot:\n\n$stderr\n";
-ok( $stderr eq $wanted, "Check Xsession.d STDERR output" );
+eq_or_diff_text( $stderr, $wanted, "Check Xsession.d STDERR output" );
 ok( unlink("$BASE/stderr"), "Clean output" );
 
 # 17 - 18
 $wanted = "$BINDIR/unburden-home-dir called\n";
 
 $output = read_file("$BASE/output");
-print "Want:\n\n$wanted\nGot:\n\n$output\n";
-ok( $output eq $wanted, "Check Xsession.d STDOUT" );
+eq_or_diff_text( $output, $wanted, "Check Xsession.d STDOUT" );
 ok( unlink("$BASE/output"), "Clean output" );
 
 # 19
@@ -88,16 +85,14 @@ ok( system($cmd) == 0, "Call '$cmd'" );
 $wanted = "";
 
 $stderr = read_file("$BASE/stderr");
-print "Want:\n\n$wanted\nGot:\n\n$stderr\n";
-ok( $stderr eq $wanted, "Check Xsession.d STDERR output" );
+eq_or_diff_text( $stderr, $wanted, "Check Xsession.d STDERR output" );
 ok( unlink("$BASE/stderr"), "Clean output" );
 
 # 23 - 24
 $wanted = "";
 
 $output = read_file("$BASE/output");
-print "Want:\n\n$wanted\nGot:\n\n$output\n";
-ok( $output eq $wanted, "Check Xsession.d STDOUT" );
+eq_or_diff_text( $output, $wanted, "Check Xsession.d STDOUT" );
 ok( unlink("$BASE/output"), "Clean output" );
 
 # 25
