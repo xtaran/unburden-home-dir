@@ -568,9 +568,8 @@ sub revert {
 
     if (-l $item_in_home) {
 	my $link_target = readlink($item_in_home);
-  $itemexpanded =~ s{/$}{};
-  $link_target  =~ s{/$}{};
-
+	$itemexpanded =~ s{/$}{};
+	$link_target  =~ s{/$}{};
 
 	if ($itemexpanded eq $link_target) {
 	    say "Removing symlink $item_in_home";
