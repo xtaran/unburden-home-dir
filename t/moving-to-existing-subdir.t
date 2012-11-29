@@ -54,11 +54,19 @@ sending incremental file list
 goo
 Symlinking $TARGET/u-foobar-gnarz ->  $HOME/.foobar/gnarz
 Moving $HOME/.foobar/foo -> $TARGET/u-foobar-foo
-`$HOME/.foobar/foo' -> `$TARGET/u-foobar-foo'
+'$HOME/.foobar/foo' -> '$TARGET/u-foobar-foo'
 Symlinking $TARGET/u-foobar-foo ->  $HOME/.foobar/foo
 ";
 
 my $output = read_file("$BASE/output");
+
+# Somewhere between coreutils 8.13 (until Wheezy/Quantal), and 8.20
+# (from Jessie/Raring on) the quoting characters in verbose output of
+# mv. changed. $wanted contains the newer style. In case this test
+# runs with older version of coreutils, we change the output to look
+# like the one from the newer versions.
+$output =~ s/\`/\'/g;
+
 eq_or_diff_text( $output, $wanted, "Check command STDOUT" );
 
 ok( -d "$TARGET/$PREFIX-foobar-fnord", "First directory moved" );

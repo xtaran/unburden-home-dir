@@ -7,6 +7,8 @@ unburden-home-dir (0.3.2) UNRELEASED; urgency=low
   * debian/control: Apply wrap-and-sort
   * Refactor test suite
     + Some tests use Test::Differences now. Add as build dependency.
+  * Fix test suite failures with newer coreutils versions in
+    t/moving-to-existing-subdir.t.
 
  -- Axel Beckert <abe@debian.org>  Thu, 11 Oct 2012 21:23:31 +0200
 
