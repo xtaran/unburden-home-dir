@@ -24,6 +24,7 @@
 
 use Modern::Perl;
 
+# Globally define version
 our $VERSION = '0.3.2';
 
 # Configuration variables to be used in configuration files
@@ -184,16 +185,19 @@ if (!$which_lsof) {
     $USE_LSOF = 0;
 }
 
+# Standard Error reporting function; Warning
 sub report_problem {
     warn "WARNING: Can't handle $_[0]: $_[1]";
     return;
 }
 
+# Standard Error reporting function; Error
 sub report_serious_problem {
     warn "ERROR: Can't handle $_[0]: $_[1]";
     return;
 }
 
+# Actually move a directory or file
 sub move ($$) {
     my ($from, $to) = @_;
     say "Moving $from -> $to";
@@ -215,6 +219,8 @@ sub move ($$) {
     return 1;
 }
 
+# Create a symlink. Create its parent directories if they don't yet
+# exist.
 sub create_symlink_and_parents {
     my ($old, $new) = @_;
     create_parent_directories($new);
@@ -226,6 +232,8 @@ sub create_symlink_and_parents {
     return;
 }
 
+# Create those parent directories for a given file or directory name
+# which don't yet exist.
 sub create_parent_directories {
     my $file = shift;
     my $parent_dir = dirname($file);
@@ -236,6 +244,10 @@ sub create_parent_directories {
     return;
 }
 
+# In case of uppercase type letters, create symlinks as replacement
+# for directories files which may not even exist yet. Common cases are
+# trash directories which are created when something gets put into the
+# trashcan, etc.
 sub possibly_create_non_existing_stuff {
     my ($type, $item, $target) = @_;
 
@@ -259,6 +271,8 @@ sub possibly_create_non_existing_stuff {
     return 0;
 }
 
+# Dangling links may happen if the destination directory has been
+# weeped, e.g. due to being on an tmpfs mount or by tmpreaper, etc.
 sub fix_dangling_links {
     my ($type, $itemexpanded, $target) = @_;
     my $link = readlink($itemexpanded);
@@ -291,6 +305,7 @@ sub fix_dangling_links {
     return 0;
 }
 
+# Find pid and command in lsof output
 sub parse_lsof_output {
     my ($output) = @_;
     chomp($output);
@@ -321,6 +336,7 @@ sub parse_lsof_output {
 
 }
 
+# Check if files in to be moved directories are currently in use.
 sub files_in_use {
     my ($item) = @_;
     my $lsof_output = undef;
@@ -344,6 +360,7 @@ sub files_in_use {
     }
 }
 
+# Move a directory or file (higher level function)
 sub action_move {
     my ($itemexpanded, $target) = @_;
 
@@ -353,6 +370,7 @@ sub action_move {
     return;
 }
 
+# Handle directory or file which should be emptied (higher level function)
 sub action_delete_and_recreate {
     my ($type, $itemexpanded, $target) = @_;
 
@@ -370,6 +388,7 @@ sub action_delete_and_recreate {
     return;
 }
 
+# Generic create function for both, directories and files
 sub create_object_of_type {
     my ($type, $target) = @_;
 
@@ -388,6 +407,7 @@ sub create_object_of_type {
     return;
 }
 
+# Bail out on common assertion
 sub unknown_element {
     my ($what, $unknown) = @_;
 
@@ -395,6 +415,7 @@ sub unknown_element {
     return 255;
 }
 
+# Create a symlink
 sub create_symlink {
     my ($itemexpanded, $target) = @_;
 
@@ -406,14 +427,17 @@ sub create_symlink {
     return;
 }
 
+# Check if the expected type of an object is "directory"
 sub type_is_directory {
     return (lc(shift) eq 'd');
 }
 
+# Check if the expected type of an object is "file"
 sub type_is_file {
     return (lc(shift) eq 'f');
 }
 
+# Check if an object has an unexpected type (higher level function)
 sub check_for_unexpected_type {
     my ($type, $itemexpanded) = @_;
 
@@ -439,6 +463,7 @@ sub check_for_unexpected_type {
     return;
 }
 
+# Top-level function run once per to-be-changed-item
 sub do_it {
     my ($type, $itemexpanded, $target, $action) = @_;
 
@@ -464,6 +489,7 @@ sub do_it {
     return 0;
 }
 
+# Parse and fill placeholders in target definition
 sub calculate_target {
     my $replacement = shift;
     my $target = $CONFIG->{FILELAYOUT};
@@ -474,6 +500,7 @@ sub calculate_target {
     return $CONFIG->{TARGETDIR}."/$target";
 }
 
+# Parse and fill wildcards
 sub fill_in_wildcard_matches {
     my ($itemglob, $itemexpanded, $target) = @_;
 
@@ -515,6 +542,7 @@ sub symlink_in_path {
     return;
 }
 
+# Handle replacement requests and check if they're sane
 sub replace {
     # replace $type $i $item $replacement
     my ($type, $itemexpanded, $itemglob, $replacement, $action) = @_;
@@ -553,6 +581,7 @@ sub replace {
     return;
 }
 
+# Core functionality of the undo feature
 sub revert {
     my ($itemexpanded, $item_in_home, $target_glob) = @_;
 
@@ -584,6 +613,7 @@ sub revert {
     return;
 }
 
+# Parse wildcards backwards
 sub exchange_wildcards_and_replacements {
     my ($wildcard, $replacement) = @_;
     my $i = 1;
@@ -597,6 +627,7 @@ sub exchange_wildcards_and_replacements {
     return ($wildcard, $replacement);
 }
 
+# Main loop over all items in list files
 for my $list (@LISTFILES) {
     next unless -r $list;
 
