@@ -41,7 +41,6 @@ foreach my $example (qw(/foobar ../foobar)) {
     eq_or_diff_text( $stderr, $wanted, "Check command STDERR output" );
 
     my $output = read_file("$BASE/output");
-    print "\nSTDOUT:\n\n$output\n";
     eq_or_diff_text( $output, '', "Check command STDOUT (should be empty)" );
 
     ok( ! -d "$TARGET/$PREFIX-foobar", "Nothing created" );
