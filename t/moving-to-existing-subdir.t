@@ -40,6 +40,7 @@ unless (which('lsof')) {
 }
 
 my $stderr = read_file("$BASE/stderr");
+unified_diff;
 eq_or_diff_text( $stderr, $wanted, "Check command STDERR output (should be empty)" );
 
 $wanted = "Moving $HOME/.foobar/fnord -> $TARGET/u-foobar-fnord
