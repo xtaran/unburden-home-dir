@@ -20,10 +20,6 @@ This is helpful at least in the following cases:
   reduces the amount of disk I/O which reduces the power consumption
   of the disk.
 
-  Another possible solution for saving non-crucial I/O is using
-  [eatmydata](http://www.flamingspork.com/projects/libeatmydata/) to
-  ignore a software's `fsync` calls.
-
 * The other type of use cases for unburden-home-dir is to reduce disk
   space usage, e.g. on devices with small disk space but a lot of RAM
   as seen often on boxes with flash disks or early netbooks,
@@ -61,9 +57,41 @@ detailed reasoning behind this project.
 [wiki]: http://wiki.phys.ethz.ch/readme/application_cache_files
  (General thoughts about application cache files in home directories)
 
+Similar Solutions
+=================
 
-How To
-======
+eatmydata
+---------
+
+Another possible solution for saving non-crucial I/O is using
+[eatmydata](http://www.flamingspork.com/projects/libeatmydata/) to
+ignore a software's `fsync` calls.
+
+Firefox/Gecko/XULRunner: toolkit.storage.synchronous
+----------------------------------------------------
+
+One notorious case of an annoyingly amount of `fsync` calls is
+[Firefox](https://www.mozilla.org/firefox) and other
+Mozilla/Gecko/XULRunner based programs, because they use
+[SQLite](http://sqlite.org/) databases as backend for many features
+(history, bookmarks, cookies, etc.).
+
+Instead of calling `eatmydata firefox` you can use
+[about:config](about:config) to set
+[toolkit.storage.synchronous](http://kb.mozillazine.org/About:config_entries#Toolkit.)
+to `0`. This specifies the
+[SQLite disk sync mode](http://www.sqlite.org/pragma.html#pragma_synchronous)
+used by the Mozilla rendering engine.
+
+Nevertheless `unburden-home-dir` usually doesn't help here, because
+it's used for volatile data like caches while those SQLite databases
+usually contain stuff you don't want to loose. But then again, setting
+`toolkit.storage.synchronous` to `0` may cause database corruption if
+the OS crashes or the computer loses power.
+
+
+How To Unburden Your Home Directory
+===================================
 
 The best way to introduce unburden-home-dir in your setup is the
 following:
