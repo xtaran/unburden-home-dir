@@ -114,10 +114,10 @@ getopts('hnufFb:c:C:l:L:', \%OPTIONS);
 
 for (keys %OPTIONS) {
     when('h') {
-	my $fh = IO::Handle->new_from_fd(fileno(STDERR),'w');
-	VERSION_MESSAGE($fh);
-	HELP_MESSAGE($fh);
-	exit 0;
+        my $fh = IO::Handle->new_from_fd(fileno(STDERR),'w');
+        VERSION_MESSAGE($fh);
+        HELP_MESSAGE($fh);
+        exit 0;
     }
     when('b') { $BASENAME = $OPTIONS{b}; }
 }
@@ -135,19 +135,19 @@ for (keys %OPTIONS) {
     when('u') { $REVERT   = 1; }
     when('F') { $USE_LSOF = 0; }
     when('f') {
-	eval { $FILTER = qr/$OPTIONS{f}/; };
-	if ($@) {
-	    report_serious_problem("parameter to -f", "\n$@");
-	    exit 2;
-	}
+        eval { $FILTER = qr/$OPTIONS{f}/; };
+        if ($@) {
+            report_serious_problem("parameter to -f", "\n$@");
+            exit 2;
+        }
     }
 }
 
 # Check for configuration files and read them
 foreach my $configfile (@CONFFILES) {
     if ( -e $configfile ) {
-	$CONFIG = { %$CONFIG,
-		    %{Config::File::read_config_file($configfile)} };
+        $CONFIG = { %$CONFIG,
+                    %{Config::File::read_config_file($configfile)} };
     }
 }
 
@@ -170,9 +170,9 @@ my $rsync = File::Rsync->new({
     archive => 1,
     verbose => 1,
     outfun => sub {
-	my $_ = shift;
-	chomp;
-	say unless m(^sent |^total size|^\s*$);
+        my $_ = shift;
+        chomp;
+        say unless m(^sent |^total size|^\s*$);
     },
     errfun => sub { chomp; warn "$_[0]\n"; },
 });
@@ -198,19 +198,19 @@ sub move ($$) {
     my ($from, $to) = @_;
     say "Moving $from -> $to";
     unless ($DRYRUN) {
-	if (-d $from) {
-	    $from .= '/' unless $from =~ m(/$);
-	    $to .= '/' unless $to =~ m(/$);
+        if (-d $from) {
+            $from .= '/' unless $from =~ m(/$);
+            $to .= '/' unless $to =~ m(/$);
 
-	    my $rc = $rsync->exec({
-		src => $from,
-		dst => $to,
-	    });
-	    rmtree($from);
-	} else {
-	    my $rc = system(qw(mv -v), $from, $to);
-	    return !($? >> 8);
-	}
+            my $rc = $rsync->exec({
+                src => $from,
+                dst => $to,
+            });
+            rmtree($from);
+        } else {
+            my $rc = system(qw(mv -v), $from, $to);
+            return !($? >> 8);
+        }
     }
     return 1;
 }
@@ -220,8 +220,8 @@ sub create_symlink_and_parents {
     create_parent_directories($new);
     say "Symlinking $new -> $old";
     unless ($DRYRUN) {
-	symlink($old, $new)
-	    or die "Couldn't symlink $new -> $old: $!";
+        symlink($old, $new)
+            or die "Couldn't symlink $new -> $old: $!";
     }
     return;
 }
@@ -230,8 +230,8 @@ sub create_parent_directories {
     my $file = shift;
     my $parent_dir = dirname($file);
     unless (-d $parent_dir) {
-	say "Create parent directories for $file";
-	mkpath($parent_dir, { verbose => 1 }) unless $DRYRUN;
+        say "Create parent directories for $file";
+        mkpath($parent_dir, { verbose => 1 }) unless $DRYRUN;
     }
     return;
 }
@@ -242,19 +242,19 @@ sub possibly_create_non_existing_stuff {
     # Shall we create not yet existing directories or files as symlink?
     # Case 1: directory
     if ( $type eq 'D' ) {
-	# TODO: Refactor create_symlink_and_parents so that its
-	# create_parent_directories call isn't redundant in this case.
-	say "Create directory $target and parents";
-	mkpath($target, { verbose => 1 }) unless $DRYRUN;
-	create_symlink_and_parents($target, $item);
+        # TODO: Refactor create_symlink_and_parents so that its
+        # create_parent_directories call isn't redundant in this case.
+        say "Create directory $target and parents";
+        mkpath($target, { verbose => 1 }) unless $DRYRUN;
+        create_symlink_and_parents($target, $item);
     }
 
     # Case 2: file
     elsif ( $type eq 'F' ) {
-	create_parent_directories($target);
-	say "Touching $target";
-	touch($target) unless $DRYRUN;
-	create_symlink_and_parents($target, $item)
+        create_parent_directories($target);
+        say "Touching $target";
+        touch($target) unless $DRYRUN;
+        create_symlink_and_parents($target, $item)
     }
     return 0;
 }
@@ -268,25 +268,25 @@ sub fix_dangling_links {
     # Accept existing symlinks or unburden-home-dir.list entries for
     # directories with or without trailing slash
     if ($is_dir) {
-	$link =~ s{/$}{};
-	$itemexpanded =~ s{/$}{};
-	$target =~ s{/$}{};
+        $link =~ s{/$}{};
+        $itemexpanded =~ s{/$}{};
+        $target =~ s{/$}{};
     }
 
     # Check if link target is wanted target
     if ( $link ne $target ) {
-	report_problem($itemexpanded, "$link not equal $target");
-	return 1;
+        report_problem($itemexpanded, "$link not equal $target");
+        return 1;
     }
 
     # Check if target exists and is same type
     if ( -e $target ) {
-	my $unexpected_type = check_for_unexpected_type($type, $target);
-	return $unexpected_type if $unexpected_type;
+        my $unexpected_type = check_for_unexpected_type($type, $target);
+        return $unexpected_type if $unexpected_type;
     }
     # Symlink is there, but file or directory not
     else {
-	create_object_of_type($type, $target);
+        create_object_of_type($type, $target);
     }
     return 0;
 }
@@ -301,20 +301,20 @@ sub parse_lsof_output {
     my $cmd;
 
     foreach my $line (@lines) {
-	if ($line =~ /^p(.*)$/) {
-	    $pid = $1;
-	    $cmd = undef;
-	} elsif ($line =~ /^c(.*)$/) {
-	    $cmd = $1;
-	    unless ($pid) {
-		report_problem("lsof output", "No pid before command: $line");
-		next;
-	    }
-	    $result .= sprintf("  %5i (%s)\n", $pid, $cmd);
-	    $pid = undef;
-	} else {
-	    report_problem("line in lsof output", $line);
-	}
+        if ($line =~ /^p(.*)$/) {
+            $pid = $1;
+            $cmd = undef;
+        } elsif ($line =~ /^c(.*)$/) {
+            $cmd = $1;
+            unless ($pid) {
+                report_problem("lsof output", "No pid before command: $line");
+                next;
+            }
+            $result .= sprintf("  %5i (%s)\n", $pid, $cmd);
+            $pid = undef;
+        } else {
+            report_problem("line in lsof output", $line);
+        }
     }
 
     return $result;
@@ -326,21 +326,21 @@ sub files_in_use {
     my $lsof_output = undef;
 
     if (-d $item) {
-	$lsof_output = `find '$item' -print0 | buffer | xargs -0 lsof -F c`;
+        $lsof_output = `find '$item' -print0 | buffer | xargs -0 lsof -F c`;
     } elsif (-f _) {
-	$lsof_output = `lsof -F c '$item'`;
+        $lsof_output = `lsof -F c '$item'`;
     } else {
-	report_problem("Not checking for open files in $item: neither file nor directory");
-	return;
+        report_problem("Not checking for open files in $item: neither file nor directory");
+        return;
     }
 
     my $lsof_parsed = parse_lsof_output($lsof_output);
 
     if ($lsof_parsed) {
-	report_problem($item, "in use, not (re)moving. Process list:\n$lsof_parsed");
-	return 1;
+        report_problem($item, "in use, not (re)moving. Process list:\n$lsof_parsed");
+        return 1;
     } else {
-	return 0;
+        return 0;
     }
 }
 
@@ -349,7 +349,7 @@ sub action_move {
 
     create_parent_directories($target);
     move($itemexpanded, $target)
-	or die "Couldn't move $itemexpanded -> $target: $!";
+        or die "Couldn't move $itemexpanded -> $target: $!";
     return;
 }
 
@@ -361,9 +361,9 @@ sub action_delete_and_recreate {
 
     say "Delete $itemexpanded";
     unless ($DRYRUN) {
-	$is_dir  and rmtree($itemexpanded, { verbose => 1 }) ;
-	$is_file and (unlink($itemexpanded)
-		      || die "Couldn't delete $itemexpanded: $!");
+        $is_dir  and rmtree($itemexpanded, { verbose => 1 }) ;
+        $is_file and (unlink($itemexpanded)
+                      || die "Couldn't delete $itemexpanded: $!");
     }
     create_object_of_type($type, $target);
 
@@ -375,14 +375,14 @@ sub create_object_of_type {
 
     say "Create $target";
     unless ($DRYRUN) {
-	if (type_is_directory($type)) {
-	    mkpath($target, { verbose => 1 });
-	}
-	elsif (type_is_file($type)) {
-	    create_parent_directories($target);
-	    say "Touching $target";
-	    touch($target) || die "Couldn't touch $target: $!";
-	}
+        if (type_is_directory($type)) {
+            mkpath($target, { verbose => 1 });
+        }
+        elsif (type_is_file($type)) {
+            create_parent_directories($target);
+            say "Touching $target";
+            touch($target) || die "Couldn't touch $target: $!";
+        }
     }
 
     return;
@@ -400,8 +400,8 @@ sub create_symlink {
 
     say "Symlinking $target ->  $itemexpanded";
     unless ($DRYRUN) {
-	symlink($target, $itemexpanded)
-	    or die "Couldn't symlink $target ->  $itemexpanded: $!";
+        symlink($target, $itemexpanded)
+            or die "Couldn't symlink $target ->  $itemexpanded: $!";
     }
     return;
 }
@@ -421,19 +421,19 @@ sub check_for_unexpected_type {
     my $is_dir  = type_is_directory($type);
 
     unless ($is_file or $is_dir) {
-	return unknown_element('type', $type);
+        return unknown_element('type', $type);
     }
 
     if ($is_file and !-f $itemexpanded) {
-	report_serious_problem($itemexpanded,
-			       'Unexpected type (not a file)');
-	return 1;
+        report_serious_problem($itemexpanded,
+                               'Unexpected type (not a file)');
+        return 1;
     }
 
     if ($is_dir and !-d $itemexpanded) {
-	report_serious_problem($itemexpanded,
-			       'Unexpected type (not a directory)');
-	return 1;
+        report_serious_problem($itemexpanded,
+                               'Unexpected type (not a directory)');
+        return 1;
     }
 
     return;
@@ -443,20 +443,20 @@ sub do_it {
     my ($type, $itemexpanded, $target, $action) = @_;
 
     if ( $USE_LSOF and files_in_use($itemexpanded) ) {
-	return 0;
+        return 0;
     }
 
     my $unexpected_type = check_for_unexpected_type($type, $itemexpanded);
     return $unexpected_type if $unexpected_type;
 
     if ( $action eq 'r' or $action eq 'd' ) {
-	action_delete_and_recreate($type, $itemexpanded, $target);
+        action_delete_and_recreate($type, $itemexpanded, $target);
     }
     elsif ( $action eq 'm' ) {
-	action_move($itemexpanded, $target);
+        action_move($itemexpanded, $target);
     }
     else {
-	return unknown_element('action', $action);
+        return unknown_element('action', $action);
     }
 
     create_symlink($itemexpanded, $target);
@@ -497,19 +497,19 @@ sub symlink_in_path {
     my $path = shift;
     # Remove home directory, i.e. check just from below the home directory
     if ($path =~ s($ENV{HOME}/?)()) {
-	# Split up into components, but remove the last one (which we
-	# are requested to handle, so we shouldn't check that now)
-	my @path_elements = split(m(/), $path);
-	pop(@path_elements);
+        # Split up into components, but remove the last one (which we
+        # are requested to handle, so we shouldn't check that now)
+        my @path_elements = split(m(/), $path);
+        pop(@path_elements);
 
-	foreach my $i (0..$#path_elements) {
-	    my $path_to_check = $ENV{HOME}.'/'.join('/', @path_elements[0..$i]);
-	    #say "Check if $path_to_check is a symlink";
-	    return $path_to_check if -l $path_to_check;
-	}
-	return 0;
+        foreach my $i (0..$#path_elements) {
+            my $path_to_check = $ENV{HOME}.'/'.join('/', @path_elements[0..$i]);
+            #say "Check if $path_to_check is a symlink";
+            return $path_to_check if -l $path_to_check;
+        }
+        return 0;
     } else {
-	report_serious_problem("Can't find home directory ($ENV{HOME}) in $path!");
+        report_serious_problem("Can't find home directory ($ENV{HOME}) in $path!");
     }
 
     return;
@@ -521,25 +521,25 @@ sub replace {
 
     # Skip entries where wildcard where passed
     if ($itemexpanded =~ /[][*?]/) {
-	warn "Skipping '$itemexpanded' due to unmatched wildcard.\n";
-	return 0;
+        warn "Skipping '$itemexpanded' due to unmatched wildcard.\n";
+        return 0;
     }
 
     if (my $symlink = symlink_in_path($itemexpanded)) {
-	warn "Skipping '$itemexpanded' due to symlink in path: $symlink\n";
-	return 0;
+        warn "Skipping '$itemexpanded' due to symlink in path: $symlink\n";
+        return 0;
     }
 
     my $target = fill_in_wildcard_matches($itemglob, $itemexpanded,
-					  calculate_target($replacement));
+                                          calculate_target($replacement));
 
     # Check if the source exists
     if ( ! -e $itemexpanded and ! -l $itemexpanded ) {
-	possibly_create_non_existing_stuff($type, $itemexpanded, $target);
+        possibly_create_non_existing_stuff($type, $itemexpanded, $target);
     }
     # Check if source is already a symlink
     elsif ( -l $itemexpanded ) {
-	fix_dangling_links($type, $itemexpanded, $target);
+        fix_dangling_links($type, $itemexpanded, $target);
     }
 
     # TODO: Check available disk space
@@ -547,7 +547,7 @@ sub replace {
 
     # No symlink yet, then actually move or remove!
     else {
-	do_it($type, $itemexpanded, $target, $action);
+        do_it($type, $itemexpanded, $target, $action);
     }
 
     return;
@@ -558,27 +558,27 @@ sub revert {
 
     # Skip entries where wildcard where passed
     if ($itemexpanded =~ /[][*?]/) {
-	warn "Skipping '$target_glob' due to unmatched wildcard.\n";
-	return 0;
+        warn "Skipping '$target_glob' due to unmatched wildcard.\n";
+        return 0;
     }
 
     $item_in_home = "$ENV{HOME}/" .
-	fill_in_wildcard_matches($target_glob, $itemexpanded, $item_in_home);
+        fill_in_wildcard_matches($target_glob, $itemexpanded, $item_in_home);
     say "Trying to revert $itemexpanded to $item_in_home";
 
     if (-l $item_in_home) {
-	my $link_target = readlink($item_in_home);
-	$itemexpanded =~ s{/$}{};
-	$link_target  =~ s{/$}{};
+        my $link_target = readlink($item_in_home);
+        $itemexpanded =~ s{/$}{};
+        $link_target  =~ s{/$}{};
 
-	if ($itemexpanded eq $link_target) {
-	    say "Removing symlink $item_in_home";
-	    unlink($item_in_home) unless $DRYRUN;
-	    move($itemexpanded, $item_in_home);
-	} else {
-	    warn "Ignoring symlink $item_in_home as it points to $link_target ".
-		 "and not to $itemexpanded as expected.\n";
-	}
+        if ($itemexpanded eq $link_target) {
+            say "Removing symlink $item_in_home";
+            unlink($item_in_home) unless $DRYRUN;
+            move($itemexpanded, $item_in_home);
+        } else {
+            warn "Ignoring symlink $item_in_home as it points to $link_target ".
+                 "and not to $itemexpanded as expected.\n";
+        }
     }
 
     return;
@@ -588,11 +588,11 @@ sub exchange_wildcards_and_replacements {
     my ($wildcard, $replacement) = @_;
     my $i = 1;
     while ($replacement =~ /\%(\d+)/) {
-	my $number = $1;
-	my $prev = $number-1;
-	$wildcard =~ s/^(([^*]*[*?]){$prev}[^*]*)([?*])/"$1\%".$i++/e;
-	my $wildcardtype = $3;
-	$replacement =~ s/\%(\d+)/$wildcardtype/;
+        my $number = $1;
+        my $prev = $number-1;
+        $wildcard =~ s/^(([^*]*[*?]){$prev}[^*]*)([?*])/"$1\%".$i++/e;
+        my $wildcardtype = $3;
+        $replacement =~ s/\%(\d+)/$wildcardtype/;
     }
     return ($wildcard, $replacement);
 }
@@ -603,49 +603,49 @@ for my $list (@LISTFILES) {
     # Clean up this and that
     open(LIST, '<', $list) or die "Can't open $list: $!";
     while (<LIST>) {
-	next if /^#|^ *$/;
+        next if /^#|^ *$/;
 
-	chomp;
-	my ($action, $type, $item, $replacement) = split;
+        chomp;
+        my ($action, $type, $item, $replacement) = split;
 
-	next unless defined $action;
+        next unless defined $action;
 
-	if (!defined($item) or !defined($replacement)) {
-	    warn "Can't parse '$_', skipping...";
-	    next;
-	}
-	unless ( type_is_directory($type) or type_is_file($type) ) {
-	    warn "Can't parse type '$type', must be 'd', 'D', 'f' or 'F', skipping...";
-	    next;
-	}
-	if ( $action ne 'd' and $action ne 'r' and $action ne 'm'  ) {
-	    warn "Can't parse action '$action', must be 'd', 'r' or 'm', skipping...";
-	    next;
-	}
+        if (!defined($item) or !defined($replacement)) {
+            warn "Can't parse '$_', skipping...";
+            next;
+        }
+        unless ( type_is_directory($type) or type_is_file($type) ) {
+            warn "Can't parse type '$type', must be 'd', 'D', 'f' or 'F', skipping...";
+            next;
+        }
+        if ( $action ne 'd' and $action ne 'r' and $action ne 'm'  ) {
+            warn "Can't parse action '$action', must be 'd', 'r' or 'm', skipping...";
+            next;
+        }
 
-	if ( $item =~ m(^(\.\.)?/) ) {
-	    warn "$item would be outside of the home directory, skipping...\n";
-	    next;
-	}
+        if ( $item =~ m(^(\.\.)?/) ) {
+            warn "$item would be outside of the home directory, skipping...\n";
+            next;
+        }
 
-	if ($REVERT) {
-	    ($item, $replacement) = exchange_wildcards_and_replacements($item, $replacement);
+        if ($REVERT) {
+            ($item, $replacement) = exchange_wildcards_and_replacements($item, $replacement);
 
-	    my $replacement_path = calculate_target($replacement);
-	    for my $i (glob($replacement_path)) {
-		if (defined($FILTER)) {
-		    next unless ($i =~ $FILTER);
-		}
-		revert($i, $item, $replacement);
-	    }
-	} else {
-	    for my $i (glob("$ENV{HOME}/$item")) {
-		if (defined($FILTER)) {
-		    next unless ($i =~ $FILTER);
-		}
-		replace($type, $i, $item, $replacement, $action);
-	    }
-	}
+            my $replacement_path = calculate_target($replacement);
+            for my $i (glob($replacement_path)) {
+                if (defined($FILTER)) {
+                    next unless ($i =~ $FILTER);
+                }
+                revert($i, $item, $replacement);
+            }
+        } else {
+            for my $i (glob("$ENV{HOME}/$item")) {
+                if (defined($FILTER)) {
+                    next unless ($i =~ $FILTER);
+                }
+                replace($type, $i, $item, $replacement, $action);
+            }
+        }
     }
     close(LIST);
 }
