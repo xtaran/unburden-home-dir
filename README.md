@@ -272,6 +272,9 @@ Another possible solution for saving non-crucial I/O is using
 [eatmydata](http://www.flamingspork.com/projects/libeatmydata/) to
 ignore a software's `fsync` calls.
 
+Be careful. This may cause data loss in case of a power loss or an
+operating system crash. It's called "eat my data" for a reason.
+
 Firefox/Gecko/XULRunner: toolkit.storage.synchronous
 ----------------------------------------------------
 
