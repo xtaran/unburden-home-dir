@@ -293,3 +293,41 @@ it's used for volatile data like caches while those SQLite databases
 usually contain stuff you don't want to loose. But then again, setting
 `toolkit.storage.synchronous` to `0` may cause database corruption if
 the OS crashes or the computer loses power.
+
+APT/dpkg
+--------
+
+Not related to the home directory and hence not solvable at all with
+`unburden-home-dir` but nevertheless similar is the amount of sync
+calls in dpkg and APT.
+
+### Package list Diffs
+
+If there's too much I/O and CPU usage during `apt-get update` due to
+downloading and merging a lots of diffs, you may want to set
+`Acquire::PDiffs` to `false` to always download the whole package list
+instead of just diffs. Of couse this only makes sense if you have a
+decent network connection.
+
+### I/O during upgrading packages
+
+dpkg cares about a consistent state of files when unpacking packages,
+so it instructs the kernel to sync stuff to disk quite often, too.
+
+From dpkg's man-page about `--force-unsafe-io`:
+
+> Do not perform safe I/O operations when unpacking. Currently this
+> implies not performing file system syncs before file renames, which
+> is known to cause substantial performance degradation on some file
+> systems, unfortunately the ones that require the safe I/O on the
+> first place due to their unreliable behaviour causing zero-length
+> files on abrupt system crashes.
+> 
+> Note: For ext4, the main offender, consider using instead the mount
+> option `nodelalloc`, which will fix both the performance degradation
+> and the data safety issues, the latter by making the file system not
+> produce zero-length files on abrupt system crashes with any software
+> not doing syncs before atomic renames.
+>
+> Warning: Using this option might improve performance at the cost of
+> losing data, use with care.
