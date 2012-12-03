@@ -312,7 +312,8 @@ decent network connection.
 ### I/O during upgrading packages
 
 dpkg cares about a consistent state of files when unpacking packages,
-so it instructs the kernel to sync stuff to disk quite often, too.
+so it instructs the kernel to sync stuff to disk quite often, too. It
+hough has an option named `--force-unsafe-io` to turn this safety off.
 
 From dpkg's man-page about `--force-unsafe-io`:
 
