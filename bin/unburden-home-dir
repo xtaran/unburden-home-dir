@@ -124,8 +124,10 @@ for (keys %OPTIONS) {
 }
 
 # By default check for a system wide and a user configuration and list file
-my @CONFFILES = ("/etc/$BASENAME", "$ENV{HOME}/.$BASENAME");
-my @LISTFILES = ("/etc/$BASENAME.$LISTSUFFIX", "$ENV{HOME}/.$BASENAME.$LISTSUFFIX");
+my @CONFFILES = ("/etc/$BASENAME",
+                 "$ENV{HOME}/.$BASENAME");
+my @LISTFILES = ("/etc/$BASENAME.$LISTSUFFIX",
+                 "$ENV{HOME}/.$BASENAME.$LISTSUFFIX");
 
 for (keys %OPTIONS) {
     when('C') {      @CONFFILES = ($OPTIONS{C}); }
