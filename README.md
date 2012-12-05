@@ -271,6 +271,9 @@ option. In that case drop the `-h` from the `du` call as well and use
 
 > find ~ -type d -iname '*cache*' -not -path '*/.git/*' -not -path '*/.hg/*' -print0 | xargs -0 du -s | sort -n
 
+Or check [Mundus Project's modules](http://files.mundusproject.org/)
+which cache files they would clean up.
+
 Example Configuration Files
 ---------------------------
 
