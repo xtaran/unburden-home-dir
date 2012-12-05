@@ -262,6 +262,22 @@ along with this program in the file COPYING.  If not, see
 [GNU's license web page](http://www.gnu.org/licenses/).
 
 
+Thanks
+======
+
+The following persons contributed the one or way or the other to
+unburden-home-dir:
+
+* Pietro Abate
+* Johan van den Dorpe
+* Klaus Ethgen
+* Elmar Heeb
+* Carsten Hey
+* Christian Herzog
+* Patrick Schmid
+* Klaus Umbach
+
+
 See Also
 ========
 
