@@ -265,8 +265,11 @@ along with this program in the file COPYING.  If not, see
 Thanks
 ======
 
-The following persons contributed the one or way or the other to
-unburden-home-dir:
+Quite some people contributed to unburden-home-dir in one way or the
+other, e.g. by being my guinea pigs, finding bugs, sending patches,
+contributing to the list of files to move off, etc. or just by
+[writing motivating blog postings](http://www.mancoosi.org/~abate/unburden-my-home-dir).
+:-)
 
 * Pietro Abate
 * Johan van den Dorpe
@@ -274,6 +277,7 @@ unburden-home-dir:
 * Elmar Heeb
 * Christian Herzog
 * Carsten Hey
+* Touko Korpela
 * Patrick Schmid
 * Klaus Umbach
 
