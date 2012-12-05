@@ -249,6 +249,16 @@ too, Gitorious gets pushed less often, but should get all major
 updates in time, too.
 
 
+Author
+======
+
+[Axel Beckert](http://noone.org/abe/) <abe@deuxchevaux.org>
+
+unburden-home-dir initially has been developed for usage at
+[Dept. of Physics](http://www.phys.ethz.ch/),
+[ETH Zurich](http://www.ethz.ch/).
+
+
 License
 =======
 
