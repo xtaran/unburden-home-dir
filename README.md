@@ -229,6 +229,11 @@ Example Configuration Files
 See `/usr/share/doc/unburden-home-dir/examples/` on debianoid
 installations or `etc/` in the source tar ball for example files.
 
+User Contributed Examples and Setups
+------------------------------------
+
+* [Reburden on Logout](http://www.mancoosi.org/~abate/unburden-my-home-dir#comment-299)
+
 
 Source Code
 ===========
@@ -278,6 +283,7 @@ contributing to the list of files to move off, etc. or just by
 * Christian Herzog
 * Carsten Hey
 * Touko Korpela
+* Mika Pflüger
 * Patrick Schmid
 * Klaus Umbach
 
