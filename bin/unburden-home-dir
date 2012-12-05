@@ -86,7 +86,7 @@ Options with parameters:
   -C  read only the given configuration file
 
   -f  just unburden those directory matched by the given filter (a perl
-      regular expression) -- matches the already unburdened
+      regular expression) -- it matches the already unburdened
       directories if used together with -u.
 
   -l  read an additional list file
