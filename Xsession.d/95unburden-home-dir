@@ -12,6 +12,10 @@ if [ -e "${HOME}/.${UNBURDEN_BASENAME}" ]; then
     . "${HOME}/.${UNBURDEN_BASENAME}"
 fi
 
+if [ -e "${XDG_CONFIG_HOME:-$HOME/.config}/${UNBURDEN_BASENAME}/config" ]; then
+    . "${XDG_CONFIG_HOME:-$HOME/.config}/${UNBURDEN_BASENAME}/config"
+fi
+
 if [ "${UNBURDEN_HOME}" = "true" ] || \
    [ "${UNBURDEN_HOME}" = "yes" ]; then
 
