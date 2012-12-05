@@ -107,14 +107,38 @@ following:
 
 * Start your applications again.
 
-* If everything works fine, uncomment
+If everything works fine, enable `unburden-home-dir` permanently,
+either per user or globally for all users. See below.
 
-  > UNBURDEN_HOME=true
+Enabling unburden-home-dir Globally
+-----------------------------------
 
-  in `/etc/default/unburden-home-dir` to enable `unburden-home-dir`
-  for X sessions of all users or add it to `~/.unburden-home-dir` to
-  enable it just on a per-user base. (Create the file if it doesn't
-  exist yet.)
+If you want to enable `unburden-home-dir` for all users of a
+machine.on an Xsession based login, edit
+`/etc/default/unburden-home-dir` and either uncomment or add a line
+that looks like this:
+
+> UNBURDEN_HOME=yes
+
+But please be aware that if you do that on a machine with NFS
+homes, you should do that on all (Unix) machines which have those NFS
+homes mounted.
+
+Enabling unburden-home-dir Per User
+-----------------------------------
+
+For installations where each user should be able to decide on his own
+if `unburden-home-dir` should be run on X session start, add a line
+saying
+
+> UNBURDEN_HOME=yes
+
+to either `~/.unburden-home-dir` or
+`~/.config/unburden-home-dir/config` (create the file if it doesn't
+exist yet) which are sourced by the Xsession startup script in the
+same way as `/etc/default/unburden-home-dir` (while beingq
+configuration files for unburden-home-dir itself at the same time,
+too).
 
 
 Common Issues / Troubleshooting
@@ -148,18 +172,63 @@ Common Issues / Troubleshooting
 Configuration Files
 ===================
 
-There are five configuration files for unburden-home-dir:
+There are three types of configuration files for unburden-home-dir:
 
-* `/etc/unburden-home-dir`             — Global configuration file
-* `/etc/unburden-home-dir.list`        — Global list of files to take care of
-* `~/.unburden-home-dir`               — Per user configuration file
-* `~/.unburden-home-dir.list`          — Per user list of files to take care of
-* `~/.config/unburden-home-dir/config` — XDG style per user configuration file
-* `~/.config/unburden-home-dir/list`   — XDG style per user list of files to take care of
-* `/etc/default/unburden-home-dir`     — Xsession hook configuration file
+Global Xsession Hook Configuration File
+---------------------------------------
 
-File Format of unburden-home-dir.list
--------------------------------------
+* `/etc/default/unburden-home-dir`
+
+It is sourced by unburden-home-dir's Xsession hook and configures the
+global on-login behaviour.
+
+### Recognized Settings
+
+* `UNBURDEN_HOME`: If set to `yes`, unburden-home-dir will run for all
+  users upon X login.
+* `UNBURDEN_BASENAME`: Sets the basename of the configuration files to
+  use. Defaults to `unburden-home-dir`. Equivalent to the `-b`
+  commandline option.
+
+General Configuration File
+--------------------------
+
+* `/etc/unburden-home-dir` (Global configuration file)
+* `~/.unburden-home-dir` (Per user configuration file)
+* `~/.config/unburden-home-dir/config` (XDG style per user
+  configuration file)
+
+All three file are parsed by
+[Config::File](http://search.cpan.org/dist/Config-File/) in the above
+given order.
+
+### Recognized Settings
+
+The files may contain one or more of the following settings:
+
+* `TARGETDIR`: To where the files should be unburdened,
+  e.g. `TARGETDIR=/tmp` or`TARGETDIR=/scratch`
+* `FILELAYOUT`: File name template for the target locations. `%u` is
+  replaced by the user name, `%s` by the target identifier defined in
+  the list file. Examples: `FILELAYOUT='.unburden-%u/%s'`,
+  `FILELAYOUT='unburden/%u/%s'`
+
+For per user activation of unburden-home-dir upon X login,
+`UNBURDEN_HOME=yes` (see above) may be used in the per-user
+configuration files, too.
+
+List Files
+----------
+
+`unburden-home-dir` looks at the following places for list of files to
+take care of:
+
+* `/etc/unburden-home-dir.list` (Global list of files to take care of)
+* `~/.unburden-home-dir.list` (Per user list of files to take care of)
+* `~/.config/unburden-home-dir/list` (XDG style per user list of files
+  to take care of)
+
+### File Format of unburden-home-dir.list
 
 `unburden-home-dir.list` lists files and directories to take care of and
 how to take care of them.
@@ -184,9 +253,7 @@ path to the subdirectory to where it should be unburden in the fourth
 column. The fourth column must contain the path to the symlink target
 itself, too.
 
-
-What To Unburden?
------------------
+### What To Unburden?
 
 The Debian package comes with a lot of commented examples in
 `/etc/unburden-home-dir.list`. See `etc/unburden-home-dir.list` in the
@@ -203,29 +270,6 @@ option. In that case drop the `-h` from the `du` call as well and use
 `sort -n` instead:
 
 > find ~ -type d -iname '*cache*' -not -path '*/.git/*' -not -path '*/.hg/*' -print0 | xargs -0 du -s | sort -n
-
-Enabling unburden-home-dir Globally
------------------------------------
-
-Edit `/etc/default/unburden-home-dir` if you want to enable
-`unburden-home-dir` for all users of a machine.on an Xsession based
-login. But please be aware that if you do that on a machine with NFS
-homes, you should do that on all (Unix) machines which have those NFS
-homes mounted.
-
-Enabling unburden-home-dir Per User
------------------------------------
-
-For installations where each user should be able to decide on his own
-if `unburden-home-dir` should be run on X session start, add a line
-saying
-
-> UNBURDEN_HOME=yes
-
-to `~/.unburden-home-dir` which is sourced by the Xsession startup
-script in the same way as `/etc/default/unburden-home-dir` (while
-being a configuration file for unburden-home-dir itself at the same
-time, too).
 
 Example Configuration Files
 ---------------------------
