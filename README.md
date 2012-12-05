@@ -272,8 +272,8 @@ unburden-home-dir:
 * Johan van den Dorpe
 * Klaus Ethgen
 * Elmar Heeb
-* Carsten Hey
 * Christian Herzog
+* Carsten Hey
 * Patrick Schmid
 * Klaus Umbach
 
