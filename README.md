@@ -265,8 +265,10 @@ along with this program in the file COPYING.  If not, see
 See Also
 ========
 
-eatmydata
----------
+Reducing Sync Calls
+-------------------
+
+### eatmydata
 
 Another possible solution for saving non-crucial I/O is using
 [eatmydata](http://www.flamingspork.com/projects/libeatmydata/) to
@@ -275,8 +277,7 @@ ignore a software's `fsync` calls.
 Be careful. This may cause data loss in case of a power loss or an
 operating system crash. It's called "eat my data" for a reason.
 
-Firefox/Gecko/XULRunner: toolkit.storage.synchronous
-----------------------------------------------------
+### Firefox/Gecko/XULRunner: toolkit.storage.synchronous
 
 One notorious case of an annoyingly amount of `fsync` calls is
 [Firefox](https://www.mozilla.org/firefox) and other
@@ -297,14 +298,14 @@ usually contain stuff you don't want to loose. But then again, setting
 `toolkit.storage.synchronous` to `0` may cause database corruption if
 the OS crashes or the computer loses power.
 
-APT/dpkg
---------
+### APT/dpkg
+
 
 Not related to the home directory and hence not solvable at all with
 `unburden-home-dir` but nevertheless similar is the amount of sync
 calls in dpkg and APT.
 
-### Package list Diffs
+#### Package list Diffs
 
 If there's too much I/O and CPU usage during `apt-get update` due to
 downloading and merging a lots of diffs, you may want to set
@@ -312,7 +313,7 @@ downloading and merging a lots of diffs, you may want to set
 instead of just diffs. Of couse this only makes sense if you have a
 decent network connection.
 
-### I/O during upgrading packages
+#### I/O during upgrading packages
 
 dpkg cares about a consistent state of files when unpacking packages,
 so it instructs the kernel to sync stuff to disk quite often, too. It
@@ -335,3 +336,52 @@ From dpkg's man-page about `--force-unsafe-io`:
 >
 > Warning: Using this option might improve performance at the cost of
 > losing data, use with care.
+
+Cleaning Up Your Home Directory Half-Automatically
+--------------------------------------------------
+
+### Computer Janitor
+
+[Computer Janitor](https://launchpad.net/computer-janitor) was a
+command-line and GUI program to …
+
+> clean up a system so it's more like a freshly installed one
+>
+> Over time, a computer system tends to get cluttered. For example,
+> software packages that are no longer needed can be uninstalled.
+> When the system is upgraded from release to release, it may miss out
+> on configuration tweaks that freshly installed systems get.
+>
+> Computer Janitor is an application to fix these kinds of problems.
+> It attempts to find software packages that can be removed, and tweak
+> the system configuration in useful ways.
+
+Unfortunately it's development has stalled, it doesn't work together
+with current APT versions and has been removed from Debian and recent
+Ubuntu releases.
+
+
+### BleachBit
+
+[BleachBit](http://bleachbit.sourceforge.net/) is a GUI program which …
+
+> […] quickly frees disk space and tirelessly guards your
+> privacy. Free cache, delete cookies, clear Internet history, shred
+> temporary files, delete logs, and discard junk you didn't know was
+> there. Designed for Linux and Windows systems, it wipes clean 90
+> applications including Firefox, Internet Explorer, Adobe Flash,
+> Google Chrome, Opera, Safari,and more. Beyond simply deleting files,
+> BleachBit includes advanced features such as shredding files to
+> prevent recovery, wiping free disk space to hide traces of files
+> deleted by other applications, and vacuuming Firefox to make it
+> faster.
+
+### Mundus
+
+[Mundus](http://www.mundusproject.org/) is GUI program which …
+
+> […] can help you keep your /home folder clean. It keeps an internal
+> database of known applications and folders, and automagically
+> detects those apps that where uninstalled but left configuration
+> files. Each supported application is also called a module, and each
+> folder it describes is called a submodule.
