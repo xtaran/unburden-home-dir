@@ -71,7 +71,7 @@ following:
 
 * Check in `/etc/unburden-home-dir` if the target and file name
   template suite your needs. If not either edit the file for global
-  settings and/or copy it to either `~/.unburden-home-dir`or
+  settings and/or copy it to either `~/.unburden-home-dir` or
   `~/.config/unburden-home-dir/config` and then edit it there for
   per-user settings.
 
