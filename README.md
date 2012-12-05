@@ -345,7 +345,7 @@ Cleaning Up Your Home Directory Half-Automatically
 [Computer Janitor](https://launchpad.net/computer-janitor) was a
 command-line and GUI program to …
 
-> clean up a system so it's more like a freshly installed one
+> … clean up a system so it's more like a freshly installed one.
 >
 > Over time, a computer system tends to get cluttered. For example,
 > software packages that are no longer needed can be uninstalled.
@@ -356,9 +356,9 @@ command-line and GUI program to …
 > It attempts to find software packages that can be removed, and tweak
 > the system configuration in useful ways.
 
-Unfortunately it's development has stalled, it doesn't work together
-with current APT versions and has been removed from Debian and recent
-Ubuntu releases.
+Unfortunately its development has stalled, it doesn't work together
+with current APT versions and it has been removed from Debian and
+recent Ubuntu releases.
 
 
 ### BleachBit
