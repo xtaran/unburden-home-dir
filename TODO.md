@@ -8,10 +8,8 @@ TODO
 * Idea from Pietro Abate: Excludes for wildcards, like "all from
   `.cache/*` except `.cache/duplicity`".
 
-* Honor `$XDG_` variables for unburden-home-dir's own configuration
-  files (at least optional), but possibly also in
-  `unburden-home-dir.list` for alternative locations of `.cache` and
-  friends.
+* Honor `$XDG_` variables in `unburden-home-dir.list` for alternative
+  locations of `.cache` and friends.
 
 * Write test so that `mv` doesn't fall into interactive mode. Basically
   test what the previous commit ("2ec069d Unconditionally move files")
@@ -21,7 +19,7 @@ TODO
 * Warning if `UNBURDEN_HOME=no` or `UNBURDEN_HOME=off` is set in
   `~/.unburden-home-dir` (which would be for the `Xsession.d` hook).
 
-* Sorting and commenting subroutines.
+* Sorting subroutines.
 
 * Split off documentation so that it can be shipped as man pages as
   well as viewed in the web. The idea is to use something like `pandoc
