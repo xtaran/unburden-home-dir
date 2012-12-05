@@ -79,7 +79,7 @@ sub HELP_MESSAGE {
 
 Options with parameters:
 
-  -b  use the given string as basename instead of $BASENAME.
+  -b  use the given string as basename instead of \"$BASENAME\".
 
   -c  read an additional configuration file
 
