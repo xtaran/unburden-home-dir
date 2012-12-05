@@ -18,6 +18,15 @@ e.g. \fI/tmp\fR or \fI/scratch\fR, and puts appropriate symbolic links
 in the home directory instead.
 .SH OPTIONS
 .TP
+\fB\-b\fR
+use the given string as basename instead of "unburden-home-dir".
+.TP
+\fB\-c\fR
+read an additional configuration file.
+.TP
+\fB\-C\fR
+read only the given configuration file
+.TP
 \fB\-f\fR
 just unburden those directory matched by the given filter (a perl
 regular expression) \(em it matches the already unburdened
@@ -25,6 +34,12 @@ directories if used together with \fB\-u\fR.
 .TP
 \fB\-F\fR
 Do not check for files in use with lsof before (re)moving files.
+.TP
+\fB\-l\fR
+read an additional list file
+.TP
+\fB\-L\fR
+read only the given list file
 .TP
 \fB\-n\fR
 dry run (show what would be done)
