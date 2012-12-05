@@ -469,3 +469,11 @@ recent Ubuntu releases.
 > detects those apps that where uninstalled but left configuration
 > files. Each supported application is also called a module, and each
 > folder it describes is called a submodule.
+
+### Autotrash
+
+> [Autotrash](http://www.logfish.net/pr/autotrash/) is a simple Python
+> script which will purge files from your trash based on their age or
+> the amount of free space left on the device. Using autotrash -d 30
+> will delete files which have been in the trash for more then 30
+> days.
