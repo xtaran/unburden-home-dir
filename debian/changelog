@@ -9,9 +9,11 @@ unburden-home-dir (0.3.2) UNRELEASED; urgency=low
     + Some tests use Test::Differences now. Add as build dependency.
   * Fix test suite failures with newer coreutils versions in
     t/moving-to-existing-subdir.t.
-  * README: Create new section "see also" about similar solutions and move
-    hint about eatmydata there.
-  * Merge THANKS into README
+  * README:
+    + Create new section "see also" about similar solutions and move
+      hint about eatmydata there.
+    + Add lots of information
+    + Merge THANKS into README
   * Add Google Earth and CCache to example unburden-home-dir.list
 
  -- Axel Beckert <abe@debian.org>  Thu, 11 Oct 2012 21:23:31 +0200
