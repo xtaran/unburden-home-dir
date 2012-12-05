@@ -1,6 +1,7 @@
 # Generic cache locations
 m D .cache cache
 m D .thumbnails thumbnails
+m D .ccache ccache
 
 # Common browser caches
 m f .config/google-chrome/*/Thumbnails google-chrome-thumbnails-%1
@@ -35,6 +36,7 @@ m d .buzzbird/*/Cache buzzbird-cache
 m f .aptitude/cache aptitude-cache
 m d .wesnoth*/cache wesnoth%1-cache
 m d .gaia/cache gaia-cache
+m d .googleearth/Cache google-earth-cache
 m d .java/deployment/cache java-deployment-cache
 m d .adobe/Acrobat/*/Cache adobe-acrobat-%1-cache
 m d .shotwell/thumbs shotwell-thumbs
