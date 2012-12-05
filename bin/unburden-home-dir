@@ -48,6 +48,7 @@ use Config::File;
 use Getopt::Std; $Getopt::Std::STANDARD_HELP_VERSION = 1;
 use File::Path qw(mkpath rmtree);
 use File::Basename;
+use File::BaseDir qw(config_home);
 use File::Touch;
 use File::Rsync;
 use File::Which;
@@ -125,9 +126,11 @@ for (keys %OPTIONS) {
 
 # By default check for a system wide and a user configuration and list file
 my @CONFFILES = ("/etc/$BASENAME",
-                 "$ENV{HOME}/.$BASENAME");
+                 "$ENV{HOME}/.$BASENAME",
+                 config_home($BASENAME).'/config');
 my @LISTFILES = ("/etc/$BASENAME.$LISTSUFFIX",
-                 "$ENV{HOME}/.$BASENAME.$LISTSUFFIX");
+                 "$ENV{HOME}/.$BASENAME.$LISTSUFFIX",
+                 config_home($BASENAME)."/$LISTSUFFIX");
 
 for (keys %OPTIONS) {
     when('C') {      @CONFFILES = ($OPTIONS{C}); }

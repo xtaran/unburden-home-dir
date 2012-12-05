@@ -65,13 +65,15 @@ The best way to introduce unburden-home-dir in your setup is the
 following:
 
 * Look through `/etc/unburden-home-dir.list` and either uncomment what
-  you need globally and/or copy it to `~/.unburden-home-dir.list` and
-  then edit it there for per-user settings.
+  you need globally and/or copy it to either
+  `~/.unburden-home-dir.list` or `~/.config/unburden-home-dir/list`
+  and then edit it there for per-user settings.
 
 * Check in `/etc/unburden-home-dir` if the target and file name
   template suite your needs. If not either edit the file for global
-  settings and/or copy it to `~/.unburden-home-dir` and then edit it
-  there for per-user settings.
+  settings and/or copy it to either `~/.unburden-home-dir`or
+  `~/.config/unburden-home-dir/config` and then edit it there for
+  per-user settings.
 
 * Make a dry run with
 
@@ -148,11 +150,13 @@ Configuration Files
 
 There are five configuration files for unburden-home-dir:
 
-* `/etc/unburden-home-dir`         — Global configuration file
-* `/etc/unburden-home-dir.list`    — Global list of files to take care of
-* `~/.unburden-home-dir`           — Per user configuration file
-* `~/.unburden-home-dir.list`      — Per user list of files to take care of
-* `/etc/default/unburden-home-dir` — Xsession hook configuration file
+* `/etc/unburden-home-dir`             — Global configuration file
+* `/etc/unburden-home-dir.list`        — Global list of files to take care of
+* `~/.unburden-home-dir`               — Per user configuration file
+* `~/.unburden-home-dir.list`          — Per user list of files to take care of
+* `~/.config/unburden-home-dir/config` — XDG style per user configuration file
+* `~/.config/unburden-home-dir/list`   — XDG style per user list of files to take care of
+* `/etc/default/unburden-home-dir`     — Xsession hook configuration file
 
 File Format of unburden-home-dir.list
 -------------------------------------
