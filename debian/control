@@ -38,6 +38,7 @@ Suggests: agedu,
           autotrash,
           bleachbit,
           eatmydata,
+          fslint,
           ncdu | baobab | filelight | xdiskusage | xdu,
           tmpreaper
 Description: Remove or move cache files automatically from user's home

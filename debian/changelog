@@ -82,6 +82,7 @@ unburden-home-dir (0.3) unstable; urgency=low
   * Added THANKS file
   * Add ~/.aptitude/cache to unburden-home-dir.list. (cf. #671780)
   * Fix typo in README.Debian (Closes: #673912; Thanks Touko Korpela!)
+  * Suggest fslint.
 
  -- Axel Beckert <abe@debian.org>  Tue, 12 Jun 2012 16:38:06 +0200
 
