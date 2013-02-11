@@ -18,7 +18,7 @@ unburden-home-dir (0.3.2) UNRELEASED; urgency=low
     + Add lots of information
     + Merge THANKS into README
   * Sync man page with --help output and recognized options.
-  * Add Google Earth and CCache to example unburden-home-dir.list
+  * Add sxiv, Google Earth and CCache to example unburden-home-dir.list
 
  -- Axel Beckert <abe@debian.org>  Thu, 11 Oct 2012 21:23:31 +0200
 
