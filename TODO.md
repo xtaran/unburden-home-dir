@@ -49,3 +49,7 @@ TODO
   by by using something like `/etc/unburden-home-dir.list.d/` or maybe
   even put symlinks to the (splitted) example file(s) in
   `/etc/unburden-home-dir.list.d/`.
+
+* Check if there are common tasks of xdg-user-dirs (its package
+  description is not so helpful there) of if it can be useful for
+  unburden-home-dir.
