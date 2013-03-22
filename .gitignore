@@ -3,3 +3,4 @@ debian/files
 debian/unburden-home-dir.debhelper.log
 debian/unburden-home-dir.substvars
 debian/unburden-home-dir/
+cover_db/

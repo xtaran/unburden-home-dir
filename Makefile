@@ -5,6 +5,11 @@ test:
 	perl -c bin/unburden-home-dir
 	prove t/*.t
 
+cover:
+	cover -delete
+	prove --exec 'env PERL5OPT=-MDevel::Cover perl' t/*.t
+	cover
+
 install:
 	install -d $(DESTDIR)/etc/X11/Xsession.d/
 	install -d $(DESTDIR)/usr/bin/
