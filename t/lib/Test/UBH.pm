@@ -46,11 +46,9 @@ sub new {
     return $self;
 }
 
-sub done {
+sub cleanup {
     my $self = shift;
-
     ok( rmtree($self->BASE), "Clean up" );
-    done_testing();
 }
 
 sub setup_test_environment {
@@ -61,15 +59,40 @@ sub setup_test_environment {
     ok( -d $t->TARGET, "Target directory has been created" );
 }
 
+sub default_config {
+    my $t = shift;
+    return "TARGETDIR=".$t->TARGET."\nFILELAYOUT=".$t->PREFIX."-\%s";
+}
+
+
 sub write_configs {
     my $t = shift;
     my ($list, $config) = @_;
-    ok( write_file($t->HOME."/.".$t->BASENAME.".list",
-                   $list || ''),
-        "Write list" );
-    ok( write_file($t->HOME."/.".$t->BASENAME,
-                   $config || "TARGETDIR=".$t->TARGET."\nFILELAYOUT=".$t->PREFIX."-\%s"),
-        "Write config" );
+    $t->write_config_file('.'.$t->BASENAME.'.list', $list || '',
+                          "Write classic list" );
+    $t->write_config_file('.'.$t->BASENAME, $config || $t->default_config,
+                          "Write classic config" );
+}
+
+sub write_xdg_configs {
+    my $t = shift;
+    my ($list, $config) = @_;
+    ok( mkpath($t->HOME.'/.config/'.$t->BASENAME, {}), "Create test environment (XDG directory)" );
+    $t->write_config_file('.config/'.$t->BASENAME.'/list', $list || '',
+                          "Write XDG list" );
+    $t->write_config_file('.config/'.$t->BASENAME.'/config', $config || $t->default_config,
+                          "Write XDG config" );
+}
+
+sub write_config_file {
+    my $t = shift;
+    my ($file, $contents, $desc) = @_;
+    BAIL_OUT('write_config_file: $file empty') unless $file;
+    BAIL_OUT('write_config_file: $contents undefined') unless defined $contents;
+
+    ok( write_file($t->HOME.'/'.$file,
+                   $contents),
+        $desc || "Write config file $file" );
 }
 
 1;
