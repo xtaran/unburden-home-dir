@@ -16,12 +16,10 @@ ok( write_file($t->BASE."/config", "TARGETDIR=".$t->TARGET."\nFILELAYOUT=".$t->P
 
 $t->call_unburden_home_dir_default;
 
-my $wanted = "Skipping '".$t->HOME."/.fnord/bla' due to symlink in path: ".$t->HOME."/.fnord
+my $wanted = $t->prepend_lsof_warning(
+    "Skipping '".$t->HOME."/.fnord/bla' due to symlink in path: ".$t->HOME."/.fnord
 Skipping '".$t->HOME."/.foobar/blafasel/bla' due to symlink in path: ".$t->HOME."/.foobar/blafasel
-";
-unless (which('lsof')) {
-    $wanted = "WARNING: lsof not found, not checking for files in use.\n".$wanted;
-}
+");
 
 my $stderr = read_file($t->BASE."/stderr");
 eq_or_diff_text( $stderr, $wanted, "Check command STDERR output" );
@@ -40,6 +38,4 @@ ok( -d $t->TARGET."/".$t->PREFIX."-foobar-fnord-bla", "First directory moved" );
 ok( ! -e $t->TARGET."/".$t->PREFIX."-fnord-bla", "Symlink 1 not moved" );
 ok( ! -e $t->TARGET."/".$t->PREFIX."-foobar-blafasel-bla", "Symlink 2 not moved" );
 
-$t->cleanup();
-
-done_testing();
+$t->done();

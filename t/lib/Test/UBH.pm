@@ -51,6 +51,12 @@ sub cleanup {
     ok( rmtree($self->BASE), "Clean up" );
 }
 
+sub done {
+    my $t = shift;
+    $t->cleanup;
+    done_testing;
+}
+
 sub setup_test_environment {
     my $t = shift;
     my $demodir = shift;
@@ -62,6 +68,17 @@ sub setup_test_environment {
 sub default_config {
     my $t = shift;
     return "TARGETDIR=".$t->TARGET."\nFILELAYOUT=".$t->PREFIX."-\%s";
+}
+
+sub prepend_lsof_warning {
+    my $t = shift;
+    my $wanted = shift;
+
+    unless (which('lsof')) {
+        $wanted = "WARNING: lsof not found, not checking for files in use.\n".$wanted;
+    }
+
+    return $wanted;
 }
 
 sub call_unburden_home_dir {
