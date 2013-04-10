@@ -26,9 +26,7 @@ foreach my $configtype (qw(write_configs write_xdg_configs)) {
                     "m d .fnord/bla fnord-bla\n".
                     "m d $demofile2 $demotarget2\n");
 
-    my $cmd = "bin/unburden-home-dir -b ".$t->BASENAME.
-        " > ".$t->BASE."/output 2> ".$t->BASE."/stderr";
-    ok( system($cmd) == 0, "Call '$cmd'" );
+    $t->call_unburden_home_dir_user;
 
     my $wanted =
         "Skipping '".$t->HOME."/.fnord/bla' due to symlink in path: ".$t->HOME."/.fnord\n" .

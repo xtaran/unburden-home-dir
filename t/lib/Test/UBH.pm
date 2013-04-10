@@ -64,6 +64,24 @@ sub default_config {
     return "TARGETDIR=".$t->TARGET."\nFILELAYOUT=".$t->PREFIX."-\%s";
 }
 
+sub call_unburden_home_dir {
+    my $t = shift;
+    my $param = shift;
+    my $cmd =
+        'bin/unburden-home-dir '.$param.
+        ' >'.$t->BASE.'/output 2>'.$t->BASE.'/stderr';
+    ok( system($cmd) == 0, "Call '$cmd'" );
+}
+
+sub call_unburden_home_dir_user {
+    my $t = shift;
+    $t->call_unburden_home_dir('-b '.$t->BASENAME)
+}
+
+sub call_unburden_home_dir_default {
+    my $t = shift;
+    $t->call_unburden_home_dir("-C ".$t->BASE."/config -L ".$t->BASE."/list");
+}
 
 sub write_configs {
     my $t = shift;
