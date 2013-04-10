@@ -1,25 +1,14 @@
 # Module to reduce boilerplate code in unburden-home-dir's test suite
 
+# Boilerplate which exports into main::
+use Test::UBH::Boilerplate;
+
 package Test::UBH;
 
-require Exporter;
-@ISA = qw(Exporter);
+# Boilerplate which exports into Test::UBH::
+use Test::UBH::Boilerplate;
 
 use Mouse;
-
-use Test::More;
-use Test::Differences;
-use File::Path qw(mkpath rmtree);
-use File::Slurp;
-use File::Which;
-use Data::Dumper;
-
-our @EXPORT = (qw(mkpath rmtree),
-               @Test::More::EXPORT,
-               @Test::Differences::EXPORT,
-               @File::Slurp::EXPORT,
-               @File::Which::EXPORT,
-               @Data::Dumper::EXPORT);
 
 foreach my $varname (qw(TESTNAME BASE HOME TARGET BASENAME PREFIX)) {
     has $varname => ( is => 'rw', isa => 'Str' );
