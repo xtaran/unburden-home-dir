@@ -53,5 +53,24 @@ sub done {
     done_testing();
 }
 
+sub setup_test_environment {
+    my $t = shift;
+    my $demodir = shift;
+    ok( mkpath($t->HOME."/$demodir", $t->TARGET, {}), "Create test environment (directories)" );
+    ok( -d $t->HOME."/$demodir", "Original directory has been created" );
+    ok( -d $t->TARGET, "Target directory has been created" );
+}
+
+sub write_configs {
+    my $t = shift;
+    my ($list, $config) = @_;
+    ok( write_file($t->HOME."/.".$t->BASENAME.".list",
+                   $list || ''),
+        "Write list" );
+    ok( write_file($t->HOME."/.".$t->BASENAME,
+                   $config || "TARGETDIR=".$t->TARGET."\nFILELAYOUT=".$t->PREFIX."-\%s"),
+        "Write config" );
+}
+
 1;
 

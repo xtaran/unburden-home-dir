@@ -10,18 +10,14 @@ my $demodir2 = '.foobar/blafasel';
 my $demofile2 = "$demodir2/bla";
 my $demotarget2 = 'foobar-blafasel-bla';
 
-ok( mkpath($t->HOME."/$demofile1", $t->TARGET, {}), "Create test environment (directories)" );
-ok( -d $t->HOME."/$demofile1", "Original directory has been created" );
-ok( -d $t->TARGET, "Target directory has been created" );
+$t->setup_test_environment($demofile1);
 
-ok( symlink($t->HOME."/$demodir1", $t->HOME."/.fnord"), "Create test environment (Symlink 1)" );
+ok( symlink($demodir1, $t->HOME."/.fnord"), "Create test environment (Symlink 1)" );
 ok( -l $t->HOME."/.fnord", "Symlink 1 has been created" );
 ok( symlink("fnord", $t->HOME."/$demodir2"), "Create test environment (Symlink 2)" );
 ok( -l $t->HOME."/$demodir2", "Symlink 2 has been created" );
 
-ok( write_file($t->HOME."/.".$t->BASENAME.".list", "m d $demofile1 $demotarget1\nm d .fnord/bla fnord-bla\nm d $demofile2 $demotarget2\n") );
-ok( write_file($t->HOME."/.".$t->BASENAME,
-               "TARGETDIR=".$t->TARGET."\nFILELAYOUT=".$t->PREFIX."-\%s") );
+$t->write_configs("m d $demofile1 $demotarget1\nm d .fnord/bla fnord-bla\nm d $demofile2 $demotarget2\n");
 
 my $cmd = "bin/unburden-home-dir -b ".$t->BASENAME.
     " > ".$t->BASE."/output 2> ".$t->BASE."/stderr";
