@@ -3,17 +3,23 @@
 use lib qw(t/lib lib);
 use Test::UBH;
 my $t = Test::UBH->new('find-per-user-stuff');
+my $demodir1 = '.foobar/fnord';
+my $demofile1 = "$demodir1/bla";
+my $demotarget1 = 'foobar-fnord-bla';
+my $demodir2 = '.foobar/blafasel';
+my $demofile2 = "$demodir2/bla";
+my $demotarget2 = 'foobar-blafasel-bla';
 
-ok( mkpath($t->HOME."/.foobar/fnord/bla", $t->TARGET, {}), "Create test environment (directories)" );
-ok( -d $t->HOME."/.foobar/fnord/bla", "Original directory has been created" );
+ok( mkpath($t->HOME."/$demofile1", $t->TARGET, {}), "Create test environment (directories)" );
+ok( -d $t->HOME."/$demofile1", "Original directory has been created" );
 ok( -d $t->TARGET, "Target directory has been created" );
 
-ok( symlink($t->HOME."/.foobar/fnord", $t->HOME."/.fnord"), "Create test environment (Symlink 1)" );
+ok( symlink($t->HOME."/$demodir1", $t->HOME."/.fnord"), "Create test environment (Symlink 1)" );
 ok( -l $t->HOME."/.fnord", "Symlink 1 has been created" );
-ok( symlink("fnord", $t->HOME."/.foobar/blafasel"), "Create test environment (Symlink 2)" );
-ok( -l $t->HOME."/.foobar/blafasel", "Symlink 2 has been created" );
+ok( symlink("fnord", $t->HOME."/$demodir2"), "Create test environment (Symlink 2)" );
+ok( -l $t->HOME."/$demodir2", "Symlink 2 has been created" );
 
-ok( write_file($t->HOME."/.".$t->BASENAME.".list", "m d .foobar/fnord/bla foobar-fnord-bla\nm d .fnord/bla fnord-bla\nm d .foobar/blafasel/bla foobar-blafasel-bla\n") );
+ok( write_file($t->HOME."/.".$t->BASENAME.".list", "m d $demofile1 $demotarget1\nm d .fnord/bla fnord-bla\nm d $demofile2 $demotarget2\n") );
 ok( write_file($t->HOME."/.".$t->BASENAME,
                "TARGETDIR=".$t->TARGET."\nFILELAYOUT=".$t->PREFIX."-\%s") );
 
@@ -22,7 +28,7 @@ my $cmd = "bin/unburden-home-dir -b ".$t->BASENAME.
 ok( system($cmd) == 0, "Call '$cmd'" );
 
 my $wanted = "Skipping '".$t->HOME."/.fnord/bla' due to symlink in path: ".$t->HOME."/.fnord
-Skipping '".$t->HOME."/.foobar/blafasel/bla' due to symlink in path: ".$t->HOME."/.foobar/blafasel
+Skipping '".$t->HOME."/$demofile2' due to symlink in path: ".$t->HOME."/$demodir2
 ";
 unless (which('lsof')) {
     $wanted = "WARNING: lsof not found, not checking for files in use.\n".$wanted;
@@ -31,18 +37,18 @@ unless (which('lsof')) {
 my $stderr = read_file($t->BASE."/stderr");
 eq_or_diff_text( $stderr, $wanted, "Check command STDERR output" );
 
-$wanted = "Moving ".$t->HOME."/.foobar/fnord/bla -> ".$t->TARGET."/u-foobar-fnord-bla
+$wanted = "Moving ".$t->HOME."/$demofile1 -> ".$t->TARGET."/u-$demotarget1
 sending incremental file list
-created directory ".$t->TARGET."/u-foobar-fnord-bla
+created directory ".$t->TARGET."/u-$demotarget1
 ./
-Symlinking ".$t->TARGET."/u-foobar-fnord-bla ->  ".$t->HOME."/.foobar/fnord/bla
+Symlinking ".$t->TARGET."/u-$demotarget1 ->  ".$t->HOME."/$demofile1
 ";
 
 my $output = read_file($t->BASE."/output");
 eq_or_diff_text( $output, $wanted, "Check command STDOUT" );
 
-ok( -d $t->TARGET."/".$t->PREFIX."-foobar-fnord-bla", "First directory moved" );
+ok( -d $t->TARGET."/".$t->PREFIX."-$demotarget1", "First directory moved" );
 ok( ! -e $t->TARGET."/".$t->PREFIX."-fnord-bla", "Symlink 1 not moved" );
-ok( ! -e $t->TARGET."/".$t->PREFIX."-foobar-blafasel-bla", "Symlink 2 not moved" );
+ok( ! -e $t->TARGET."/".$t->PREFIX."-$demotarget2", "Symlink 2 not moved" );
 
 $t->done();
