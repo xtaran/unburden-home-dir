@@ -43,7 +43,7 @@ sub cleanup {
 sub done {
     my $t = shift;
     $t->cleanup;
-    done_testing;
+    done_testing();
 }
 
 sub setup_test_environment {
