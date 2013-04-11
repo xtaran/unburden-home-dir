@@ -16,7 +16,7 @@ ok( write_file($t->BASE."/config", "TARGETDIR=".$t->TARGET."\nFILELAYOUT=".$t->P
 
 $t->call_unburden_home_dir_default;
 
-my $wanted = $t->prepend_lsof_warning('');
+my $wanted = $t->prepend_lsof_warning;
 
 my $stderr = read_file($t->BASE."/stderr");
 eq_or_diff_text( $stderr, $wanted, "Check command STDERR output" );

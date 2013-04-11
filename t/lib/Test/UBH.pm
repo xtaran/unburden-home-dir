@@ -83,7 +83,7 @@ sub default_config {
 
 sub prepend_lsof_warning {
     my $t = shift;
-    my $wanted = shift;
+    my $wanted = shift || '';
 
     unless (which('lsof')) {
         $wanted = "WARNING: lsof not found, not checking for files in use.\n".$wanted;
