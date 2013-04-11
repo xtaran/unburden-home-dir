@@ -1,39 +1,24 @@
 #!/usr/bin/perl -wl
 
-use Test::More;
-use Test::Differences;
-use File::Path qw(mkpath rmtree);
-use File::Slurp;
-use Data::Dumper;
+use lib qw(t/lib lib);
+use Test::UBH;
+my $t = Test::UBH->new('replacement-order-dryrun');
 
-my $BASE = 't/replacement-order-dryrun';
-my $HOME = "$BASE/1";
-my $TARGET = "$BASE/2";
-my $PREFIX = "u";
+$t->setup_test_environment_without_target(".foobar/blatest/barba");
+$t->write_configs('m d .foo*/bla*/bar* bar%3-bla%2-foo%1');
+$t->call_unburden_home_dir_default('-n');
 
-# Set a debug environment
-$ENV{HOME} = $HOME;
+my $wanted = "Create parent directories for ".$t->TP."-barba-blatest-foobar
+Moving ".$t->HOME."/.foobar/blatest/barba -> ".$t->TP."-barba-blatest-foobar
+Symlinking ".$t->TP."-barba-blatest-foobar ->  ".$t->HOME."/.foobar/blatest/barba
+";
 
-ok( mkpath("$HOME/.foobar/blatest/barba", "$TARGET") );
-
-ok( write_file("$BASE/list", 'm d .foo*/bla*/bar* bar%3-bla%2-foo%1') );
-ok( write_file("$BASE/config", "TARGETDIR=$TARGET\nFILELAYOUT=$PREFIX-\%s") );
-
-ok( system("bin/unburden-home-dir -n -C $BASE/config -L $BASE/list > $BASE/output" ) == 0 );
-
-my $wanted = <<EOF;
-Create parent directories for $TARGET/u-barba-blatest-foobar
-Moving $HOME/.foobar/blatest/barba -> $TARGET/u-barba-blatest-foobar
-Symlinking $TARGET/u-barba-blatest-foobar ->  $HOME/.foobar/blatest/barba
-EOF
-
-my $output = read_file("$BASE/output");
+my $output = read_file($t->BASE."/output");
 eq_or_diff_text( $output, $wanted, "Check output if as expected" );
 
-ok( ! -e "$TARGET/$PREFIX-barba-blatest-foobar" );
-ok( ! -l "$HOME/.foobar/blatest/barba" );
-ok( -d "$HOME/.foobar/blatest/barba" );
+file_not_exists_ok( $t->TP."-barba-blatest-foobar" );
+ok( ! -l $t->HOME."/.foobar/blatest/barba",
+    "File ".$t->HOME."/.foobar/blatest/barba is no symlink" );
+dir_exists_ok( $t->HOME."/.foobar/blatest/barba" );
 
-ok( rmtree("$BASE") );
-
-done_testing();
+$t->done;
