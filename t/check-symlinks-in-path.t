@@ -16,8 +16,9 @@ file_is_symlink_ok( $t->HOME."/.foobar/blafasel" );
 # http://bugs.debian.org/705242 + https://rt.cpan.org/Public/Bug/Display.html?id=84582
 #symlink_target_exists_ok( $t->HOME."/.foobar/blafasel" );
 
-ok( write_file($t->BASE."/list", "m d .foobar/fnord/bla foobar-fnord-bla\nm d .fnord/bla fnord-bla\nm d .foobar/blafasel/bla foobar-blafasel-bla\n") );
-ok( write_file($t->BASE."/config", "TARGETDIR=".$t->TARGET."\nFILELAYOUT=".$t->PREFIX."-\%s") );
+$t->write_configs("m d .foobar/fnord/bla foobar-fnord-bla\n" .
+                  "m d .fnord/bla fnord-bla\n" .
+                  "m d .foobar/blafasel/bla foobar-blafasel-bla\n");
 
 $t->call_unburden_home_dir_default;
 

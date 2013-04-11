@@ -11,8 +11,7 @@ file_not_exists_ok( $t->TARGET."/fnord" );
 ok( symlink($t->TARGET."/u-foobar-fnord", $t->HOME."/.foobar/fnord"), "Create test environment (Symlink)" );
 file_is_symlink_ok( $t->HOME."/.foobar/fnord" );
 
-ok( write_file($t->BASE."/list", "m d .foobar/fnord foobar-fnord/\n") );
-ok( write_file($t->BASE."/config", "TARGETDIR=".$t->TARGET."\nFILELAYOUT=".$t->PREFIX."-\%s") );
+$t->write_configs("m d .foobar/fnord foobar-fnord/\n");
 
 $t->call_unburden_home_dir_default;
 
