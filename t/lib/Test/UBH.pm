@@ -61,7 +61,7 @@ sub done {
 
 sub setup_test_environment {
     my $t = shift;
-    $t->setup_test_environment_without_target(@_);
+    $t->setup_test_environment_without_target(@_ || '');
     $t->create_and_check_directory($t->TARGET,
                                    "test environment (target directory)" );
 }
