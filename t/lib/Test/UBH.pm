@@ -114,20 +114,35 @@ sub call_unburden_home_dir_default {
 sub write_configs {
     my $t = shift;
     my ($list, $config) = @_;
-    $t->write_config_file('.'.$t->BASENAME.'.list', $list || '',
+    $t->write_config_file($t->BASE.'/list', $list || '',
                           "Write classic list" );
-    $t->write_config_file('.'.$t->BASENAME, $config || $t->default_config,
+    $t->write_config_file($t->BASE.'/config', $config || $t->default_config,
                           "Write classic config" );
+}
+
+sub write_user_configs {
+    my $t = shift;
+    my ($list, $config) = @_;
+    $t->write_config_file_to_home('.'.$t->BASENAME.'.list', $list || '',
+                                  "Write classic list" );
+    $t->write_config_file_to_home('.'.$t->BASENAME, $config || $t->default_config,
+                                  "Write classic config" );
 }
 
 sub write_xdg_configs {
     my $t = shift;
     my ($list, $config) = @_;
     ok( mkpath($t->HOME.'/.config/'.$t->BASENAME, {}), "Create test environment (XDG directory)" );
-    $t->write_config_file('.config/'.$t->BASENAME.'/list', $list || '',
-                          "Write XDG list" );
-    $t->write_config_file('.config/'.$t->BASENAME.'/config', $config || $t->default_config,
-                          "Write XDG config" );
+    $t->write_config_file_to_home('.config/'.$t->BASENAME.'/list', $list || '',
+                                  "Write XDG list" );
+    $t->write_config_file_to_home('.config/'.$t->BASENAME.'/config', $config || $t->default_config,
+                                  "Write XDG config" );
+}
+
+sub write_config_file_to_home {
+    my $t = shift;
+    my $file = shift;
+    $t->write_config_file($t->HOME.'/'.$file, @_);
 }
 
 sub write_config_file {
@@ -136,8 +151,7 @@ sub write_config_file {
     BAIL_OUT('write_config_file: $file empty') unless $file;
     BAIL_OUT('write_config_file: $contents undefined') unless defined $contents;
 
-    ok( write_file($t->HOME.'/'.$file,
-                   $contents),
+    ok( write_file($file, $contents),
         $desc || "Write config file $file" );
 }
 

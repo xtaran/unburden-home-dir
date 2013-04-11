@@ -10,7 +10,7 @@ my $demodir2 = '.foobar/blafasel';
 my $demofile2 = "$demodir2/bla";
 my $demotarget2 = 'foobar-blafasel-bla';
 
-foreach my $configtype (qw(write_configs write_xdg_configs)) {
+foreach my $configtype (qw(write_user_configs write_xdg_configs)) {
     $t->setup_test_environment($demofile1);
 
     ok( symlink($demodir1, $t->HOME."/.fnord"),
