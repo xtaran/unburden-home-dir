@@ -1,62 +1,45 @@
 #!/usr/bin/perl -wl
 
-use Test::More;
-use Test::Differences;
-use File::Path qw(mkpath rmtree);
-use File::Slurp;
-use File::Which;
-use Data::Dumper;
+use lib qw(t/lib lib);
+use Test::UBH;
+my $t = Test::UBH->new('parse-comments-and-blank-lines');
 
-my $BASE = 't/parse-comments-and-blank-lines';
-my $HOME = "$BASE/1";
-my $TARGET = "$BASE/2";
-my $PREFIX = "u";
+$t->setup_test_environment('.foobar/fnord/bla');
 
-# Set a debug environment
-$ENV{HOME} = $HOME;
+ok( symlink($t->HOME."/.foobar/fnord", $t->HOME."/.fnord"), "Create test environment (Symlink 1)" );
+file_is_symlink_ok( $t->HOME."/.fnord" );
+ok( symlink("fnord", $t->HOME."/.foobar/blafasel"), "Create test environment (Symlink 2)" );
+file_is_symlink_ok( $t->HOME."/.foobar/blafasel" );
 
-# Clean up possible remainders of aborted tests
-rmtree("$BASE");
+$t->write_configs("m d .foobar/fnord/bla foobar-fnord-bla\n" .
+                  "# Comment\n" .
+                  "\n" .
+                  "  \n" .
+                  "	\n" .
+                  "m d .fnord/bla fnord-bla\n" .
+                  "m d .foobar/blafasel/bla foobar-blafasel-bla\n");
 
-ok( mkpath("$HOME/.foobar/fnord/bla", "$TARGET", {}), "Create test environment (directories)" );
-ok( -d "$HOME/.foobar/fnord/bla", "Original directory has been created" );
-ok( -d "$TARGET", "Target directory has been created" );
+$t->call_unburden_home_dir_default;
 
-ok( symlink("$HOME/.foobar/fnord", "$HOME/.fnord"), "Create test environment (Symlink 1)" );
-ok( -l "$HOME/.fnord", "Symlink 1 has been created" );
-ok( symlink("fnord", "$HOME/.foobar/blafasel"), "Create test environment (Symlink 2)" );
-ok( -l "$HOME/.foobar/blafasel", "Symlink 2 has been created" );
+my $wanted = $t->prepend_lsof_warning(
+    "Skipping '".$t->HOME."/.fnord/bla' due to symlink in path: ".$t->HOME."/.fnord\n" .
+    "Skipping '".$t->HOME."/.foobar/blafasel/bla' due to symlink in path: ".$t->HOME."/.foobar/blafasel\n");
 
-ok( write_file("$BASE/list", "m d .foobar/fnord/bla foobar-fnord-bla\n# Comment\n\n  \n	\nm d .fnord/bla fnord-bla\nm d .foobar/blafasel/bla foobar-blafasel-bla\n") );
-ok( write_file("$BASE/config", "TARGETDIR=$TARGET\nFILELAYOUT=$PREFIX-\%s") );
-
-my $cmd = "bin/unburden-home-dir -C $BASE/config -L $BASE/list > $BASE/output 2> $BASE/stderr";
-ok( system($cmd) == 0, "Call '$cmd'" );
-
-my $wanted = "Skipping '$HOME/.fnord/bla' due to symlink in path: $HOME/.fnord
-Skipping '$HOME/.foobar/blafasel/bla' due to symlink in path: $HOME/.foobar/blafasel
-";
-unless (which('lsof')) {
-    $wanted = "WARNING: lsof not found, not checking for files in use.\n".$wanted;
-}
-
-my $stderr = read_file("$BASE/stderr");
+my $stderr = read_file($t->BASE."/stderr");
 eq_or_diff_text( $stderr, $wanted, "Check command STDERR output" );
 
-$wanted = "Moving $HOME/.foobar/fnord/bla -> $TARGET/u-foobar-fnord-bla
+$wanted = "Moving ".$t->HOME."/.foobar/fnord/bla -> ".$t->TP."-foobar-fnord-bla
 sending incremental file list
-created directory $TARGET/u-foobar-fnord-bla
+created directory ".$t->TP."-foobar-fnord-bla
 ./
-Symlinking $TARGET/u-foobar-fnord-bla ->  $HOME/.foobar/fnord/bla
+Symlinking ".$t->TP."-foobar-fnord-bla ->  ".$t->HOME."/.foobar/fnord/bla
 ";
 
-my $output = read_file("$BASE/output");
+my $output = read_file($t->BASE."/output");
 eq_or_diff_text( $output, $wanted, "Check command STDOUT" );
 
-ok( -d "$TARGET/$PREFIX-foobar-fnord-bla", "First directory moved" );
-ok( ! -e "$TARGET/$PREFIX-fnord-bla", "Symlink 1 not moved" );
-ok( ! -e "$TARGET/$PREFIX-foobar-blafasel-bla", "Symlink 2 not moved" );
+dir_exists_ok( $t->TP."-foobar-fnord-bla" );
+file_not_exists_ok( $t->TP."-fnord-bla", "Symlink 1 not moved" );
+file_not_exists_ok( $t->TP."-foobar-blafasel-bla", "Symlink 2 not moved" );
 
-ok( rmtree("$BASE"), "Clean up" );
-
-done_testing();
+$t->done;
