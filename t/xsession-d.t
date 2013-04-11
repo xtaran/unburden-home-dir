@@ -27,7 +27,7 @@ ok( write_file("$BINDIR/unburden-home-dir", "#!/bin/sh\necho \$0 called\n"), "Cr
 ok( chmod( 0755, "$BINDIR/unburden-home-dir" ), "Set executable bit on testscript" );
 ok( write_file($t->HOME.'/.'.$t->BASENAME, "UNBURDEN_HOME=yes\n"), "Configure Xsession.d script to run unburden-home-dir" );
 
-$cmd = "/bin/run-parts --list $XSESSIOND > ".$t->BASE."/output 2> ".$t->BASE."/stderr";
+$cmd = "/bin/run-parts --list $XSESSIOND" . $t->shell_capture;
 ok( system($cmd) == 0, "Call '$cmd'" );
 
 $wanted = "";
@@ -42,7 +42,7 @@ $output = read_file($t->BASE."/output");
 eq_or_diff_text( $output, $wanted, "Check run-parts STDOUT" );
 ok( unlink($t->BASE."/output"), "Clean output" );
 
-$cmd = "/bin/sh $XSESSIOND/$RPSCRIPT > ".$t->BASE."/output 2> ".$t->BASE."/stderr";
+$cmd = "/bin/sh $XSESSIOND/$RPSCRIPT" . $t->shell_capture;
 ok( system($cmd) == 0, "Call '$cmd'" );
 
 $wanted = "";
@@ -59,7 +59,7 @@ ok( unlink($t->BASE."/output"), "Clean output" );
 
 ok( write_file($t->HOME.'/.'.$t->BASENAME, "UNBURDEN_HOME=no\n"), "Configure Xsession.d script to NOT run unburden-home-dir" );
 
-$cmd = "/bin/sh $XSESSIOND/$RPSCRIPT > ".$t->BASE."/output 2> ".$t->BASE."/stderr";
+$cmd = "/bin/sh $XSESSIOND/$RPSCRIPT" . $t->shell_capture;
 ok( system($cmd) == 0, "Call '$cmd'" );
 
 $wanted = "";

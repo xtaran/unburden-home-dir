@@ -103,7 +103,7 @@ sub call_unburden_home_dir {
         unless @_;
     my $cmd =
         'bin/unburden-home-dir '.join(' ', @_).
-        ' >'.$t->BASE.'/output 2>'.$t->BASE.'/stderr';
+        $t->shell_capture;
     ok( system($cmd) == 0, "Call '$cmd'" );
 }
 
@@ -159,6 +159,11 @@ sub write_config_file {
 
     ok( write_file($file, $contents),
         $desc || "Write config file $file" );
+}
+
+sub shell_capture {
+    my $t = shift;
+    return ' >'.$t->BASE.'/output 2>'.$t->BASE.'/stderr';
 }
 
 1;
