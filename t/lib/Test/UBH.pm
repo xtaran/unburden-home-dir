@@ -4,6 +4,7 @@
 use Test::More;
 use Test::Differences;
 use Test::File;
+use File::Path qw(mkpath);
 use File::Slurp;
 use Data::Dumper;
 
@@ -39,6 +40,7 @@ sub new {
 
     # Set a debug environment
     $ENV{HOME} = $t->HOME;
+    $ENV{LANG} = 'C';
 
     # Clean up possible remainders of aborted tests
     rmtree($t->BASE);
