@@ -99,22 +99,22 @@ sub prepend_lsof_warning {
 
 sub call_unburden_home_dir {
     my $t = shift;
-    my $param = shift ||
-        die 'Assertion: call_unburden_home_dir needs at least one non-empty parameter';
+    die 'Assertion: call_unburden_home_dir needs at least one non-empty parameter'
+        unless @_;
     my $cmd =
-        'bin/unburden-home-dir '.$param.
+        'bin/unburden-home-dir '.join(' ', @_).
         ' >'.$t->BASE.'/output 2>'.$t->BASE.'/stderr';
     ok( system($cmd) == 0, "Call '$cmd'" );
 }
 
 sub call_unburden_home_dir_user {
     my $t = shift;
-    $t->call_unburden_home_dir('-b '.$t->BASENAME)
+    $t->call_unburden_home_dir(@_, '-b '.$t->BASENAME)
 }
 
 sub call_unburden_home_dir_default {
     my $t = shift;
-    $t->call_unburden_home_dir("-C ".$t->BASE."/config -L ".$t->BASE."/list");
+    $t->call_unburden_home_dir(@_, "-C ".$t->BASE."/config -L ".$t->BASE."/list");
 }
 
 sub write_configs {
