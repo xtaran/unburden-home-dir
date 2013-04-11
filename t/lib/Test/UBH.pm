@@ -3,6 +3,7 @@
 # Boilerplate which exports into main::
 use Test::More;
 use Test::Differences;
+use Test::File;
 use File::Slurp;
 use Data::Dumper;
 
@@ -13,6 +14,7 @@ use Mouse;
 # Boilerplate which exports into Test::UBH::
 use Test::More;
 use Test::Differences;
+use Test::File;
 use File::Path qw(mkpath rmtree);
 use File::Slurp;
 use File::Which;

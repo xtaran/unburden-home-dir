@@ -6,10 +6,10 @@ my $t = Test::UBH->new('check-symlinks-without-trailing-slash');
 
 $t->setup_test_environment_without_target(".foobar");
 
-ok( ! -d $t->TARGET."/fnord", "Target directory does not exist" );
+file_not_exists_ok( $t->TARGET."/fnord" );
 
 ok( symlink($t->TARGET."/u-foobar-fnord", $t->HOME."/.foobar/fnord"), "Create test environment (Symlink)" );
-ok( -l $t->HOME."/.foobar/fnord", "Symlink has been created" );
+file_is_symlink_ok( $t->HOME."/.foobar/fnord" );
 
 ok( write_file($t->BASE."/list", "m d .foobar/fnord foobar-fnord/\n") );
 ok( write_file($t->BASE."/config", "TARGETDIR=".$t->TARGET."\nFILELAYOUT=".$t->PREFIX."-\%s") );
@@ -29,6 +29,6 @@ $wanted =
 my $output = read_file($t->BASE."/output");
 eq_or_diff_text( $output, $wanted, "Check command STDOUT" );
 
-ok( -d $t->TARGET."/u-foobar-fnord", "Directory created" );
+dir_exists_ok( $t->TARGET."/u-foobar-fnord" );
 
 $t->done;

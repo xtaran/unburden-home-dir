@@ -6,10 +6,15 @@ my $t = Test::UBH->new('check-symlinks-in-path');
 
 $t->setup_test_environment(".foobar/fnord/bla");
 
-ok( symlink($t->HOME."/.foobar/fnord", $t->HOME."/.fnord"), "Create test environment (Symlink 1)" );
-ok( -l $t->HOME."/.fnord", "Symlink 1 has been created" );
+ok( symlink(".foobar/fnord", $t->HOME."/.fnord"), "Create test environment (Symlink 1)" );
+file_is_symlink_ok( $t->HOME."/.fnord" );
+# http://bugs.debian.org/705242 + https://rt.cpan.org/Public/Bug/Display.html?id=84582
+#symlink_target_exists_ok( $t->HOME."/.fnord" );
+
 ok( symlink("fnord", $t->HOME."/.foobar/blafasel"), "Create test environment (Symlink 2)" );
-ok( -l $t->HOME."/.foobar/blafasel", "Symlink 2 has been created" );
+file_is_symlink_ok( $t->HOME."/.foobar/blafasel" );
+# http://bugs.debian.org/705242 + https://rt.cpan.org/Public/Bug/Display.html?id=84582
+#symlink_target_exists_ok( $t->HOME."/.foobar/blafasel" );
 
 ok( write_file($t->BASE."/list", "m d .foobar/fnord/bla foobar-fnord-bla\nm d .fnord/bla fnord-bla\nm d .foobar/blafasel/bla foobar-blafasel-bla\n") );
 ok( write_file($t->BASE."/config", "TARGETDIR=".$t->TARGET."\nFILELAYOUT=".$t->PREFIX."-\%s") );
@@ -34,8 +39,8 @@ Symlinking ".$t->TARGET."/u-foobar-fnord-bla ->  ".$t->HOME."/.foobar/fnord/bla
 my $output = read_file($t->BASE."/output");
 eq_or_diff_text( $output, $wanted, "Check command STDOUT" );
 
-ok( -d $t->TARGET."/".$t->PREFIX."-foobar-fnord-bla", "First directory moved" );
-ok( ! -e $t->TARGET."/".$t->PREFIX."-fnord-bla", "Symlink 1 not moved" );
-ok( ! -e $t->TARGET."/".$t->PREFIX."-foobar-blafasel-bla", "Symlink 2 not moved" );
+dir_exists_ok( $t->TARGET."/".$t->PREFIX."-foobar-fnord-bla", "First directory moved" );
+file_not_exists_ok( $t->TARGET."/".$t->PREFIX."-fnord-bla", "Symlink 1 not moved" );
+file_not_exists_ok( $t->TARGET."/".$t->PREFIX."-foobar-blafasel-bla", "Symlink 2 not moved" );
 
 $t->done();

@@ -15,12 +15,14 @@ foreach my $configtype (qw(write_configs write_xdg_configs)) {
 
     ok( symlink($demodir1, $t->HOME."/.fnord"),
         "Create test environment (Symlink 1)" );
-    ok( -l $t->HOME."/.fnord",
-        "Symlink 1 has been created" );
+    file_is_symlink_ok( $t->HOME."/.fnord" );
+    # http://bugs.debian.org/705242 + https://rt.cpan.org/Public/Bug/Display.html?id=84582
+    #symlink_target_exists_ok( $t->HOME."/.fnord" );
     ok( symlink("fnord", $t->HOME."/$demodir2"),
         "Create test environment (Symlink 2)" );
-    ok( -l $t->HOME."/$demodir2",
-        "Symlink 2 has been created" );
+    file_is_symlink_ok( $t->HOME."/$demodir2" );
+    # http://bugs.debian.org/705242 + https://rt.cpan.org/Public/Bug/Display.html?id=84582
+    #symlink_target_exists_ok( $t->HOME."/$demodir2" );
 
     $t->$configtype("m d $demofile1 $demotarget1\n".
                     "m d .fnord/bla fnord-bla\n".
@@ -45,9 +47,9 @@ foreach my $configtype (qw(write_configs write_xdg_configs)) {
     my $output = read_file($t->BASE."/output");
     eq_or_diff_text( $output, $wanted, "Check command STDOUT" );
 
-    ok( -d $t->TARGET."/".$t->PREFIX."-$demotarget1", "First directory moved" );
-    ok( ! -e $t->TARGET."/".$t->PREFIX."-fnord-bla", "Symlink 1 not moved" );
-    ok( ! -e $t->TARGET."/".$t->PREFIX."-$demotarget2", "Symlink 2 not moved" );
+    dir_exists_ok( $t->TARGET."/".$t->PREFIX."-$demotarget1", "First directory moved" );
+    file_not_exists_ok( $t->TARGET."/".$t->PREFIX."-fnord-bla", "Symlink 1 not moved" );
+    file_not_exists_ok( $t->TARGET."/".$t->PREFIX."-$demotarget2", "Symlink 2 not moved" );
 
     $t->cleanup();
 }
