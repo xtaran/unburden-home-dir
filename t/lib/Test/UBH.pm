@@ -59,15 +59,17 @@ sub done {
 
 sub setup_test_environment {
     my $t = shift;
-    $t->setup_test_environment_without_target(shift);
+    $t->setup_test_environment_without_target(@_);
     $t->create_and_check_directory($t->TARGET,
                                    "test environment (target directory)" );
 }
 
 sub setup_test_environment_without_target {
     my $t = shift;
-    $t->create_and_check_directory($t->HOME."/".(shift || ''),
-                                   "test environment (home directory)" );
+    foreach my $dir (@_) {
+        $t->create_and_check_directory($t->HOME."/".($dir || ''),
+                                       "test environment (home directory)" );
+    }
 }
 
 sub create_and_check_directory {
