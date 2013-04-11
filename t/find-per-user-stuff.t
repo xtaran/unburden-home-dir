@@ -28,12 +28,9 @@ foreach my $configtype (qw(write_configs write_xdg_configs)) {
 
     $t->call_unburden_home_dir_user;
 
-    my $wanted =
+    my $wanted = $t->prepend_lsof_warning(
         "Skipping '".$t->HOME."/.fnord/bla' due to symlink in path: ".$t->HOME."/.fnord\n" .
-        "Skipping '".$t->HOME."/$demofile2' due to symlink in path: ".$t->HOME."/$demodir2\n";
-    unless (which('lsof')) {
-        $wanted = "WARNING: lsof not found, not checking for files in use.\n".$wanted;
-    }
+        "Skipping '".$t->HOME."/$demofile2' due to symlink in path: ".$t->HOME."/$demodir2\n");
 
     my $stderr = read_file($t->BASE."/stderr");
     eq_or_diff_text( $stderr, $wanted, "Check command STDERR output" );

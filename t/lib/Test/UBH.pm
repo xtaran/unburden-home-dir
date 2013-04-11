@@ -3,9 +3,7 @@
 # Boilerplate which exports into main::
 use Test::More;
 use Test::Differences;
-use File::Path qw(mkpath rmtree);
 use File::Slurp;
-use File::Which;
 use Data::Dumper;
 
 package Test::UBH;
