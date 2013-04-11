@@ -8,7 +8,7 @@ $t->setup_test_environment_without_target(".foobar");
 
 file_not_exists_ok( $t->TARGET."/fnord" );
 
-ok( symlink($t->TARGET."/u-foobar-fnord", $t->HOME."/.foobar/fnord"), "Create test environment (Symlink)" );
+ok( symlink($t->TP."-foobar-fnord", $t->HOME."/.foobar/fnord"), "Create test environment (Symlink)" );
 file_is_symlink_ok( $t->HOME."/.foobar/fnord" );
 
 $t->write_configs("m d .foobar/fnord foobar-fnord/\n");
@@ -21,13 +21,13 @@ my $stderr = read_file($t->BASE."/stderr");
 eq_or_diff_text( $stderr, $wanted, "Check command STDERR output" );
 
 $wanted =
-    "Create ".$t->TARGET."/u-foobar-fnord\n" .
+    "Create ".$t->TP."-foobar-fnord\n" .
     "mkdir ".$t->TARGET."\n" .
-    "mkdir ".$t->TARGET."/u-foobar-fnord\n";
+    "mkdir ".$t->TP."-foobar-fnord\n";
 
 my $output = read_file($t->BASE."/output");
 eq_or_diff_text( $output, $wanted, "Check command STDOUT" );
 
-dir_exists_ok( $t->TARGET."/u-foobar-fnord" );
+dir_exists_ok( $t->TP."-foobar-fnord" );
 
 $t->done;

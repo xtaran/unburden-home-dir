@@ -30,18 +30,18 @@ Skipping '".$t->HOME."/.foobar/blafasel/bla' due to symlink in path: ".$t->HOME.
 my $stderr = read_file($t->BASE."/stderr");
 eq_or_diff_text( $stderr, $wanted, "Check command STDERR output" );
 
-$wanted = "Moving ".$t->HOME."/.foobar/fnord/bla -> ".$t->TARGET."/u-foobar-fnord-bla
+$wanted = "Moving ".$t->HOME."/.foobar/fnord/bla -> ".$t->TP."-foobar-fnord-bla
 sending incremental file list
-created directory ".$t->TARGET."/u-foobar-fnord-bla
+created directory ".$t->TP."-foobar-fnord-bla
 ./
-Symlinking ".$t->TARGET."/u-foobar-fnord-bla ->  ".$t->HOME."/.foobar/fnord/bla
+Symlinking ".$t->TP."-foobar-fnord-bla ->  ".$t->HOME."/.foobar/fnord/bla
 ";
 
 my $output = read_file($t->BASE."/output");
 eq_or_diff_text( $output, $wanted, "Check command STDOUT" );
 
-dir_exists_ok( $t->TARGET."/".$t->PREFIX."-foobar-fnord-bla", "First directory moved" );
-file_not_exists_ok( $t->TARGET."/".$t->PREFIX."-fnord-bla", "Symlink 1 not moved" );
-file_not_exists_ok( $t->TARGET."/".$t->PREFIX."-foobar-blafasel-bla", "Symlink 2 not moved" );
+dir_exists_ok( $t->TP."-foobar-fnord-bla", "First directory moved" );
+file_not_exists_ok( $t->TP."-fnord-bla", "Symlink 1 not moved" );
+file_not_exists_ok( $t->TP."-foobar-blafasel-bla", "Symlink 2 not moved" );
 
 $t->done();

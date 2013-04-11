@@ -20,7 +20,7 @@ use File::Slurp;
 use File::Which;
 use Data::Dumper;
 
-foreach my $varname (qw(TESTNAME BASE HOME TARGET BASENAME PREFIX)) {
+foreach my $varname (qw(TESTNAME BASE HOME TARGET BASENAME PREFIX TP)) {
     has $varname => ( is => 'rw', isa => 'Str' );
 }
 
@@ -35,6 +35,7 @@ sub new {
     $self->TARGET($self->BASE .'/2');
     $self->BASENAME("unburden-home-dir_TEST_$$");
     $self->PREFIX('u');
+    $self->TP($self->TARGET.'/'.$self->PREFIX);
 
     # Set a debug environment
     $ENV{HOME} = $self->HOME;

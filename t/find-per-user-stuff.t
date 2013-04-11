@@ -38,18 +38,18 @@ foreach my $configtype (qw(write_user_configs write_xdg_configs)) {
     eq_or_diff_text( $stderr, $wanted, "Check command STDERR output" );
 
     $wanted =
-        "Moving ".$t->HOME."/$demofile1 -> ".$t->TARGET."/u-$demotarget1\n" .
+        "Moving ".$t->HOME."/$demofile1 -> ".$t->TP."-$demotarget1\n" .
         "sending incremental file list\n" .
-        "created directory ".$t->TARGET."/u-$demotarget1\n" .
+        "created directory ".$t->TP."-$demotarget1\n" .
         "./\n" .
-        "Symlinking ".$t->TARGET."/u-$demotarget1 ->  ".$t->HOME."/$demofile1\n";
+        "Symlinking ".$t->TP."-$demotarget1 ->  ".$t->HOME."/$demofile1\n";
 
     my $output = read_file($t->BASE."/output");
     eq_or_diff_text( $output, $wanted, "Check command STDOUT" );
 
-    dir_exists_ok( $t->TARGET."/".$t->PREFIX."-$demotarget1", "First directory moved" );
-    file_not_exists_ok( $t->TARGET."/".$t->PREFIX."-fnord-bla", "Symlink 1 not moved" );
-    file_not_exists_ok( $t->TARGET."/".$t->PREFIX."-$demotarget2", "Symlink 2 not moved" );
+    dir_exists_ok( $t->TP."-$demotarget1", "First directory moved" );
+    file_not_exists_ok( $t->TP."-fnord-bla", "Symlink 1 not moved" );
+    file_not_exists_ok( $t->TP."-$demotarget2", "Symlink 2 not moved" );
 
     $t->cleanup();
 }
