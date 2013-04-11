@@ -17,11 +17,7 @@ $t->write_configs("m d .foobar/fnord foobar-fnord\n" .
 
 $t->call_unburden_home_dir_default;
 
-my $wanted = $t->prepend_lsof_warning;
-
-my $stderr = read_file($t->BASE."/stderr");
-unified_diff;
-eq_or_diff_text( $stderr, $wanted, "Check command STDERR output (should be empty)" );
+$t->eq_lsof_warning_or_diff_stderr;
 
 $wanted = "Moving ".$t->HOME."/.foobar/fnord -> ".$t->TP."-foobar-fnord
 sending incremental file list
@@ -37,17 +33,7 @@ Moving ".$t->HOME."/.foobar/foo -> ".$t->TP."-foobar-foo
 '".$t->HOME."/.foobar/foo' -> '".$t->TP."-foobar-foo'
 Symlinking ".$t->TP."-foobar-foo ->  ".$t->HOME."/.foobar/foo
 ";
-
-my $output = read_file($t->BASE."/output");
-
-# Somewhere between coreutils 8.13 (until Wheezy/Quantal), and 8.20
-# (from Jessie/Raring on) the quoting characters in verbose output of
-# mv. changed. $wanted contains the newer style. In case this test
-# runs with older version of coreutils, we change the output to look
-# like the one from the newer versions.
-$output =~ s/\`/\'/g;
-
-eq_or_diff_text( $output, $wanted, "Check command STDOUT" );
+$t->eq_or_diff_output($wanted);
 
 dir_exists_ok( $t->TP."-foobar-fnord", "First directory moved" );
 dir_exists_ok( $t->TP."-foobar-gnarz", "Second directory moved" );

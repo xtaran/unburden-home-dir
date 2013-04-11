@@ -24,9 +24,7 @@ $t->call_unburden_home_dir_default;
 my $wanted = $t->prepend_lsof_warning(
     "Skipping '".$t->HOME."/.fnord/bla' due to symlink in path: ".$t->HOME."/.fnord\n" .
     "Skipping '".$t->HOME."/.foobar/blafasel/bla' due to symlink in path: ".$t->HOME."/.foobar/blafasel\n");
-
-my $stderr = read_file($t->BASE."/stderr");
-eq_or_diff_text( $stderr, $wanted, "Check command STDERR output" );
+$t->eq_or_diff_stderr($wanted);
 
 $wanted = "Moving ".$t->HOME."/.foobar/fnord/bla -> ".$t->TP."-foobar-fnord-bla
 sending incremental file list
@@ -35,8 +33,7 @@ created directory ".$t->TP."-foobar-fnord-bla
 Symlinking ".$t->TP."-foobar-fnord-bla ->  ".$t->HOME."/.foobar/fnord/bla
 ";
 
-my $output = read_file($t->BASE."/output");
-eq_or_diff_text( $output, $wanted, "Check command STDOUT" );
+$t->eq_or_diff_output($wanted);
 
 dir_exists_ok( $t->TP."-foobar-fnord-bla" );
 file_not_exists_ok( $t->TP."-fnord-bla", "Symlink 1 not moved" );

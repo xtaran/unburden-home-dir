@@ -16,9 +16,7 @@ my $wanted =
     "Trying to revert ".$t->TP."-barba-blatest-foobar to ".$t->HOME."/.foobar/blatest/barba\n" .
     "Removing symlink ".$t->HOME."/.foobar/blatest/barba\n" .
     "Moving ".$t->TP."-barba-blatest-foobar -> ".$t->HOME."/.foobar/blatest/barba\n";
-
-my $contents = read_file($t->BASE."/output");
-eq_or_diff_text( $contents, $wanted, "Check command output" );
+$t->eq_or_diff_output($wanted);
 
 dir_exists_ok( $t->TARGET, "Base directory still exists" );
 dir_exists_ok( $t->TP."-barba-blatest-foobar", "Directory still exists" );

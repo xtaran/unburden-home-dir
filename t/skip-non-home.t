@@ -15,12 +15,8 @@ foreach my $example (qw(/foobar ../foobar)) {
 
     my $wanted = $t->prepend_lsof_warning(
         "$example would be outside of the home directory, skipping...\n");
-
-    my $stderr = read_file($t->BASE."/stderr");
-    eq_or_diff_text( $stderr, $wanted, "Check command STDERR output" );
-
-    my $output = read_file($t->BASE."/output");
-    eq_or_diff_text( $output, '', "Check command STDOUT (should be empty)" );
+    $t->eq_or_diff_stderr($wanted);
+    $t->eq_or_diff_output('');
 
     file_not_exists_ok( $t->TP."-foobar" );
     file_not_exists_ok( $t->TP );

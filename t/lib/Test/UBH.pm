@@ -166,5 +166,40 @@ sub shell_capture {
     return ' >'.$t->BASE.'/output 2>'.$t->BASE.'/stderr';
 }
 
+sub eq_or_diff_stderr {
+    my $t = shift;
+    my ($wanted, $desc) = @_;
+    $t->eq_or_diff_file('stderr', $desc || 'STDERR', $wanted || '');
+}
+
+sub eq_lsof_warning_or_diff_stderr {
+    my $t = shift;
+    $t->eq_or_diff_stderr($t->prepend_lsof_warning);
+}
+
+sub eq_or_diff_output {
+    my $t = shift;
+    my ($wanted, $desc) = @_;
+    $t->eq_or_diff_file('output', $desc || 'STDOUT' , $wanted || '');
+}
+
+sub eq_or_diff_file {
+    my $t = shift;
+    my ($file, $desc, $wanted) = @_;
+    $file = $t->BASE."/$file";
+    my $output = read_file($file);
+
+    # Somewhere between coreutils 8.13 (until Wheezy/Quantal), and
+    # 8.20 (from Jessie/Raring on) the quoting characters in verbose
+    # output of mv. changed. $wanted contains the newer style. In case
+    # this test runs with older version of coreutils, we change the
+    # output to look like the one from the newer versions.
+    $output =~ s/\`/\'/g;
+
+    unified_diff;
+    eq_or_diff_text( $output, $wanted, "Check $desc" );
+    ok( unlink($file), "Clean cache file ($desc)" );
+}
+
 1;
 

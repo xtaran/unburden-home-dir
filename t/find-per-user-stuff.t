@@ -33,9 +33,7 @@ foreach my $configtype (qw(write_user_configs write_xdg_configs)) {
     my $wanted = $t->prepend_lsof_warning(
         "Skipping '".$t->HOME."/.fnord/bla' due to symlink in path: ".$t->HOME."/.fnord\n" .
         "Skipping '".$t->HOME."/$demofile2' due to symlink in path: ".$t->HOME."/$demodir2\n");
-
-    my $stderr = read_file($t->BASE."/stderr");
-    eq_or_diff_text( $stderr, $wanted, "Check command STDERR output" );
+    $t->eq_or_diff_stderr($wanted);
 
     $wanted =
         "Moving ".$t->HOME."/$demofile1 -> ".$t->TP."-$demotarget1\n" .
@@ -43,9 +41,7 @@ foreach my $configtype (qw(write_user_configs write_xdg_configs)) {
         "created directory ".$t->TP."-$demotarget1\n" .
         "./\n" .
         "Symlinking ".$t->TP."-$demotarget1 ->  ".$t->HOME."/$demofile1\n";
-
-    my $output = read_file($t->BASE."/output");
-    eq_or_diff_text( $output, $wanted, "Check command STDOUT" );
+    $t->eq_or_diff_output($wanted);
 
     dir_exists_ok( $t->TP."-$demotarget1", "First directory moved" );
     file_not_exists_ok( $t->TP."-fnord-bla", "Symlink 1 not moved" );

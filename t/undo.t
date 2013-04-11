@@ -20,15 +20,8 @@ my $wanted =
     "sending incremental file list\n" .
     "created directory ".$t->HOME."/.foobar/blatest/barba\n" .
     "./\n";
-
-my $contents = read_file($t->BASE."/output");
-eq_or_diff_text( $contents, $wanted, "Check command output" );
-
-$wanted = $t->prepend_lsof_warning;
-
-my $stderr = read_file($t->BASE."/stderr");
-print "\nSTDERR:\n\n$stderr\n";
-eq_or_diff_text( $stderr, $wanted, "Check command STDERR output (should be empty)" );
+$t->eq_or_diff_output($wanted);
+$t->eq_lsof_warning_or_diff_stderr;
 
 dir_exists_ok( $t->TARGET, "Base directory still exists" );
 file_not_exists_ok( $t->TP."-barba-blatest-foobar", "Directory no more exists" );
