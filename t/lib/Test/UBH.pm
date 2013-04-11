@@ -26,29 +26,29 @@ foreach my $varname (qw(TESTNAME BASE HOME TARGET BASENAME PREFIX TP)) {
 
 sub new {
     my $class = shift;
-    my $self = {};
-    bless($self, $class);
+    my $t = {};
+    bless($t, $class);
 
-    $self->TESTNAME(shift || 'generic-test');
-    $self->BASE('t/'.$self->TESTNAME);
-    $self->HOME($self->BASE . '/1');
-    $self->TARGET($self->BASE .'/2');
-    $self->BASENAME("unburden-home-dir_TEST_$$");
-    $self->PREFIX('u');
-    $self->TP($self->TARGET.'/'.$self->PREFIX);
+    $t->TESTNAME(shift || 'generic-test');
+    $t->BASE('t/'.$t->TESTNAME);
+    $t->HOME($t->BASE . '/1');
+    $t->TARGET($t->BASE .'/2');
+    $t->BASENAME("unburden-home-dir_TEST_$$");
+    $t->PREFIX('u');
+    $t->TP($t->TARGET.'/'.$t->PREFIX);
 
     # Set a debug environment
-    $ENV{HOME} = $self->HOME;
+    $ENV{HOME} = $t->HOME;
 
     # Clean up possible remainders of aborted tests
-    rmtree($self->BASE);
+    rmtree($t->BASE);
 
-    return $self;
+    return $t;
 }
 
 sub cleanup {
-    my $self = shift;
-    ok( rmtree($self->BASE), "Clean up" );
+    my $t = shift;
+    ok( rmtree($t->BASE), "Clean up" );
 }
 
 sub done {
