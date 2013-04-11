@@ -99,7 +99,8 @@ sub prepend_lsof_warning {
 
 sub call_unburden_home_dir {
     my $t = shift;
-    my $param = shift;
+    my $param = shift ||
+        die 'Assertion: call_unburden_home_dir needs at least one non-empty parameter';
     my $cmd =
         'bin/unburden-home-dir '.$param.
         ' >'.$t->BASE.'/output 2>'.$t->BASE.'/stderr';
