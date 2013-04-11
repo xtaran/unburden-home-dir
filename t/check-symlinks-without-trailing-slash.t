@@ -1,53 +1,34 @@
 #!/usr/bin/perl -wl
 
-use Test::More;
-use Test::Differences;
-use File::Path qw(mkpath rmtree);
-use File::Slurp;
-use File::Which;
-use Data::Dumper;
+use lib qw(t/lib lib);
+use Test::UBH;
+my $t = Test::UBH->new('check-symlinks-without-trailing-slash');
 
-my $BASE = 't/check-symlinks-without-trailing-slash';
-my $HOME = "$BASE/1";
-my $TARGET = "$BASE/2";
-my $PREFIX = "u";
+$t->setup_test_environment_without_target(".foobar");
 
-# Set a debug environment
-$ENV{HOME} = $HOME;
+ok( ! -d $t->TARGET."/fnord", "Target directory does not exist" );
 
-# Clean up possible remainders of aborted tests
-rmtree("$BASE");
+ok( symlink($t->TARGET."/u-foobar-fnord", $t->HOME."/.foobar/fnord"), "Create test environment (Symlink)" );
+ok( -l $t->HOME."/.foobar/fnord", "Symlink has been created" );
 
-ok( mkpath("$HOME/.foobar", {}), "Create test environment (directories)" );
-ok( ! -d "$TARGET/fnord", "Target directory does not exist" );
+ok( write_file($t->BASE."/list", "m d .foobar/fnord foobar-fnord/\n") );
+ok( write_file($t->BASE."/config", "TARGETDIR=".$t->TARGET."\nFILELAYOUT=".$t->PREFIX."-\%s") );
 
-ok( symlink("$TARGET/u-foobar-fnord", "$HOME/.foobar/fnord"), "Create test environment (Symlink)" );
-ok( -l "$HOME/.foobar/fnord", "Symlink has been created" );
+$t->call_unburden_home_dir_default;
 
-ok( write_file("$BASE/list", "m d .foobar/fnord foobar-fnord/\n") );
-ok( write_file("$BASE/config", "TARGETDIR=$TARGET\nFILELAYOUT=$PREFIX-\%s") );
+my $wanted = $t->prepend_lsof_warning('');
 
-my $cmd = "bin/unburden-home-dir -C $BASE/config -L $BASE/list > $BASE/output 2> $BASE/stderr";
-ok( system($cmd) == 0, "Call '$cmd'" );
-
-my $wanted = "";
-unless (which('lsof')) {
-    $wanted = "WARNING: lsof not found, not checking for files in use.\n".$wanted;
-}
-
-my $stderr = read_file("$BASE/stderr");
+my $stderr = read_file($t->BASE."/stderr");
 eq_or_diff_text( $stderr, $wanted, "Check command STDERR output" );
 
-$wanted = "Create $TARGET/u-foobar-fnord
-mkdir $TARGET
-mkdir $TARGET/u-foobar-fnord
-";
+$wanted =
+    "Create ".$t->TARGET."/u-foobar-fnord\n" .
+    "mkdir ".$t->TARGET."\n" .
+    "mkdir ".$t->TARGET."/u-foobar-fnord\n";
 
-my $output = read_file("$BASE/output");
+my $output = read_file($t->BASE."/output");
 eq_or_diff_text( $output, $wanted, "Check command STDOUT" );
 
-ok( -d "$TARGET/u-foobar-fnord", "Directory created" );
+ok( -d $t->TARGET."/u-foobar-fnord", "Directory created" );
 
-ok( rmtree("$BASE"), "Clean up" );
-
-done_testing();
+$t->done;

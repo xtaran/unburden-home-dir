@@ -48,10 +48,22 @@ sub done {
 
 sub setup_test_environment {
     my $t = shift;
-    my $demodir = shift;
-    ok( mkpath($t->HOME."/$demodir", $t->TARGET, {}), "Create test environment (directories)" );
-    ok( -d $t->HOME."/$demodir", "Original directory has been created" );
-    ok( -d $t->TARGET, "Target directory has been created" );
+    $t->setup_test_environment_without_target(shift);
+    $t->create_and_check_directory($t->TARGET,
+                                   "test environment (target directory)" );
+}
+
+sub setup_test_environment_without_target {
+    my $t = shift;
+    $t->create_and_check_directory($t->HOME."/".shift,
+                                   "test environment (home directory)" );
+}
+
+sub create_and_check_directory {
+    my $t = shift;
+    my ($dir, $desc) = @_;
+    ok( mkpath($dir, {}), "Create $desc" );
+    ok( -d $dir, "$desc has been created" );
 }
 
 sub default_config {
