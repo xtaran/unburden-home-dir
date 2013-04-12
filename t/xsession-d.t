@@ -29,16 +29,16 @@ ok( write_file($t->HOME.'/.'.$t->BASENAME, "UNBURDEN_HOME=yes\n"), "Configure Xs
 
 $t->call_cmd("/bin/run-parts --list $XSESSIOND");
 $t->eq_or_diff_stderr('', "run-parts STDERR");
-$t->eq_or_diff_output("$XSESSIOND/$RPSCRIPT\n", "run-parts STDOUT");
+$t->eq_or_diff_stdout("$XSESSIOND/$RPSCRIPT\n", "run-parts STDOUT");
 
 $t->call_cmd("/bin/sh $XSESSIOND/$RPSCRIPT");
 $t->eq_or_diff_stderr('', "Xsession.d STDERR");
-$t->eq_or_diff_output("$BINDIR/unburden-home-dir called\n", "Xsession.d STDOUT");
+$t->eq_or_diff_stdout("$BINDIR/unburden-home-dir called\n", "Xsession.d STDOUT");
 
 ok( write_file($t->HOME.'/.'.$t->BASENAME, "UNBURDEN_HOME=no\n"), "Configure Xsession.d script to NOT run unburden-home-dir" );
 
 $t->call_cmd("/bin/sh $XSESSIOND/$RPSCRIPT");
 $t->eq_or_diff_stderr('');
-$t->eq_or_diff_output('');
+$t->eq_or_diff_stdout('');
 
 $t->done;

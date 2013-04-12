@@ -20,7 +20,7 @@ my $wanted =
     "sending incremental file list\n" .
     "created directory ".$t->HOME."/.foobar/blatest/barba\n" .
     "./\n";
-$t->eq_or_diff_output($wanted);
+$t->eq_or_diff_stdout($wanted);
 $t->eq_lsof_warning_or_diff_stderr;
 
 dir_exists_ok( $t->TARGET, "Base directory still exists" );

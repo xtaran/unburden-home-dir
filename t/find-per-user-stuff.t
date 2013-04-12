@@ -41,7 +41,7 @@ foreach my $configtype (qw(write_user_configs write_xdg_configs)) {
         "created directory ".$t->TP."-$demotarget1\n" .
         "./\n" .
         "Symlinking ".$t->TP."-$demotarget1 ->  ".$t->HOME."/$demofile1\n";
-    $t->eq_or_diff_output($wanted);
+    $t->eq_or_diff_stdout($wanted);
 
     dir_exists_ok( $t->TP."-$demotarget1", "First directory moved" );
     file_not_exists_ok( $t->TP."-fnord-bla", "Symlink 1 not moved" );

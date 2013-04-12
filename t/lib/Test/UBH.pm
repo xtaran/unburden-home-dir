@@ -181,7 +181,7 @@ sub eq_lsof_warning_or_diff_stderr {
     $t->eq_or_diff_stderr($t->prepend_lsof_warning);
 }
 
-sub eq_or_diff_output {
+sub eq_or_diff_stdout {
     my $t = shift;
     my ($wanted, $desc) = @_;
     $t->eq_or_diff_file('output', $desc || 'STDOUT' , $wanted || '');

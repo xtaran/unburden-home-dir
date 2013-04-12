@@ -13,7 +13,7 @@ Moving ".$t->HOME."/.foobar/blatest/barba -> ".$t->TP."-barba-blatest-foobar
 Symlinking ".$t->TP."-barba-blatest-foobar ->  ".$t->HOME."/.foobar/blatest/barba
 ";
 
-$t->eq_or_diff_output($wanted);
+$t->eq_or_diff_stdout($wanted);
 
 file_not_exists_ok( $t->TP."-barba-blatest-foobar" );
 ok( ! -l $t->HOME."/.foobar/blatest/barba",

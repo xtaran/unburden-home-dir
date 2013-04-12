@@ -36,7 +36,7 @@ created directory ".$t->TP."-foobar-fnord-bla
 Symlinking ".$t->TP."-foobar-fnord-bla ->  ".$t->HOME."/.foobar/fnord/bla
 ";
 
-$t->eq_or_diff_output($wanted);
+$t->eq_or_diff_stdout($wanted);
 
 dir_exists_ok( $t->TP."-foobar-fnord-bla", "First directory moved" );
 file_not_exists_ok( $t->TP."-fnord-bla", "Symlink 1 not moved" );

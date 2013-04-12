@@ -16,7 +16,7 @@ foreach my $example (qw(/foobar ../foobar)) {
     my $wanted = $t->prepend_lsof_warning(
         "$example would be outside of the home directory, skipping...\n");
     $t->eq_or_diff_stderr($wanted);
-    $t->eq_or_diff_output('');
+    $t->eq_or_diff_stdout('');
 
     file_not_exists_ok( $t->TP."-foobar" );
     file_not_exists_ok( $t->TP );

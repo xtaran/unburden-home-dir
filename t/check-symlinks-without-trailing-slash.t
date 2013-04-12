@@ -22,7 +22,7 @@ $wanted =
     "Create ".$t->TP."-foobar-fnord\n" .
     "mkdir ".$t->TARGET."\n" .
     "mkdir ".$t->TP."-foobar-fnord\n";
-$t->eq_or_diff_output($wanted);
+$t->eq_or_diff_stdout($wanted);
 
 dir_exists_ok( $t->TP."-foobar-fnord" );
 

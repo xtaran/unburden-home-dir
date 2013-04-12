@@ -33,7 +33,7 @@ Moving ".$t->HOME."/.foobar/foo -> ".$t->TP."-foobar-foo
 '".$t->HOME."/.foobar/foo' -> '".$t->TP."-foobar-foo'
 Symlinking ".$t->TP."-foobar-foo ->  ".$t->HOME."/.foobar/foo
 ";
-$t->eq_or_diff_output($wanted);
+$t->eq_or_diff_stdout($wanted);
 
 dir_exists_ok( $t->TP."-foobar-fnord", "First directory moved" );
 dir_exists_ok( $t->TP."-foobar-gnarz", "Second directory moved" );

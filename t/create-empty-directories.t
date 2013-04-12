@@ -20,7 +20,7 @@ Create parent directories for ".$t->HOME."/.foobar/fnord
 mkdir ".$t->HOME."/.foobar
 Symlinking ".$t->HOME."/.foobar/fnord -> ".$t->TP."-foobar-fnord
 ";
-$t->eq_or_diff_output($wanted);
+$t->eq_or_diff_stdout($wanted);
 
 dir_exists_ok( $t->TP."-foobar-fnord" );
 dir_exists_ok( $t->HOME."/.foobar" );
