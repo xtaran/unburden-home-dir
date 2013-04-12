@@ -6,10 +6,14 @@ my $t = Test::UBH->new('parse-comments-and-blank-lines');
 
 $t->setup_test_environment('.foobar/fnord/bla');
 
-ok( symlink($t->HOME."/.foobar/fnord", $t->HOME."/.fnord"), "Create test environment (Symlink 1)" );
+ok( symlink(".foobar/fnord", $t->HOME."/.fnord"), "Create test environment (Symlink 1)" );
 file_is_symlink_ok( $t->HOME."/.fnord" );
+# http://bugs.debian.org/705242 + https://rt.cpan.org/Public/Bug/Display.html?id=84582
+#symlink_target_exists_ok( $t->HOME."/.fnord" );
 ok( symlink("fnord", $t->HOME."/.foobar/blafasel"), "Create test environment (Symlink 2)" );
 file_is_symlink_ok( $t->HOME."/.foobar/blafasel" );
+# http://bugs.debian.org/705242 + https://rt.cpan.org/Public/Bug/Display.html?id=84582
+#symlink_target_exists_ok( $t->HOME."/.foobar/blafasel" );
 
 $t->write_configs("m d .foobar/fnord/bla foobar-fnord-bla\n" .
                   "# Comment\n" .
