@@ -101,10 +101,14 @@ sub call_unburden_home_dir {
     my $t = shift;
     die 'Assertion: call_unburden_home_dir needs at least one non-empty parameter'
         unless @_;
-    my $cmd =
-        'bin/unburden-home-dir '.join(' ', @_).
-        $t->shell_capture;
-    ok( system($cmd) == 0, "Call '$cmd'" );
+    my $cmd = 'bin/unburden-home-dir '.join(' ', @_);
+    $t->call_cmd($cmd);
+}
+
+sub call_cmd {
+    my $t = shift;
+    my $cmd = shift;
+    ok( system($cmd . $t->shell_capture) == 0, "Call '$cmd'" );
 }
 
 sub call_unburden_home_dir_user {
