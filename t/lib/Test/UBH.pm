@@ -172,7 +172,7 @@ sub shell_capture {
 sub eq_or_diff_stderr {
     my $t = shift;
     my ($wanted, $desc) = @_;
-    $t->eq_or_diff_file('stderr', $desc || 'STDERR', $wanted || '');
+    $t->eq_or_diff_file('stderr', $desc || 'STDERR', $wanted);
 }
 
 sub eq_lsof_warning_or_diff_stderr {
@@ -183,7 +183,7 @@ sub eq_lsof_warning_or_diff_stderr {
 sub eq_or_diff_stdout {
     my $t = shift;
     my ($wanted, $desc) = @_;
-    $t->eq_or_diff_file('output', $desc || 'STDOUT' , $wanted || '');
+    $t->eq_or_diff_file('output', $desc || 'STDOUT' , $wanted);
 }
 
 sub eq_or_diff_file {
@@ -200,7 +200,7 @@ sub eq_or_diff_file {
     $output =~ s/\`/\'/g;
 
     unified_diff;
-    eq_or_diff_text( $output, $wanted, "Check $desc" );
+    eq_or_diff_text( $output, $wanted || '', "Check $desc" );
     ok( unlink($file), "Clean cache file ($desc)" );
 }
 
