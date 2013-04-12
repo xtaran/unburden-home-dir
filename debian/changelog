@@ -9,7 +9,8 @@ unburden-home-dir (0.3.2) UNRELEASED; urgency=low
     files. (Closes: #692807)
     + Add dependency and build-dependency on libfile-basedir-perl.
   * Refactor test suite
-    + Some tests use Test::Differences now. Add as build dependency.
+    + Some tests use Test::Differences and Test::Files now. Add as build
+      dependencies.
   * Fix test suite failures with newer coreutils versions in
     t/moving-to-existing-subdir.t.
   * README:
