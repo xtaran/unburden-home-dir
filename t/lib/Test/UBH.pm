@@ -161,8 +161,7 @@ sub write_config_file {
     BAIL_OUT('write_config_file: $file empty') unless $file;
     BAIL_OUT('write_config_file: $contents undefined') unless defined $contents;
 
-    ok( write_file($file, $contents),
-        $desc || "Write config file $file" );
+    ok( write_file($file, $contents), $desc || "Write config file $file" );
 }
 
 sub shell_capture {
