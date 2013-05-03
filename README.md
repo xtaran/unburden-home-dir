@@ -300,6 +300,18 @@ too, Gitorious gets pushed less often, but should get all major
 updates in time, too.
 
 
+Getting Unburden-Home-Dir
+=========================
+
+Besides installing from source code, several Linux distributions ship
+unburden-home-dir as package:
+
+* [Debian since 7.0 Wheezy](http://packages.debian.org/unburden-home-dir)
+* [Ubuntu since 12.10 Quantal](http://packages.ubuntu.com/unburden-home-dir)
+* [Korora 18 Flo](https://kororaproject.org/korora-18-flo-released/)
+  ([GitHub repository](https://github.com/kororaproject/kp-unburden-home-dir))
+
+
 Author
 ======
 
@@ -344,6 +356,7 @@ contributing to the list of files to move off, etc. or just by
 * Christian Herzog
 * Carsten Hey
 * Touko Korpela
+* Marcus Möller
 * Mika Pflüger
 * Patrick Schmid
 * Klaus Umbach
