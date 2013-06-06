@@ -17,7 +17,7 @@ Upstream Author:
 
 Copyright:
 
-    Copyright (C) 2010-2012 Axel Beckert
+    Copyright (C) 2010-2013 Axel Beckert
 
 License:
 
@@ -39,7 +39,7 @@ Public License version 2 can be found in "/usr/share/common-licenses/GPL-2".
 
 The Debian packaging is:
 
-    Copyright (C) 2010-2012 Axel Beckert <abe@debian.org>
+    Copyright (C) 2010-2013 Axel Beckert <abe@debian.org>
 
 you can redistribute it and/or modify it under the terms of the GNU
 General Public License as published by the Free Software Foundation;
