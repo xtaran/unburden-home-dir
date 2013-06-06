@@ -24,6 +24,8 @@ unburden-home-dir (0.3.2) UNRELEASED; urgency=low
   * debian/rules: Remove notice that the initial example file has no
     copyright restrictions, i.e. that the notice is allowed to be removed.
   * Bump Standards-Version to 3.9.4 (no changes)
+  * Switch Homepage and Vcs-* headers to Github. Mention all Git repos in
+    debian/copyright.
 
  -- Axel Beckert <abe@debian.org>  Thu, 11 Oct 2012 21:23:31 +0200
 
