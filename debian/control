@@ -16,7 +16,7 @@ Build-Depends: buffer,
                libmouse-perl,
                libtest-differences-perl,
                libtest-file-perl
-Standards-Version: 3.9.3
+Standards-Version: 3.9.4
 Homepage: http://wiki.phys.ethz.ch/readme/application_cache_files
 Vcs-Git: http://git.phys.ethz.ch/unburden-home-dir.git
 Vcs-Browser: http://git.phys.ethz.ch/?p=unburden-home-dir.git
