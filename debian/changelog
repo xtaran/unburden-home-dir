@@ -1,5 +1,7 @@
 unburden-home-dir (0.3.2.1~dev) UNRELEASED; urgency=low
 
+  * man-page: Clarify why du and friends are helpful when configuring
+    unburden-home-dir (Closes: #711820)
   * README/man page: Update information about corekeeper
   * Add ~/.devscripts_cache to unburden-home-dir.list
 
