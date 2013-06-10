@@ -436,6 +436,15 @@ From dpkg's man-page about `--force-unsafe-io`:
 > Warning: Using this option might improve performance at the cost of
 > losing data, use with care.
 
+### Core dumps
+
+If you want core dumps for debugging purposes, but don't want to
+clutter your home directory with them,
+[Corekeeper](http://openvswitch.org/cgi-bin/gitweb.cgi?p=corekeeper)
+offers saving core dumps to `/var/crash` and also automatically cleans
+them up after a week by just installing one Debian package.
+
+
 Cleaning Up Your Home Directory Half-Automatically
 --------------------------------------------------
 

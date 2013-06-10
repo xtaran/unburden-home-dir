@@ -1,3 +1,9 @@
+unburden-home-dir (0.3.2.1~dev) UNRELEASED; urgency=low
+
+  * README/man page: Update information about corekeeper
+
+ -- Axel Beckert <beckert@phys.ethz.ch>  Mon, 10 Jun 2013 14:37:28 +0200
+
 unburden-home-dir (0.3.2) unstable; urgency=low
 
   * Use "buffer" to prevent "find" still running when "lsof" is started by
