@@ -400,7 +400,6 @@ the OS crashes or the computer loses power.
 
 ### APT/dpkg
 
-
 Not related to the home directory and hence not solvable at all with
 `unburden-home-dir` but nevertheless similar is the amount of sync
 calls in dpkg and APT.
