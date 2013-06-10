@@ -1,6 +1,7 @@
 unburden-home-dir (0.3.2.1~dev) UNRELEASED; urgency=low
 
   * README/man page: Update information about corekeeper
+  * Add ~/.devscripts_cache to unburden-home-dir.list
 
  -- Axel Beckert <beckert@phys.ethz.ch>  Mon, 10 Jun 2013 14:37:28 +0200
 

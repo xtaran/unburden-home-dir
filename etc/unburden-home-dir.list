@@ -42,6 +42,7 @@ m d .adobe/Acrobat/*/Cache adobe-acrobat-%1-cache
 m d .shotwell/thumbs shotwell-thumbs
 # sxiv caches thumbnails if a .sxiv directory exists, so create it if nonexistent
 m D .sxiv sxiv-thumbs
+m D .devscripts_cache devscripts_cache
 
 # Trash locations
 r D .Trash trash
