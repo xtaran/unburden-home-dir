@@ -449,26 +449,13 @@ them up after a week by just installing one Debian package.
 Cleaning Up Your Home Directory Half-Automatically
 --------------------------------------------------
 
-### Computer Janitor
+### Autotrash
 
-[Computer Janitor](https://launchpad.net/computer-janitor) was a
-command-line and GUI program to …
-
-> … clean up a system so it's more like a freshly installed one.
->
-> Over time, a computer system tends to get cluttered. For example,
-> software packages that are no longer needed can be uninstalled.
-> When the system is upgraded from release to release, it may miss out
-> on configuration tweaks that freshly installed systems get.
->
-> Computer Janitor is an application to fix these kinds of problems.
-> It attempts to find software packages that can be removed, and tweak
-> the system configuration in useful ways.
-
-Unfortunately its development has stalled, it doesn't work together
-with current APT versions and it has been removed from Debian and
-recent Ubuntu releases.
-
+> [Autotrash](http://www.logfish.net/pr/autotrash/) is a simple Python
+> script which will purge files from your trash based on their age or
+> the amount of free space left on the device. Using autotrash -d 30
+> will delete files which have been in the trash for more then 30
+> days.
 
 ### BleachBit
 
@@ -495,10 +482,22 @@ recent Ubuntu releases.
 > files. Each supported application is also called a module, and each
 > folder it describes is called a submodule.
 
-### Autotrash
+### Computer Janitor
 
-> [Autotrash](http://www.logfish.net/pr/autotrash/) is a simple Python
-> script which will purge files from your trash based on their age or
-> the amount of free space left on the device. Using autotrash -d 30
-> will delete files which have been in the trash for more then 30
-> days.
+[Computer Janitor](https://launchpad.net/computer-janitor) was a
+command-line and GUI program to …
+
+> … clean up a system so it's more like a freshly installed one.
+>
+> Over time, a computer system tends to get cluttered. For example,
+> software packages that are no longer needed can be uninstalled.
+> When the system is upgraded from release to release, it may miss out
+> on configuration tweaks that freshly installed systems get.
+>
+> Computer Janitor is an application to fix these kinds of problems.
+> It attempts to find software packages that can be removed, and tweak
+> the system configuration in useful ways.
+
+Unfortunately its development has stalled, it doesn't work together
+with current APT versions and it has been removed from Debian and
+recent Ubuntu releases.
