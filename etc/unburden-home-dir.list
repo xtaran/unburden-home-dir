@@ -25,6 +25,7 @@ m d .opera/cache opera-cache
 m d .opera/cache4 opera-cache4
 m d .opera/opcache opera-opcache
 m d .opera/cacheOp opera-cacheOp
+m d .config/qupzilla/profiles/*/networkcache qupzilla-cache-%1
 
 # Mail- and microblogging clients, may affect offline caches
 m d .thunderbird/*/Cache thunderbird-cache-%1
