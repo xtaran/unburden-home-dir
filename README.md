@@ -355,6 +355,7 @@ contributing to the list of files to move off, etc. or just by
 * Elmar Heeb
 * Christian Herzog
 * Carsten Hey
+* Daniel Koch
 * Touko Korpela
 * Marcus Möller
 * Mika Pflüger
