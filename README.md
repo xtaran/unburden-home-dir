@@ -199,7 +199,7 @@ General Configuration File
   configuration file)
 
 All three file are parsed by
-[Config::File](http://search.cpan.org/dist/Config-File/) in the above
+[Config::File](http://metacpan.org/release/Config-File/) in the above
 given order.
 
 ### Recognized Settings
