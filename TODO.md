@@ -11,6 +11,12 @@ TODO
 * Honor `$XDG_` variables in `unburden-home-dir.list` for alternative
   locations of `.cache` and friends.
 
+* Set `$XDG_CACHE_HOME` before other programs using this variable run,
+  so that they use the wanted location even without moving files
+  around or adding symlinks.
+
+  Likely needs another `Xsession.d` file with a very low number.
+
 * Write test so that `mv` doesn't fall into interactive mode. Basically
   test what the previous commit ("2ec069d Unconditionally move files")
   fixed. To reproduce: Have directories to move off as well as a
