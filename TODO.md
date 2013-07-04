@@ -56,9 +56,9 @@ TODO
   even put symlinks to the (splitted) example file(s) in
   `/etc/unburden-home-dir.list.d/`.
 
-  The Perl interface to `run-parts' could be implemented as standalone
-  Perl/CPAN module which then could be shared with e.g. `aptitude-robot'
-  which is also a perl-written program which makes use of `run-parts'.
+  I've wrote a Perl interface to `run-parts` named
+  [Run::Parts](https://metacpan.org/release/Run-Parts) as standalone
+  Perl module which is planned to be used by `aptitude-robot`, too.
 
 * Check if there are common tasks of xdg-user-dirs (its package
   description is not so helpful there) of if it can be useful for
