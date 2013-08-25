@@ -25,7 +25,7 @@
 use Modern::Perl;
 
 # Globally define version
-our $VERSION = '0.3.2.1';
+our $VERSION = '0.3.2.2';
 
 # Configuration variables to be used in configuration files
 my $CONFIG = {
@@ -114,14 +114,14 @@ Options without parameters:
 # Parse command line options
 getopts('hnufFb:c:C:l:L:', \%OPTIONS);
 
-for (keys %OPTIONS) {
-    when('h') {
+foreach my $key (keys %OPTIONS) {
+    if ($key eq 'h') {
         my $fh = IO::Handle->new_from_fd(fileno(STDERR),'w');
         VERSION_MESSAGE($fh);
         HELP_MESSAGE($fh);
         exit 0;
     }
-    when('b') { $BASENAME = $OPTIONS{b}; }
+    elsif ($key eq 'b') { $BASENAME = $OPTIONS{b}; }
 }
 
 # By default check for a system wide and a user configuration and list file
@@ -132,15 +132,15 @@ my @LISTFILES = ("/etc/$BASENAME.$LISTSUFFIX",
                  "$ENV{HOME}/.$BASENAME.$LISTSUFFIX",
                  config_home($BASENAME)."/$LISTSUFFIX");
 
-for (keys %OPTIONS) {
-    when('C') {      @CONFFILES = ($OPTIONS{C}); }
-    when('c') { push(@CONFFILES,   $OPTIONS{c}); }
-    when('L') {      @LISTFILES = ($OPTIONS{L}); }
-    when('l') { push(@LISTFILES,   $OPTIONS{l}); }
-    when('n') { $DRYRUN   = 1; }
-    when('u') { $REVERT   = 1; }
-    when('F') { $USE_LSOF = 0; }
-    when('f') {
+foreach my $key (keys %OPTIONS) {
+    if    ($key eq 'C') {      @CONFFILES = ($OPTIONS{C}); }
+    elsif ($key eq 'c') { push(@CONFFILES,   $OPTIONS{c}); }
+    elsif ($key eq 'L') {      @LISTFILES = ($OPTIONS{L}); }
+    elsif ($key eq 'l') { push(@LISTFILES,   $OPTIONS{l}); }
+    elsif ($key eq 'n') { $DRYRUN   = 1; }
+    elsif ($key eq 'u') { $REVERT   = 1; }
+    elsif ($key eq 'F') { $USE_LSOF = 0; }
+    elsif ($key eq 'f') {
         eval { $FILTER = qr/$OPTIONS{f}/; };
         if ($@) {
             report_serious_problem("parameter to -f", "\n$@");
@@ -176,9 +176,9 @@ my $rsync = File::Rsync->new({
     archive => 1,
     verbose => 1,
     outfun => sub {
-        my $_ = shift;
-        chomp;
-        say unless m(^sent |^total size|^\s*$);
+        my $output = shift;
+        chomp($output);
+        say $output unless $output =~ m(^sent |^total size|^\s*$);
     },
     errfun => sub { chomp; warn "$_[0]\n"; },
 });
