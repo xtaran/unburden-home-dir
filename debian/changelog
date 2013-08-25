@@ -3,6 +3,8 @@ unburden-home-dir (0.3.2.2) UNRELEASED; urgency=low
   * No more use "when" nor "my $_". Both features are marked experimental
     in Perl 5.18 and hence cause warnings which again cause test-suite
     failures. (Closes: #720762)
+  * Bump debhelper compatibility to 9
+    + Update versioned debhelper build-dependency accordingly
 
  -- Axel Beckert <abe@debian.org>  Sun, 25 Aug 2013 13:11:08 +0200
 
