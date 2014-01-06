@@ -1,3 +1,9 @@
+unburden-home-dir (0.3.2.2+dev) UNRELEASED; urgency=low
+
+  * Bump Standards-Version to 3.9.5 (no further changes)
+
+ -- Axel Beckert <abe@debian.org>  Mon, 06 Jan 2014 23:31:30 +0100
+
 unburden-home-dir (0.3.2.2) unstable; urgency=low
 
   * No more use "when" nor "my $_". Both features are marked experimental
