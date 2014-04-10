@@ -347,7 +347,7 @@ sub files_in_use {
     my $lsof_output = undef;
 
     if (-d $item) {
-        $lsof_output = `find '$item' -print0 | buffer | xargs -0 lsof -F c`;
+        $lsof_output = `lsof -F c +D '$item'`;
     } elsif (-f _) {
         $lsof_output = `lsof -F c '$item'`;
     } else {

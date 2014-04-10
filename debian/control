@@ -2,8 +2,7 @@ Source: unburden-home-dir
 Section: x11
 Priority: extra
 Maintainer: Axel Beckert <abe@debian.org>
-Build-Depends: buffer,
-               debhelper (>= 9~),
+Build-Depends: debhelper (>= 9~),
                devscripts,
                libconfig-file-perl,
                libfile-basedir-perl,
@@ -23,8 +22,7 @@ Vcs-Browser: https://github.com/xtaran/unburden-home-dir
 
 Package: unburden-home-dir
 Architecture: all
-Depends: buffer,
-         libconfig-file-perl,
+Depends: libconfig-file-perl,
          libfile-basedir-perl,
          libfile-rsync-perl,
          libfile-touch-perl,
