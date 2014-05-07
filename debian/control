@@ -37,6 +37,7 @@ Enhances: x11-common
 Suggests: agedu,
           autotrash,
           bleachbit,
+          corekeeper,
           eatmydata,
           fslint,
           ncdu | baobab | filelight | xdiskusage | xdu,
