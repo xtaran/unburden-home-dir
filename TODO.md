@@ -37,9 +37,9 @@ TODO
   dry-run mode instead of not calling `rsync` at all in that case.
 
 * Find a nice way to handle the global `unburden-home-dir.list`, maybe
-  by by using something like `/etc/unburden-home-dir.list.d/` or maybe
-  even put symlinks to the (splitted) example file(s) in
-  `/etc/unburden-home-dir.list.d/`.
+  by by using something like `/etc/unburden-home-dir.list.d/`,
+  `/etc/unburden-home-dir/list.d/` or maybe even put symlinks to the
+  (splitted) example file(s) in there.
 
   I've wrote a Perl interface to `run-parts` named
   [Run::Parts](https://metacpan.org/release/Run-Parts) as standalone
