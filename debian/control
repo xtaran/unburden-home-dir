@@ -28,11 +28,11 @@ Depends: libconfig-file-perl,
          libfile-touch-perl,
          libfile-which-perl,
          libmodern-perl-perl,
-         x11-common,
          ${misc:Depends},
          ${perl:Depends}
 Pre-Depends: dpkg (>= 1.15.7.2)
-Recommends: lsof
+Recommends: lsof,
+            x11-common
 Enhances: x11-common
 Suggests: agedu,
           autotrash,

@@ -4,6 +4,8 @@ unburden-home-dir (0.3.2.3) UNRELEASED; urgency=low
   * Use "lsof +D" instead of "find | buffer | xargs lsof".
     + Drop dependencies on "buffer".
   * Re-add corekeeper to Suggests as it's back in Debian.
+  * Downgrade dependency on x11-common to Recommends, unburden-home-dir
+    works outside the Xsession infrastructure for quite a while now.
 
  -- Axel Beckert <abe@debian.org>  Mon, 06 Jan 2014 23:31:30 +0100
 
