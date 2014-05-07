@@ -33,21 +33,6 @@ TODO
 
   * Maybe use POD instead of Markdown as base format.
 
-* `find | buffer | xargs lsof -F c` (bin/unburden-home-dir:325) will
-  find the `find` process if the list of files output by `find` is
-  larger than 1 MB, so that `buffer` starts piping them to `xargs`
-  before `find` finishes. `xargs` will then split up the list and call
-  `lsof` more than once, which again will list the `find` process as
-  having the directory open.
-
-  Possible solutions:
-
-  * Store `find` output in a temporary file and then `cat` that file
-    to `xargs`. Should use `mktemp` and friends.
-
-  * Use a bigger buffer size for `buffer`. Can't be infinite,
-    i.e. just delays the issue to even bigger directories.
-
 * Call `rsync` in dry-run mode if `unburden-home-dir` is called in
   dry-run mode instead of not calling `rsync` at all in that case.
 
@@ -67,8 +52,3 @@ TODO
 * Slow find/rsync, e.g. "sh -c find
   '/home/abe/.conkeror.mozdev.org/conkeror/$FOO/Cache' -print0 | xargs
   -0 lsof -F c"
-
-* lsof should ignore the find processes which generates its
-  parameters: "WARNING: Can't handle
-  /home/abe/.conkeror.mozdev.org/conkeror/$FOO/Cache: in use, not
-  (re)moving. Process list: 12855 (find)"
