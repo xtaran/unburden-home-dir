@@ -58,7 +58,7 @@ TODO
 
   I've wrote a Perl interface to `run-parts` named
   [Run::Parts](https://metacpan.org/release/Run-Parts) as standalone
-  Perl module which is planned to be used by `aptitude-robot`, too.
+  Perl module which is already used by `aptitude-robot`, too.
 
 * Check if there are common tasks of xdg-user-dirs (its package
   description is not so helpful there) of if it can be useful for
