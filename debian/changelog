@@ -1,4 +1,4 @@
-unburden-home-dir (0.3.2.3) UNRELEASED; urgency=low
+unburden-home-dir (0.3.2.3) unstable; urgency=low
 
   * Bump Standards-Version to 3.9.5 (no further changes)
   * Use "lsof +D" instead of "find | buffer | xargs lsof".
@@ -7,7 +7,7 @@ unburden-home-dir (0.3.2.3) UNRELEASED; urgency=low
   * Downgrade dependency on x11-common to Recommends, unburden-home-dir
     works outside the Xsession infrastructure for quite a while now.
 
- -- Axel Beckert <abe@debian.org>  Mon, 06 Jan 2014 23:31:30 +0100
+ -- Axel Beckert <abe@debian.org>  Thu, 08 May 2014 01:49:37 +0200
 
 unburden-home-dir (0.3.2.2) unstable; urgency=low
 
