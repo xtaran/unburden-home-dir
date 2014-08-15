@@ -8,6 +8,7 @@ perl:
   - "5.10"
 
 install:
+   - sudo apt-get update
    - sudo apt-get install devscripts rsync
    - cpanm --quiet --notest --skip-satisfied Config::File File::Basedir File::Rsync File::Slurp File::Touch File::Which Modern::Perl Mouse Test::Differences Test::File
    - export RELEASE_TESTING=1 AUTOMATED_TESTING=1 AUTHOR_TESTING=1 HARNESS_OPTIONS=j10:c HARNESS_TIMER=1
