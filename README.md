@@ -1,6 +1,8 @@
 Unburden Your Home Directory
 ============================
 
+[![Travis CI Build Status](https://travis-ci.org/xtaran/unburden-home-dir.svg)](https://travis-ci.org/xtaran/unburden-home-dir)
+
 unburden-home-dir allows users to move cache files from browsers,
 etc. off their home directory, i.e. on a local harddisk or tmpfs and
 replace them with a symbolic link to the new location (e.g. on `/tmp/`
