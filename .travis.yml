@@ -18,3 +18,8 @@ install:
 
 script:
    - make test
+
+notifications:
+  irc:
+    channels:
+      - "irc6.lugs.ch#kivamon"
