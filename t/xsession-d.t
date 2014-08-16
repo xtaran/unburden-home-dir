@@ -1,4 +1,4 @@
-#!/usr/bin/perl -wl
+#!perl -wl
 
 use File::Copy;
 

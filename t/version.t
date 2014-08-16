@@ -1,4 +1,4 @@
-#!/usr/bin/perl -wl
+#!perl -wl
 
 use Test::More tests => 1;
 use File::Slurp;

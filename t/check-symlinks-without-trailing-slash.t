@@ -1,4 +1,4 @@
-#!/usr/bin/perl -wl
+#!perl -wl
 
 use lib qw(t/lib lib);
 use Test::UBH;
