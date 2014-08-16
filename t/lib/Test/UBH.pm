@@ -101,7 +101,7 @@ sub call_unburden_home_dir {
     my $t = shift;
     die 'Assertion: call_unburden_home_dir needs at least one non-empty parameter'
         unless @_;
-    my $cmd = 'bin/unburden-home-dir '.join(' ', @_);
+    my $cmd = 'perl bin/unburden-home-dir '.join(' ', @_);
     $t->call_cmd($cmd);
 }
 
