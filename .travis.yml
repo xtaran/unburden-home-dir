@@ -20,6 +20,4 @@ script:
    - make test
 
 notifications:
-  irc:
-    channels:
-      - "irc6.lugs.ch#kivamon"
+  irc: "irc.lugs.ch#kivamon"
