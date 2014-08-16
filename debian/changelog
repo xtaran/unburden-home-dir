@@ -1,4 +1,4 @@
-unburden-home-dir (0.3.2.5) UNRELEASED; urgency=medium
+unburden-home-dir (0.3.2.4) UNRELEASED; urgency=medium
 
   * Fix test suite so it runs with perl elsewhere than /usr/bin/perl
   * Use Travis CI
