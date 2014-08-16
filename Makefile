@@ -3,7 +3,7 @@ build:
 test:
 	checkbashisms Xsession.d/95unburden-home-dir
 	perl -c bin/unburden-home-dir
-	prove -e `which perl` t/*.t
+	prove t/*.t
 
 cover:
 	cover -delete
