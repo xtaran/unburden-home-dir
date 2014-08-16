@@ -1,3 +1,10 @@
+unburden-home-dir (0.3.2.5) UNRELEASED; urgency=medium
+
+  * Fix test suite so it runs with perl elsewhere than /usr/bin/perl
+  * Use Travis CI
+
+ -- Axel Beckert <abe@debian.org>  Sat, 16 Aug 2014 02:44:05 +0200
+
 unburden-home-dir (0.3.2.3) unstable; urgency=low
 
   * Bump Standards-Version to 3.9.5 (no further changes)
