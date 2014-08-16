@@ -1,9 +1,11 @@
 build:
 
-test:
-	checkbashisms Xsession.d/95unburden-home-dir
+pureperltest:
 	perl -c bin/unburden-home-dir
 	prove t/*.t
+
+test: pureperltest
+	checkbashisms Xsession.d/95unburden-home-dir
 
 cover:
 	cover -delete
