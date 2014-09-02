@@ -118,7 +118,7 @@ sub call_unburden_home_dir_user {
 
 sub call_unburden_home_dir_default {
     my $t = shift;
-    $t->call_unburden_home_dir(@_, "-C ".$t->BASE."/config -L ".$t->BASE."/list");
+    $t->call_unburden_home_dir(@_, "-C ".$t->BASE."/config -c /dev/null -L ".$t->BASE."/list -l /dev/null");
 }
 
 sub write_configs {

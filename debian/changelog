@@ -4,6 +4,8 @@ unburden-home-dir (0.3.2.4) UNRELEASED; urgency=medium
   * Mention quota as usage reason in long package description
   * Add tests to check --version, -h and --help options.
   * Make -h write to STDOUT instead of STDERR as --help does.
+  * Use /dev/null as additional empty config file and list to cover -c and
+    -l options.
   * Use Travis CI
 
  -- Axel Beckert <abe@debian.org>  Sat, 16 Aug 2014 02:44:05 +0200
