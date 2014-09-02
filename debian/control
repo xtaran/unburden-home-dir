@@ -77,6 +77,8 @@ Description: Remove or move cache files automatically from user's home
  case it's an alternative to keeping the blacklist in your backup
  software up-to-date.
  .
+ For some users it may also be helpful to stay under their quota.
+ .
  The package also contains an Xsession hook which calls this script on
  X login for every user. But by default no files or directories are
  configured to be moved elsewhere, so nothing will happen
