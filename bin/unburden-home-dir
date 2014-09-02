@@ -152,8 +152,11 @@ foreach my $key (keys %OPTIONS) {
 # Check for configuration files and read them
 foreach my $configfile (@CONFFILES) {
     if ( -e $configfile ) {
-        $CONFIG = { %$CONFIG,
-                    %{Config::File::read_config_file($configfile)} };
+        # Workaround RT#98542 in Config::File 1.50 and earlier
+        my $cf = Config::File::read_config_file($configfile);
+        if (defined($cf)) {
+            $CONFIG = { %$CONFIG, %$cf };
+        }
     }
 }
 
