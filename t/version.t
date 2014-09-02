@@ -15,7 +15,7 @@ eval($script_version);
 is( $debian_changelog_version, $VERSION,
     'Version numbers in debian/changelog and bin/unburden-home-dir are the same' );
 
-my $dashdash_version = `$basedir/bin/unburden-home-dir --version`;
+my $dashdash_version = `perl $basedir/bin/unburden-home-dir --version`;
 my $rc = $?;
 is( $rc, 0, 'unburden-home-dir --version exited with 0');
 
