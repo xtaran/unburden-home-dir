@@ -1,14 +1,23 @@
 #!perl -wl
 
-use Test::More tests => 3;
+use Test::More;
 use File::Basename;
 use 5.010;
 
 my $basedir = dirname($0).'/..';
 
 my $dashdash_help = `$basedir/bin/unburden-home-dir --help`;
-my $rc = $?;
-is( $rc, 0, 'unburden-home-dir --help exited with 0');
+is( $?, 0, 'unburden-home-dir --help exited with 0');
 
 ok( $dashdash_help =~ /Options/, 'unburden-home-dir --help explains options' );
 ok( $dashdash_help =~ /Usage/,   'unburden-home-dir --help explains usage' );
+
+my $dash_h = `$basedir/bin/unburden-home-dir -h`;
+is( $?, 0, 'unburden-home-dir -h exited with 0');
+
+ok( $dash_h =~ /Options/, 'unburden-home-dir -h explains options' );
+ok( $dash_h =~ /Usage/,   'unburden-home-dir -h explains usage' );
+
+is( $dash_h, $dashdash_help, 'unburden-home-dir options -h and --help output the same text');
+
+done_testing;

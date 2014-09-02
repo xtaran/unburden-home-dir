@@ -2,7 +2,7 @@ unburden-home-dir (0.3.2.4) UNRELEASED; urgency=medium
 
   * Fix test suite so it runs with perl elsewhere than /usr/bin/perl
   * Mention quota as usage reason in long package description
-  * Add tests to check --version and --help options.
+  * Add tests to check --version, -h and --help options.
   * Use Travis CI
 
  -- Axel Beckert <abe@debian.org>  Sat, 16 Aug 2014 02:44:05 +0200
