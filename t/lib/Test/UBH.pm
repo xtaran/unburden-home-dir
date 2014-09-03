@@ -22,12 +22,13 @@ use File::Slurp;
 use File::Which;
 use Data::Dumper;
 
-foreach my $varname (qw(TESTNAME BASE HOME TARGET BASENAME PREFIX TP)) {
-    has $varname => ( is => 'rw',
-                      isa => sub {
-                          die "$_[0] is not a String" unless
-                              defined($_[0]) or ref($_[0]) } );
-}
+has 'TESTNAME' => ( is => 'ro',
+                    default => 'generic-test',
+                    isa => sub {
+                        die "$_[0] is not a String" unless
+                            defined($_[0]) or ref($_[0]) } );
+has 'PREFIX'   => ( is => 'ro', default => 'u' );
+has 'BASENAME' => ( is => 'ro', default => "unburden-home-dir_TEST_$$" );
 
 sub BUILDARGS {
     my ($class, @args) = @_;
@@ -37,14 +38,6 @@ sub BUILDARGS {
 
 sub BUILD {
     my $t = shift;
-
-    $t->TESTNAME('generic-test') unless $t->TESTNAME();
-    $t->BASE('t/'.$t->TESTNAME);
-    $t->HOME($t->BASE . '/1');
-    $t->TARGET($t->BASE .'/2');
-    $t->BASENAME("unburden-home-dir_TEST_$$");
-    $t->PREFIX('u');
-    $t->TP($t->TARGET.'/'.$t->PREFIX);
 
     # Set a debug environment
     $ENV{HOME} = $t->HOME;
@@ -56,6 +49,8 @@ sub BUILD {
     return $t;
 }
 
+# Tear down
+
 sub cleanup {
     my $t = shift;
     ok( rmtree($t->BASE), "Clean up" );
@@ -66,6 +61,15 @@ sub done {
     $t->cleanup;
     done_testing();
 }
+
+# Calculated attributes based on TESTNAME
+
+sub BASE   { my $t = shift; return 't/'.$t->TESTNAME; }
+sub HOME   { my $t = shift; return $t->BASE . '/1'; }
+sub TARGET { my $t = shift; return $t->BASE . '/2'; }
+sub TP     { my $t = shift; return $t->TARGET.'/'.$t->PREFIX; }
+
+# Setup routines
 
 sub setup_test_environment {
     my $t = shift;
