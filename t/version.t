@@ -1,4 +1,4 @@
-#!perl -l
+#!perl
 
 #use strict;
 use warnings;

@@ -17,6 +17,7 @@ unburden-home-dir (0.3.2.4) UNRELEASED; urgency=medium
     + Replace bareword file handles with variables.
     + Drop the sole (non-relevant) occurrence of subroutine prototypes.
   * Don't use "has" for calculated attributes in Test::UBH.
+  * Remove all shebang line parameters from t/*.t files.
   * Use Travis CI
 
  -- Axel Beckert <abe@debian.org>  Sat, 16 Aug 2014 02:44:05 +0200
