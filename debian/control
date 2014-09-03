@@ -12,7 +12,7 @@ Build-Depends: debhelper (>= 9~),
                libfile-which-perl,
                libmodern-perl-perl,
 # Test suite dependencies
-               libmouse-perl,
+               libmoo-perl,
                libtest-differences-perl,
                libtest-file-perl
 Standards-Version: 3.9.5

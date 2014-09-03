@@ -10,7 +10,7 @@ use Data::Dumper;
 
 package Test::UBH;
 
-use Mouse;
+use Moo;
 
 # Boilerplate which exports into Test::UBH::
 use Test::More;
@@ -22,15 +22,22 @@ use File::Which;
 use Data::Dumper;
 
 foreach my $varname (qw(TESTNAME BASE HOME TARGET BASENAME PREFIX TP)) {
-    has $varname => ( is => 'rw', isa => 'Str' );
+    has $varname => ( is => 'rw',
+                      isa => sub {
+                          die "$_[0] is not a String" unless
+                              defined($_[0]) or ref($_[0]) } );
 }
 
-sub new {
-    my $class = shift;
-    my $t = {};
-    bless($t, $class);
+sub BUILDARGS {
+    my ($class, @args) = @_;
+    unshift @args, 'TESTNAME' if @args % 2 == 1;
+    return { @args };
+}
 
-    $t->TESTNAME(shift || 'generic-test');
+sub BUILD {
+    my $t = shift;
+
+    $t->TESTNAME('generic-test') unless $t->TESTNAME();
     $t->BASE('t/'.$t->TESTNAME);
     $t->HOME($t->BASE . '/1');
     $t->TARGET($t->BASE .'/2');

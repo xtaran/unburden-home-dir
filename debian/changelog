@@ -8,6 +8,8 @@ unburden-home-dir (0.3.2.4) UNRELEASED; urgency=medium
     -l options.
   * Workaround Config::File bug RT#98542, it behaves unexpectedly if given
     an empty configuration file.
+  * Switch test suite from using Mouse to using Moo. Update
+    build-dependencies accordingly.
   * Use Travis CI
 
  -- Axel Beckert <abe@debian.org>  Sat, 16 Aug 2014 02:44:05 +0200
