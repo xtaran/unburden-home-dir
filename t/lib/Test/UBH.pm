@@ -1,4 +1,5 @@
 # Module to reduce boilerplate code in unburden-home-dir's test suite
+use strict;
 
 # Boilerplate which exports into main::
 use Test::More;

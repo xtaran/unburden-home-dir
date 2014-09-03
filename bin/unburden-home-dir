@@ -206,7 +206,7 @@ sub report_serious_problem {
 }
 
 # Actually move a directory or file
-sub move ($$) {
+sub move {
     my ($from, $to) = @_;
     say "Moving $from -> $to";
     unless ($DRYRUN) {
@@ -640,8 +640,9 @@ for my $list (@LISTFILES) {
     next unless -r $list;
 
     # Clean up this and that
-    open(LIST, '<', $list) or die "Can't open $list: $!";
-    while (<LIST>) {
+    my $list_fh;
+    open($list_fh, '<', $list) or die "Can't open $list: $!";
+    while (<$list_fh>) {
         next if /^#|^ *$/;
 
         chomp;
@@ -686,7 +687,7 @@ for my $list (@LISTFILES) {
             }
         }
     }
-    close(LIST);
+    close($list_fh);
 }
 
 # Restore original umask

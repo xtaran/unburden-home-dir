@@ -1,9 +1,13 @@
-#!perl -wl
+#!perl -l
+
+use strict;
+use warnings;
 
 use File::Copy;
 
 use lib qw(t/lib lib);
 use Test::UBH;
+
 my $t = Test::UBH->new('xsession-d');
 
 my $BINDIR = $t->BASE."/bin";

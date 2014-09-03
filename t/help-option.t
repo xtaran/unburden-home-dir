@@ -1,4 +1,7 @@
-#!perl -wl
+#!perl -l
+
+use strict;
+use warnings;
 
 use Test::More;
 use File::Basename;

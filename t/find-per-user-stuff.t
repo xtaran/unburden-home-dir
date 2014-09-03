@@ -1,7 +1,11 @@
-#!perl -wl
+#!perl -l
+
+use strict;
+use warnings;
 
 use lib qw(t/lib lib);
 use Test::UBH;
+
 my $t = Test::UBH->new('find-per-user-stuff');
 my $demodir1 = '.foobar/fnord';
 my $demofile1 = "$demodir1/bla";

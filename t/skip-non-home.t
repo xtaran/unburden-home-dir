@@ -1,7 +1,11 @@
-#!perl -wl
+#!perl -l
+
+use strict;
+use warnings;
 
 use lib qw(t/lib lib);
 use Test::UBH;
+
 my $t = Test::UBH->new('skip-non-home');
 
 foreach my $example (qw(/foobar ../foobar)) {

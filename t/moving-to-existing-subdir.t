@@ -1,7 +1,11 @@
-#!perl -wl
+#!perl -l
+
+use strict;
+use warnings;
 
 use lib qw(t/lib lib);
 use Test::UBH;
+
 my $t = Test::UBH->new('moving-to-existing-subdir');
 
 $t->setup_test_environment(".foobar/fnord", ".foobar/gnarz");
@@ -19,7 +23,7 @@ $t->call_unburden_home_dir_default;
 
 $t->eq_lsof_warning_or_diff_stderr;
 
-$wanted = "Moving ".$t->HOME."/.foobar/fnord -> ".$t->TP."-foobar-fnord
+my $wanted = "Moving ".$t->HOME."/.foobar/fnord -> ".$t->TP."-foobar-fnord
 sending incremental file list
 created directory ".$t->TP."-foobar-fnord
 ./

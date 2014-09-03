@@ -1,7 +1,11 @@
-#!perl -wl
+#!perl -l
+
+use strict;
+use warnings;
 
 use lib qw(t/lib lib);
 use Test::UBH;
+
 my $t = Test::UBH->new('replacement-order-dryrun');
 
 $t->setup_test_environment_without_target(".foobar/blatest/barba");

@@ -1,4 +1,7 @@
-#!perl -wl
+#!perl -l
+
+use strict;
+use warnings;
 
 use lib qw(t/lib lib);
 use Test::UBH;
@@ -14,7 +17,7 @@ $t->call_unburden_home_dir_default;
 
 $t->eq_lsof_warning_or_diff_stderr;
 
-$wanted = "Create directory ".$t->TP."-foobar-fnord and parents
+my $wanted = "Create directory ".$t->TP."-foobar-fnord and parents
 mkdir ".$t->TP."-foobar-fnord
 Create parent directories for ".$t->HOME."/.foobar/fnord
 mkdir ".$t->HOME."/.foobar
