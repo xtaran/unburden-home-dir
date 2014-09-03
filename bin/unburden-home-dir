@@ -22,7 +22,9 @@
 # along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 
-use Modern::Perl;
+use strict;
+use warnings;
+use 5.010;
 
 # Globally define version
 our $VERSION = '0.3.2.4';

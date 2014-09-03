@@ -10,8 +10,10 @@ unburden-home-dir (0.3.2.4) UNRELEASED; urgency=medium
     an empty configuration file.
   * Switch test suite from using Mouse to using Moo. Update
     build-dependencies accordingly.
+  * Switch from Modern::Perl to strict + warnings + 5.010.
+    + Drop (build-) dependency on libmodern-perl-perl.
   * Fix some issues found by Perl::Critic:
-    + Add missing strictures (consider Modern::Perl as stricture).
+    + Add missing strictures.
     + Replace bareword file handles with variables.
     + Drop the sole (non-relevant) occurrence of subroutine prototypes.
   * Use Travis CI

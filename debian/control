@@ -10,7 +10,6 @@ Build-Depends: debhelper (>= 9~),
                libfile-slurp-perl,
                libfile-touch-perl,
                libfile-which-perl,
-               libmodern-perl-perl,
 # Test suite dependencies
                libmoo-perl,
                libtest-differences-perl,
@@ -27,7 +26,6 @@ Depends: libconfig-file-perl,
          libfile-rsync-perl,
          libfile-touch-perl,
          libfile-which-perl,
-         libmodern-perl-perl,
          ${misc:Depends},
          ${perl:Depends}
 Pre-Depends: dpkg (>= 1.15.7.2)
