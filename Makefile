@@ -7,10 +7,15 @@ pureperltest:
 test: pureperltest
 	checkbashisms Xsession.d/95unburden-home-dir
 
-cover:
+determine-coverage:
 	cover -delete
 	prove --exec 'env PERL5OPT=-MDevel::Cover perl' t/*.t
+
+cover: determine-coverage
 	cover
+
+coveralls: determine-coverage
+	cover -report coveralls
 
 install:
 	install -d $(DESTDIR)/etc/X11/Xsession.d/
