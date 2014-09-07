@@ -10,7 +10,7 @@ perl:
 
 before_install:
    - sudo apt-get update
-   - sudo apt-get install devscripts rsync
+   - sudo apt-get install devscripts rsync lsof
 
 install:
    - yes '' | cpanm --verbose --notest --skip-satisfied Config::File File::BaseDir File::Rsync File::Slurp File::Touch File::Which Moo Test::Differences Test::File Devel::Cover::Report::Coveralls
