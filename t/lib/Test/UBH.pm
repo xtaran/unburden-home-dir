@@ -75,14 +75,16 @@ sub setup_test_environment {
     my $t = shift;
     $t->setup_test_environment_without_target(@_);
     $t->create_and_check_directory($t->TARGET,
-                                   "test environment (target directory)" );
+                                   "test environment (target directory = ".
+                                   $t->TARGET.")" );
 }
 
 sub setup_test_environment_without_target {
     my $t = shift;
     foreach my $dir (@_) {
         $t->create_and_check_directory($t->HOME."/".($dir || ''),
-                                       "test environment (home directory)" );
+                                       "test environment (home directory = ".
+                                       $t->HOME."): ".($dir || '') );
     }
 }
 
@@ -137,18 +139,18 @@ sub write_configs {
     my $t = shift;
     my ($list, $config) = @_;
     $t->write_config_file($t->BASE.'/list', $list || '',
-                          "Write classic list" );
+                          'Write classic list ('.$t->BASE.'/list)');
     $t->write_config_file($t->BASE.'/config', $config || $t->default_config,
-                          "Write classic config" );
+                          'Write classic config ('.$t->BASE.'/config)' );
 }
 
 sub write_user_configs {
     my $t = shift;
     my ($list, $config) = @_;
     $t->write_config_file_to_home('.'.$t->BASENAME.'.list', $list || '',
-                                  "Write classic list" );
+                                  'Write classic list ('.$t->BASE.'/config)' );
     $t->write_config_file_to_home('.'.$t->BASENAME, $config || $t->default_config,
-                                  "Write classic config" );
+                                  'Write classic config (.'.$t->BASENAME.')' );
 }
 
 sub write_xdg_configs {
@@ -156,9 +158,9 @@ sub write_xdg_configs {
     my ($list, $config) = @_;
     ok( mkpath($t->HOME.'/.config/'.$t->BASENAME, {}), "Create test environment (XDG directory)" );
     $t->write_config_file_to_home('.config/'.$t->BASENAME.'/list', $list || '',
-                                  "Write XDG list" );
+                                  'Write XDG list (.config/'.$t->BASENAME.'/list)' );
     $t->write_config_file_to_home('.config/'.$t->BASENAME.'/config', $config || $t->default_config,
-                                  "Write XDG config" );
+                                  'Write XDG config (.config/'.$t->BASENAME.'/config)' );
 }
 
 sub write_config_file_to_home {
