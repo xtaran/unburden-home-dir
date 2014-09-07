@@ -9,7 +9,7 @@ test: pureperltest
 
 determine-coverage:
 	cover -delete
-	prove --exec 'env PERL5OPT=-MDevel::Cover perl' t/*.t
+	prove --exec 'env PERL5OPT=-MDevel::Cover=-ignore_re,^t/ perl' t/*.t
 
 cover: determine-coverage
 	cover
