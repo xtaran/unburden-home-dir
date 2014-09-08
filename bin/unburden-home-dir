@@ -185,7 +185,11 @@ my $rsync = File::Rsync->new({
         chomp($output);
         say $output unless $output =~ m(^sent |^total size|^\s*$);
     },
-    errfun => sub { chomp; warn "$_[0]\n"; },
+    errfun => sub {
+        # uncoverable subroutine
+        chomp;          # uncoverable statement
+        warn "$_[0]\n"; # uncoverable statement
+    },
 });
 
 # Check for lsof in search path
@@ -236,6 +240,7 @@ sub create_symlink_and_parents {
     create_parent_directories($new);
     say "Symlinking $new -> $old";
     unless ($DRYRUN) {
+        # uncoverable branch true
         symlink($old, $new)
             or die "Couldn't symlink $new -> $old: $!";
     }
@@ -375,6 +380,7 @@ sub action_move {
     my ($itemexpanded, $target) = @_;
 
     create_parent_directories($target);
+    # uncoverable branch true
     move($itemexpanded, $target)
         or die "Couldn't move $itemexpanded -> $target: $!";
     return;
@@ -390,6 +396,7 @@ sub action_delete_and_recreate {
     say "Delete $itemexpanded";
     unless ($DRYRUN) {
         $is_dir  and rmtree($itemexpanded, { verbose => 1 }) ;
+        # uncoverable branch true
         $is_file and (unlink($itemexpanded)
                       || die "Couldn't delete $itemexpanded: $!");
     }
@@ -410,6 +417,7 @@ sub create_object_of_type {
         elsif (type_is_file($type)) {
             create_parent_directories($target);
             say "Touching $target";
+            # uncoverable branch true
             touch($target) || die "Couldn't touch $target: $!";
         }
     }
@@ -431,6 +439,7 @@ sub create_symlink {
 
     say "Symlinking $target ->  $itemexpanded";
     unless ($DRYRUN) {
+        # uncoverable branch true
         symlink($target, $itemexpanded)
             or die "Couldn't symlink $target ->  $itemexpanded: $!";
     }
