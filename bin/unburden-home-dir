@@ -398,7 +398,7 @@ sub action_delete_and_recreate {
         $is_dir  and rmtree($itemexpanded, { verbose => 1 }) ;
         # uncoverable branch true
         $is_file and (unlink($itemexpanded)
-                      || die "Couldn't delete $itemexpanded: $!");
+                      or die "Couldn't delete $itemexpanded: $!");
     }
     create_object_of_type($type, $target);
 
@@ -418,7 +418,7 @@ sub create_object_of_type {
             create_parent_directories($target);
             say "Touching $target";
             # uncoverable branch true
-            touch($target) || die "Couldn't touch $target: $!";
+            touch($target) or die "Couldn't touch $target: $!";
         }
     }
 
