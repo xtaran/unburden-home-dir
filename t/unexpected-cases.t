@@ -78,6 +78,14 @@ $t->eq_or_diff_stderr("Can't parse type 'x', must be 'd', 'D', 'f' or 'F', ".
                       '<$list_fh> line 1.'."\n");
 $t->eq_or_diff_stdout('');
 
+# Unexpected action type in list file
+$t->write_configs("x f .foobar/flaaf foobar-flaaf");
+$t->call_unburden_home_dir_default;
+$t->eq_or_diff_stderr("Can't parse action 'x', must be 'd', 'r' or 'm', ".
+                      'skipping... at bin/unburden-home-dir line 665, '.
+                      '<$list_fh> line 1.'."\n");
+$t->eq_or_diff_stdout('');
+
 # Incomplete entry list file (case #1)
 $t->write_configs("r f .foobar/flaaf");
 $t->call_unburden_home_dir_default;
