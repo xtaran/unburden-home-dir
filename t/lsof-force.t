@@ -5,7 +5,7 @@ use warnings;
 
 use lib qw(t/lib lib);
 use Test::UBH;
-my $t = Test::UBH->new('lsof');
+my $t = Test::UBH->new('lsof-force');
 
 $t->setup_test_environment_without_target(".foobar");
 $t->write_configs('m d .foobar foobar');
