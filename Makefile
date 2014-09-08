@@ -12,7 +12,7 @@ determine-coverage:
 	prove --exec 'env PERL5OPT=-MDevel::Cover=-ignore_re,^t/ perl' t/*.t
 
 cover: determine-coverage
-	cover
+	cover -report html_basic
 
 coveralls: determine-coverage
 	cover -report coveralls
