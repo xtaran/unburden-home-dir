@@ -13,7 +13,7 @@ Build-Depends: debhelper (>= 9~),
 # Test suite dependencies
                libmoo-perl,
                libtest-differences-perl,
-               libtest-file-perl,
+               libtest-file-perl (>= 1.30),
                lsof
 Standards-Version: 3.9.5
 Homepage: https://github.com/xtaran/unburden-home-dir

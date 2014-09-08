@@ -4,7 +4,7 @@ use strict;
 # Boilerplate which exports into main::
 use Test::More;
 use Test::Differences;
-use Test::File;
+use Test::File '1.30';
 use File::Path qw(mkpath);
 use File::Slurp;
 use Data::Dumper;
