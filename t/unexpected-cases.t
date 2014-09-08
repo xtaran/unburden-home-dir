@@ -44,6 +44,32 @@ $t->eq_or_diff_stderr("WARNING: Can't handle ".$t->HOME.
                       "\n");
 $t->eq_or_diff_stdout('');
 
+# Unexpected symlink target type: not a directory
+$t->write_configs("r d .foobar/hurz foobar-hurz");
+ok( symlink($t->TP.'-foobar-hurz', $t->HOME."/.foobar/hurz"), "Create symlink to wrong target" );
+ok( write_file($t->TP.'-foobar-hurz', "Some target contents\n"),
+    'Create '.$t->TP.'-foobar-hurz with some contents');
+
+$t->call_unburden_home_dir_default;
+$t->eq_or_diff_stderr("ERROR: Can't handle ".$t->TP.'-foobar-hurz: '.
+                      'Unexpected type (not a directory) '.
+                      'at bin/unburden-home-dir line 210, <$list_fh> line 1.'.
+                      "\n");
+$t->eq_or_diff_stdout('');
+
+# Unexpected symlink target type: not a file
+$t->write_configs("r f .foobar/flaaf foobar-flaaf");
+ok( symlink($t->TP.'-foobar-flaaf', $t->HOME."/.foobar/flaaf"), "Create symlink to wrong target" );
+ok( $t->create_and_check_directory($t->TP.'-foobar-flaaf',
+                                   'unexpected target director '.
+                                   $t->TP.'-foobar-flaaf') );
+$t->call_unburden_home_dir_default;
+$t->eq_or_diff_stderr("ERROR: Can't handle ".$t->TP.'-foobar-flaaf: '.
+                      'Unexpected type (not a file) '.
+                      'at bin/unburden-home-dir line 210, <$list_fh> line 1.'.
+                      "\n");
+$t->eq_or_diff_stdout('');
+
 # lsof not found. Needs mockup of File::Which
 $t->write_configs('m f .foobar/fnord foobar-fnord');
 $t->call_unburden_home_dir_inc_path('t/lib/mockup');
