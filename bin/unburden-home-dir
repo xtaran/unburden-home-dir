@@ -653,7 +653,7 @@ for my $list (@LISTFILES) {
 
         next unless defined $action;
 
-        if (!defined($item) or !defined($replacement)) {
+        if (not (defined($item) and defined($replacement))) {
             warn "Can't parse '$_', skipping...";
             next;
         }
