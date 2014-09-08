@@ -74,7 +74,7 @@ $t->eq_or_diff_stdout('');
 $t->write_configs("r x .foobar/flaaf foobar-flaaf");
 $t->call_unburden_home_dir_default;
 $t->eq_or_diff_stderr("Can't parse type 'x', must be 'd', 'D', 'f' or 'F', ".
-                      'skipping... at bin/unburden-home-dir line 661, '.
+                      'skipping... at bin/unburden-home-dir line 662, '.
                       '<$list_fh> line 1.'."\n");
 $t->eq_or_diff_stdout('');
 
@@ -82,7 +82,7 @@ $t->eq_or_diff_stdout('');
 $t->write_configs("x f .foobar/flaaf foobar-flaaf");
 $t->call_unburden_home_dir_default;
 $t->eq_or_diff_stderr("Can't parse action 'x', must be 'd', 'r' or 'm', ".
-                      'skipping... at bin/unburden-home-dir line 665, '.
+                      'skipping... at bin/unburden-home-dir line 666, '.
                       '<$list_fh> line 1.'."\n");
 $t->eq_or_diff_stdout('');
 
@@ -90,7 +90,7 @@ $t->eq_or_diff_stdout('');
 $t->write_configs("r f .foobar/flaaf");
 $t->call_unburden_home_dir_default;
 $t->eq_or_diff_stderr("Can't parse 'r f .foobar/flaaf', skipping... ".
-                      'at bin/unburden-home-dir line 657, <$list_fh> line 1.'.
+                      'at bin/unburden-home-dir line 658, <$list_fh> line 1.'.
                       "\n");
 $t->eq_or_diff_stdout('');
 
@@ -98,7 +98,7 @@ $t->eq_or_diff_stdout('');
 $t->write_configs("r f");
 $t->call_unburden_home_dir_default;
 $t->eq_or_diff_stderr("Can't parse 'r f', skipping... ".
-                      'at bin/unburden-home-dir line 657, <$list_fh> line 1.'.
+                      'at bin/unburden-home-dir line 658, <$list_fh> line 1.'.
                       "\n");
 $t->eq_or_diff_stdout('');
 
