@@ -111,12 +111,25 @@ sub prepend_lsof_warning {
     return $wanted;
 }
 
+sub call_unburden_home_dir_common {
+    my $t   = shift;
+    my $cmd = shift;
+    die 'Assertion: call_unburden_home_dir* needs at least one non-empty parameter'
+        unless @_;
+    $t->call_cmd($cmd.' '.join(' ', @_));
+}
+
 sub call_unburden_home_dir {
     my $t = shift;
-    die 'Assertion: call_unburden_home_dir needs at least one non-empty parameter'
-        unless @_;
-    my $cmd = 'perl bin/unburden-home-dir '.join(' ', @_);
-    $t->call_cmd($cmd);
+    my $cmd = 'perl bin/unburden-home-dir';
+    $t->call_unburden_home_dir_common($cmd, @_);
+}
+
+sub call_unburden_home_dir_inc_path {
+    my $t = shift;
+    my $inc_path = shift;
+    my $cmd = "perl -I$inc_path bin/unburden-home-dir";
+    $t->call_unburden_home_dir_common($cmd, @_, "-C ".$t->BASE."/config -L ".$t->BASE."/list");
 }
 
 sub call_cmd {

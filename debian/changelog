@@ -1,7 +1,8 @@
 unburden-home-dir (0.3.2.5) UNRELEASED; urgency=medium
 
   * Make Coveralls.io testing the right thing.
-  * Add tests for lsof checks and for emptying files and directories.
+  * Add tests for lsof checks, some internal error handling and for
+    emptying files and directories.
   * Don't do coverage on tests. Ignore handling of external errors.
   * Fix Moo-based Test::UBH for older versions of Moo.
 
