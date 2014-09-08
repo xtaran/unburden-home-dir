@@ -23,12 +23,12 @@ use File::Which;
 use Data::Dumper;
 
 has 'TESTNAME' => ( is => 'ro',
-                    default => 'generic-test',
+                    default => sub { 'generic-test' },
                     isa => sub {
                         die "$_[0] is not a String" unless
                             defined($_[0]) or ref($_[0]) } );
-has 'PREFIX'   => ( is => 'ro', default => 'u' );
-has 'BASENAME' => ( is => 'ro', default => "unburden-home-dir_TEST_$$" );
+has 'PREFIX'   => ( is => 'ro', default => sub { 'u'; });
+has 'BASENAME' => ( is => 'ro', default => sub { "unburden-home-dir_TEST_$$"; });
 
 sub BUILDARGS {
     my ($class, @args) = @_;
