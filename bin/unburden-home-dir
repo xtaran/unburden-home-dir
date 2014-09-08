@@ -429,14 +429,6 @@ sub create_object_of_type {
     return;
 }
 
-# Bail out on common assertion
-sub unknown_element {
-    my ($what, $unknown) = @_;
-
-    warn "Unknown $what '$unknown'. This should never happen.";
-    return 255;
-}
-
 # Create a symlink
 sub create_symlink {
     my ($itemexpanded, $target) = @_;
@@ -466,10 +458,6 @@ sub check_for_unexpected_type {
 
     my $is_file = type_is_file($type);
     my $is_dir  = type_is_directory($type);
-
-    unless ($is_file or $is_dir) {
-        return unknown_element('type', $type);
-    }
 
     if ($is_file and !-f $itemexpanded) {
         report_serious_problem($itemexpanded,
