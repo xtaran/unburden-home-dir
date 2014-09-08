@@ -1,14 +1,21 @@
 unburden-home-dir (0.3.2.5) UNRELEASED; urgency=medium
 
-  * Make Coveralls.io testing the right thing.
-  * Add tests for lsof checks, some internal error handling, for emptying
-    files and directories, for -f, and for creating non-existent files.
-  * Don't do coverage on tests. Ignore handling of external errors.
-  * Fix Moo-based Test::UBH for older versions of Moo.
-  * Require at least version 1.30 of libtest-file-perl for dir_exists_ok.
-  * Remove unreachable subroutine unknown_element. Yay for coverage tests!
-  * Fix broken behaviour upon trailing blank in list file.
-  * Fix broken -f parameter parsing.
+  * Bugfixes:
+    + Fix broken behaviour upon trailing blank in list file.
+    + Fix broken -f parameter parsing.
+    + Remove unreachable subroutine unknown_element. Yay for coverage tests!
+  * Test suite enhancements:
+    + Make Coveralls.io testing the right thing.
+    + Don't do coverage on tests. Ignore handling of external errors.
+    + Fix Moo-based Test::UBH for older versions of Moo.
+  * New tests covering…
+    + lsof checks
+    + a lots of internal error handling
+    + emptying files and directories
+    + option -f
+    + creating non-existent files
+  * Updated build dependencies: Require at least version 1.30 of
+    libtest-file-perl for dir_exists_ok.
 
  -- Axel Beckert <abe@debian.org>  Sat, 06 Sep 2014 15:41:37 +0200
 
