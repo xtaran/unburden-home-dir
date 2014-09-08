@@ -654,7 +654,8 @@ for my $list (@LISTFILES) {
         next unless defined $action;
 
         if (not (defined($item) and defined($replacement) and
-                 $item ne '' and $replacement ne '')) {
+                 # $item can't be '' since $replacement is undef then
+                 $replacement ne '')) {
             warn "Can't parse '$_', skipping...";
             next;
         }
