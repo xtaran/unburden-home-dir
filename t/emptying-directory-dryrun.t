@@ -8,7 +8,7 @@ use Test::UBH;
 my $t = Test::UBH->new('emptying-directory-dryrun');
 
 $t->setup_test_environment(".foobar/fnord");
-$t->write_configs('d d .foobar foobar');
+$t->write_configs('r d .foobar foobar');
 
 $t->call_unburden_home_dir_default('-n');
 
