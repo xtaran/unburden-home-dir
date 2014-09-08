@@ -78,6 +78,22 @@ $t->eq_or_diff_stderr("Can't parse type 'x', must be 'd', 'D', 'f' or 'F', ".
                       '<$list_fh> line 1.'."\n");
 $t->eq_or_diff_stdout('');
 
+# Incomplete entry list file (case #1)
+$t->write_configs("r f .foobar/flaaf");
+$t->call_unburden_home_dir_default;
+$t->eq_or_diff_stderr("Can't parse 'r f .foobar/flaaf', skipping... ".
+                      'at bin/unburden-home-dir line 657, <$list_fh> line 1.'.
+                      "\n");
+$t->eq_or_diff_stdout('');
+
+# Incomplete entry list file (case #2)
+$t->write_configs("r f");
+$t->call_unburden_home_dir_default;
+$t->eq_or_diff_stderr("Can't parse 'r f', skipping... ".
+                      'at bin/unburden-home-dir line 657, <$list_fh> line 1.'.
+                      "\n");
+$t->eq_or_diff_stdout('');
+
 # lsof not found. Needs mockup of File::Which
 $t->write_configs('m f .foobar/fnord foobar-fnord');
 $t->call_unburden_home_dir_inc_path('t/lib/mockup');
