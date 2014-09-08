@@ -219,4 +219,3 @@ sub eq_or_diff_file {
 }
 
 1;
-

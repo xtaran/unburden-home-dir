@@ -5,7 +5,7 @@ use warnings;
 
 use lib qw(t/lib lib);
 use Test::UBH;
-my $t = Test::UBH->new('emptying-directories');
+my $t = Test::UBH->new('emptying-directory');
 
 $t->setup_test_environment(".foobar/fnord");
 $t->write_configs('d d .foobar foobar');

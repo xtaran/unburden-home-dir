@@ -7,7 +7,7 @@ use lib qw(t/lib lib);
 use Test::UBH;
 use File::Slurp qw(write_file);
 
-my $t = Test::UBH->new('emptying-file');
+my $t = Test::UBH->new('emptying-file-dryrun');
 
 $t->setup_test_environment(".foobar");
 $t->write_configs('d f .foobar/fnord foobar-fnord');
