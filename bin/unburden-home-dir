@@ -336,14 +336,17 @@ sub parse_lsof_output {
             $cmd = undef;
         } elsif ($line =~ /^c(.*)$/) {
             $cmd = $1;
+            # uncoverable branch true
             unless ($pid) {
+                # uncoverable statement
                 report_problem("lsof output", "No pid before command: $line");
-                next;
+                next; # uncoverable statement
             }
             $result .= sprintf("  %5i (%s)\n", $pid, $cmd);
             $pid = undef;
         } else {
-            report_problem("line in lsof output", $line);
+            # uncoverable statement
+            report_problem("unexpected line in lsof output", $line);
         }
     }
 
@@ -361,8 +364,9 @@ sub files_in_use {
     } elsif (-f _) {
         $lsof_output = `lsof -F c '$item'`;
     } else {
+        # uncoverable statement
         report_problem("Not checking for open files in $item: neither file nor directory");
-        return;
+        return; # uncoverable statement
     }
 
     my $lsof_parsed = parse_lsof_output($lsof_output);
@@ -396,7 +400,7 @@ sub action_delete_and_recreate {
     say "Delete $itemexpanded";
     unless ($DRYRUN) {
         $is_dir  and rmtree($itemexpanded, { verbose => 1 }) ;
-        # uncoverable branch true
+        # uncoverable condition right
         $is_file and (unlink($itemexpanded)
                       or die "Couldn't delete $itemexpanded: $!");
     }
