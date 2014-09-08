@@ -114,7 +114,7 @@ Options without parameters:
 }
 
 # Parse command line options
-getopts('hnufFb:c:C:l:L:', \%OPTIONS);
+getopts('hnuf:Fb:c:C:l:L:', \%OPTIONS);
 
 foreach my $key (keys %OPTIONS) {
     if ($key eq 'h') {
@@ -145,7 +145,7 @@ foreach my $key (keys %OPTIONS) {
     elsif ($key eq 'f') {
         eval { $FILTER = qr/$OPTIONS{f}/; };
         if ($@) {
-            report_serious_problem("parameter to -f", "\n$@");
+            report_serious_problem("parameter to -f", $OPTIONS{f});
             exit 2;
         }
     }
