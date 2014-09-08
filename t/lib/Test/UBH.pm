@@ -113,23 +113,30 @@ sub prepend_lsof_warning {
 
 sub call_unburden_home_dir_common {
     my $t   = shift;
+    my $ok  = shift;
     my $cmd = shift;
     die 'Assertion: call_unburden_home_dir* needs at least one non-empty parameter'
         unless @_;
-    $t->call_cmd($cmd.' '.join(' ', @_));
+    $cmd .= ' '.join(' ', @_);
+    if ($ok) {
+        $t->call_cmd($cmd);
+    } else {
+        $t->fail_cmd($cmd);
+    }
 }
 
 sub call_unburden_home_dir {
-    my $t = shift;
+    my $t   = shift;
+    my $ok  = shift;
     my $cmd = 'perl bin/unburden-home-dir';
-    $t->call_unburden_home_dir_common($cmd, @_);
+    $t->call_unburden_home_dir_common($ok, $cmd, @_);
 }
 
 sub call_unburden_home_dir_inc_path {
     my $t = shift;
     my $inc_path = shift;
     my $cmd = "perl -I$inc_path bin/unburden-home-dir";
-    $t->call_unburden_home_dir_common($cmd, @_, "-C ".$t->BASE."/config -L ".$t->BASE."/list");
+    $t->call_unburden_home_dir_common(1, $cmd, @_, $t->default_parameters);
 }
 
 sub call_cmd {
@@ -138,14 +145,30 @@ sub call_cmd {
     ok( system($cmd . $t->shell_capture) == 0, "Call '$cmd'" );
 }
 
+sub fail_cmd {
+    my $t = shift;
+    my $cmd = shift;
+    ok( ! system($cmd . $t->shell_capture) == 0, "'$cmd' fails" );
+}
+
 sub call_unburden_home_dir_user {
     my $t = shift;
-    $t->call_unburden_home_dir(@_, '-b '.$t->BASENAME)
+    $t->call_unburden_home_dir(1, @_, '-b '.$t->BASENAME)
 }
 
 sub call_unburden_home_dir_default {
     my $t = shift;
-    $t->call_unburden_home_dir(@_, "-C ".$t->BASE."/config -c /dev/null -L ".$t->BASE."/list -l /dev/null");
+    $t->call_unburden_home_dir(1, @_, $t->default_parameters);
+}
+
+sub fail_unburden_home_dir_default {
+    my $t = shift;
+    $t->call_unburden_home_dir(0, @_, $t->default_parameters);
+}
+
+sub default_parameters {
+    my $t = shift;
+    return "-C ".$t->BASE."/config -c /dev/null -L ".$t->BASE."/list -l /dev/null";
 }
 
 sub write_configs {
