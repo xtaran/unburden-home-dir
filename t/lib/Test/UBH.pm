@@ -27,9 +27,11 @@ sub ubh_temp_dir {
     return File::Temp->newdir(DIR => '.')->dirname;
 }
 
-has 'TESTNAME' => ( is => 'ro', default => \&ubh_temp_dir, init_arg => undef );
-has 'PREFIX'   => ( is => 'ro', default => \&ubh_temp_dir, init_arg => undef );
-has 'BASENAME' => ( is => 'ro', default => \&ubh_temp_dir, init_arg => undef );
+foreach my $attribute (qw(TESTNAME PREFIX BASENAME)) {
+    has $attribute => ( is => 'ro',
+                        default => \&ubh_temp_dir,
+                        init_arg => undef );
+}
 
 sub BUILD {
     my $t = shift;
