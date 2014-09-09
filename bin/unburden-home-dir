@@ -586,12 +586,6 @@ sub replace {
 sub revert {
     my ($itemexpanded, $item_in_home, $target_glob) = @_;
 
-    # Skip entries where wildcard where passed
-    if ($itemexpanded =~ /[][*?]/) {
-        warn "Skipping '$target_glob' due to unmatched wildcard.\n";
-        return 0;
-    }
-
     $item_in_home = "$ENV{HOME}/" .
         fill_in_wildcard_matches($target_glob, $itemexpanded, $item_in_home);
     say "Trying to revert $itemexpanded to $item_in_home";
