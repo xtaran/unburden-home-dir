@@ -217,8 +217,8 @@ sub move {
     say "Moving $from -> $to";
     unless ($DRYRUN) {
         if (-d $from) {
-            $from .= '/' unless $from =~ m(/$);
-            $to .= '/' unless $to =~ m(/$);
+            $from .= '/';
+            $to .= '/';
 
             my $rc = $rsync->exec({
                 src => $from,
