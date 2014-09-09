@@ -33,7 +33,7 @@ has 'BASENAME' => ( is => 'ro', default => sub { "unburden-home-dir_TEST_$$"; })
 
 sub BUILDARGS {
     my ($class, @args) = @_;
-    unshift @args, 'TESTNAME' if @args % 2 == 1;
+    shift @args if @args % 2 == 1;
     return { @args };
 }
 
