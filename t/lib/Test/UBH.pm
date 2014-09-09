@@ -25,9 +25,7 @@ use Data::Dumper;
 
 has 'TESTNAME' => ( is => 'ro',
                     default => sub { File::Temp->newdir(DIR => '.')->dirname },
-                    isa => sub {
-                        die "$_[0] is not a String" unless
-                            defined($_[0]) or ref($_[0]) } );
+                    init_arg => undef );
 has 'PREFIX'   => ( is => 'ro', default => sub { 'u'; });
 has 'BASENAME' => ( is => 'ro', default => sub { "unburden-home-dir_TEST_$$"; });
 
