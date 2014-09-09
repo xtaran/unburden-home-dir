@@ -27,13 +27,9 @@ sub ubh_temp_dir {
     return File::Temp->newdir(DIR => '.')->dirname;
 }
 
-has 'TESTNAME' => ( is => 'ro',
-                    default => \&ubh_temp_dir,
-                    init_arg => undef );
+has 'TESTNAME' => ( is => 'ro', default => \&ubh_temp_dir, init_arg => undef );
 has 'PREFIX'   => ( is => 'ro', default => sub { 'u'; }, init_arg => undef );
-has 'BASENAME' => ( is => 'ro',
-                    default => \&ubh_temp_dir,
-                    init_arg => undef );
+has 'BASENAME' => ( is => 'ro', default => \&ubh_temp_dir, init_arg => undef );
 
 sub BUILD {
     my $t = shift;
