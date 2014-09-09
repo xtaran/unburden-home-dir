@@ -5,7 +5,6 @@ use warnings;
 
 use lib qw(t/lib lib);
 use Test::UBH;
-use File::Slurp qw(write_file);
 
 my $t = Test::UBH->new;
 
