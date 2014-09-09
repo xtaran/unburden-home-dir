@@ -554,12 +554,6 @@ sub replace {
     # replace $type $i $item $replacement
     my ($type, $itemexpanded, $itemglob, $replacement, $action) = @_;
 
-    # Skip entries where wildcard where passed
-    if ($itemexpanded =~ /[][*?]/) {
-        warn "Skipping '$itemexpanded' due to unmatched wildcard.\n";
-        return 0;
-    }
-
     if (my $symlink = symlink_in_path($itemexpanded)) {
         warn "Skipping '$itemexpanded' due to symlink in path: $symlink\n";
         return 0;
