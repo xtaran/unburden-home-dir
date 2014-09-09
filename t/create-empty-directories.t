@@ -30,4 +30,3 @@ dir_exists_ok( $t->HOME."/.foobar" );
 symlink_target_exists_ok( $t->HOME."/.foobar/fnord" );
 
 $t->done();
-
