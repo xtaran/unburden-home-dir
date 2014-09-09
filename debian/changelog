@@ -20,6 +20,7 @@ unburden-home-dir (0.3.3) UNRELEASED; urgency=medium
     + option -f
     + creating non-existent files
     + handling items that are neither file nor directory nor symlink
+    + undo in combination with symlink which points to the wrong file
   * Updated build dependencies: Require at least version 1.30 of
     libtest-file-perl for dir_exists_ok.
 
