@@ -36,7 +36,8 @@ $t->eq_or_diff_stdout('');
 
 # Unexpected symlink target
 $t->write_configs("r d .foobar/gnarz foobar-gnarz");
-ok( symlink("bla", $t->HOME."/.foobar/gnarz"), "Create symlink to wrong target" );
+ok( symlink("bla", $t->HOME."/.foobar/gnarz"),
+    "Create symlink to wrong target" );
 $t->call_unburden_home_dir_default;
 $t->eq_or_diff_stderr("WARNING: Can't handle ".$t->HOME.
                       '/.foobar/gnarz: bla not equal '.$t->TP.'-foobar-gnarz '.
@@ -46,7 +47,8 @@ $t->eq_or_diff_stdout('');
 
 # Unexpected symlink target type: not a directory
 $t->write_configs("r d .foobar/hurz foobar-hurz");
-ok( symlink($t->TP.'-foobar-hurz', $t->HOME."/.foobar/hurz"), "Create symlink to wrong target" );
+ok( symlink($t->TP.'-foobar-hurz', $t->HOME."/.foobar/hurz"),
+    "Create symlink to wrong target" );
 ok( write_file($t->TP.'-foobar-hurz', "Some target contents\n"),
     'Create '.$t->TP.'-foobar-hurz with some contents');
 
@@ -59,7 +61,8 @@ $t->eq_or_diff_stdout('');
 
 # Unexpected symlink target type: not a file
 $t->write_configs("r f .foobar/flaaf foobar-flaaf");
-ok( symlink($t->TP.'-foobar-flaaf', $t->HOME."/.foobar/flaaf"), "Create symlink to wrong target" );
+ok( symlink($t->TP.'-foobar-flaaf', $t->HOME."/.foobar/flaaf"),
+    "Create symlink to wrong target" );
 ok( $t->create_and_check_directory($t->TP.'-foobar-flaaf',
                                    'unexpected target director '.
                                    $t->TP.'-foobar-flaaf') );
