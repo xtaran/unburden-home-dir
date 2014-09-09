@@ -31,12 +31,6 @@ has 'TESTNAME' => ( is => 'ro',
 has 'PREFIX'   => ( is => 'ro', default => sub { 'u'; });
 has 'BASENAME' => ( is => 'ro', default => sub { "unburden-home-dir_TEST_$$"; });
 
-sub BUILDARGS {
-    my ($class, @args) = @_;
-    shift @args if @args % 2 == 1;
-    return { @args };
-}
-
 sub BUILD {
     my $t = shift;
 
