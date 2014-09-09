@@ -19,11 +19,12 @@ use Test::Differences;
 use Test::File;
 use File::Path qw(mkpath rmtree);
 use File::Slurp;
+use File::Temp;
 use File::Which;
 use Data::Dumper;
 
 has 'TESTNAME' => ( is => 'ro',
-                    default => sub { 'generic-test' },
+                    default => sub { File::Temp->newdir(DIR => '.')->dirname },
                     isa => sub {
                         die "$_[0] is not a String" unless
                             defined($_[0]) or ref($_[0]) } );

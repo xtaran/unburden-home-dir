@@ -8,6 +8,7 @@ unburden-home-dir (0.3.2.5) UNRELEASED; urgency=medium
     + Make Coveralls.io testing the right thing.
     + Don't do coverage on tests. Ignore handling of external errors.
     + Fix Moo-based Test::UBH for older versions of Moo.
+    + Use File::Temp instead of manually set test directories.
   * New tests covering…
     + lsof checks
     + a lots of internal error handling
