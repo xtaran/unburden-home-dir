@@ -27,7 +27,7 @@ use warnings;
 use 5.010;
 
 # Globally define version
-our $VERSION = '0.3.2.5';
+our $VERSION = '0.3.3';
 
 # Configuration variables to be used in configuration files
 my $CONFIG = {
@@ -624,10 +624,15 @@ sub exchange_wildcards_and_replacements {
 
 # Main loop over all items in list files
 for my $list (@LISTFILES) {
-    next unless -r $list;
+    next unless -e $list;
+    unless (-r _) {
+        warn "List file $list isn't readable, skipping";
+        next;
+    }
 
     # Clean up this and that
     my $list_fh;
+    # uncoverable branch true
     open($list_fh, '<', $list) or die "Can't open $list: $!";
     while (<$list_fh>) {
         next if /^#|^ *$/;

@@ -122,4 +122,13 @@ $t->write_configs('m f .foobar/fnord foobar-fnord');
 $t->call_unburden_home_dir_inc_path('t/lib/mockup');
 $t->eq_or_diff_stderr("WARNING: lsof not found, not checking for files in use.\n");
 
+# Must warn on unreadable list file
+my $list_file = $t->BASE.'/list';
+file_exists_ok($list_file);
+ok( chmod(0, $list_file), "Make list file $list_file unreadable");
+$t->call_unburden_home_dir_default;
+$t->eq_or_diff_stderr("List file $list_file isn't readable, skipping ".
+                      "at bin/unburden-home-dir line <n>.\n");
+$t->eq_or_diff_stdout('');
+
 $t->done;

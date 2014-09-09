@@ -1,5 +1,7 @@
-unburden-home-dir (0.3.2.5) UNRELEASED; urgency=medium
+unburden-home-dir (0.3.3) UNRELEASED; urgency=medium
 
+  * Enhancements:
+    + Warnings in case of unreadable list files
   * Bugfixes:
     + Fix broken behaviour upon trailing blank in list file.
     + Fix broken -f parameter parsing.
