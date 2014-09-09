@@ -26,7 +26,7 @@ use Data::Dumper;
 has 'TESTNAME' => ( is => 'ro',
                     default => sub { File::Temp->newdir(DIR => '.')->dirname },
                     init_arg => undef );
-has 'PREFIX'   => ( is => 'ro', default => sub { 'u'; });
+has 'PREFIX'   => ( is => 'ro', default => sub { 'u'; }, init_arg => undef );
 has 'BASENAME' => ( is => 'ro', default => sub { "unburden-home-dir_TEST_$$"; });
 
 sub BUILD {
