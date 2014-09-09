@@ -28,7 +28,7 @@ sub ubh_temp_dir {
 }
 
 has 'TESTNAME' => ( is => 'ro', default => \&ubh_temp_dir, init_arg => undef );
-has 'PREFIX'   => ( is => 'ro', default => sub { 'u'; }, init_arg => undef );
+has 'PREFIX'   => ( is => 'ro', default => \&ubh_temp_dir, init_arg => undef );
 has 'BASENAME' => ( is => 'ro', default => \&ubh_temp_dir, init_arg => undef );
 
 sub BUILD {
