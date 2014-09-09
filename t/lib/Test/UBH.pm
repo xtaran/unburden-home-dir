@@ -239,6 +239,8 @@ sub eq_or_diff_file {
     $file = $t->BASE."/$file";
     my $output = read_file($file);
 
+    $output =~ s(at bin/unburden-home-dir line \d+([,.]))(at bin/unburden-home-dir line <n>$1)g;
+
     # Somewhere between coreutils 8.13 (until Wheezy/Quantal), and
     # 8.20 (from Jessie/Raring on) the quoting characters in verbose
     # output of mv. changed. $wanted contains the newer style. In case

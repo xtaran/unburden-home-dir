@@ -30,6 +30,6 @@ file_not_exists_ok( $t->TP."-foobar-gnarz" );
 $t->write_configs("r F .foobar/fnord foobar-fnord");
 $t->fail_unburden_home_dir_default(qw[-f '(']);
 $t->eq_or_diff_stderr("ERROR: Can't handle parameter to -f: ( ".
-                      'at bin/unburden-home-dir line 210.'."\n");
+                      'at bin/unburden-home-dir line <n>.'."\n");
 $t->done();
 

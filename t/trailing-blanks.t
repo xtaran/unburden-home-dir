@@ -15,7 +15,7 @@ $t->setup_test_environment(".foobar/bla");
 $t->write_configs("r f .foobar/flaaf  ");
 $t->call_unburden_home_dir_default;
 $t->eq_or_diff_stderr("Can't parse 'r f .foobar/flaaf  ', skipping... ".
-                      'at bin/unburden-home-dir line 658, <$list_fh> line 1.'.
+                      'at bin/unburden-home-dir line <n>, <$list_fh> line 1.'.
                       "\n");
 $t->eq_or_diff_stdout('');
 
