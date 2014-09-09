@@ -6,7 +6,7 @@ use warnings;
 use lib qw(t/lib lib);
 use Test::UBH;
 
-my $t = Test::UBH->new('moving-to-existing-subdir');
+my $t = Test::UBH->new;
 
 $t->setup_test_environment(".foobar/fnord", ".foobar/gnarz");
 ok( mkpath($t->TP."-foobar-gnarz", {}), 'Create test environment (target)' );

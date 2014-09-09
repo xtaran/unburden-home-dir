@@ -6,7 +6,7 @@ use warnings;
 use lib qw(t/lib lib);
 use Test::UBH;
 
-my $t = Test::UBH->new('find-per-user-stuff');
+my $t = Test::UBH->new;
 my $demodir1 = '.foobar/fnord';
 my $demofile1 = "$demodir1/bla";
 my $demotarget1 = 'foobar-fnord-bla';

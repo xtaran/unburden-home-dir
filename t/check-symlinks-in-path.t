@@ -5,7 +5,7 @@ use warnings;
 
 use lib qw(t/lib lib);
 use Test::UBH;
-my $t = Test::UBH->new('check-symlinks-in-path');
+my $t = Test::UBH->new;
 
 $t->setup_test_environment('.foobar/fnord/bla');
 

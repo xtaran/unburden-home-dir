@@ -9,7 +9,7 @@ use File::Slurp qw(write_file);
 
 $| = 1;
 
-my $t = Test::UBH->new('emptying-file-dryrun');
+my $t = Test::UBH->new;
 
 $t->setup_test_environment(".foobar");
 $t->write_configs('d f .foobar/fnord foobar-fnord');

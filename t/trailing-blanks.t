@@ -9,7 +9,7 @@ use File::Slurp qw(write_file);
 
 $| = 1;
 
-my $t = Test::UBH->new('trailing-blanks');
+my $t = Test::UBH->new;
 
 $t->setup_test_environment(".foobar/bla");
 

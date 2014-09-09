@@ -5,7 +5,7 @@ use warnings;
 
 use lib qw(t/lib lib);
 use Test::UBH;
-my $t = Test::UBH->new('create-empty-files');
+my $t = Test::UBH->new;
 
 $t->setup_test_environment('');
 

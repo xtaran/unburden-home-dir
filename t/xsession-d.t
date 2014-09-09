@@ -8,7 +8,7 @@ use File::Copy;
 use lib qw(t/lib lib);
 use Test::UBH;
 
-my $t = Test::UBH->new('xsession-d');
+my $t = Test::UBH->new;
 
 my $BINDIR = $t->BASE."/bin";
 my $XSESSIOND = $t->BASE."/Xsession.d";

@@ -6,7 +6,7 @@ use warnings;
 use lib qw(t/lib lib);
 use Test::UBH;
 
-my $t = Test::UBH->new('skip-non-home');
+my $t = Test::UBH->new;
 
 foreach my $example (qw(/foobar ../foobar)) {
     $t->setup_test_environment_without_target("foobar");
