@@ -530,6 +530,7 @@ sub fill_in_wildcard_matches {
 sub symlink_in_path {
     my $path = shift;
     # Remove home directory, i.e. check just from below the home directory
+    # uncoverable branch false
     if ($path =~ s($ENV{HOME}/?)()) {
         # Split up into components, but remove the last one (which we
         # are requested to handle, so we shouldn't check that now)
@@ -543,10 +544,9 @@ sub symlink_in_path {
         }
         return 0;
     } else {
+        # uncoverable statement
         report_serious_problem("Can't find home directory ($ENV{HOME}) in $path!");
     }
-
-    return;
 }
 
 # Handle replacement requests and check if they're sane

@@ -3,7 +3,8 @@ unburden-home-dir (0.3.2.5) UNRELEASED; urgency=medium
   * Bugfixes:
     + Fix broken behaviour upon trailing blank in list file.
     + Fix broken -f parameter parsing.
-    + Remove unreachable subroutine unknown_element. Yay for coverage tests!
+    + Remove unreachable subroutine unknown_element and some other
+      unreachable code fragments. Yay for coverage tests!
   * Test suite enhancements:
     + Make Coveralls.io testing the right thing.
     + Don't do coverage on tests. Ignore handling of external errors.
