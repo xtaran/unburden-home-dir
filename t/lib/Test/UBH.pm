@@ -21,15 +21,21 @@ use File::Path qw(mkpath rmtree);
 use File::Slurp;
 use File::Temp;
 use File::Which;
+use String::Random qw(random_string);
 use Data::Dumper;
 
 sub ubh_temp_dir {
-    return File::Temp->newdir(DIR => '.')->dirname;
+    return File::Temp->newdir(DIR => 't');
 }
 
-foreach my $attribute (qw(TESTNAME PREFIX BASENAME)) {
+sub ubh_random_string {
+    return String::Random->new->randregex('\w{12}');
+}
+
+has 'BASE' => ( is => 'ro', default => \&ubh_temp_dir, init_arg => undef );
+foreach my $attribute (qw(PREFIX BASENAME)) {
     has $attribute => ( is => 'ro',
-                        default => \&ubh_temp_dir,
+                        default => \&ubh_random_string,
                         init_arg => undef );
 }
 
@@ -46,22 +52,13 @@ sub BUILD {
     return $t;
 }
 
-# Tear down
-
-sub cleanup {
-    my $t = shift;
-    ok( rmtree($t->BASE), "Clean up" );
-}
-
 sub done {
     my $t = shift;
-    $t->cleanup;
     done_testing();
 }
 
-# Calculated attributes based on TESTNAME
+# Calculated attributes based on BASE
 
-sub BASE   { my $t = shift; return 't/'.$t->TESTNAME; }
 sub HOME   { my $t = shift; return $t->BASE . '/1'; }
 sub TARGET { my $t = shift; return $t->BASE . '/2'; }
 sub TP     { my $t = shift; return $t->TARGET.'/'.$t->PREFIX; }

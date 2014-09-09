@@ -6,9 +6,9 @@ use warnings;
 use lib qw(t/lib lib);
 use Test::UBH;
 
-my $t = Test::UBH->new;
-
 foreach my $example (qw(/foobar ../foobar)) {
+    my $t = Test::UBH->new;
+
     $t->setup_test_environment_without_target("foobar");
 
     file_not_exists_ok( $t->BASE."/foobar" );
@@ -27,8 +27,6 @@ foreach my $example (qw(/foobar ../foobar)) {
 
     file_not_exists_ok( $t->BASE."/foobar" );
     file_not_exists_ok( "/foobar" );
-
-    $t->cleanup;
 }
 
 done_testing();

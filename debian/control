@@ -12,6 +12,7 @@ Build-Depends: debhelper (>= 9~),
                libfile-which-perl,
 # Test suite dependencies
                libmoo-perl,
+               libstring-random-perl,
                libtest-differences-perl,
                libtest-file-perl (>= 1.30),
                lsof

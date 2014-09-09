@@ -6,7 +6,6 @@ use warnings;
 use lib qw(t/lib lib);
 use Test::UBH;
 
-my $t = Test::UBH->new;
 my $demodir1 = '.foobar/fnord';
 my $demofile1 = "$demodir1/bla";
 my $demotarget1 = 'foobar-fnord-bla';
@@ -15,6 +14,7 @@ my $demofile2 = "$demodir2/bla";
 my $demotarget2 = 'foobar-blafasel-bla';
 
 foreach my $configtype (qw(write_user_configs write_xdg_configs)) {
+    my $t = Test::UBH->new;
     $t->setup_test_environment($demofile1);
 
     ok( symlink($demodir1, $t->HOME."/.fnord"),
@@ -50,8 +50,6 @@ foreach my $configtype (qw(write_user_configs write_xdg_configs)) {
     dir_exists_ok( $t->TP."-$demotarget1", "First directory moved" );
     file_not_exists_ok( $t->TP."-fnord-bla", "Symlink 1 not moved" );
     file_not_exists_ok( $t->TP."-$demotarget2", "Symlink 2 not moved" );
-
-    $t->cleanup();
 }
 
 done_testing();
