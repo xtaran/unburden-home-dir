@@ -23,12 +23,16 @@ use File::Temp;
 use File::Which;
 use Data::Dumper;
 
+sub ubh_temp_dir {
+    return File::Temp->newdir(DIR => '.')->dirname;
+}
+
 has 'TESTNAME' => ( is => 'ro',
-                    default => sub { File::Temp->newdir(DIR => '.')->dirname },
+                    default => \&ubh_temp_dir,
                     init_arg => undef );
 has 'PREFIX'   => ( is => 'ro', default => sub { 'u'; }, init_arg => undef );
 has 'BASENAME' => ( is => 'ro',
-                    default => sub { File::Temp->newdir(DIR => '.')->dirname },
+                    default => \&ubh_temp_dir,
                     init_arg => undef );
 
 sub BUILD {
