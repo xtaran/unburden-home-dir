@@ -490,9 +490,6 @@ sub do_it {
     elsif ( $action eq 'm' ) {
         action_move($itemexpanded, $target);
     }
-    else {
-        return unknown_element('action', $action);
-    }
 
     create_symlink($itemexpanded, $target);
 
