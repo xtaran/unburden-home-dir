@@ -63,9 +63,9 @@ $t->eq_or_diff_stdout('');
 $t->write_configs("r f .foobar/flaaf foobar-flaaf");
 ok( symlink($t->TP.'-foobar-flaaf', $t->HOME."/.foobar/flaaf"),
     "Create symlink to wrong target" );
-ok( $t->create_and_check_directory($t->TP.'-foobar-flaaf',
-                                   'unexpected target director '.
-                                   $t->TP.'-foobar-flaaf') );
+$t->create_and_check_directory($t->TP.'-foobar-flaaf',
+                               'unexpected target director '.
+                               $t->TP.'-foobar-flaaf');
 $t->call_unburden_home_dir_default;
 $t->eq_or_diff_stderr("ERROR: Can't handle ".$t->TP.'-foobar-flaaf: '.
                       'Unexpected type (not a file) '.
