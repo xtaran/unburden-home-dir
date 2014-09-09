@@ -364,9 +364,8 @@ sub files_in_use {
     } elsif (-f _) {
         $lsof_output = `lsof -F c '$item'`;
     } else {
-        # uncoverable statement
-        report_problem("Not checking for open files in $item: neither file nor directory");
-        return; # uncoverable statement
+        report_problem("checking open files in $item", "neither file nor directory");
+        return;
     }
 
     my $lsof_parsed = parse_lsof_output($lsof_output);

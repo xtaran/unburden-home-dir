@@ -11,7 +11,7 @@ $| = 1;
 
 my $t = Test::UBH->new('unexpected_cases');
 
-$t->setup_test_environment(".foobar/bla");
+$t->setup_test_environment(".foobar/bla", ".fifo");
 
 # Expected directory is file
 $t->write_configs('m d .foobar/fnord foobar-fnord');
@@ -77,7 +77,7 @@ $t->eq_or_diff_stdout('');
 $t->write_configs("r x .foobar/flaaf foobar-flaaf");
 $t->call_unburden_home_dir_default;
 $t->eq_or_diff_stderr("Can't parse type 'x', must be 'd', 'D', 'f' or 'F', ".
-                      'skipping... at bin/unburden-home-dir line 663, '.
+                      'skipping... at bin/unburden-home-dir line 662, '.
                       '<$list_fh> line 1.'."\n");
 $t->eq_or_diff_stdout('');
 
@@ -85,7 +85,7 @@ $t->eq_or_diff_stdout('');
 $t->write_configs("x f .foobar/flaaf foobar-flaaf");
 $t->call_unburden_home_dir_default;
 $t->eq_or_diff_stderr("Can't parse action 'x', must be 'd', 'r' or 'm', ".
-                      'skipping... at bin/unburden-home-dir line 667, '.
+                      'skipping... at bin/unburden-home-dir line 666, '.
                       '<$list_fh> line 1.'."\n");
 $t->eq_or_diff_stdout('');
 
@@ -93,7 +93,7 @@ $t->eq_or_diff_stdout('');
 $t->write_configs("r f .foobar/flaaf");
 $t->call_unburden_home_dir_default;
 $t->eq_or_diff_stderr("Can't parse 'r f .foobar/flaaf', skipping... ".
-                      'at bin/unburden-home-dir line 659, <$list_fh> line 1.'.
+                      'at bin/unburden-home-dir line 658, <$list_fh> line 1.'.
                       "\n");
 $t->eq_or_diff_stdout('');
 
@@ -101,8 +101,23 @@ $t->eq_or_diff_stdout('');
 $t->write_configs("r f");
 $t->call_unburden_home_dir_default;
 $t->eq_or_diff_stderr("Can't parse 'r f', skipping... ".
-                      'at bin/unburden-home-dir line 659, <$list_fh> line 1.'.
+                      'at bin/unburden-home-dir line 658, <$list_fh> line 1.'.
                       "\n");
+$t->eq_or_diff_stdout('');
+
+# Neither file nor directory nor symlink
+$t->write_configs("r f .fifo/blarg fifo-blarg");
+dir_exists_ok($t->HOME.'/.fifo');
+ok( system('mkfifo '.$t->HOME.'/.fifo/blarg 1>&2') == 0,
+    "Created a fifo at ".$t->HOME.'/.fifo/blarg' );
+$t->call_unburden_home_dir_default;
+$t->eq_or_diff_stderr("WARNING: Can't handle checking open files in ".
+                      't/unexpected_cases/1/.fifo/blarg: '.
+                      'neither file nor directory at bin/unburden-home-dir '.
+                      'line 204, <$list_fh> line 1.'."\n".
+                      "ERROR: Can't handle t/unexpected_cases/1/.fifo/blarg: ".
+                      'Unexpected type (not a file) at bin/unburden-home-dir '.
+                      'line 210, <$list_fh> line 1.'."\n");
 $t->eq_or_diff_stdout('');
 
 # lsof not found. Needs mockup of File::Which
