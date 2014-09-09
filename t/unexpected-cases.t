@@ -112,10 +112,10 @@ ok( system('mkfifo '.$t->HOME.'/.fifo/blarg 1>&2') == 0,
     "Created a fifo at ".$t->HOME.'/.fifo/blarg' );
 $t->call_unburden_home_dir_default;
 $t->eq_or_diff_stderr("WARNING: Can't handle checking open files in ".
-                      't/unexpected_cases/1/.fifo/blarg: '.
+                      $t->HOME.'/.fifo/blarg: '.
                       'neither file nor directory at bin/unburden-home-dir '.
                       'line 204, <$list_fh> line 1.'."\n".
-                      "ERROR: Can't handle t/unexpected_cases/1/.fifo/blarg: ".
+                      "ERROR: Can't handle ".$t->HOME."/.fifo/blarg: ".
                       'Unexpected type (not a file) at bin/unburden-home-dir '.
                       'line 210, <$list_fh> line 1.'."\n");
 $t->eq_or_diff_stdout('');
