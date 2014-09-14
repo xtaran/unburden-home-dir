@@ -315,6 +315,17 @@ too, Gitorious gets pushed less often, but should get all major
 updates in time, too.
 
 
+Testing, Continuous Integration and Code Coverage
+-------------------------------------------------
+
+* [Travis CI Build Status](https://travis-ci.org/xtaran/unburden-home-dir)
+  (after each `git push`)
+* [Coveralls.io Statement Coverage Status](https://coveralls.io/r/xtaran/unburden-home-dir)
+  (after each `git push`)
+* [Code Statistics on OpenHub (formerly Ohloh)](https://www.openhub.net/p/unburden-home-dir)
+  (every few days)
+
+
 Bugs
 ====
 
