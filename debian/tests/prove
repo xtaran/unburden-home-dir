@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Run unburden-home-dir's test suite under Debian's autopkgtest
+# Author: Axel Beckert <abe@debian.org>
+
+set -e
+
+# Copy test tree to $ADTTMP
+cp -pvr t "$ADTTMP/t"
+cd "$ADTTMP"
+
+prove -v -j1

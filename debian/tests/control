@@ -1,0 +1,5 @@
+Tests: prove
+Depends: @, @builddeps@
+
+Tests: adequate
+Depends: @, adequate

@@ -13,7 +13,7 @@ unburden-home-dir (0.3.3) UNRELEASED; urgency=medium
     + Fix Moo-based Test::UBH for older versions of Moo.
     + Use File::Temp and String::Random instead of manually setting test
       directories. Add libstring-random-perl as build-dependency.
-    + Enable installed-time testing with autopkgtest.
+    + Enable DEP8 installed-time testing with autopkgtest.
   * New tests covering…
     + lsof checks
     + a lots of internal error handling

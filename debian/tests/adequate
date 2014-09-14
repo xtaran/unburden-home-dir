@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Very simple test to run adequate on "unburden-home-dir". To be used
+# with Debian's autopkgtest package.
+# Author: Axel Beckert <abe@debian.org>
+
+adequate unburden-home-dir >&2
