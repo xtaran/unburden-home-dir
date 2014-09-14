@@ -1,47 +1,26 @@
-This work was packaged for Debian by:
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: unburden-home-dir
+Upstream-Contact: Axel Beckert <abe@deuxchevaux.org>
+Source: https://github.com/xtaran/unburden-home-dir
+        but can also be found at
+        http://git.phys.ethz.ch/?p=unburden-home-dir.git and
+        http://gitorious.org/unburden-home-dir/
 
-    Axel Beckert <abe@debian.org> on Sun, 31 Oct 2010 20:17:57 +0100
-
-It was downloaded from:
-
-    http://github.com/xtaran/unburden-home-dir
-
-... but can also be found at
-
-    http://git.phys.ethz.ch/?p=unburden-home-dir.git and
-    http://gitorious.org/unburden-home-dir/
-
-Upstream Author:
-
-    Axel Beckert <beckert@phys.ethz.ch>
-
-Copyright:
-
-    Copyright (C) 2010-2013 Axel Beckert
-
-License:
-
-    This package is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
-
-    This package is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program. If not, see <http://www.gnu.org/licenses/>
-
-On Debian systems, the complete text of the GNU General
-Public License version 2 can be found in "/usr/share/common-licenses/GPL-2".
-
-The Debian packaging is:
-
-    Copyright (C) 2010-2013 Axel Beckert <abe@debian.org>
-
-you can redistribute it and/or modify it under the terms of the GNU
-General Public License as published by the Free Software Foundation;
-either version 2 of the License, or (at your option) any later
-version.
+Files: *
+License: GPL-2+
+ This package is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+ .
+ This package is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program. If not, see <http://www.gnu.org/licenses/>
+ .
+ On Debian systems, the complete text of the GNU General Public
+ License version 2 can be found in "/usr/share/common-licenses/GPL-2".
+Copyright: 2010-2014 Axel Beckert

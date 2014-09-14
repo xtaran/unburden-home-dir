@@ -24,6 +24,7 @@ unburden-home-dir (0.3.3) UNRELEASED; urgency=medium
     + undo in combination with symlink which points to the wrong file
   * Updated build dependencies: Require at least version 1.30 of
     libtest-file-perl for dir_exists_ok.
+  * Switch debian/copyright to machine-readable format and update years.
 
  -- Axel Beckert <abe@debian.org>  Sat, 06 Sep 2014 15:41:37 +0200
 
