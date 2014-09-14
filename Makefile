@@ -1,8 +1,13 @@
+ifneq (,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
+  NUMJOBS = $(patsubst parallel=%,%,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
+  PROVEFLAGS += -j$(NUMJOBS)
+endif
+
 build:
 
 pureperltest:
 	perl -c bin/unburden-home-dir
-	prove t/*.t
+	prove $(PROVEFLAGS) t/*.t
 
 test: pureperltest
 	checkbashisms Xsession.d/95unburden-home-dir
