@@ -1,4 +1,4 @@
-unburden-home-dir (0.3.3) UNRELEASED; urgency=medium
+unburden-home-dir (0.3.3) unstable; urgency=medium
 
   * Enhancements:
     + Warnings in case of unreadable list files
@@ -28,7 +28,7 @@ unburden-home-dir (0.3.3) UNRELEASED; urgency=medium
   * Switch debian/copyright to machine-readable format and update years.
   * Enable parallel building (the test suite supports it)
 
- -- Axel Beckert <abe@debian.org>  Sat, 06 Sep 2014 15:41:37 +0200
+ -- Axel Beckert <abe@debian.org>  Sun, 14 Sep 2014 18:15:08 +0200
 
 unburden-home-dir (0.3.2.4) unstable; urgency=medium
 
