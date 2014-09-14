@@ -18,7 +18,7 @@ $t->write_configs("m d .foobar/fnord foobar-fnord/\n");
 
 $t->call_unburden_home_dir_default;
 
-my $wanted = $t->handle_lsof_warnings;
+my $wanted = $t->prepend_lsof_warning;
 $t->eq_or_diff_stderr($wanted);
 
 $wanted =

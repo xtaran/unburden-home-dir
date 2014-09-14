@@ -34,7 +34,7 @@ foreach my $configtype (qw(write_user_configs write_xdg_configs)) {
 
     $t->call_unburden_home_dir_user;
 
-    my $wanted = $t->handle_lsof_warnings(
+    my $wanted = $t->prepend_lsof_warning(
         "Skipping '".$t->HOME."/.fnord/bla' due to symlink in path: ".$t->HOME."/.fnord\n" .
         "Skipping '".$t->HOME."/$demofile2' due to symlink in path: ".$t->HOME."/$demodir2\n");
     $t->eq_or_diff_stderr($wanted);

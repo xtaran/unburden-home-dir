@@ -17,7 +17,7 @@ foreach my $example (qw(/foobar ../foobar)) {
     $t->write_configs("m d $example foobar");
     $t->call_unburden_home_dir_default;
 
-    my $wanted = $t->handle_lsof_warnings(
+    my $wanted = $t->prepend_lsof_warning(
         "$example would be outside of the home directory, skipping...\n");
     $t->eq_or_diff_stderr($wanted);
     $t->eq_or_diff_stdout('');

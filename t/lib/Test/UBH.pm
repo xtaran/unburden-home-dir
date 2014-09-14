@@ -94,18 +94,11 @@ sub default_config {
     return "TARGETDIR=".$t->TARGET."\nFILELAYOUT=".$t->PREFIX."-\%s";
 }
 
-sub handle_lsof_warnings {
+sub prepend_lsof_warning {
     my $t = shift;
     my $wanted = shift || '';
 
-    if (which('lsof')) {
-        my $trailing_newline = $wanted =~ /\n\z/;
-        $wanted = join("\n", grep {
-                         !m{lsof: WARNING: can't stat\(\) \w* file system} and
-                         !m{Output information may be incomplete}
-                     } split("\n", $wanted));
-        $wanted .= "\n" if $trailing_newline;
-    } else {
+    unless (which('lsof')) {
         $wanted = "WARNING: lsof not found, not checking for files in use.\n".$wanted;
     }
 
@@ -230,7 +223,7 @@ sub eq_or_diff_stderr {
 
 sub eq_lsof_warning_or_diff_stderr {
     my $t = shift;
-    $t->eq_or_diff_stderr($t->handle_lsof_warnings);
+    $t->eq_or_diff_stderr($t->prepend_lsof_warning);
 }
 
 sub eq_or_diff_stdout {

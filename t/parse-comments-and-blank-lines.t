@@ -28,7 +28,7 @@ $t->write_configs("m d .foobar/fnord/bla foobar-fnord-bla\n" .
 
 $t->call_unburden_home_dir_default;
 
-my $wanted = $t->handle_lsof_warnings(
+my $wanted = $t->prepend_lsof_warning(
     "Skipping '".$t->HOME."/.fnord/bla' due to symlink in path: ".$t->HOME."/.fnord\n" .
     "Skipping '".$t->HOME."/.foobar/blafasel/bla' due to symlink in path: ".$t->HOME."/.foobar/blafasel\n");
 $t->eq_or_diff_stderr($wanted);
