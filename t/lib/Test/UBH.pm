@@ -238,6 +238,14 @@ sub eq_or_diff_file {
     $file = $t->BASE."/$file";
     my $output = read_file($file);
 
+    # Filter out lsof warnings caused by systemd
+    my $trailing_newline = $output =~ /\n\z/;
+    $output = join("\n", grep {
+                          !m{lsof: WARNING: can.?.t stat.. \w+ file system} and
+                          !m{Output information may be incomplete}
+                   } split("\n", $output));
+    $output .= "\n" if $trailing_newline and $output ne '';
+
     my $bin = $ENV{ADTTMP} ? '/usr/bin/unburden-home-dir' : 'bin/unburden-home-dir';
     $output =~ s(at $bin line \d+([,.]))(at unburden-home-dir line <n>$1)g;
 
