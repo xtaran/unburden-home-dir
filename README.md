@@ -289,6 +289,18 @@ User Contributed Examples and Setups
 * [Reburden on Logout](http://www.mancoosi.org/~abate/unburden-my-home-dir#comment-299)
 
 
+Getting Unburden-Home-Dir
+=========================
+
+Besides installing from source code, several Linux distributions ship
+unburden-home-dir as package:
+
+* [Debian since 7.0 Wheezy](http://packages.debian.org/unburden-home-dir)
+* [Ubuntu since 12.10 Quantal](http://packages.ubuntu.com/unburden-home-dir)
+* [Korora 18 Flo](https://kororaproject.org/korora-18-flo-released/)
+  ([GitHub repository](https://github.com/kororaproject/kp-unburden-home-dir))
+
+
 Source Code
 ===========
 
@@ -301,18 +313,6 @@ You should always find the newest code via git at either
 GitHub is used as primary hub, git.phys.ethz.ch is usually up-to-date,
 too, Gitorious gets pushed less often, but should get all major
 updates in time, too.
-
-
-Getting Unburden-Home-Dir
-=========================
-
-Besides installing from source code, several Linux distributions ship
-unburden-home-dir as package:
-
-* [Debian since 7.0 Wheezy](http://packages.debian.org/unburden-home-dir)
-* [Ubuntu since 12.10 Quantal](http://packages.ubuntu.com/unburden-home-dir)
-* [Korora 18 Flo](https://kororaproject.org/korora-18-flo-released/)
-  ([GitHub repository](https://github.com/kororaproject/kp-unburden-home-dir))
 
 
 Bugs
