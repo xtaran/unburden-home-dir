@@ -45,6 +45,12 @@ TODO
   [Run::Parts](https://metacpan.org/release/Run-Parts) as standalone
   Perl module which is already used by `aptitude-robot`, too.
 
+* Use /usr/share/unburden-homed-dir/… for default settings and use
+  /etc/unburden-home-dir* only for settings by the local admin.
+
+  See https://stackoverflow.com/questions/26041056 for the reasoning
+  behind this idea.
+
 * Check if there are common tasks of xdg-user-dirs (its package
   description is not so helpful there) of if it can be useful for
   unburden-home-dir.
