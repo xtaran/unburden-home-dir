@@ -49,6 +49,4 @@ TODO
   description is not so helpful there) of if it can be useful for
   unburden-home-dir.
 
-* Slow find/rsync, e.g. "sh -c find
-  '/home/abe/.conkeror.mozdev.org/conkeror/$FOO/Cache' -print0 | xargs
-  -0 lsof -F c"
+* Slow rsync, e.g. for cache directories.
