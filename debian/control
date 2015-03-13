@@ -1,5 +1,5 @@
 Source: unburden-home-dir
-Section: x11
+Section: utils
 Priority: extra
 Maintainer: Axel Beckert <abe@debian.org>
 Build-Depends: debhelper (>= 9~),
