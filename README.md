@@ -57,7 +57,7 @@ logout or shutdown.
 See [this wiki page about application cache files][wiki] for the
 detailed reasoning behind this project.
 
-[wiki]: http://wiki.phys.ethz.ch/readme/application_cache_files
+[wiki]: https://readme.phys.ethz.ch/linux/application_cache_files/
  (General thoughts about application cache files in home directories)
 
 
