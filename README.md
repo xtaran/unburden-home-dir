@@ -171,6 +171,9 @@ Common Issues / Troubleshooting
   directory instead. See the `r` action in the Configuration Files
   section below.
 
+* See also the current [TODO list](TODO.md) for known deficiencies,
+  planned features and various ideas.
+
 
 Configuration Files
 ===================
