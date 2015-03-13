@@ -21,6 +21,9 @@ Features
   unburden-home-dir. (Doesn't look that helpful on a first glance,
   though.)
 
+* Use /run/user/$USERID as target if present. See also
+  [Debian Bug-Report #780387](https://bugs.debian.org/780387).
+
 Improvements
 ------------
 
