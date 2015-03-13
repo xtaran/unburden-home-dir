@@ -343,6 +343,8 @@ Bugs
 
 There are some, I'm sure. ;-)
 
+A few known deficiencies are listed in the [TODO list](TODO.md)
+
 Browsing Bug Reports
 --------------------
 
