@@ -7,8 +7,10 @@ Features
 * Idea from Pietro Abate: Excludes for wildcards, like "all from
   `.cache/*` except `.cache/duplicity`".
 
-* Honor `$XDG_` variables in `unburden-home-dir.list` for alternative
-  locations of `.cache` and friends.
+* Honor
+  [`$XDG_` variables](http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html#variables)
+  in `unburden-home-dir.list` for alternative locations of `.cache`
+  and friends.
 
 * Set `$XDG_CACHE_HOME` before other programs using this variable run,
   so that they use the wanted location even without moving files
