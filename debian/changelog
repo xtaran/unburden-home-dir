@@ -3,6 +3,7 @@ unburden-home-dir (0.3.3+dev) UNRELEASED; urgency=medium
   * Change section from x11 to utils. It's far more than just an Xsession
     hook nowadays.
   * Declare compliance with Debian Policy 3.9.6 (no other changes needed)
+  * Update copyright years in debian/copyright.
 
  -- Axel Beckert <abe@debian.org>  Fri, 13 Mar 2015 13:11:26 +0100
 
