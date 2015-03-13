@@ -18,7 +18,8 @@ Features
 
 * Check if there are common tasks of xdg-user-dirs (its package
   description is not so helpful there) of if it can be useful for
-  unburden-home-dir.
+  unburden-home-dir. (Doesn't look that helpful on a first glance,
+  though.)
 
 Improvements
 ------------
