@@ -18,6 +18,41 @@ Features
 
   Likely needs another `Xsession.d` file with a very low number.
 
+* Set the cache directory of Firefox/Iceweasel and friends (mostly
+  Conkeror nowadays) explicitly since it regularily renames symlinks
+  created by `unburden-home-dir` and creates its cache directories
+  again from scratch.
+
+  One way to do this for Iceweasel (Debian's unbranded Firefox) would
+  be to create the following files:
+
+  * `/etc/iceweasel/pref/aaaa-unburden-home-dir.js` containing the
+    following code: ```JavaScript
+pref('general.config.filename', 'unburden-home-dir.cfg');
+pref('general.config.obscure_value', 0);```
+
+  * `/etc/iceweasel/pref/unburden-home-dir.cfg` containing the
+    following code: ```JavaScript
+// First line of that file is ignore for some crazy reason
+lockPref("browser.cache.disk.parent_directory", "/scratch/.unburden-"+getenv("USER")+"/firefox-cache");```
+
+  * A symbolic link from `/usr/lib/iceweasel/unburden-home-dir.cfg` to
+    `/etc/iceweasel/pref/unburden-home-dir.cfg`.
+
+  (Documentation as of Firefox 37, tested with Iceweasel 31.6 ESR.)
+
+  But this is some hardcoded solution which may overwrite e.g. a local
+  administrator's configuration, so maybe it's better to ship all
+  these files in `/usr/share/unburden-home-dir/` and use debconf to
+  create symlinks to there only upon request in the maintainer
+  scripts.
+
+  Some resources about that topic:
+
+  * https://mike.kaply.com/2012/03/16/customizing-firefox-autoconfig-files/
+  * https://developer.mozilla.org/Firefox/Enterprise_deployment
+  * https://developer.mozilla.org/docs/Mozilla/Preferences/A_brief_guide_to_Mozilla_preferences
+
 * Check if there are common tasks of xdg-user-dirs (its package
   description is not so helpful there) of if it can be useful for
   unburden-home-dir. (Doesn't look that helpful on a first glance,
