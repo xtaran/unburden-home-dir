@@ -36,7 +36,7 @@ pref('general.config.obscure_value', 0);
   * `/etc/iceweasel/pref/unburden-home-dir.cfg` containing the
     following code:
     ```JavaScript
-// First line of that file is ignore for some crazy reason
+// First line of that file is ignored for some crazy reason
 lockPref("browser.cache.disk.parent_directory", "/scratch/.unburden-"+getenv("USER")+"/firefox-cache");
 ```
 
