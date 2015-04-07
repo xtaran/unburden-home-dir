@@ -27,14 +27,18 @@ Features
   be to create the following files:
 
   * `/etc/iceweasel/pref/aaaa-unburden-home-dir.js` containing the
-    following code: ```JavaScript
+    following code:
+    ```JavaScript
 pref('general.config.filename', 'unburden-home-dir.cfg');
-pref('general.config.obscure_value', 0);```
+pref('general.config.obscure_value', 0);
+```
 
   * `/etc/iceweasel/pref/unburden-home-dir.cfg` containing the
-    following code: ```JavaScript
+    following code:
+    ```JavaScript
 // First line of that file is ignore for some crazy reason
-lockPref("browser.cache.disk.parent_directory", "/scratch/.unburden-"+getenv("USER")+"/firefox-cache");```
+lockPref("browser.cache.disk.parent_directory", "/scratch/.unburden-"+getenv("USER")+"/firefox-cache");
+```
 
   * A symbolic link from `/usr/lib/iceweasel/unburden-home-dir.cfg` to
     `/etc/iceweasel/pref/unburden-home-dir.cfg`.
