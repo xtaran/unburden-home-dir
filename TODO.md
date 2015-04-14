@@ -18,6 +18,10 @@ Features
 
   Likely needs another `Xsession.d` file with a very low number.
 
+  Firefox/Iceweasel as well as Chrome/Chromium seem to honour this
+  setting, making the following likely an obsolete solution as it is
+  more complicated and less effective.
+
 * Set the cache directory of Firefox/Iceweasel and friends (mostly
   Conkeror nowadays) explicitly since it regularily renames symlinks
   created by `unburden-home-dir` and creates its cache directories
