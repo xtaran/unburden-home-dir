@@ -7,14 +7,25 @@ Features
 * Idea from Pietro Abate: Excludes for wildcards, like "all from
   `.cache/*` except `.cache/duplicity`".
 
-* Honor
-  [`$XDG_` variables](http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html#variables)
-  in `unburden-home-dir.list` for alternative locations of `.cache`
-  and friends.
+* `$XDG_` related stuff:
 
-* Use `/run/user/$USERID` aka `$XDG_RUNTIME_DIR` as target if
-  present. See also
-  [Debian Bug-Report #780387](https://bugs.debian.org/780387).
+  * Honor
+    [`$XDG_` variables](http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html#variables)
+    in `unburden-home-dir.list` for alternative locations of `.cache`
+    and friends.
+
+  * Use `/run/user/$USERID` aka `$XDG_RUNTIME_DIR` as target if
+    present. See also
+    [Debian Bug-Report #780387](https://bugs.debian.org/780387).
+
+  These features likely all will need expansion of environment
+  variables in configuration files or values. This could be
+  implemented using e.g.
+  [`String::Expand`](https://metacpan.org/pod/String::Expand) or
+  [`String::Interpolate::Shell`](https://metacpan.org/pod/String::Interpolate::Shell),
+  but so far neither is packaged for Debian. `String::Expand` seems
+  the simpler one. The additional features of
+  `String::Interpolate::Shell` are currently not needed.
 
 Improvements
 ------------
