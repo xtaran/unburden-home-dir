@@ -12,11 +12,6 @@ Features
   in `unburden-home-dir.list` for alternative locations of `.cache`
   and friends.
 
-* Check if there are common tasks of xdg-user-dirs (its package
-  description is not so helpful there) of if it can be useful for
-  unburden-home-dir. (Doesn't look that helpful on a first glance,
-  though.)
-
 * Use `/run/user/$USERID` as target if present. See also
   [Debian Bug-Report #780387](https://bugs.debian.org/780387).
 
