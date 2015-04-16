@@ -26,7 +26,9 @@ install:
 	install -d $(DESTDIR)/etc/X11/Xsession.d/
 	install -d $(DESTDIR)/usr/bin/
 	install -d $(DESTDIR)/usr/share/man/man1/
+	install -d $(DESTDIR)/usr/share/unburden-home-dir/
 	install -m 755 bin/unburden-home-dir $(DESTDIR)/usr/bin/
+	install -m 644 share/common.sh $(DESTDIR)/usr/share/unburden-home-dir/
 	install -m 644 Xsession.d/95unburden-home-dir $(DESTDIR)/etc/X11/Xsession.d/
 	install -m 644 etc/unburden-home-dir etc/unburden-home-dir.list $(DESTDIR)/etc/
 	sed -e 's/^\([^#]\)/#\1/' -i $(DESTDIR)/etc/unburden-home-dir.list

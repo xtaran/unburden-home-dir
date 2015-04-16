@@ -2,22 +2,14 @@
 # /etc/X11/Xsession.d/95unburden-home-dir
 # This file is sourced by Xsession(5), not executed.
 
-UNBURDEN_BASENAME=${UNBURDEN_BASENAME:-unburden-home-dir}
-
-if [ -e /etc/default/"${UNBURDEN_BASENAME}" ]; then
-    . /etc/default/"${UNBURDEN_BASENAME}"
+if [ -z "$UNBURDEN_HOME_DIR_COMMON_SOURCED" ]; then
+    if [ -e share/common.sh ]; then
+        . share/common.sh
+    elif [ -e /usr/share/unburden-home-dir/common.sh ]; then
+        . /usr/share/unburden-home-dir/common.sh
+    fi
 fi
 
-if [ -e "${HOME}/.${UNBURDEN_BASENAME}" ]; then
-    . "${HOME}/.${UNBURDEN_BASENAME}"
-fi
-
-if [ -e "${XDG_CONFIG_HOME:-$HOME/.config}/${UNBURDEN_BASENAME}/config" ]; then
-    . "${XDG_CONFIG_HOME:-$HOME/.config}/${UNBURDEN_BASENAME}/config"
-fi
-
-if [ "${UNBURDEN_HOME}" = "true" ] || \
-   [ "${UNBURDEN_HOME}" = "yes" ]; then
-
+if unburden_it; then
     unburden-home-dir
 fi
