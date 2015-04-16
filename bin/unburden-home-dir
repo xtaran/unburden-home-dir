@@ -27,7 +27,7 @@ use warnings;
 use 5.010;
 
 # Globally define version
-our $VERSION = '0.3.3+dev';
+our $VERSION = '0.4~dev';
 
 # Configuration variables to be used in configuration files
 my $CONFIG = {

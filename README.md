@@ -123,6 +123,9 @@ that looks like this:
 
 > UNBURDEN_HOME=yes
 
+This will also set `$XDG_CACHE_HOME` to a subdirectory of
+unburden-home-dir's target directory.
+
 But please be aware that if you do that on a machine with NFS
 homes, you should do that on all (Unix) machines which have those NFS
 homes mounted.

@@ -1,0 +1,18 @@
+# -*- shell-script -*-
+# /etc/X11/Xsession.d/25unburden-home-dir-xdg
+# This file is sourced by Xsession(5), not executed.
+
+if [ -z "$UNBURDEN_HOME_DIR_COMMON_SOURCED" ]; then
+    if [ -e share/common.sh ]; then
+        . share/common.sh
+    elif [ -e /usr/share/unburden-home-dir/common.sh ]; then
+        . /usr/share/unburden-home-dir/common.sh
+    fi
+fi
+
+if unburden_it; then
+    if [ -z "$XDG_CACHE_HOME" ]; then
+        XDG_CACHE_HOME="$(echo "$FILELAYOUT" | sed -e "s/%u/$USER/;s/%s/cache/")"
+        export XDG_CACHE_HOME
+    fi
+fi

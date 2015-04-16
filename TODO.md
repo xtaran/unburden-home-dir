@@ -12,16 +12,6 @@ Features
   in `unburden-home-dir.list` for alternative locations of `.cache`
   and friends.
 
-* Set `$XDG_CACHE_HOME` before other programs using this variable run,
-  so that they use the wanted location even without moving files
-  around or adding symlinks.
-
-  Likely needs another `Xsession.d` file with a very low number.
-
-  Firefox/Iceweasel as well as Chrome/Chromium seem to honour this
-  setting, making the following likely an obsolete solution as it is
-  more complicated and less effective.
-
 * Set the cache directory of Firefox/Iceweasel and friends (mostly
   Conkeror nowadays) explicitly since it regularily renames symlinks
   created by `unburden-home-dir` and creates its cache directories

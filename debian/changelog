@@ -1,5 +1,7 @@
-unburden-home-dir (0.3.3+dev) UNRELEASED; urgency=medium
+unburden-home-dir (0.4~dev) UNRELEASED; urgency=medium
 
+  * New Features:
+    + Set $XDG_CACHE_HOME to a subdirectory of unburden-home-dir's target.
   * Change section from x11 to utils. It's far more than just an Xsession
     hook nowadays.
   * Declare compliance with Debian Policy 3.9.6 (no other changes needed)
