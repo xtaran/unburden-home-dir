@@ -50,6 +50,15 @@ Test Suite Coverage
   fixed. To reproduce: Have directories to move off as well as a
   directory which is already moved off.
 
+Planned Default Setting Changes
+-------------------------------
+
+* Currently calling unburden-home-dir via Xsession.d is disabled by
+  default and all default list entries are commented, too.
+
+  This double disabling is redundant. At most unburden-home-dir's
+  functionality should be disabled at one of those locations.
+
 Planned Invasive Changes
 ------------------------
 
