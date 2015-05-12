@@ -4,7 +4,7 @@ Upstream-Contact: Axel Beckert <abe@deuxchevaux.org>
 Source: https://github.com/xtaran/unburden-home-dir
         but can also be found at
         http://git.phys.ethz.ch/?p=unburden-home-dir.git and
-        http://gitorious.org/unburden-home-dir/
+        https://gitlab.com/unburden-home-dir/unburden-home-dir
 
 Files: *
 License: GPL-2+
