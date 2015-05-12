@@ -46,6 +46,10 @@ sub BUILD {
     $ENV{HOME} = $t->HOME;
     $ENV{LANG} = 'C';
 
+    # For testing environment variable expansion inside the
+    # configuration file.
+    $ENV{PERCENT_S} = '%s';
+
     # Clean up possible remainders of aborted tests
     rmtree($t->BASE);
 
@@ -91,7 +95,7 @@ sub create_and_check_directory {
 
 sub default_config {
     my $t = shift;
-    return "TARGETDIR=".$t->TARGET."\nFILELAYOUT=".$t->PREFIX."-\%s";
+    return "TARGETDIR=".$t->TARGET."\nFILELAYOUT=".$t->PREFIX.'-${PERCENT_S}';
 }
 
 sub prepend_lsof_warning {

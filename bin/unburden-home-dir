@@ -55,6 +55,7 @@ use File::Touch;
 use File::Rsync;
 use File::Which;
 use IO::Handle;
+use String::Expand;
 use Data::Dumper;
 
 # Declare and initialise some variables
@@ -164,6 +165,9 @@ foreach my $configfile (@CONFFILES) {
 
 # Fix some values
 $UID =~ s/\s+//gs;
+
+# Expand environment variables
+expand_strings($CONFIG, \%ENV);
 
 # Remove quotes and line-feeds from values
 foreach my $key (keys %$CONFIG) {
@@ -641,6 +645,10 @@ for my $list (@LISTFILES) {
         my ($action, $type, $item, $replacement) = split;
 
         next unless defined $action;
+
+        # Expand environment variables in item and replacement only
+        $item        = expand_string($item,        \%ENV) if defined($item);
+        $replacement = expand_string($replacement, \%ENV) if defined($replacement);
 
         if (not (defined($item) and defined($replacement) and
                  # $item can't be '' since $replacement is undef then
