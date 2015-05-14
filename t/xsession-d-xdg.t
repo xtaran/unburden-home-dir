@@ -19,7 +19,6 @@ my ($cmd, $wanted, $output, $stderr);
 # Set a debug environment
 $ENV{PATH} = "$BINDIR:/bin"; # /bin needed for sed
 $ENV{UNBURDEN_BASENAME} = $t->BASENAME;
-$ENV{TARGETDIR} = '.';
 delete $ENV{XDG_CACHE_HOME};
 
 $t->setup_test_environment_without_target('');
@@ -33,7 +32,7 @@ ok( copy( ($ENV{ADTTMP}?'/etc/X11/':'')."Xsession.d/$RPSCRIPT","$XSESSIOND/" ),
 ok( write_file("$BINDIR/unburden-home-dir", "#!/bin/sh\necho \$0 called\n"), "Create test script" );
 ok( chmod( 0755, "$BINDIR/unburden-home-dir" ), "Set executable bit on testscript" );
 ok( write_file($t->HOME.'/.'.$t->BASENAME,
-               "FILELAYOUT=".$t->TARGET."/%s\nUNBURDEN_HOME=yes\n"),
+               "FILELAYOUT=".$t->TARGET."/%s\nUNBURDEN_HOME=yes\nTARGETDIR=.\n"),
     "Configure Xsession.d script to run unburden-home-dir" );
 
 $t->call_cmd("/bin/run-parts --list $XSESSIOND");
@@ -42,9 +41,9 @@ $t->eq_or_diff_stdout("$XSESSIOND/$RPSCRIPT\n", "run-parts STDOUT");
 
 $t->call_cmd("/bin/sh -c '. $XSESSIOND/$RPSCRIPT; echo \$XDG_CACHE_HOME'");
 $t->eq_or_diff_stderr('', "Xsession.d STDERR is empty");
-$t->eq_or_diff_stdout($ENV{TARGETDIR}.'/'.$t->TARGET."/cache\n", "XDG_CACHE_HOME is set");
+$t->eq_or_diff_stdout('./'.$t->TARGET."/cache\n", "XDG_CACHE_HOME is set");
 
-ok( write_file($t->HOME.'/.'.$t->BASENAME, "UNBURDEN_HOME=no\n"), "Configure Xsession.d script to NOT run unburden-home-dir" );
+ok( write_file($t->HOME.'/.'.$t->BASENAME, "UNBURDEN_HOME=no\nTARGETDIR=.\n"), "Configure Xsession.d script to NOT run unburden-home-dir" );
 
 $t->call_cmd("/bin/sh -c '. $XSESSIOND/$RPSCRIPT; echo \$XDG_CACHE_HOME'");
 $t->eq_or_diff_stderr('', "Xsession.d STDERR is empty");
