@@ -6,6 +6,10 @@ if [ -e /etc/default/"${UNBURDEN_BASENAME}" ]; then
     . /etc/default/"${UNBURDEN_BASENAME}"
 fi
 
+if [ -e /etc/"${UNBURDEN_BASENAME}" ]; then
+    . /etc/"${UNBURDEN_BASENAME}"
+fi
+
 if [ -e "${HOME}/.${UNBURDEN_BASENAME}" ]; then
     . "${HOME}/.${UNBURDEN_BASENAME}"
 fi
