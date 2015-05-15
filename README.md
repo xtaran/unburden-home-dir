@@ -363,6 +363,12 @@ report bugs there. If you use unburden-home-dir elsewhere, please use
 [GitHub's issue tracker](https://github.com/xtaran/unburden-home-dir/issues)
 for now.
 
+General Contact
+===============
+
+There's a
+[discussion mailing list for unburden-home-dir](https://noone.org/mailman/listinfo/unburden-home-dir).
+
 
 Author
 ======
