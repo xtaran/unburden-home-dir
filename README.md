@@ -2,6 +2,7 @@ Unburden Your Home Directory
 ============================
 
 [![Travis CI Build Status](https://travis-ci.org/xtaran/unburden-home-dir.svg)](https://travis-ci.org/xtaran/unburden-home-dir)
+[![Documentation Status](https://readthedocs.org/projects/unburden-home-dir/badge/?version=latest)](https://readthedocs.org/projects/unburden-home-dir/?badge=latest)
 [![Coverage Status](https://img.shields.io/coveralls/xtaran/unburden-home-dir.svg)](https://coveralls.io/r/xtaran/unburden-home-dir)
 
 `unburden-home-dir` allows users to move cache files from browsers,
@@ -43,9 +44,9 @@ This project initially started as an `Xsession` hook. It now consists
 of a perl script which optionally can also be called from a provided
 `Xsession` hook.
 
-See the
-[docs directory](https://github.com/xtaran/unburden-home-dir/tree/master/docs)
-for the full documentation.
+The
+[full documentation can be read at ReadTheDocs](http://unburden-home-dir.readthedocs.org/en/latest/).
+
 
 Author
 ======

@@ -5,6 +5,7 @@ Testing and Continuous Integration
 ----------------------------------
 
 [![Travis CI Build Status](https://travis-ci.org/xtaran/unburden-home-dir.svg)](https://travis-ci.org/xtaran/unburden-home-dir)
+[![Documentation Status](https://readthedocs.org/projects/unburden-home-dir/badge/?version=latest)](https://readthedocs.org/projects/unburden-home-dir/?badge=latest)
 [![Coverage Status](https://img.shields.io/coveralls/xtaran/unburden-home-dir.svg)](https://coveralls.io/r/xtaran/unburden-home-dir)
 
 * [Travis CI Build Status](https://travis-ci.org/xtaran/unburden-home-dir)
