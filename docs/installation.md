@@ -44,7 +44,7 @@ Required Run-Time Dependencies
 Optional Run-Time Dependencies
 ------------------------------
 
-* [`lsof`](http://people.freebsd.org/~abe/)
+* [`lsof`](http://people.freebsd.org/~abe/)[^1]
 
 
 Build-Time and Test-Suite Dependencies
@@ -65,4 +65,8 @@ or packaging process) additionally needs:
 ### For Generating the Documentation
 
 * [`mkdocs`](https://mkdocs.org/)
-* `sponge` from [moreutils](http://joeyh.name/code/moreutils/)
+* `sponge`[^2] from [moreutils](http://joeyh.name/code/moreutils/)
+
+[^1]: No, <abe@freebsd.org> is not me. I'm just <abe@debian.org>. :-)
+[^2]: `sponge` is only needed if you want a documentation cleaned
+  from all remote inclusions as required by e.g. Debian.
