@@ -1,0 +1,10 @@
+Document: unburden-home-dir
+Title: unburden-home-dir Documentation
+Author: Axel Beckert
+Abstract: Full unburden-home-dir documentation including introduction,
+ howto, configuration file reference, etc.
+Section: File Management
+
+Format: HTML
+Index: /usr/share/doc/unburden-home-dir/site/index.html
+Files: /usr/share/doc/unburden-home-dir/site/*.html
