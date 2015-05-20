@@ -11,3 +11,4 @@ pages:
   - [bugs.md, Bugs]
   - [qa.md, Quality Assurance]
   - [see-also.md, See Also]
+theme: readthedocs
