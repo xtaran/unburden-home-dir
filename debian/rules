@@ -6,8 +6,3 @@
 
 %:
 	dh $@ --parallel
-
-# Rename README.md to README for the Debian binary package (cf. #678630)
-override_dh_installdocs:
-	cp -p README.md README
-	dh_installdocs

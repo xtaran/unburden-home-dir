@@ -3,7 +3,7 @@ ifneq (,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
   PROVEFLAGS += -j$(NUMJOBS)
 endif
 
-build:
+build: docs
 
 docs: site/index.html
 site/index.html: mkdocs.yml Makefile docs/*.md
@@ -41,3 +41,6 @@ install:
 	install -m 644 etc/unburden-home-dir etc/unburden-home-dir.list $(DESTDIR)/etc/
 	sed -e 's/^\([^#]\)/#\1/' -i $(DESTDIR)/etc/unburden-home-dir.list
 	gzip -9c man/unburden-home-dir.1 > $(DESTDIR)/usr/share/man/man1/unburden-home-dir.1.gz
+
+clean:
+	rm -rf site/
