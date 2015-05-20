@@ -71,3 +71,9 @@ Documentation
 * [Bugs](bugs/)
 * [Quality Assurance](qa/)
 * [See Also](see-also/)
+
+Talks about Unburden Your Home Directory
+----------------------------------------
+
+* [Talks given about Unburden Your Home Directory in German](http://noone.org/talks/unburden/)
+  (external)
