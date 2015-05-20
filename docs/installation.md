@@ -62,10 +62,6 @@ or packaging process) additionally needs:
 * [`Test::Differences`](https://metacpan.org/pod/Test::Differences)
 * [`Test::File`](https://metacpan.org/pod/Test::File)
 
-### From Elsewhere
-
-* [`lsof`](http://people.freebsd.org/~abe/)
-
 ### For Generating the Documentation
 
 * [`mkdocs`](https://mkdocs.org/)
