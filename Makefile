@@ -5,7 +5,8 @@ endif
 
 build:
 
-docs:
+docs: site/index.html
+site/index.html: mkdocs.yml Makefile docs/*.md
 	mkdocs build --clean
 
 pureperltest:
