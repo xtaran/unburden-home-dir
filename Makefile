@@ -9,6 +9,9 @@ docs: site/index.html
 site/index.html: mkdocs.yml Makefile docs/*.md
 	mkdocs build --clean
 
+index:
+	perl -nE 'if (/^  - \[([^,]+)\.md, "?([^]"]+)"?\]$$/) { say "* [$$2]($$1/)"; }' < mkdocs.yml
+
 pureperltest:
 	perl -c bin/unburden-home-dir
 	prove $(PROVEFLAGS) t/*.t
