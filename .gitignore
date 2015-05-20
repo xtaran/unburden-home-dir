@@ -4,4 +4,5 @@
 /debian/unburden-home-dir.substvars
 /debian/unburden-home-dir/
 /cover_db/
+/site/
 /README

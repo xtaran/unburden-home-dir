@@ -15,6 +15,8 @@ unburden-home-dir (0.4~dev) UNRELEASED; urgency=medium
   * Rename debian/unburden-home-dir.* to debian/* for consistency.
   * Extract common logic for Xsession.d files into a separate file.
   * README.md, debian/copyright: take into account that Gitorious closes.
+  * Split up documentation into several Markdown files in a separate
+    directory. Support mkdocs to generate them.
 
  -- Axel Beckert <abe@debian.org>  Fri, 13 Mar 2015 13:11:26 +0100
 

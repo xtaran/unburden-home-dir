@@ -5,6 +5,9 @@ endif
 
 build:
 
+docs:
+	mkdocs build --clean
+
 pureperltest:
 	perl -c bin/unburden-home-dir
 	prove $(PROVEFLAGS) t/*.t
