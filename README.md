@@ -44,8 +44,8 @@ This project initially started as an `Xsession` hook. It now consists
 of a perl script which optionally can also be called from a provided
 `Xsession` hook.
 
-The
-[full documentation can be read at ReadTheDocs](http://unburden-home-dir.readthedocs.org/en/latest/).
+The [full documentation](http://unburden-home-dir.readthedocs.org/)
+can be read at ReadTheDocs.
 
 
 Author
