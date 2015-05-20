@@ -43,6 +43,9 @@ This project initially started as an `Xsession` hook. It now consists
 of a perl script which optionally can also be called from a provided
 `Xsession` hook.
 
+See the
+[docs directory](https://github.com/xtaran/unburden-home-dir/tree/master/docs)
+for the full documentation.
 
 Author
 ======
