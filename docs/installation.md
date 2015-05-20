@@ -69,3 +69,4 @@ or packaging process) additionally needs:
 ### For Generating the Documentation
 
 * [`mkdocs`](https://mkdocs.org/)
+* `sponge` from [moreutils](http://joeyh.name/code/moreutils/)

@@ -3,11 +3,20 @@ ifneq (,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
   PROVEFLAGS += -j$(NUMJOBS)
 endif
 
-build: docs
+build: cleanthedocs
 
 docs: site/index.html
 site/index.html: mkdocs.yml Makefile docs/*.md
 	mkdocs build --clean
+
+# Avoid any inclusion of either external or embedded JS code. Avoids
+# lintian warnings about privacy breaches.
+cleanthedocs: docs
+	find site -name '*.html' | while read file; do \
+		egrep -v '<link href=.https?://fonts.googleapis.com/|<(img|script)[^>]*src="(https?:)?//|<script[^>]*src="\.\.?/js/|<link rel="stylesheet" href="\.\.?/css/highlight\.css">' "$$file" | \
+			sponge "$$file"; \
+	done
+	rm -rf site/js/ site/css/highlight.css
 
 index:
 	perl -nE 'if (/^  - \[([^,]+)\.md, "?([^]"]+)"?\]$$/) { say "* [$$2]($$1/)"; }' < mkdocs.yml
