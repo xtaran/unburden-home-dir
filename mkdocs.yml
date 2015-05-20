@@ -14,3 +14,4 @@ pages:
 theme: readthedocs
 repo_url: https://github.com/xtaran/unburden-home-dir
 site_author: Axel Beckert
+use_directory_urls: false
