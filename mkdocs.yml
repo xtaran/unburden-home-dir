@@ -12,3 +12,5 @@ pages:
   - [qa.md, Quality Assurance]
   - [see-also.md, See Also]
 theme: readthedocs
+repo_url: https://github.com/xtaran/unburden-home-dir
+site_author: Axel Beckert
