@@ -4,7 +4,7 @@ Unburden Your Home Directory
 [![Travis CI Build Status](https://travis-ci.org/xtaran/unburden-home-dir.svg)](https://travis-ci.org/xtaran/unburden-home-dir)
 [![Coverage Status](https://img.shields.io/coveralls/xtaran/unburden-home-dir.svg)](https://coveralls.io/r/xtaran/unburden-home-dir)
 
-unburden-home-dir allows users to move cache files from browsers,
+`unburden-home-dir` allows users to move cache files from browsers,
 etc. off their home directory, i.e. on a local harddisk or tmpfs and
 replace them with a symbolic link to the new location (e.g. on `/tmp/`
 or `/scratch/`) upon login. Optionally the contents of the directories
@@ -48,7 +48,7 @@ Xsession script, you can run `unburden-home-dir -u` to reverse the
 effect of `unburden-home-dir` and to move all (moved) directories back
 to your home directory.
 
-Nevertheless unburden-home-dir was written with non-valuable data
+Nevertheless `unburden-home-dir` was written with non-valuable data
 (cache files, pid files, thumbnails, temporary data, etc.) in mind and
 not for preservation of the handled data. So it is likely less
 suitable for cases where the handled data should be preserved on
