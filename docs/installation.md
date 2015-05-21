@@ -16,8 +16,8 @@ CPAN-compatible) is planned.
 Getting Unburden-Home-Dir
 -------------------------
 
-Besides installing from source code, several Linux distributions ship
-unburden-home-dir as package:
+Besides installing from [source code](source-code.md), several Linux
+distributions ship unburden-home-dir as package:
 
 * [Debian since 7.0 Wheezy](http://packages.debian.org/unburden-home-dir)
 * [Ubuntu since 12.10 Quantal](http://packages.ubuntu.com/unburden-home-dir)
