@@ -24,7 +24,7 @@ This is helpful at least in the following cases:
   reduces the amount of disk I/O which reduces the power consumption
   of the disk.
 
-* The other type of use cases for unburden-home-dir is to reduce disk
+* Another type of use cases for unburden-home-dir is to reduce disk
   space usage, e.g. on devices with small disk space but a lot of RAM
   as seen often on boxes with flash disks or early netbooks,
   especially the EeePC, where configurations with 4GB disk space and
