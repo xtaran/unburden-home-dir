@@ -19,3 +19,4 @@ use_directory_urls: false
 markdown_extensions:
   - smarty
   - footnotes
+site_dir: html

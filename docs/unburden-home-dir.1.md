@@ -75,7 +75,7 @@ FILES
 `/etc/X11/Xsession.d/95unburden-home-dir`
 
 Read the documentation at either
-`/usr/share/doc/unburden-home-dir/site/` on debianoid installations,
+`/usr/share/doc/unburden-home-dir/html/` on debianoid installations,
 at http://unburden-home-dir.readthedocs.org/ online, or in the `docs/`
 directory in the source tar ball for an explanation of these files.
 

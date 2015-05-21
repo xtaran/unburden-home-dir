@@ -5,18 +5,18 @@ endif
 
 build: cleanthedocs manpages
 
-docs: site/index.html
-site/index.html: mkdocs.yml Makefile docs/*.md
+docs: html/index.html
+html/index.html: mkdocs.yml Makefile docs/*.md
 	mkdocs build --clean
 
 # Avoid any inclusion of either external or embedded JS code. Avoids
 # lintian warnings about privacy breaches.
 cleanthedocs: docs
-	find site -name '*.html' | while read file; do \
+	find html -name '*.html' | while read file; do \
 		egrep -v '<link href=.https?://fonts.googleapis.com/|<(img|script)[^>]*src="(https?:)?//|<script[^>]*src="\.\.?/js/|<link rel="stylesheet" href="\.\.?/css/highlight\.css">' "$$file" | \
 			sponge "$$file"; \
 	done
-	rm -rf site/js/ site/css/highlight.css
+	rm -rf html/js/ html/css/highlight.css
 
 manpages:
 	$(MAKE) -C docs
@@ -55,5 +55,5 @@ install: manpages
 	gzip -9cn docs/unburden-home-dir.1 > $(DESTDIR)/usr/share/man/man1/unburden-home-dir.1.gz
 
 clean:
-	rm -rf site/
+	rm -rf html/
 	$(MAKE) -C docs $@
