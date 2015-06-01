@@ -41,7 +41,7 @@ cover: determine-coverage
 coveralls: determine-coverage
 	cover -report coveralls
 
-install:
+install: manpages
 	install -d $(DESTDIR)/etc/X11/Xsession.d/
 	install -d $(DESTDIR)/usr/bin/
 	install -d $(DESTDIR)/usr/share/man/man1/
