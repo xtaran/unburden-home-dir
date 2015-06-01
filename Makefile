@@ -3,7 +3,7 @@ ifneq (,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
   PROVEFLAGS += -j$(NUMJOBS)
 endif
 
-build: cleanthedocs
+build: cleanthedocs manpages
 
 docs: site/index.html
 site/index.html: mkdocs.yml Makefile docs/*.md
@@ -17,6 +17,9 @@ cleanthedocs: docs
 			sponge "$$file"; \
 	done
 	rm -rf site/js/ site/css/highlight.css
+
+manpages:
+	$(MAKE) -C man
 
 index:
 	perl -nE 'if (/^  - \[([^,]+)\.md, "?([^]"]+)"?\]$$/) { say "* [$$2]($$1/)"; }' < mkdocs.yml
@@ -53,3 +56,4 @@ install:
 
 clean:
 	rm -rf site/
+	$(MAKE) -C man $@

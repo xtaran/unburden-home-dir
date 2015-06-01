@@ -65,6 +65,7 @@ or packaging process) additionally needs:
 ### For Generating the Documentation
 
 * [`mkdocs`](https://mkdocs.org/)
+* [`ronn`](https://rtomayko.github.io/ronn/)
 * `sponge`[^2] from [moreutils](http://joeyh.name/code/moreutils/)
 
 [^1]: No, <abe@freebsd.org> is not me. I'm just <abe@debian.org>. :-)

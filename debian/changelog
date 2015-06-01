@@ -21,6 +21,8 @@ unburden-home-dir (0.4~dev) UNRELEASED; urgency=medium
     + No more install README.md as documentation.
     + Drop override for dh_installdocs.
     + Register them with doc-base.
+  * Generate man pages from Markdown, too, using ronn.
+    + Add ruby-ronn as build-dependency.
 
  -- Axel Beckert <abe@debian.org>  Fri, 13 Mar 2015 13:11:26 +0100
 
