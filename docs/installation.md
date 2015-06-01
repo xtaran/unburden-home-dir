@@ -64,10 +64,11 @@ or packaging process) additionally needs:
 
 ### For Generating the Documentation
 
-* [`mkdocs`](https://mkdocs.org/) (Yes, Python)
-* [`ronn`](https://rtomayko.github.io/ronn/) (Yes, Ruby)
-* `sponge`[^2] from [moreutils](http://joeyh.name/code/moreutils/) (Yes, C)
+* [`mkdocs`](https://mkdocs.org/) (Yes, Python[^3])
+* [`ronn`](https://rtomayko.github.io/ronn/) (Yes, Ruby[^3])
+* `sponge`[^2] from [moreutils](http://joeyh.name/code/moreutils/) (Yes, C[^3])
 
 [^1]: No, <abe@freebsd.org> is not me. I'm just <abe@debian.org>. :-)
 [^2]: `sponge` is only needed if you want a documentation cleaned
   from all remote inclusions as required by e.g. Debian.
+[^3]: Please inform me if you know a suitable replacement in pure Perl.
