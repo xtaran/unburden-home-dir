@@ -4,7 +4,7 @@ unburden-home-dir(1) -- unburdens home directories from caches and trashes
 SYNOPSIS
 --------
 
-`unburden-home-dir` [ `-n` | `-u` | `-f` <filter> ]  
+`unburden-home-dir` [ `-n` | `-u` | `-f` _filter_ ]  
 `unburden-home-dir` ( `-h` | `--help` | `--version` )
 
 DESCRIPTION
