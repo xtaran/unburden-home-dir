@@ -71,6 +71,7 @@ Documentation
 * [Bugs](bugs/)
 * [Quality Assurance](qa/)
 * [See Also](see-also/)
+* [Manual page unburden-home-dir(1)](unburden-home-dir.1/)
 
 Talks about Unburden Your Home Directory
 ----------------------------------------

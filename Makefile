@@ -19,7 +19,7 @@ cleanthedocs: docs
 	rm -rf site/js/ site/css/highlight.css
 
 manpages:
-	$(MAKE) -C man
+	$(MAKE) -C docs
 
 index:
 	perl -nE 'if (/^  - \[([^,]+)\.md, "?([^]"]+)"?\]$$/) { say "* [$$2]($$1/)"; }' < mkdocs.yml
@@ -52,8 +52,8 @@ install: manpages
 	install -m 644 Xsession.d/25unburden-home-dir-xdg $(DESTDIR)/etc/X11/Xsession.d/
 	install -m 644 etc/unburden-home-dir etc/unburden-home-dir.list $(DESTDIR)/etc/
 	sed -e 's/^\([^#]\)/#\1/' -i $(DESTDIR)/etc/unburden-home-dir.list
-	gzip -9c man/unburden-home-dir.1 > $(DESTDIR)/usr/share/man/man1/unburden-home-dir.1.gz
+	gzip -9c docs/unburden-home-dir.1 > $(DESTDIR)/usr/share/man/man1/unburden-home-dir.1.gz
 
 clean:
 	rm -rf site/
-	$(MAKE) -C man $@
+	$(MAKE) -C docs $@
