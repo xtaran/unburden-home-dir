@@ -105,9 +105,11 @@ Stretch.
 
 #### Notes about generating documentation with Python and Ruby based tools
 
-Actually, I'd prefer to have pure Perl tools to generate the
-documentation so that I can upload unburden-home-dir to CPAN at some
-point without having too many external dependencies.
+Despite I'm quite happy with the feature set of `ronn`, `mkdocs` and
+[Read the Docs](https://readthedocs.org/), I'd prefer to have pure
+Perl tools to generate the documentation so that I can upload
+unburden-home-dir to CPAN at some point without having too many
+external dependencies.
 
 So if you know a suitable perl-written tool which can generate HTML
 including a table of contents from a set of Markdown files and/or a
