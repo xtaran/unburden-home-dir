@@ -64,11 +64,22 @@ or packaging process) additionally needs:
 
 ### For Generating the Documentation
 
-* [`mkdocs`](https://mkdocs.org/) (Yes, Python[^3])
-* [`ronn`](https://rtomayko.github.io/ronn/) (Yes, Ruby[^3])
-* `sponge`[^2] from [moreutils](http://joeyh.name/code/moreutils/) (Yes, C[^3])
+* [`mkdocs`](https://mkdocs.org/) (Yes, Python[^2]): for generating
+  the HTML documentation including the one
+  [at ReadTheDocs](http://unburden-home-dir.readthedocs.org/) from
+  Markdown files.
+
+* [`ronn`](https://rtomayko.github.io/ronn/) (Yes, Ruby[^2]): for
+  generating the man pages from Markdown files.
+
+* `sponge` from [moreutils](http://joeyh.name/code/moreutils/) (Yes,
+  C[^2]): only needed if you want the HTML documentation cleaned from
+  all remote inclusions (fonts, JavaScript libraries, CSS libraries)
+  as required by e.g. Debian. (In Debian, embedding remote items in
+  packaged HTML documentation is
+  [considered a privacy breach](https://lintian.debian.org/tags/privacy-breach-generic.html).)
+
+
 
 [^1]: No, <abe@freebsd.org> is not me. I'm just <abe@debian.org>. :-)
-[^2]: `sponge` is only needed if you want a documentation cleaned
-  from all remote inclusions as required by e.g. Debian.
-[^3]: Please inform me if you know a suitable replacement in pure Perl.
+[^2]: Please inform me if you know a suitable replacement in pure Perl.
