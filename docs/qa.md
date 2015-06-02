@@ -17,6 +17,8 @@ Testing and Continuous Integration
   each upload to Debian)
 * [Debcheck](https://qa.debian.org/debcheck.php?dist=unstable&package=unburden-home-dir)
   (mostly dependency checking; at least after each upload to Debian)
+* [Read the Docs Documentation Builds](https://readthedocs.org/builds/unburden-home-dir/)
+  (after each `git push`)
 
 Code Statistics and Coverage
 ----------------------------
