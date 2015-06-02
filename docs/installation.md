@@ -103,7 +103,7 @@ and only available in Debian Testing at the time of writing. It likely
 will be available in Debian Stable with the release of Debian 9
 Stretch.
 
-#### Notes
+#### Notes about generating documentation with Python and Ruby based tools
 
 Actually, I'd prefer to have pure Perl tools to generate the
 documentation so that I can upload unburden-home-dir to CPAN at some
@@ -114,5 +114,15 @@ including a table of contents from a set of Markdown files and/or a
 perl-written tool which can generate Unix manual pages from Markdown,
 I'd be happy if you would [inform me](mailto:abe@deuxchevaux.org).
 
+Another option would be to use POD instead of Markdown as default
+documentation format. That would also work on Github (they can parse
+POD) and there are well-known converters from POD to roff and HTML and
+at least also one converter from POD to Markdown. The question is only
+if that can be combined with [Read the Docs](https://readthedocs.org/)
+which seems to require the Markdown files being in the Git repository,
+not generated from it.
+
+For now I've filed a wishlist request against Read the Docs to
+[also support POD as input format](https://github.com/rtfd/readthedocs.org/issues/1319).
 
 [^1]: No, <abe@freebsd.org> is not me. I'm just <abe@debian.org>. :-)
