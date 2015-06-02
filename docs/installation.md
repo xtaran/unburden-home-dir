@@ -37,6 +37,18 @@ Required Run-Time Dependencies
 * [`File::Which`](https://metacpan.org/pod/File::Which)
 * [`String::Expand`](https://metacpan.org/pod/String::Expand)
 
+#### Availability in Debian
+
+With one exception, all mentioned Perl Modules are available in Debian
+for quite some Stable releases now.
+
+Only the package
+[libstring-expand-perl](https://packages.debian.org/libstring-expand-perl)
+is rather new and only available in Debian Testing at the time of
+writing. It likely will be available in Debian Stable with the release
+of Debian 9 Stretch. (Actually I packaged it for Debian to be able to
+use it in unburden-home-dir.)
+
 ### From Elsewhere
 
 * [`rsync`](https://rsync.samba.org/) (actually a dependency of `File::Rsync`)
@@ -78,6 +90,18 @@ or packaging process) additionally needs:
   required by e.g. Debian. (In Debian, embedding remote items in
   packaged HTML documentation is
   [considered a privacy breach](https://lintian.debian.org/tags/privacy-breach-generic.html).)
+
+#### Availability in Debian
+
+`ronn` and `sponge` are available in the packages
+[ruby-ronn](https://packages.debian.org/ruby-ronn) and
+[moreutils](https://packages.debian.org/moreutils) for quite some
+Debian Stable releases now.
+
+The package [mkdocs](https://packages.debian.org/mkdocs) is rather new
+and only available in Debian Testing at the time of writing. It likely
+will be available in Debian Stable with the release of Debian 9
+Stretch.
 
 #### Notes
 
