@@ -18,8 +18,10 @@ cleanthedocs: docs
 	done
 	rm -rf html/js/ html/css/highlight.css
 
-manpages:
-	$(MAKE) -C docs
+manpages: unburden-home-dir.1
+
+%.1: docs/%.1.md
+	ronn --manual="Unburden Your Home Directory" -r --pipe $< > $@
 
 index:
 	perl -nE 'if (/^  - \[([^,]+)\.md, "?([^]"]+)"?\]$$/) { say "* [$$2]($$1/)"; }' < mkdocs.yml
@@ -41,7 +43,7 @@ cover: determine-coverage
 coveralls: determine-coverage
 	cover -report coveralls
 
-install: manpages
+install: unburden-home-dir.1
 	install -d $(DESTDIR)/etc/X11/Xsession.d/
 	install -d $(DESTDIR)/usr/bin/
 	install -d $(DESTDIR)/usr/share/man/man1/
@@ -52,8 +54,8 @@ install: manpages
 	install -m 644 Xsession.d/25unburden-home-dir-xdg $(DESTDIR)/etc/X11/Xsession.d/
 	install -m 644 etc/unburden-home-dir etc/unburden-home-dir.list $(DESTDIR)/etc/
 	sed -e 's/^\([^#]\)/#\1/' -i $(DESTDIR)/etc/unburden-home-dir.list
-	gzip -9cn docs/unburden-home-dir.1 > $(DESTDIR)/usr/share/man/man1/unburden-home-dir.1.gz
+	gzip -9cn unburden-home-dir.1 > $(DESTDIR)/usr/share/man/man1/unburden-home-dir.1.gz
 
 clean:
 	rm -rf html/
-	$(MAKE) -C docs $@
+	rm -f *.[0-9]
