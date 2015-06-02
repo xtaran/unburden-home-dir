@@ -107,7 +107,7 @@ Stretch.
 
 Actually, I'd prefer to have pure Perl tools to generate the
 documentation so that I can upload unburden-home-dir to CPAN at some
-point without having to many external dependencies.
+point without having too many external dependencies.
 
 So if you know a suitable perl-written tool which can generate HTML
 including a table of contents from a set of Markdown files and/or a
