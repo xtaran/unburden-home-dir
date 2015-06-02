@@ -87,3 +87,43 @@ Deficiencies
 ------------
 
 * Slow rsync, e.g. for cache directories.
+
+Documentation Infrastructure
+----------------------------
+
+### Status Quo
+
+Currently uses mkdocs (Python) for Markdown-to-HTML-site conversion
+(also used on ReadTheDocs) and ronn (Ruby) for
+Markdown-to-Unix-Manual-Page conversion.
+
+### Idea
+
+I'd like to switch to POD as primary documentation format to make the
+software more suitable to distribution via CPAN.
+
+### Requirements
+
+* One single, easy to read and write, Github rendered source format
+  (i.e. Markdown or POD, but no DocBook) for different output formats
+  (primarily HTML and [ng]roff aka Unix man-pages).
+
+* HTML documents should have a index/ToC of all the documentation, not
+  only a ToC for the current file. (Example: MkDocs, ReadTheDocs)
+
+* A documentation build should be triggerable via Github
+  Webhook. (Example: ReadTheDocs)
+
+### Plan
+
+* Convert all Markdown files to POD with e.g. Markdown::POD.
+
+* Replace MkDocs with e.g. Pod::Simple::HTMLBatch, Pod::HtmlEasy or
+  Pod::HtmlTree to generate a bunch of HTML files belonging
+  together. Needs evaluation.
+
+* Replace ronn with a simple pod2man.
+
+* Use GitHub::WebHook and submodules to update a local
+  clone/checkout/working-copy and run the documentation
+  generator. Sounds like the right module.
