@@ -46,6 +46,7 @@ Suggests: agedu,
           bleachbit,
           corekeeper,
           eatmydata,
+          fonts-font-awesome,
           fslint,
           ncdu | baobab | filelight | xdiskusage | xdu,
           tmpreaper

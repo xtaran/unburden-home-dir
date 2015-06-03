@@ -6,3 +6,8 @@
 
 %:
 	dh $@ --parallel
+
+override_dh_installdocs:
+	dh_installdocs
+	rm -rf debian/unburden-home-dir/usr/share/doc/unburden-home-dir/html/fonts
+	ln -vis /usr/share/fonts-font-awesome/fonts debian/unburden-home-dir/usr/share/doc/unburden-home-dir/html/fonts
