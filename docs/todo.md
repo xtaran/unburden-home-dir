@@ -62,12 +62,6 @@ Planned Default Setting Changes
 Planned Invasive Changes
 ------------------------
 
-* Split off documentation so that it can be shipped as man pages as
-  well as viewed in the web. The idea is to use something like `pandoc
-  -t man -s -o README.1 README.md`
-
-  * Maybe use POD instead of Markdown as base format.
-
 * Find a nice way to handle the global `unburden-home-dir.list`, maybe
   by by using something like `/etc/unburden-home-dir.list.d/`,
   `/etc/unburden-home-dir/list.d/` or maybe even put symlinks to the
@@ -88,6 +82,13 @@ Deficiencies
 ------------
 
 * Slow rsync, e.g. for cache directories.
+
+Documentation Improvements
+--------------------------
+
+* Restructure the documentation in a way that parts of it can be
+  shipped as man pages as well as viewed in the web without contents
+  being duplicated in the source.
 
 Documentation Infrastructure
 ----------------------------
