@@ -77,11 +77,12 @@ Planned Invasive Changes
   [Run::Parts](https://metacpan.org/release/Run-Parts) as standalone
   Perl module which is already used by `aptitude-robot`, too.
 
-* Use /usr/share/unburden-home-dir/… for default settings and use
-  /etc/unburden-home-dir* only for settings by the local admin.
+* Use `/usr/share/unburden-home-dir/…` for default settings and use
+  `/etc/unburden-home-dir*` only for settings by the local admin.
 
-  See https://stackoverflow.com/questions/26041056 for the reasoning
-  behind this idea.
+  See my question about
+  [How to make a Dist::Zilla based Perl module (or app) install files into /etc/](https://stackoverflow.com/questions/26041056)
+  on StackOverflow for the reasoning behind this idea.
 
 Deficiencies
 ------------
