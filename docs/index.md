@@ -68,6 +68,7 @@ Documentation
 * [Source Code](source-code/)
 * [License, Copyright and Author](license/)
 * [Contact and Community](contact/)
+* [Plans, Known Issues, TODO](todo/)
 * [Bugs](bugs/)
 * [Quality Assurance](qa/)
 * [See Also](see-also/)
