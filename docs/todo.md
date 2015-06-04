@@ -129,3 +129,7 @@ software more suitable to distribution via CPAN.
 * Use GitHub::WebHook and submodules to update a local
   clone/checkout/working-copy and run the documentation
   generator. Sounds like the right module.
+
+* Maybe Pandoc is also an idea. It' not fulfilling all requirements
+  above, but it would reduce the amount of dependencies because it can
+  convert to HTML as well as [ng]roff.
