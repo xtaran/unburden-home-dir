@@ -3,7 +3,7 @@ Bugs
 
 There are some, I'm sure. ;-)
 
-A few known deficiencies are listed in the [TODO list](https://github.com/xtaran/unburden-home-dir/blob/master/TODO.md).
+A few known deficiencies are listed in the [TODO list](todo/).
 
 Browsing Bug Reports
 --------------------

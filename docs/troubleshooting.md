@@ -29,5 +29,5 @@ Common Issues
   section below.
 
 * See also the current
-  [TODO list](https://github.com/xtaran/unburden-home-dir/blob/master/TODO.md)
+  [TODO list](todo/)
   for known deficiencies, planned features and various ideas.
