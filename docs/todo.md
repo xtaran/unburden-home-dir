@@ -19,13 +19,13 @@ Features
     [Debian Bug-Report #780387](https://bugs.debian.org/780387).
 
   These features likely all will need expansion of environment
-  variables in configuration files or values. This could be
-  implemented using e.g.
-  [`String::Expand`](https://metacpan.org/pod/String::Expand) or
-  [`String::Interpolate::Shell`](https://metacpan.org/pod/String::Interpolate::Shell),
-  but so far neither is packaged for Debian. `String::Expand` seems
-  the simpler one. The additional features of
-  `String::Interpolate::Shell` are currently not needed.
+  variables in configuration files or values.
+
+  The expansion of environment variables in configuration files is
+  implemented since the version 0.4[^1] using
+  [`String::Expand`](https://metacpan.org/pod/String::Expand) which is
+  packaged for Debian since recently, but may still be missing in
+  Ubuntu. Still needs to be documented properly, though.
 
 Improvements
 ------------
@@ -133,3 +133,5 @@ software more suitable to distribution via CPAN.
 * Maybe Pandoc is also an idea. It' not fulfilling all requirements
   above, but it would reduce the amount of dependencies because it can
   convert to HTML as well as [ng]roff.
+
+[^1] Not yet released at the time of writing.
