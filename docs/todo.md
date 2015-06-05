@@ -27,6 +27,9 @@ Features
   packaged for Debian since recently, but may still be missing in
   Ubuntu. Still needs to be documented properly, though.
 
+* Make the dependency on rsync and File::Rsync optional by allowing a
+  mode where only deletion and no moving happens.
+
 Improvements
 ------------
 
