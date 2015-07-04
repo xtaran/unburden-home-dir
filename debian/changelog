@@ -26,6 +26,16 @@ unburden-home-dir (0.4~dev) UNRELEASED; urgency=medium
   * Use "gzip -n" to make sure the build stays reproducible.
   * Skip tests which involve the non-readabliity of files if run as
     root. (Closes: #789832)
+  * Don't set TARGETDIR in configuration file by default but compute a
+    sane default value inside unburden-home-dir (Closes: #780387):
+      - Use $TARGETDIR if set in the configuration file.
+      - Else use $XDG_RUNTIME_DIR/$UID if it exists.
+      - Else use /run/user/$UID if it exists.
+      - Else use $TMPDIR if it exists.
+      - Else use /tmp/.
+    + Requires new runtime dependency libfile-slurp-perl.
+    + Run test suite multiple times with different environments for
+      coverage computation.
 
  -- Axel Beckert <abe@debian.org>  Fri, 13 Mar 2015 13:11:26 +0100
 

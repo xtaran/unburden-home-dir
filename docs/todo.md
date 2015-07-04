@@ -14,10 +14,6 @@ Features
     in `unburden-home-dir.list` for alternative locations of `.cache`
     and friends.
 
-  * Use `/run/user/$USERID` aka `$XDG_RUNTIME_DIR` as target if
-    present. See also
-    [Debian Bug-Report #780387](https://bugs.debian.org/780387).
-
   These features likely all will need expansion of environment
   variables in configuration files or values.
 

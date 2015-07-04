@@ -35,7 +35,8 @@ test: pureperltest
 
 determine-coverage:
 	cover -delete
-	prove --exec 'env PERL5OPT=-MDevel::Cover=-ignore_re,^t/ perl' t/*.t
+	prove --exec 'env -u TMPDIR   -u XDG_RUNTIME_DIR      PERL5OPT=-MDevel::Cover=-ignore_re,^t/ perl' t/*.t
+	prove --exec 'env    TMPDIR=/foo XDG_RUNTIME_DIR=/bar PERL5OPT=-MDevel::Cover=-ignore_re,^t/ perl' t/*.t
 
 cover: determine-coverage
 	cover -report html_basic

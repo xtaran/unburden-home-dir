@@ -2,6 +2,6 @@
 #
 # Parsed by Config::File
 
-TARGETDIR=/tmp
+#TARGETDIR=/tmp
 FILELAYOUT='.unburden-%u/%s'
 #DEBUG=

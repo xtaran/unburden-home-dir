@@ -35,6 +35,7 @@ use Getopt::Std; $Getopt::Std::STANDARD_HELP_VERSION = 1;
 use File::Path qw(mkpath rmtree);
 use File::Basename;
 use File::BaseDir qw(config_home);
+use File::Slurp;
 use File::Touch;
 use File::Rsync;
 use File::Which;
@@ -42,9 +43,31 @@ use IO::Handle;
 use String::Expand;
 use Data::Dumper;
 
+# Determine default value for target directory
+my $default_target = '/tmp';
+if (defined($ENV{TMPDIR})) { # defined() doesn't autovivicate
+    $default_target = $ENV{TMPDIR};
+}
+if (-r '/proc/mounts') {
+    my $runtime_dir = '/run/user';
+    if (defined($ENV{XDG_RUNTIME_DIR})) { # defined() doesn't autovivicate
+        $runtime_dir = $ENV{XDG_RUNTIME_DIR};
+    }
+    $runtime_dir .= "/$<"; # typically something like /run/user/1000
+
+    my @mounts = read_file('/proc/mounts');
+    foreach my $mount (@mounts) {
+        my @mount = split(/\s+/, $mount);
+        if ($mount[1] eq $runtime_dir) {
+            $default_target = $runtime_dir;
+            last;
+        }
+    }
+}
+
 # Configuration variables to be used in configuration files
 my $CONFIG = {
-    TARGETDIR  => '/tmp',
+    TARGETDIR  => $default_target,
     FILELAYOUT => '.unburden-%u/%s',
 };
 

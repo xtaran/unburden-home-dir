@@ -32,6 +32,7 @@ Architecture: all
 Depends: libconfig-file-perl,
          libfile-basedir-perl,
          libfile-rsync-perl,
+         libfile-slurp-perl,
          libfile-touch-perl,
          libfile-which-perl,
          libstring-expand-perl,
