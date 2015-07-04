@@ -29,6 +29,19 @@ use 5.010;
 # Globally define version
 our $VERSION = '0.4~dev';
 
+# Load Modules
+use Config::File;
+use Getopt::Std; $Getopt::Std::STANDARD_HELP_VERSION = 1;
+use File::Path qw(mkpath rmtree);
+use File::Basename;
+use File::BaseDir qw(config_home);
+use File::Touch;
+use File::Rsync;
+use File::Which;
+use IO::Handle;
+use String::Expand;
+use Data::Dumper;
+
 # Configuration variables to be used in configuration files
 my $CONFIG = {
     TARGETDIR  => '/tmp',
@@ -44,19 +57,6 @@ my $REVERT = 0;
 # Defaul base name
 my $BASENAME = 'unburden-home-dir';
 my $LISTSUFFIX = 'list';
-
-# Load Modules
-use Config::File;
-use Getopt::Std; $Getopt::Std::STANDARD_HELP_VERSION = 1;
-use File::Path qw(mkpath rmtree);
-use File::Basename;
-use File::BaseDir qw(config_home);
-use File::Touch;
-use File::Rsync;
-use File::Which;
-use IO::Handle;
-use String::Expand;
-use Data::Dumper;
 
 # Declare and initialise some variables
 my %OPTIONS = ();
