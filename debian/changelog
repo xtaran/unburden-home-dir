@@ -1,13 +1,30 @@
 unburden-home-dir (0.4~dev) UNRELEASED; urgency=medium
 
-  * New Features:
-    + Set $XDG_CACHE_HOME to a subdirectory of unburden-home-dir's target.
-    + Expansion of environment variables inside configuration files and
-      list files.
-      - Add (build-)dependency on libstring-expand-perl.
-  * Test suite enhancements:
-    + Test::UBH always uses an environment variable for a part of the
-      configuration file and hence tests the new feature mentioned above.
+  New Features:
+
+  * Set $XDG_CACHE_HOME to a subdirectory of unburden-home-dir's target.
+  * Expand environment variables inside config files and list files.
+    + Add (build-)dependency on libstring-expand-perl.
+  * Don't set TARGETDIR in configuration file by default but compute a
+    sane default value inside unburden-home-dir (Closes: #780387):
+      - Use $TARGETDIR if set in the configuration file.
+      - Else use $XDG_RUNTIME_DIR/$UID if it exists.
+      - Else use /run/user/$UID if it exists.
+      - Else use $TMPDIR if it exists.
+      - Else use /tmp/.
+    + Requires new runtime dependency libfile-slurp-perl.
+    + Run test suite multiple times with different environments for
+      coverage computation.
+
+  Test suite enhancements:
+
+  * Test::UBH always uses an environment variable for a part of the
+    configuration file and hence tests the new feature mentioned above.
+  * Skip tests which involve the non-readabliity of files if run as
+    root. (Closes: #789832)
+
+  Packaging, build system, documentation and file layout changes:
+
   * Change section from x11 to utils. It's far more than just an Xsession
     hook nowadays.
   * Declare compliance with Debian Policy 3.9.6 (no other changes needed)
@@ -24,18 +41,6 @@ unburden-home-dir (0.4~dev) UNRELEASED; urgency=medium
   * Generate man pages from Markdown, too, using ronn.
     + Add ruby-ronn as build-dependency.
   * Use "gzip -n" to make sure the build stays reproducible.
-  * Skip tests which involve the non-readabliity of files if run as
-    root. (Closes: #789832)
-  * Don't set TARGETDIR in configuration file by default but compute a
-    sane default value inside unburden-home-dir (Closes: #780387):
-      - Use $TARGETDIR if set in the configuration file.
-      - Else use $XDG_RUNTIME_DIR/$UID if it exists.
-      - Else use /run/user/$UID if it exists.
-      - Else use $TMPDIR if it exists.
-      - Else use /tmp/.
-    + Requires new runtime dependency libfile-slurp-perl.
-    + Run test suite multiple times with different environments for
-      coverage computation.
 
  -- Axel Beckert <abe@debian.org>  Fri, 13 Mar 2015 13:11:26 +0100
 
