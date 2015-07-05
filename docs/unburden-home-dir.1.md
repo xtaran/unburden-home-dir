@@ -33,7 +33,7 @@ OPTIONS
 
 * `-f`:
   just unburden those directory matched by the given filter (a perl
-  regular expression) — it matches the already unburdened directories
+  regular expression) - it matches the already unburdened directories
   if used together with `-u`.
 
 * `-F`:
