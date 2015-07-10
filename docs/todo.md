@@ -133,4 +133,9 @@ software more suitable to distribution via CPAN.
   above, but it would reduce the amount of dependencies because it can
   convert to HTML as well as [ng]roff.
 
+### Possible Existing Implementations
+
+* [DocSet](https://metacpan.org/pod/DocSet)
+* [PodSite](https://metacpan.org/pod/Pod::Site)
+
 [^1]: Not yet released at the time of writing.
