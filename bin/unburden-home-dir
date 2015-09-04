@@ -221,6 +221,11 @@ my $rsync = File::Rsync->new({
 
 # Check for lsof in search path
 my $which_lsof = which('lsof');
+# Extra check for crappy distributions which place lsof outside a
+# user's $PATH. Fixes GH#8.
+if (!$which_lsof and -x '/usr/sbin/lsof') {
+    $which_lsof = '/usr/sbin/lsof';
+}
 if (!$which_lsof) {
     warn "WARNING: lsof not found, not checking for files in use.\n";
     $USE_LSOF = 0;
