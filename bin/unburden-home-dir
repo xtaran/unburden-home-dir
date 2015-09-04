@@ -229,6 +229,8 @@ if (!$which_lsof and -x '/usr/sbin/lsof') {
 if (!$which_lsof) {
     warn "WARNING: lsof not found, not checking for files in use.\n";
     $USE_LSOF = 0;
+} else {
+    $LSOF_CMD = $which_lsof;
 }
 
 # Standard Error reporting function; Warning
@@ -392,9 +394,9 @@ sub files_in_use {
     my $lsof_output = undef;
 
     if (-d $item) {
-        $lsof_output = `lsof -F c +D '$item'`;
+        $lsof_output = `$LSOF_CMD -F c +D '$item'`;
     } elsif (-f _) {
-        $lsof_output = `lsof -F c '$item'`;
+        $lsof_output = `$LSOF_CMD -F c '$item'`;
     } else {
         report_problem("checking open files in $item", "neither file nor directory");
         return;
