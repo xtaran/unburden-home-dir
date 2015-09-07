@@ -21,7 +21,7 @@ unburden-home-dir (0.4~dev) UNRELEASED; urgency=medium
   Bug fixes:
 
   * Always pass parameters to File::Rsync as array, not as hash
-    reference. This no more works with File::Rsync (despite the
+    reference. This no more works with File::Rsync 0.46 (despite the
     documentation claims otherwise).
 
   Test suite enhancements:
