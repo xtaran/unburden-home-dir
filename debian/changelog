@@ -18,6 +18,12 @@ unburden-home-dir (0.4~dev) UNRELEASED; urgency=medium
   * Also explicitly look for lsof in /usr/sbin to support odd Linux
     distributions which ship lsof outside a user's $PATH. Fixes GH#8.
 
+  Bug fixes:
+
+  * Always pass parameters to File::Rsync as array, not as hash
+    reference. This no more works with File::Rsync (despite the
+    documentation claims otherwise).
+
   Test suite enhancements:
 
   * Test::UBH always uses an environment variable for a part of the

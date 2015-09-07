@@ -204,7 +204,7 @@ my $OLDUMASK = umask();
 umask(077);
 
 # Initialize rsync object
-my $rsync = File::Rsync->new({
+my $rsync = File::Rsync->new(
     archive => 1,
     verbose => 1,
     outfun => sub {
@@ -217,7 +217,7 @@ my $rsync = File::Rsync->new({
         chomp;          # uncoverable statement
         warn "$_[0]\n"; # uncoverable statement
     },
-});
+);
 
 # Check for lsof in search path
 my $which_lsof = which('lsof');
@@ -254,10 +254,10 @@ sub move {
             $from .= '/';
             $to .= '/';
 
-            my $rc = $rsync->exec({
+            my $rc = $rsync->exec(
                 src => $from,
                 dst => $to,
-            });
+            );
             rmtree($from);
         } else {
             my $rc = system(qw(mv -v), $from, $to);
