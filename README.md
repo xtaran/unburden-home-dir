@@ -44,8 +44,11 @@ This project initially started as an `Xsession` hook. It now consists
 of a perl script which optionally can also be called from a provided
 `Xsession` hook.
 
-The [full documentation](http://unburden-home-dir.readthedocs.org/)
-can be read at ReadTheDocs.
+The full documentation can be read online
+[at ReadTheDocs](http://unburden-home-dir.readthedocs.org/),
+[at Gitbook](https://xtaran.gitbooks.io/unburden-home-dir/) or
+downloaded
+[as e-book at Gitbook](https://www.gitbook.com/book/xtaran/unburden-home-dir/details).
 
 
 Author
