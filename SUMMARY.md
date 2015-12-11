@@ -12,4 +12,4 @@
 * [Bugs](docs/bugs.md)
 * [Quality Assurance](docs/qa.md)
 * [See Also](docs/see-also.md)
-* [Manual page unburden-home-dir(1)](docs/unburden-home-dir.1.md)
+* [Appendix: Manual page unburden-home-dir(1)](docs/unburden-home-dir.1.md)
