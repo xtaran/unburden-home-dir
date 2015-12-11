@@ -124,8 +124,9 @@ if that can be combined with [Read the Docs](https://readthedocs.org/)
 which seems to require the Markdown files being in the Git repository,
 not generated from it.
 
-For now I've filed a wishlist request against Read the Docs to
-[also support POD as input format](https://github.com/rtfd/readthedocs.org/issues/1319).
+I've filed a wishlist request against Read the Docs to
+[also support POD as input format](https://github.com/rtfd/readthedocs.org/issues/1319),
+but it has been rejected.
 
 Another way to generate the documentation is using the
 javascript-written [Gitbook](https://www.npmjs.com/package/gitbook)
