@@ -7,7 +7,7 @@ build: cleanthedocs manpages
 
 docs: html/index.html
 html/index.html: mkdocs.yml Makefile docs/*.md
-	mkdocs build --clean
+	env LC_ALL=C.UTF-8 mkdocs build --clean
 
 # Avoid any inclusion of either external or embedded JS code. Avoids
 # lintian warnings about privacy breaches.
