@@ -54,10 +54,10 @@ downloaded
 Author
 ======
 
-[Axel Beckert](http://noone.org/abe/) <abe@deuxchevaux.org>
+[Axel Beckert](http://axel.beckert.ch/) <abe@deuxchevaux.org>
 
 unburden-home-dir initially has been developed for usage at
-[Dept. of Physics](http://www.phys.ethz.ch/),
+[Dept. of Physics](https://www.phys.ethz.ch/),
 [ETH Zurich](http://www.ethz.ch/).
 
 
