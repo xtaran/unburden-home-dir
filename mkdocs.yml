@@ -1,18 +1,18 @@
 site_name: Unburden Your Home Directory
 pages:
-  - [index.md, Project Home]
-  - [installation.md, Installation and Dependencies]
-  - [howto.md, Getting Started]
-  - [configuration.md, Configuration]
-  - [troubleshooting.md, Troubleshooting]
-  - [source-code.md, Source Code]
-  - [license.md, "License, Copyright and Author"]
-  - [contact.md, Contact and Community]
-  - [todo.md, "Plans, Known Issues, TODO"]
-  - [bugs.md, Bugs]
-  - [qa.md, Quality Assurance]
-  - [see-also.md, See Also]
-  - [unburden-home-dir.1.md, "Appendix: Manual page unburden-home-dir(1)"]
+  - Project Home: index.md
+  - Installation and Dependencies: installation.md
+  - Getting Started: howto.md
+  - Configuration: configuration.md
+  - Troubleshooting: troubleshooting.md
+  - Source Code: source-code.md
+  - License, Copyright and Author: license.md
+  - Contact and Community: contact.md
+  - Plans, Known Issues, TODO: todo.md
+  - Bugs: bugs.md
+  - Quality Assurance: qa.md
+  - See Also: see-also.md
+  - "Appendix: Manual page unburden-home-dir(1)": unburden-home-dir.1.md
 theme: readthedocs
 repo_url: https://github.com/xtaran/unburden-home-dir
 site_author: Axel Beckert
