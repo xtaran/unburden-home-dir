@@ -7,7 +7,13 @@
 %:
 	dh $@ --parallel
 
+ifneq ($(filter nodoc,$(DEB_BUILD_PROFILES)),)
+override_dh_installdocs:
+override_dh_auto_build:
+override_dh_installman:
+else
 override_dh_installdocs:
 	dh_installdocs
 	rm -rf debian/unburden-home-dir/usr/share/doc/unburden-home-dir/html/fonts
 	ln -vis /usr/share/fonts-font-awesome/fonts debian/unburden-home-dir/usr/share/doc/unburden-home-dir/html/fonts
+endif

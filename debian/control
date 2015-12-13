@@ -2,8 +2,9 @@ Source: unburden-home-dir
 Section: utils
 Priority: extra
 Maintainer: Axel Beckert <abe@debian.org>
-Build-Depends: debhelper (>= 9~),
+Build-Depends: debhelper (>= 9.20141010),
                devscripts,
+               dpkg-dev (>= 1.17.14),
                libconfig-file-perl,
                libfile-basedir-perl,
                libfile-rsync-perl,
@@ -12,16 +13,16 @@ Build-Depends: debhelper (>= 9~),
                libfile-which-perl,
                libstring-expand-perl,
 # Test suite dependencies
-               libmoo-perl,
-               libstring-random-perl,
-               libtest-differences-perl,
-               libtest-file-perl (>= 1.30),
-               lsof,
+               libmoo-perl <!nocheck>,
+               libstring-random-perl <!nocheck>,
+               libtest-differences-perl <!nocheck>,
+               libtest-file-perl (>= 1.30) <!nocheck>,
+               lsof <!nocheck>,
 # Required for building the documentation
-               mkdocs,
-               moreutils,
+               mkdocs <!nodoc>,
+               moreutils <!nodoc>,
 # Required for building the man pages
-               ruby-ronn
+               ruby-ronn <!nodoc>
 Standards-Version: 3.9.6
 Homepage: https://github.com/xtaran/unburden-home-dir
 Vcs-Git: git://github.com/xtaran/unburden-home-dir.git

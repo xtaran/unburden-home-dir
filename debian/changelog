@@ -50,6 +50,9 @@ unburden-home-dir (0.4~dev) UNRELEASED; urgency=medium
   * Generate man pages from Markdown, too, using ronn.
     + Add ruby-ronn as build-dependency.
   * Use "gzip -n" to make sure the build stays reproducible.
+  * Support build profiles nocheck and nodoc.
+    + Bump debhelper build-dependency to ≥ 9.20141010
+    + Add build-dependency on dpkg-dev ≥ 1.17.14.
 
  -- Axel Beckert <abe@debian.org>  Fri, 13 Mar 2015 13:11:26 +0100
 
