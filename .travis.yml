@@ -14,6 +14,8 @@ before_install:
    - eval $(curl https://travis-perl.github.io/init)
    - build-perl
    - perl -V
+
+install:
    - yes '' | cpanm --verbose --notest --skip-satisfied Config::File File::BaseDir File::Rsync File::Slurp File::Touch File::Which Moo Test::Differences Test::File Devel::Cover::Report::Coveralls String::Random String::Expand
 
 script:
