@@ -12,6 +12,7 @@ perl:
 matrix:
   include:
     - perl: "5.20"
+      env: CHECKBASHISMS=1
       sudo: required
       before_install:
         - sudo apt-get update
