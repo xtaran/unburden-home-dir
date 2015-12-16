@@ -14,7 +14,17 @@ env:
 
 sudo: false
 before_install:
-   - eval $(curl https://travis-perl.github.io/init) --auto
+   - eval $(curl https://travis-perl.github.io/init)
+   - build-perl
+   - perl -V
+   - yes '' | cpanm --verbose --notest --skip-satisfied Config::File File::BaseDir File::Rsync File::Slurp File::Touch File::Which Moo Test::Differences Test::File Devel::Cover::Report::Coveralls String::Random String::Expand
+
+script:
+   - make pureperltest
+
+after_success:
+   - make coveralls
+
 
 notifications:
   irc: "irc.lugs.ch#kivamon"
