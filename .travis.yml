@@ -22,6 +22,12 @@ matrix:
         - perl -V
       script:
         - make test
+    - perl: "5.20-thr"
+      env: DIST=trusty
+      dist: trusty
+    - perl: "5.10-thr"
+      env: DIST=precise
+      dist: precise
 
 sudo: false
 before_install:
