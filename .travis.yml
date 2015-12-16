@@ -9,9 +9,6 @@ perl:
   - "5.10"
   - "dev"
 
-env:
-  - COVERAGE=1
-
 sudo: false
 before_install:
    - eval $(curl https://travis-perl.github.io/init)
