@@ -17,6 +17,9 @@ matrix:
       before_install:
         - sudo apt-get update
         - sudo apt-get install -y --no-install-recommends devscripts
+        - eval $(curl https://travis-perl.github.io/init)
+        - build-perl
+        - perl -V
       script:
         - make test
 
