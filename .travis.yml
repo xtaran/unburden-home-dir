@@ -11,7 +11,7 @@ perl:
 
 matrix:
   include:
-    - perl: "5.20"
+    - perl: "5.22-thr"
       env: CHECKBASHISMS=1
       sudo: required
       before_install:
@@ -19,8 +19,6 @@ matrix:
         - sudo apt-get install -y --no-install-recommends devscripts
       script:
         - make test
-      after_success:
-        - true
 
 sudo: false
 before_install:
