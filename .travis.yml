@@ -13,6 +13,8 @@ matrix:
   include:
     - perl: "5.22-thr"
       env: CHECKBASHISMS=1
+      env: DIST=trusty
+      dist: trusty
       sudo: required
       before_install:
         - sudo apt-get update
@@ -23,11 +25,11 @@ matrix:
       script:
         - make test
     - perl: "5.20-thr"
-      env: DIST=trusty
-      dist: trusty
-    - perl: "5.10-thr"
       env: DIST=precise
       dist: precise
+    - perl: "5.10-thr"
+      env: DIST=trusty
+      dist: trusty
 
 sudo: false
 before_install:
