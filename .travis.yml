@@ -12,8 +12,9 @@ perl:
 matrix:
   include:
     - perl: "5.22-thr"
-      env: CHECKBASHISMS=1
-      env: DIST=trusty
+      env:
+        - CHECKBASHISMS=1
+        - DIST=trusty
       dist: trusty
       sudo: required
       before_install:
