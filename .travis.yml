@@ -18,6 +18,7 @@ matrix:
       dist: trusty
       sudo: required
       before_install:
+        - dpkg -l rsync make
         - sudo apt-get update
         - sudo apt-get install -y --no-install-recommends devscripts
         - eval $(curl https://travis-perl.github.io/init)
