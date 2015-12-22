@@ -24,7 +24,7 @@ use File::Which;
 use String::Random qw(random_string);
 use Data::Dumper;
 
-use utf8;
+no warnings 'utf8';
 
 sub ubh_temp_dir {
     return File::Temp->newdir(DIR => 't');
@@ -261,7 +261,7 @@ sub eq_or_diff_file {
     # this test runs with older version of coreutils, we change the
     # output to look like the one from the newer versions.  Depending
     # on locale settings, it might be even some UTF-8 characters
-    $output =~ s/[\`‘]/\'/g;
+    $output =~ s/[\`\x{2018}-\x{201f}]/\'/g;
 
     unified_diff;
     eq_or_diff_text( $output, $wanted || '', "Check $desc" );
