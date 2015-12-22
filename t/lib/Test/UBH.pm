@@ -242,7 +242,7 @@ sub eq_or_diff_file {
     my $t = shift;
     my ($file, $desc, $wanted) = @_;
     $file = $t->BASE."/$file";
-    my $output = read_file($file);
+    my $output = read_file($file, binmode => ':utf8');
 
     # Filter out lsof warnings caused by systemd
     my $trailing_newline = $output =~ /\n\z/;
