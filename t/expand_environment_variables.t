@@ -5,6 +5,7 @@ use warnings;
 
 use lib qw(t/lib lib);
 use Test::UBH;
+use File::Touch;
 
 my $t = Test::UBH->new;
 
@@ -20,6 +21,9 @@ $t->write_configs("m d \$FOO/fnord foobar-fnord\n" .
                   "m d \$FOO/gnarz foobar-gnarz\n" .
                   "m f \$FOO/foo foobar-foo\n");
 
+# Fixes race condition in rsync
+File::Touch->new(mtime => time-60)->touch($t->HOME."/.foobar/gnarz");
+
 $t->call_unburden_home_dir_default;
 
 $t->eq_lsof_warning_or_diff_stderr;
@@ -32,6 +36,7 @@ bla
 Symlinking ".$t->TP."-foobar-fnord ->  ".$t->HOME."/.foobar/fnord
 Moving ".$t->HOME."/.foobar/gnarz -> ".$t->TP."-foobar-gnarz
 sending incremental file list
+./
 goo
 Symlinking ".$t->TP."-foobar-gnarz ->  ".$t->HOME."/.foobar/gnarz
 Moving ".$t->HOME."/.foobar/foo -> ".$t->TP."-foobar-foo
