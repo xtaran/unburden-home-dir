@@ -24,7 +24,7 @@ manpages: unburden-home-dir.1
 	ronn --manual="Unburden Your Home Directory" -r --pipe $< > $@
 
 index:
-	perl -nE 'if (/^  - \[([^,]+)\.md, "?([^]"]+)"?\]$$/) { say "* [$$2]($$1/)"; }' < mkdocs.yml
+	perl -nE 'if (/^  - "?(.+[^"])"?: (\S*?)\.md$$/) { say "* [$$1]($$2/)"; }' < mkdocs.yml
 
 pureperltest:
 	perl -c bin/unburden-home-dir
