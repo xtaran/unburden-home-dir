@@ -24,6 +24,8 @@ use File::Which;
 use String::Random qw(random_string);
 use Data::Dumper;
 
+use utf8;
+
 sub ubh_temp_dir {
     return File::Temp->newdir(DIR => 't');
 }
@@ -257,8 +259,9 @@ sub eq_or_diff_file {
     # 8.20 (from Jessie/Raring on) the quoting characters in verbose
     # output of "mv" changed. $wanted contains the newer style. In case
     # this test runs with older version of coreutils, we change the
-    # output to look like the one from the newer versions.
-    $output =~ s/\`/\'/g;
+    # output to look like the one from the newer versions.  Depending
+    # on locale settings, it might be even some UTF-8 characters
+    $output =~ s/[\`‘]/\'/g;
 
     unified_diff;
     eq_or_diff_text( $output, $wanted || '', "Check $desc" );
