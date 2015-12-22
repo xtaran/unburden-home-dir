@@ -255,7 +255,7 @@ sub eq_or_diff_file {
 
     # Somewhere between coreutils 8.13 (until Wheezy/Quantal), and
     # 8.20 (from Jessie/Raring on) the quoting characters in verbose
-    # output of mv. changed. $wanted contains the newer style. In case
+    # output of "mv" changed. $wanted contains the newer style. In case
     # this test runs with older version of coreutils, we change the
     # output to look like the one from the newer versions.
     $output =~ s/\`/\'/g;
