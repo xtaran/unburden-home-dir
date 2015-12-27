@@ -17,4 +17,4 @@ Bug reports
 
 Bug reports are welcome either
 [via the Debian Bug Tracking System](https://bugs.debian.org/unburden-home-dir)
-or [via GitHub Issues](https://github.com/xtaran/unburden-home-dir).
+or [via GitHub Issues](https://github.com/xtaran/unburden-home-dir/issues).
