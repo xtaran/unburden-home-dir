@@ -52,7 +52,7 @@ downloaded
 
 
 Author
-======
+------
 
 [Axel Beckert](http://axel.beckert.ch/) <abe@deuxchevaux.org>
 
@@ -62,7 +62,7 @@ unburden-home-dir initially has been developed for usage at
 
 
 License
-=======
+-------
 
 `unburden-home-dir` is free software: you can redistribute it and/or
 modify it under the terms of the GNU General Public License as
