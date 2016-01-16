@@ -25,6 +25,26 @@ distributions ship unburden-home-dir as package:
   ([GitHub repository](https://github.com/kororaproject/kp-unburden-home-dir))
 
 
+Release Version Numbers
+-----------------------
+
+unburden-home-dir tries to adhere to
+[Semantic Versioning](http://semver.org/),
+i.e. [`breaking.feature.fix`](https://medium.com/javascript-scene/software-versions-are-broken-3d2dc0da0783#70a1),
+but uses two small modifications:
+
+* While there's a leading zero in the version number, the meaning is
+  `0.major.minor.micro` (or `beta.breaking.feature.fix`).
+* Trailing zeroes are omitted.
+
+### Examples
+
+* `1` equals `1.0.0`,
+* `1.1` equals `1.1.0`,
+* `0.4` equals `0.4.0.0`, and
+* `0.3.3` equals `0.3.3.0`.
+
+
 Required Run-Time Dependencies
 ------------------------------
 
