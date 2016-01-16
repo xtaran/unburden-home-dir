@@ -1,7 +1,8 @@
 Source Code
 ===========
 
-You should always find the newest code via git at either
+You should always find the newest unburden-home-dir source code via
+git at either
 
 * [GitHub](http://github.com/xtaran/unburden-home-dir),
 * the [Git Repository at D-PHYS](http://git.phys.ethz.ch/?p=unburden-home-dir.git),
