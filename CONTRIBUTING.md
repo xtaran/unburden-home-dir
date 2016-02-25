@@ -9,7 +9,7 @@ keep in mind:
   latter is currently not the case for `libstring-expand-perl`, but
   it's easy to backport.)
 
-* If you contribute bigger patches which validate you own copyright,
+* If you contribute bigger patches which validate your own copyright,
   please use "GPLv2 or newer" as license.
 
 Bug reports
