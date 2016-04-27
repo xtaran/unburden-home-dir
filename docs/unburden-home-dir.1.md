@@ -83,7 +83,7 @@ SEE ALSO
 --------
 
 [corekeeper](https://packages.debian.org/corekeeper), autotrash(1),
-agedu(1), bleachbit(1). [mundus](http://www.mundusproject.org/).
+agedu(1), bleachbit(1). [mundus](https://sebikul.github.io/mundus/).
 computer-janitor(1).
 
 Of, course, du(1) can help you to find potential files or directories

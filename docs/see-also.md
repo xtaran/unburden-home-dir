@@ -86,7 +86,7 @@ Cleaning Up Your Home Directory Half-Automatically
 
 ### Autotrash
 
-> [Autotrash](http://www.logfish.net/pr/autotrash/) is a simple Python
+> [Autotrash](https://bneijt.nl/pr/autotrash/) is a simple Python
 > script which will purge files from your trash based on their age or
 > the amount of free space left on the device. Using autotrash -d 30
 > will delete files which have been in the trash for more then 30
@@ -94,7 +94,7 @@ Cleaning Up Your Home Directory Half-Automatically
 
 ### BleachBit
 
-[BleachBit](http://bleachbit.sourceforge.net/) is a GUI program which …
+[BleachBit](https://www.bleachbit.org/) is a GUI program which …
 
 > […] quickly frees disk space and tirelessly guards your
 > privacy. Free cache, delete cookies, clear Internet history, shred
@@ -109,7 +109,7 @@ Cleaning Up Your Home Directory Half-Automatically
 
 ### Mundus
 
-[Mundus](http://www.mundusproject.org/) is GUI program which …
+[Mundus](https://sebikul.github.io/mundus/) is GUI program which …
 
 > […] can help you keep your /home folder clean. It keeps an internal
 > database of known applications and folders, and automagically
