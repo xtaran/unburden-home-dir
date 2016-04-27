@@ -136,3 +136,18 @@ command-line and GUI program to …
 Unfortunately its development has stalled, it doesn't work together
 with current APT versions and it has been removed from Debian and
 recent Ubuntu releases.
+
+### rmlint
+
+[rmlint](https://rmlint.readthedocs.io/) is a commandline program
+(with optional GUI) which …
+
+> finds space waste and other broken things on your filesystem and
+> offers to remove it. It is able to find:
+>
+> * Duplicate files & directories.
+> * Nonstripped Binaries
+> * Broken symlinks.
+> * Empty files.
+> * Recursive empty directories.
+> * Files with broken user or group id.

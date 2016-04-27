@@ -62,6 +62,7 @@ unburden-home-dir (0.4~dev) UNRELEASED; urgency=medium
     + ReadTheDocs changed the domain for hosted projects from .org to .io
     + Updated links to BleachBit, Mundus and AutoTrash.
     + Changed links from http:// to https:// where possible.
+    + Mention rmlint.
 
  -- Axel Beckert <abe@debian.org>  Fri, 13 Mar 2015 13:11:26 +0100
 
