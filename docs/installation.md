@@ -98,7 +98,7 @@ or packaging process) additionally needs:
 
 * [`mkdocs`](https://mkdocs.org/) (Yes, Python): for generating the
   HTML documentation including the one
-  [at ReadTheDocs](http://unburden-home-dir.readthedocs.org/) from
+  [at ReadTheDocs](https://unburden-home-dir.readthedocs.io/) from
   Markdown files.
 
 * [`ronn`](https://rtomayko.github.io/ronn/) (Yes, Ruby): for

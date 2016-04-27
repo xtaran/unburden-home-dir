@@ -76,7 +76,7 @@ FILES
 
 Read the documentation at either
 `/usr/share/doc/unburden-home-dir/html/` on debianoid installations,
-at http://unburden-home-dir.readthedocs.org/ online, or in the `docs/`
+at https://unburden-home-dir.readthedocs.io/ online, or in the `docs/`
 directory in the source tar ball for an explanation of these files.
 
 SEE ALSO
