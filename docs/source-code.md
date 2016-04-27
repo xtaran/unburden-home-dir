@@ -16,7 +16,7 @@ The copy at
 
 is updated less often and the copy at
 
-* [Gitorious](http://gitorious.org/unburden-home-dir/)
+* [Gitorious](https://gitorious.org/unburden-home-dir/unburden-home-dir.git/)
 
-is just a frozen archive at the state when
-([has been shut down in June 2015](https://about.gitlab.com/2015/03/03/gitlab-acquires-gitorious/)).
+is just a frozen archive at the state when it
+[has been shut down in June 2015](https://about.gitlab.com/2015/03/03/gitlab-acquires-gitorious/).
