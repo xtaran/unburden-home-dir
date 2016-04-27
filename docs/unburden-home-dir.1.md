@@ -82,7 +82,7 @@ directory in the source tar ball for an explanation of these files.
 SEE ALSO
 --------
 
-[corekeeper](http://packages.debian.org/corekeeper), autotrash(1),
+[corekeeper](https://packages.debian.org/corekeeper), autotrash(1),
 agedu(1), bleachbit(1). [mundus](http://www.mundusproject.org/).
 computer-janitor(1).
 

@@ -19,7 +19,7 @@ Getting Unburden-Home-Dir
 Besides installing from [source code](source-code.md), several Linux
 distributions ship unburden-home-dir as package:
 
-* [Debian since 7.0 Wheezy](http://packages.debian.org/unburden-home-dir)
+* [Debian since 7.0 Wheezy](https://packages.debian.org/unburden-home-dir)
 * [Ubuntu since 12.10 Quantal](http://packages.ubuntu.com/unburden-home-dir)
 * [Korora 18 Flo](https://kororaproject.org/korora-18-flo-released/)
   ([GitHub repository](https://github.com/kororaproject/kp-unburden-home-dir))
@@ -76,7 +76,7 @@ use it in unburden-home-dir.)
 Optional Run-Time Dependencies
 ------------------------------
 
-* [`lsof`](http://people.freebsd.org/~abe/)[^1]
+* [`lsof`](https://people.freebsd.org/~abe/)[^1]
 
 
 Build-Time and Test-Suite Dependencies
@@ -104,7 +104,7 @@ or packaging process) additionally needs:
 * [`ronn`](https://rtomayko.github.io/ronn/) (Yes, Ruby): for
   generating the man pages from Markdown files.
 
-* `sponge` from [moreutils](http://joeyh.name/code/moreutils/) (Yes,
+* `sponge` from [moreutils](https://joeyh.name/code/moreutils/) (Yes,
   C): only needed if you want the HTML documentation cleaned from all
   remote inclusions (fonts, JavaScript libraries, CSS libraries) as
   required by e.g. Debian. (In Debian, embedding remote items in
