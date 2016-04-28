@@ -7,7 +7,7 @@ Mailing List
 There's a
 [discussion mailing list for unburden-home-dir](https://noone.org/mailman/listinfo/unburden-home-dir),
 including a
-[public archive](http://noone.org/pipermail/unburden-home-dir/).
+[public archive](https://noone.org/pipermail/unburden-home-dir/).
 
 Security Contact
 ----------------

@@ -28,7 +28,7 @@ General Configuration File
   configuration file)
 
 All three file are parsed by
-[Config::File](http://metacpan.org/release/Config-File/) in the above
+[Config::File](https://metacpan.org/release/Config-File/) in the above
 given order.
 
 ### Recognized Settings

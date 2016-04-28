@@ -77,5 +77,5 @@ Documentation
 Talks about Unburden Your Home Directory
 ----------------------------------------
 
-* [Talks given about Unburden Your Home Directory in German](http://noone.org/talks/unburden/)
+* [Talks given about Unburden Your Home Directory in German](https://noone.org/talks/unburden/)
   (external)

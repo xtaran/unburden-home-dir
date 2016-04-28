@@ -4,7 +4,7 @@ Source Code
 You should always find the newest unburden-home-dir source code via
 git at either
 
-* [GitHub](http://github.com/xtaran/unburden-home-dir), or
+* [GitHub](https://github.com/xtaran/unburden-home-dir), or
 * [GitLab](https://gitlab.com/unburden-home-dir/unburden-home-dir).
 
 GitHub is used as primary hub, GitLab is updated in most cases

@@ -7,7 +7,7 @@ Reducing Sync Calls
 ### eatmydata
 
 Another possible solution for saving non-crucial I/O is using
-[eatmydata](http://www.flamingspork.com/projects/libeatmydata/) to
+[eatmydata](https://www.flamingspork.com/projects/libeatmydata/) to
 ignore a software's `fsync` calls.
 
 Be careful. This may cause data loss in case of a power loss or an
@@ -18,14 +18,14 @@ operating system crash. It's called "eat my data" for a reason.
 One notorious case of an annoyingly amount of `fsync` calls is
 [Firefox](https://www.mozilla.org/firefox) and other
 Mozilla/Gecko/XULRunner based programs, because they use
-[SQLite](http://sqlite.org/) databases as backend for many features
+[SQLite](https://sqlite.org/) databases as backend for many features
 (history, bookmarks, cookies, etc.).
 
 Instead of calling `eatmydata firefox` you can use
 [about:config](about:config) to set
 [toolkit.storage.synchronous](http://kb.mozillazine.org/About:config_entries#Toolkit.)
 to `0`. This specifies the
-[SQLite disk sync mode](http://www.sqlite.org/pragma.html#pragma_synchronous)
+[SQLite disk sync mode](https://www.sqlite.org/pragma.html#pragma_synchronous)
 used by the Mozilla rendering engine.
 
 Nevertheless `unburden-home-dir` usually doesn't help here, because

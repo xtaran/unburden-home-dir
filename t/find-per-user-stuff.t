@@ -20,12 +20,12 @@ foreach my $configtype (qw(write_user_configs write_xdg_configs)) {
     ok( symlink($demodir1, $t->HOME."/.fnord"),
         "Create test environment (Symlink 1)" );
     file_is_symlink_ok( $t->HOME."/.fnord" );
-    # http://bugs.debian.org/705242 + https://rt.cpan.org/Public/Bug/Display.html?id=84582
+    # https://bugs.debian.org/705242 + https://rt.cpan.org/Public/Bug/Display.html?id=84582
     #symlink_target_exists_ok( $t->HOME."/.fnord" );
     ok( symlink("fnord", $t->HOME."/$demodir2"),
         "Create test environment (Symlink 2)" );
     file_is_symlink_ok( $t->HOME."/$demodir2" );
-    # http://bugs.debian.org/705242 + https://rt.cpan.org/Public/Bug/Display.html?id=84582
+    # https://bugs.debian.org/705242 + https://rt.cpan.org/Public/Bug/Display.html?id=84582
     #symlink_target_exists_ok( $t->HOME."/$demodir2" );
 
     $t->$configtype("m d $demofile1 $demotarget1\n".

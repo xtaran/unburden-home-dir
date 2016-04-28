@@ -10,7 +10,7 @@ Testing and Continuous Integration
 
 * [Travis CI Build Status](https://travis-ci.org/xtaran/unburden-home-dir)
   (after each `git push`)
-* [Debian CI Automatic As-Installed Tests](http://ci.debian.net/packages/u/unburden-home-dir/)
+* [Debian CI Automatic As-Installed Tests](https://ci.debian.net/packages/u/unburden-home-dir/)
   (at least after each upload to Debian; and after uploads of dependencies)
 * [Piuparts](https://piuparts.debian.org/sid/source/u/unburden-home-dir.html)
   (package installation, upgrading and removal testing; at least after

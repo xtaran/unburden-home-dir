@@ -4,11 +4,11 @@ License, Copyright and Author
 Copyright and Author
 --------------------
 
-Copyright 2010-2015, [Axel Beckert](http://abe.noone.org/) <abe@deuxchevaux.org>
+Copyright 2010-2015, [Axel Beckert](https://axel.beckert.ch/) <abe@deuxchevaux.org>
 
 unburden-home-dir initially has been developed for usage at
-[Dept. of Physics](http://www.phys.ethz.ch/),
-[ETH Zurich](http://www.ethz.ch/).
+[Dept. of Physics](https://www.phys.ethz.ch/),
+[ETH Zurich](https://www.ethz.ch/).
 
 
 License
@@ -26,4 +26,4 @@ General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program in the file COPYING.  If not, see
-[GNU's license web page](http://www.gnu.org/licenses/).
+[GNU's license web page](https://www.gnu.org/licenses/).

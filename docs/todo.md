@@ -10,7 +10,7 @@ Features
 * `$XDG_` related stuff:
 
   * Honor
-    [`$XDG_` variables](http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html#variables)
+    [`$XDG_` variables](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html#variables)
     in `unburden-home-dir.list` for alternative locations of `.cache`
     and friends.
 
