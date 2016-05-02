@@ -36,6 +36,8 @@ unburden-home-dir (0.4~dev) UNRELEASED; urgency=medium
   * Catch some more cases of minor differences in output.
   * Fix race-condition in t/expand_environment_variables.t and
     t/moving-to-existing-subdir.t by enforcing older mtime.
+  * Skip t/lsof-force.t if run on NFS. (Fixes test suite aspect of
+    #760890.)
 
   Packaging, build system, documentation and file layout changes:
 
