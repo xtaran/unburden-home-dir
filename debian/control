@@ -67,10 +67,11 @@ Description: Remove or move cache files automatically from user's home
  performance and may clog the NFS server, too.
  .
  A similar case, but with different purpose is reducing I/O on mobile
- devices like laptops or netbooks to extend the battery life: Moving
- browser caches etc. off the real disk into a tmpfs filesystem reduces
- the amount of disk I/O which reduces the power consumption of the
- disk.
+ devices like laptops or netbooks to extend the battery life or reduce
+ the wearing down of CF or SD cards, e.g. in single board computers
+ like the Raspberry Pi or Alix or APU boards: Moving browser caches
+ etc. off the real disk into a tmpfs filesystem reduces the amount of
+ disk I/O which reduces the power consumption of the disk.
  .
  Another possible solution for saving non-crucial I/O is using the
  package eatmydata to ignore a software's fsync calls.

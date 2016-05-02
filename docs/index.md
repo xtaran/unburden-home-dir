@@ -15,10 +15,13 @@ This is helpful at least in the following cases:
   performance and may clog the NFS server, too.
 
 * A similar case, but with different purpose is reducing I/O on mobile
-  devices like laptops or netbooks to extend the battery life: Moving
-  browser caches etc. off the real disk into a tmpfs filesystem
-  reduces the amount of disk I/O which reduces the power consumption
-  of the disk.
+  devices like laptops or netbooks to extend the battery life or
+  reduce the wearing down of CF or SD cards, e.g. in single board
+  computers like the [Raspberry Pi](https://www.raspberrypi.org/) or
+  [ALIX](http://www.pcengines.ch/alix.htm) or
+  [APU](http://www.pcengines.ch/apu.htm) boards: Moving browser caches
+  etc. off the real disk into a tmpfs filesystem reduces the amount of
+  disk I/O which reduces the power consumption of the disk.
 
 * Another type of use case for unburden-home-dir is to reduce disk
   space usage, e.g. on devices with small disk space but a lot of RAM
