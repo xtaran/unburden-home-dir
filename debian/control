@@ -78,10 +78,10 @@ Description: Remove or move cache files automatically from user's home
  .
  The other type of use cases for unburden-home-dir is to reduce disk
  space usage, e.g. on devices with small disk space but a lot of RAM
- as seen often on boxes with flash disks or early netbooks, especially
- the EeePC, where configurations with 4GB disk space and 2GB RAM are
- not seldom. In this case you want to move off as many cache files,
- etc. as possible to some tmpfs filesystem, e.g. /tmp/.
+ as seen often on boxes with flash disks or early netbooks, e.g.  the
+ first EeePC with 4GB disk space and 2GB RAM. In this case you want to
+ move off as many cache files, etc. as possible to some tmpfs
+ filesystem, e.g. /tmp/.
  .
  It may also help to reduce the amount of needed backup disk space by
  keeping those files in places where they don't get backed up. In that

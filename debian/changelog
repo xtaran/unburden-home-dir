@@ -70,6 +70,7 @@ unburden-home-dir (0.4~dev) UNRELEASED; urgency=medium
   * Mention SD and CF cards in long package description and documentation.
   * Switch Vcs-Git header from git:// to https://.
   * Add debian/debhelper-build-stamp to .gitignore.
+  * Rephrase EeePC mentioning in package description and documentation.
 
  -- Axel Beckert <abe@debian.org>  Fri, 13 Mar 2015 13:11:26 +0100
 
