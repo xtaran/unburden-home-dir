@@ -3,6 +3,8 @@ unburden-home-dir (0.4~dev) UNRELEASED; urgency=medium
   New Features:
 
   * Set $XDG_CACHE_HOME to a subdirectory of unburden-home-dir's target.
+    + Use sane tmpfs-based defaults for $XDG_CACHE_HOME in case
+      unburden-home-dir is unconfigured.
   * Expand environment variables inside config files and list files.
     + Add (build-)dependency on libstring-expand-perl.
   * Don't set TARGETDIR in configuration file by default but compute a

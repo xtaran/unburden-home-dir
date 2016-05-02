@@ -12,7 +12,7 @@ fi
 
 if unburden_it; then
     if [ -z "$XDG_CACHE_HOME" ]; then
-        XDG_CACHE_HOME="$TARGETDIR/$(echo "$FILELAYOUT" | sed -e "s/%u/$USER/;s/%s/cache/")"
+        XDG_CACHE_HOME="${TARGETDIR:-${XDG_RUNTIME_DIR:-${TMPDIR:-/tmp}}}/$(echo "${FILELAYOUT:-.unburden-%u/%s}" | sed -e "s/%u/$USER/;s/%s/cache/")"
         export XDG_CACHE_HOME
     fi
 fi
