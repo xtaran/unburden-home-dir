@@ -10,7 +10,6 @@ if ( $ENV{ADTTMP} ) {
     plan( skip_all => "these tests are for release candidate testing" );
 }
 
-use File::Slurp;
 use File::Basename;
 
 my $basedir = dirname($0).'/..';
