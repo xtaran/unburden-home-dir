@@ -73,6 +73,8 @@ unburden-home-dir (0.4~dev) UNRELEASED; urgency=medium
   * Switch Vcs-Git header from git:// to https://.
   * Add debian/debhelper-build-stamp to .gitignore.
   * Rephrase EeePC mentioning in package description and documentation.
+  * Remove (mkdocs-generated?) __pycache__ directory from
+    /usr/share/doc/unburden-home-dir/html/ at build time.
 
  -- Axel Beckert <abe@debian.org>  Fri, 13 Mar 2015 13:11:26 +0100
 

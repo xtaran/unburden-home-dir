@@ -14,6 +14,7 @@ override_dh_installman:
 else
 override_dh_installdocs:
 	dh_installdocs
-	rm -rf debian/unburden-home-dir/usr/share/doc/unburden-home-dir/html/fonts
+	rm -rf debian/unburden-home-dir/usr/share/doc/unburden-home-dir/html/fonts \
+	       debian/unburden-home-dir/usr/share/doc/unburden-home-dir/html/__pycache__
 	ln -vis /usr/share/fonts-font-awesome/fonts debian/unburden-home-dir/usr/share/doc/unburden-home-dir/html/fonts
 endif
