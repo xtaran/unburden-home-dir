@@ -5,7 +5,6 @@ use warnings;
 
 use lib qw(t/lib lib);
 use Test::UBH;
-use File::Slurp qw(write_file);
 
 my $t = Test::UBH->new;
 
@@ -13,7 +12,7 @@ $t->setup_test_environment(".foobar/bla", ".fifo");
 
 # Expected directory is file
 $t->write_configs('m d .foobar/fnord foobar-fnord');
-ok( write_file($t->HOME.'/.foobar/fnord', "Some contents\n"),
+ok( $t->write_file($t->HOME.'/.foobar/fnord', "Some contents\n"),
     'Create '.$t->HOME.'/.foobar/fnord with some contents');
 file_not_empty_ok($t->HOME.'/.foobar/fnord');
 $t->call_unburden_home_dir_default('-F');
@@ -47,7 +46,7 @@ $t->eq_or_diff_stdout('');
 $t->write_configs("r d .foobar/hurz foobar-hurz");
 ok( symlink($t->TP.'-foobar-hurz', $t->HOME."/.foobar/hurz"),
     "Create symlink to wrong target" );
-ok( write_file($t->TP.'-foobar-hurz', "Some target contents\n"),
+ok( $t->write_file($t->TP.'-foobar-hurz', "Some target contents\n"),
     'Create '.$t->TP.'-foobar-hurz with some contents');
 
 $t->call_unburden_home_dir_default;

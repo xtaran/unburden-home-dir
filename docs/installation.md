@@ -88,7 +88,7 @@ or packaging process) additionally needs:
 
 ### From CPAN
 
-* [`File::Slurp`](https://metacpan.org/pod/File::Slurp)
+* [`File::Slurper`](https://metacpan.org/pod/File::Slurper)
 * [`Moo`](https://metacpan.org/pod/Moo)
 * [`String::Random`](https://metacpan.org/pod/String::Random)
 * [`Test::Differences`](https://metacpan.org/pod/Test::Differences)

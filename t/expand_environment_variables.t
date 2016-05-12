@@ -12,9 +12,9 @@ my $t = Test::UBH->new;
 $t->setup_test_environment(".foobar/fnord", ".foobar/gnarz");
 ok( mkpath($t->TP."-foobar-gnarz", {}), 'Create test environment (target)' );
 
-ok( write_file($t->HOME."/.foobar/fnord/bla", "123\n"), "Create file 1" );
-ok( write_file($t->HOME."/.foobar/gnarz/goo", "456\n"), "Create file 2" );
-ok( write_file($t->HOME."/.foobar/foo", "abc\n"), "Create file 3" );
+ok( $t->write_file($t->HOME."/.foobar/fnord/bla", "123\n"), "Create file 1" );
+ok( $t->write_file($t->HOME."/.foobar/gnarz/goo", "456\n"), "Create file 2" );
+ok( $t->write_file($t->HOME."/.foobar/foo", "abc\n"), "Create file 3" );
 
 $ENV{FOO} = '.foobar';
 $t->write_configs("m d \$FOO/fnord foobar-fnord\n" .

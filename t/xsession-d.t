@@ -28,9 +28,9 @@ dir_exists_ok( "$XSESSIOND", "Xsession.d directory has been created" );
 
 ok( copy( ($ENV{ADTTMP}?'/etc/X11/':'')."Xsession.d/$RPSCRIPT","$XSESSIOND/" ),
     "Install Xsession.d script" );
-ok( write_file("$BINDIR/unburden-home-dir", "#!/bin/sh\necho \$0 called\n"), "Create test script" );
+ok( $t->write_file("$BINDIR/unburden-home-dir", "#!/bin/sh\necho \$0 called\n"), "Create test script" );
 ok( chmod( 0755, "$BINDIR/unburden-home-dir" ), "Set executable bit on testscript" );
-ok( write_file($t->HOME.'/.'.$t->BASENAME, "UNBURDEN_HOME=yes\n"), "Configure Xsession.d script to run unburden-home-dir" );
+ok( $t->write_file($t->HOME.'/.'.$t->BASENAME, "UNBURDEN_HOME=yes\n"), "Configure Xsession.d script to run unburden-home-dir" );
 
 $t->call_cmd("/bin/run-parts --list $XSESSIOND");
 $t->eq_or_diff_stderr('', "run-parts STDERR");
@@ -40,7 +40,7 @@ $t->call_cmd("/bin/sh $XSESSIOND/$RPSCRIPT");
 $t->eq_or_diff_stderr('', "Xsession.d STDERR");
 $t->eq_or_diff_stdout("$BINDIR/unburden-home-dir called\n", "Xsession.d STDOUT");
 
-ok( write_file($t->HOME.'/.'.$t->BASENAME, "UNBURDEN_HOME=no\n"), "Configure Xsession.d script to NOT run unburden-home-dir" );
+ok( $t->write_file($t->HOME.'/.'.$t->BASENAME, "UNBURDEN_HOME=no\n"), "Configure Xsession.d script to NOT run unburden-home-dir" );
 
 $t->call_cmd("/bin/sh $XSESSIOND/$RPSCRIPT");
 $t->eq_or_diff_stderr('');

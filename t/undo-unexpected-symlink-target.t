@@ -12,7 +12,7 @@ $t->setup_test_environment(".foobar/blatest");
 ok( mkpath($t->TP."-barba-blatest-foobar", {}), "Create test environment (directory)" );
 ok( symlink($t->TP."-fnord-blatest-barba", $t->HOME."/.foobar/blatest/barba"), "Create test environment (symlink)" );
 file_is_symlink_ok( $t->HOME."/.foobar/blatest/barba" );
-ok( write_file($t->TP.'-fnord-blatest-barba', "Some target contents\n"),
+ok( $t->write_file($t->TP.'-fnord-blatest-barba', "Some target contents\n"),
     'Create '.$t->TP.'-fnord-blatest-barba with some contents');
 
 $t->write_configs('m d .foobar/blatest/barba foobar-blatest-barba');

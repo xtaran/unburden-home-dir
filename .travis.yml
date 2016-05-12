@@ -41,7 +41,7 @@ before_install:
    - perl -V
 
 install:
-   - yes '' | cpanm --verbose --notest --skip-satisfied Config::File File::BaseDir File::Rsync File::Slurp File::Touch File::Which Moo Test::Differences Test::File Devel::Cover::Report::Coveralls String::Random String::Expand
+   - yes '' | cpanm --verbose --notest --skip-satisfied Config::File File::BaseDir File::Rsync File::Slurp File::Touch File::Which Moo Test::Differences Test::File Devel::Cover::Report::Coveralls String::Random String::Expand File::Slurper
    - export RELEASE_TESTING=1 AUTOMATED_TESTING=1 AUTHOR_TESTING=1 HARNESS_OPTIONS=j10:c HARNESS_TIMER=1 PATH=${PERLBREW_PATH}:${PATH}
 
 script:

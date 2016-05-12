@@ -6,7 +6,6 @@ use Test::More;
 use Test::Differences;
 use Test::File '1.30';
 use File::Path qw(mkpath);
-use File::Slurp;
 use Data::Dumper;
 
 package Test::UBH;
@@ -18,7 +17,7 @@ use Test::More;
 use Test::Differences;
 use Test::File;
 use File::Path qw(mkpath rmtree);
-use File::Slurp;
+use File::Slurper qw(read_text write_text);
 use File::Temp;
 use File::Which;
 use String::Random qw(random_string);
@@ -213,7 +212,7 @@ sub write_config_file {
     BAIL_OUT('write_config_file: $file empty') unless $file;
     BAIL_OUT('write_config_file: $contents undefined') unless defined $contents;
 
-    ok( write_file($file, $contents), $desc || "Write config file $file" );
+    ok( $t->write_file($file, $contents), $desc || "Config file $file has been written" );
 }
 
 sub shell_capture {
@@ -242,7 +241,7 @@ sub eq_or_diff_file {
     my $t = shift;
     my ($file, $desc, $wanted) = @_;
     $file = $t->BASE."/$file";
-    my $output = read_file($file, binmode => ':utf8');
+    my $output = read_text($file);
 
     # Filter out lsof warnings caused by systemd
     my $trailing_newline = $output =~ /\n\z/;
@@ -266,6 +265,12 @@ sub eq_or_diff_file {
     unified_diff;
     eq_or_diff_text( $output, $wanted || '', "Check $desc" );
     ok( unlink($file), "Clean cache file ($desc)" );
+}
+
+sub write_file {
+    shift;
+    write_text(@_);
+    return -e $_[0];
 }
 
 1;
