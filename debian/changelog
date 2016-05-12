@@ -38,7 +38,7 @@ unburden-home-dir (0.4~dev) UNRELEASED; urgency=medium
     t/moving-to-existing-subdir.t by enforcing older mtime.
   * Skip t/lsof-force.t if run on NFS. (Fixes test suite aspect of
     #760890.)
-  * Remove unused File::Slurp loading from t/version.t.
+  * Remove loading of unused File::Slurp from some tests.
 
   Packaging, build system, documentation and file layout changes:
 
