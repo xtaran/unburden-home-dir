@@ -53,6 +53,7 @@ Required Run-Time Dependencies
 * [`Config::File`](https://metacpan.org/pod/Config::File)
 * [`File::BaseDir`](https://metacpan.org/pod/File::BaseDir)
 * [`File::Rsync`](https://metacpan.org/pod/File::Rsync)
+* [`File::Slurp`](https://metacpan.org/pod/File::Slurp)
 * [`File::Touch`](https://metacpan.org/pod/File::Touch)
 * [`File::Which`](https://metacpan.org/pod/File::Which)
 * [`String::Expand`](https://metacpan.org/pod/String::Expand)
