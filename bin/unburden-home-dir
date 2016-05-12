@@ -35,7 +35,6 @@ use Getopt::Std; $Getopt::Std::STANDARD_HELP_VERSION = 1;
 use File::Path qw(mkpath rmtree);
 use File::Basename;
 use File::BaseDir qw(config_home);
-use File::Slurp;
 use File::Touch;
 use File::Rsync;
 use File::Which;
@@ -55,7 +54,11 @@ if (-r '/proc/mounts') {
     }
     $runtime_dir .= "/$<"; # typically something like /run/user/1000
 
-    my @mounts = read_file('/proc/mounts');
+    open(my $proc_mounts_fd, '<', '/proc/mounts')
+        or die "Can't open /proc/mounts despite it exists: $!";
+    my @mounts = <$proc_mounts_fd>;
+    close($proc_mounts_fd);
+
     foreach my $mount (@mounts) {
         my @mount = split(/\s+/, $mount);
         if ($mount[1] eq $runtime_dir) {
