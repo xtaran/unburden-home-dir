@@ -381,6 +381,10 @@ sub parse_lsof_output {
             }
             $result .= sprintf("  %5i (%s)\n", $pid, $cmd);
             $pid = undef;
+        } elsif ($line =~ /^f/) {
+            # file descriptor, always selected in more recent versions
+            # of lsof -- not interesting here, hence skipping.
+            next;
         } else {
             # uncoverable statement
             report_problem("unexpected line in lsof output", $line);

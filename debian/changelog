@@ -26,6 +26,8 @@ unburden-home-dir (0.4~dev) UNRELEASED; urgency=medium
     reference. This is File::Rsync's preferred interface now and is even
     fully backwards compatible. Fixes test suite failures with File::Rsync
     0.46 (whose backward compatibility mode is buggy).
+  * Support newer versions of lsof which additionally always output the
+    used file descriptors. (Suppresses the "unexpected line" warnings.)
 
   Other improvements:
 
