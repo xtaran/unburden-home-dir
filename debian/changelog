@@ -1,3 +1,9 @@
+unburden-home-dir (0.4.0.1) UNRELEASED; urgency=medium
+
+  * Fix typos in man page.
+
+ -- Axel Beckert <abe@debian.org>  Fri, 13 May 2016 03:41:25 +0200
+
 unburden-home-dir (0.4) unstable; urgency=low
 
   New Features:
