@@ -14,7 +14,6 @@ unburden-home-dir (0.4~dev) UNRELEASED; urgency=medium
       - Else use /run/user/$UID if it exists.
       - Else use $TMPDIR if it exists.
       - Else use /tmp/.
-    + Requires new runtime dependency libfile-slurp-perl.
     + Run test suite multiple times with different environments for
       coverage computation.
   * Also explicitly look for lsof in /usr/sbin to support odd Linux
@@ -28,11 +27,6 @@ unburden-home-dir (0.4~dev) UNRELEASED; urgency=medium
     0.46 (whose backward compatibility mode is buggy).
   * Support newer versions of lsof which additionally always output the
     used file descriptors. (Suppresses the "unexpected line" warnings.)
-
-  Other improvements:
-
-  * No more uses File::Slurp. (Was only used to read /proc/mounts.)
-    + Drop dependency on libfile-slurp-perl.
 
   Test suite enhancements:
 
