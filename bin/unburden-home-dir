@@ -27,7 +27,7 @@ use warnings;
 use 5.010;
 
 # Globally define version
-our $VERSION = '0.4~dev';
+our $VERSION = '0.4';
 
 # Load Modules
 use Config::File;

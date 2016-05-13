@@ -1,4 +1,4 @@
-unburden-home-dir (0.4~dev) UNRELEASED; urgency=medium
+unburden-home-dir (0.4) unstable; urgency=low
 
   New Features:
 
@@ -78,7 +78,7 @@ unburden-home-dir (0.4~dev) UNRELEASED; urgency=medium
   * Remove (mkdocs-generated?) __pycache__ directory from
     /usr/share/doc/unburden-home-dir/html/ at build time.
 
- -- Axel Beckert <abe@debian.org>  Fri, 13 Mar 2015 13:11:26 +0100
+ -- Axel Beckert <abe@debian.org>  Fri, 13 May 2016 03:03:13 +0200
 
 unburden-home-dir (0.3.3) unstable; urgency=medium
 

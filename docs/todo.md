@@ -18,7 +18,7 @@ Features
   variables in configuration files or values.
 
   The expansion of environment variables in configuration files is
-  implemented since the version 0.4[^1] using
+  implemented since the version 0.4 using
   [`String::Expand`](https://metacpan.org/pod/String::Expand) which is
   packaged for Debian since recently, but may still be missing in
   Ubuntu. Still needs to be documented properly, though.
@@ -141,5 +141,3 @@ software more suitable to distribution via CPAN.
 
 * [DocSet](https://metacpan.org/pod/DocSet)
 * [PodSite](https://metacpan.org/pod/Pod::Site)
-
-[^1]: Not yet released at the time of writing.
