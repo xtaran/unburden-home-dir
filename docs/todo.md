@@ -94,8 +94,10 @@ Documentation Infrastructure
 
 ### Status Quo
 
-Currently uses mkdocs (Python) for Markdown-to-HTML-site conversion
-(also used on ReadTheDocs) and ronn (Ruby) for
+Currently uses [mkdocs](http://www.mkdocs.org/) (Python) for
+Markdown-to-HTML-site conversion (also
+[used on ReadTheDocs](https://unburden-home-dir.readthedocs.io/)) and
+[ronn](https://rtomayko.github.io/ronn/) (Ruby) for
 Markdown-to-Unix-Manual-Page conversion.
 
 ### Idea
@@ -119,19 +121,21 @@ software more suitable to distribution via CPAN.
 
 * Convert all Markdown files to POD with e.g. Markdown::POD.
 
-* Replace MkDocs with e.g. Pod::Simple::HTMLBatch, Pod::HtmlEasy or
-  Pod::HtmlTree to generate a bunch of HTML files belonging
-  together. Needs evaluation.
+* Replace MkDocs with e.g. [Pod::Simple::HTMLBatch](https://metacpan.org/pod/Pod::Simple::HTMLBatch),
+  [Pod::HtmlEasy](https://metacpan.org/pod/Pod::HtmlEasy) or
+  [Pod::HtmlTree](https://metacpan.org/pod/Pod::HtmlTree) to generate
+  a bunch of HTML files belonging together. Needs evaluation.
 
-* Replace ronn with a simple pod2man.
+* Replace ronn with a simple [pod2man](https://metacpan.org/pod/pod2man).
 
-* Use GitHub::WebHook and submodules to update a local
-  clone/checkout/working-copy and run the documentation
-  generator. Sounds like the right module.
+* Use
+  [CGI::Github::Webhook](https://metacpan.org/pod/CGI::Github::Webhook)
+  to update a local clone/checkout/working-copy and run the
+  documentation generator.
 
-* Maybe Pandoc is also an idea. It' not fulfilling all requirements
-  above, but it would reduce the amount of dependencies because it can
-  convert to HTML as well as [ng]roff.
+* Maybe [Pandoc](http://pandoc.org/) is also an idea. It' not
+  fulfilling all requirements above, but it would reduce the amount of
+  dependencies because it can convert to HTML as well as [ng]roff.
 
 ### Possible Existing Implementations
 
