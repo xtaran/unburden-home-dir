@@ -47,9 +47,9 @@ Suggests: agedu,
           bleachbit,
           corekeeper,
           eatmydata,
-          fonts-font-awesome,
           fslint,
           ncdu | baobab | filelight | xdiskusage | xdu,
+          unburden-home-dir-doc,
           tmpreaper
 Description: Remove or move cache files automatically from user's home
  unburden-home-dir allows users to move cache files from browsers,
@@ -93,3 +93,19 @@ Description: Remove or move cache files automatically from user's home
  X login for every user. But by default no files or directories are
  configured to be moved elsewhere, so nothing will happen
  automatically without configuration.
+
+Package: unburden-home-dir-doc
+Architecture: all
+Depends: ${misc:Depends}
+Recommends: fonts-font-awesome
+Enhances: unburden-home-dir
+Section: doc
+Homepage: https://unburden-home-dir.readthedocs.io/
+Description: HTML documentation for unburden-home-dir
+ This package contains the documentation for Unburden Your Home
+ Directory in HTML format.
+ .
+ Alternatively you can also find the latest version of this
+ documentation online at either
+ https://unburden-home-dir.readthedocs.io/ or
+ https://xtaran.gitbooks.io/unburden-home-dir/.

@@ -9,12 +9,14 @@
 
 ifneq ($(filter nodoc,$(DEB_BUILD_PROFILES)),)
 override_dh_installdocs:
+override_dh_install:
+	dh_install -punburden-home-dir
 override_dh_auto_build:
 override_dh_installman:
 else
-override_dh_installdocs:
-	dh_installdocs
-	rm -rf debian/unburden-home-dir/usr/share/doc/unburden-home-dir/html/fonts \
-	       debian/unburden-home-dir/usr/share/doc/unburden-home-dir/html/__pycache__
-	ln -vis /usr/share/fonts-font-awesome/fonts debian/unburden-home-dir/usr/share/doc/unburden-home-dir/html/fonts
+override_dh_install:
+	dh_install
+	rm -rf debian/unburden-home-dir-doc/usr/share/doc/unburden-home-dir/html/fonts \
+	       debian/unburden-home-dir-doc/usr/share/doc/unburden-home-dir/html/__pycache__
+	ln -vis /usr/share/fonts-font-awesome/fonts debian/unburden-home-dir-doc/usr/share/doc/unburden-home-dir/html/fonts
 endif

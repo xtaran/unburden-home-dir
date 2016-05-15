@@ -1,0 +1,2 @@
+# Needs .install instead of .docs due to #824221
+html/ usr/share/doc/unburden-home-dir/
