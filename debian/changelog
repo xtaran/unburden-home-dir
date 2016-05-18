@@ -1,10 +1,19 @@
 unburden-home-dir (0.4.0.1) UNRELEASED; urgency=medium
 
+  Bug Fixes:
+
+  * Fix typos in man page.
+
+  Test suite enhancements:
+
+  * Use File::Slurper with "eval { write_text(@_); 1 }" instead of "-e".
+
+  Packaging changes:
+
   * Split off an unburden-home-dir-doc package as recommended by the
     Debian Policy since version 3.9.7.
     + Make fonts-font-awesome a Recommends of unburden-home-dir-doc
       instead of a Suggests of unburden-home-dir.
-  * Fix typos in man page.
 
  -- Axel Beckert <abe@debian.org>  Fri, 13 May 2016 03:41:25 +0200
 

@@ -269,8 +269,7 @@ sub eq_or_diff_file {
 
 sub write_file {
     shift;
-    write_text(@_);
-    return -e $_[0];
+    eval { write_text(@_); return 1; };
 }
 
 1;
