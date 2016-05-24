@@ -1,15 +1,8 @@
-unburden-home-dir (0.4.0.1) UNRELEASED; urgency=medium
-
-  Bug Fixes:
+unburden-home-dir (0.4.0.1) unstable; urgency=medium
 
   * Fix typos in man page.
-
-  Test Suite Enhancements:
-
-  * Use File::Slurper with "eval { write_text(@_); 1 }" instead of "-e".
-
-  Packaging Changes:
-
+  * Test suite: Use File::Slurper with "eval { write_text(@_); 1 }"
+    instead of "-e".
   * Split off an unburden-home-dir-doc package as recommended by the
     Debian Policy since version 3.9.7.
     + Make fonts-font-awesome a Recommends of unburden-home-dir-doc
@@ -19,7 +12,7 @@ unburden-home-dir (0.4.0.1) UNRELEASED; urgency=medium
   * Fix installation of NEWS.Debian
   * Don't install mkdocs-generated __init__.py.
 
- -- Axel Beckert <abe@debian.org>  Fri, 13 May 2016 03:41:25 +0200
+ -- Axel Beckert <abe@debian.org>  Wed, 25 May 2016 01:56:59 +0200
 
 unburden-home-dir (0.4) unstable; urgency=low
 
