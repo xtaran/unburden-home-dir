@@ -4,11 +4,11 @@ unburden-home-dir (0.4.0.1) UNRELEASED; urgency=medium
 
   * Fix typos in man page.
 
-  Test suite enhancements:
+  Test Suite Enhancements:
 
   * Use File::Slurper with "eval { write_text(@_); 1 }" instead of "-e".
 
-  Packaging changes:
+  Packaging Changes:
 
   * Split off an unburden-home-dir-doc package as recommended by the
     Debian Policy since version 3.9.7.
