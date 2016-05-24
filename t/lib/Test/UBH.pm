@@ -1,6 +1,19 @@
 # Module to reduce boilerplate code in unburden-home-dir's test suite
 use strict;
 
+# Note about why using File::Slurper and not Path::Tiny:
+#
+# * Path::Tiny could replace File::Slurper, File::Path and File::Temp.
+# * But File::Path and File::Temp are part of Perl's core,
+#   i.e. usually always already installed.
+# * For the additionally required functionality, i.e. pure slurp/spew
+#   functionality, I prefer the smaller and simpler module, i.e.
+#   File::Slurper (24kB unpacked .deb) over Path::Tiny (158kB).
+#
+# See
+# http://blogs.perl.org/users/leon_timmermans/2015/08/fileslurp-is-broken-and-wrong.html
+# for some more background on this discussion.
+
 # Boilerplate which exports into main::
 use Test::More;
 use Test::Differences;
