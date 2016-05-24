@@ -99,6 +99,8 @@ Architecture: all
 Depends: ${misc:Depends}
 Recommends: fonts-font-awesome
 Enhances: unburden-home-dir
+Replaces: unburden-home-dir (<< 0.4.0.1)
+Breaks: unburden-home-dir (<< 0.4.0.1)
 Section: doc
 Homepage: https://unburden-home-dir.readthedocs.io/
 Description: HTML documentation for unburden-home-dir
