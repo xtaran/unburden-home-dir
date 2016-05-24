@@ -17,6 +17,7 @@ unburden-home-dir (0.4.0.1) UNRELEASED; urgency=medium
     + Rename all binary-package specific debian/* files to
       debian/unburden-home-dir.*.
   * Fix installation of NEWS.Debian
+  * Don't install mkdocs-generated __init__.py.
 
  -- Axel Beckert <abe@debian.org>  Fri, 13 May 2016 03:41:25 +0200
 
