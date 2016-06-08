@@ -6,7 +6,7 @@ use 5.010;
 
 use Test::More;
 
-if ( $ENV{ADTTMP} ) {
+if ( $ENV{AUTOPKGTEST_TMP} || $ENV{ADTTMP} ) {
     plan( skip_all => "these tests are for release candidate testing" );
 }
 

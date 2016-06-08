@@ -27,7 +27,8 @@ ok( mkpath($XSESSIOND, $BINDIR, {}), "Create test environment (directories)" );
 dir_exists_ok( "$BINDIR", "Script directory has been created" );
 dir_exists_ok( "$XSESSIOND", "Xsession.d directory has been created" );
 
-ok( copy( ($ENV{ADTTMP}?'/etc/X11/':'')."Xsession.d/$RPSCRIPT","$XSESSIOND/" ),
+ok( copy( (($ENV{AUTOPKGTEST_TMP} || $ENV{ADTTMP}) ? '/etc/X11/' : '').
+          "Xsession.d/$RPSCRIPT","$XSESSIOND/" ),
     "Install Xsession.d script" );
 ok( $t->write_file("$BINDIR/unburden-home-dir", "#!/bin/sh\necho \$0 called\n"), "Create test script" );
 ok( chmod( 0755, "$BINDIR/unburden-home-dir" ), "Set executable bit on testscript" );

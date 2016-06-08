@@ -5,8 +5,14 @@
 
 set -e
 
-# Copy test tree to $ADTTMP
-cp -pvr t "$ADTTMP/t"
-cd "$ADTTMP"
+# Compatibility with autopkgtest < v4
+if [ -z "$AUTOPKGTEST_TMP" -a -n "$ADTTMP" ]; then
+    AUTOPKGTEST_TMP="$ADTTMP"
+    export AUTOPKGTEST_TMP
+fi
+
+# Copy test tree to $AUTOPKGTEST_TMP
+cp -pvr t "$AUTOPKGTEST_TMP/t"
+cd "$AUTOPKGTEST_TMP"
 
 prove -v -j1

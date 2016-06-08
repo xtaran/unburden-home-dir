@@ -7,7 +7,7 @@ use Test::More;
 use File::Basename;
 use 5.010;
 
-my $basedir = $ENV{ADTTMP} ? '/usr' : dirname($0).'/..';
+my $basedir = ($ENV{AUTOPKGTEST_TMP} || $ENV{ADTTMP}) ? '/usr' : dirname($0).'/..';
 my $dashdash_help = `perl $basedir/bin/unburden-home-dir --help`;
 is( $?, 0, 'unburden-home-dir --help exited with 0');
 

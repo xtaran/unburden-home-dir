@@ -140,7 +140,8 @@ sub call_unburden_home_dir_common {
 sub call_unburden_home_dir {
     my $t   = shift;
     my $ok  = shift;
-    my $bin = $ENV{ADTTMP} ? '/usr/bin/unburden-home-dir' : 'bin/unburden-home-dir';
+    my $bin = ($ENV{AUTOPKGTEST_TMP} || $ENV{ADTTMP}) ?
+        '/usr/bin/unburden-home-dir' : 'bin/unburden-home-dir';
     my $cmd = "perl $bin";
     $t->call_unburden_home_dir_common($ok, $cmd, @_);
 }
@@ -148,7 +149,8 @@ sub call_unburden_home_dir {
 sub call_unburden_home_dir_inc_path {
     my $t = shift;
     my $inc_path = shift;
-    my $bin = $ENV{ADTTMP} ? '/usr/bin/unburden-home-dir' : 'bin/unburden-home-dir';
+    my $bin = ($ENV{AUTOPKGTEST_TMP} || $ENV{ADTTMP}) ?
+        '/usr/bin/unburden-home-dir' : 'bin/unburden-home-dir';
     my $cmd = "perl -I$inc_path $bin";
     $t->call_unburden_home_dir_common(1, $cmd, @_, $t->default_parameters);
 }
@@ -264,7 +266,8 @@ sub eq_or_diff_file {
                    } split("\n", $output));
     $output .= "\n" if $trailing_newline and $output ne '';
 
-    my $bin = $ENV{ADTTMP} ? '/usr/bin/unburden-home-dir' : 'bin/unburden-home-dir';
+    my $bin = ($ENV{AUTOPKGTEST_TMP} || $ENV{ADTTMP}) ?
+        '/usr/bin/unburden-home-dir' : 'bin/unburden-home-dir';
     $output =~ s(at $bin line \d+([,.]))(at unburden-home-dir line <n>$1)g;
 
     # Somewhere between coreutils 8.13 (until Wheezy/Quantal), and
