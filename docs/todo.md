@@ -62,9 +62,9 @@ Planned Invasive Changes
 ------------------------
 
 * Find a nice way to handle the global `unburden-home-dir.list`, maybe
-  by by using something like `/etc/unburden-home-dir.list.d/`,
+  by using something like `/etc/unburden-home-dir.list.d/`,
   `/etc/unburden-home-dir/list.d/` or maybe even put symlinks to the
-  (splitted) example file(s) in there.
+  (split) example file(s) in there.
 
   I've wrote a Perl interface to `run-parts` named
   [Run::Parts](https://metacpan.org/release/Run-Parts) as standalone
