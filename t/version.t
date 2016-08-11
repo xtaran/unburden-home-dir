@@ -1,6 +1,6 @@
 #!perl
 
-#use strict;
+use strict;
 use warnings;
 use 5.010;
 
@@ -16,6 +16,7 @@ my $basedir = dirname($0).'/..';
 
 my $debian_changelog_version = `head -1 $basedir/debian/changelog | awk -F'[ ()]+' '{print \$2}'`;
 chomp($debian_changelog_version);
+our $VERSION;
 my $script_version = `egrep '^our .VERSION' $basedir/bin/unburden-home-dir`;
 eval($script_version);
 
