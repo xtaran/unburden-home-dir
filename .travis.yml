@@ -14,16 +14,12 @@ perl:
 
 matrix:
   include:
-    - perl: "5.22-thr"
+    - perl: "5.24-thr"
       env:
         - CHECKBASHISMS=1
         - DIST=trusty
       dist: trusty
-      sudo: required
       before_install:
-        - dpkg -l rsync make
-        - sudo apt-get update
-        - sudo apt-get install -y --no-install-recommends devscripts
         - eval $(curl https://travis-perl.github.io/init)
         - build-perl
         - perl -V
@@ -35,6 +31,11 @@ matrix:
     - perl: "5.10-thr"
       env: DIST=trusty
       dist: trusty
+
+addons:
+  apt:
+    packages:
+    - devscripts
 
 sudo: false
 before_install:
