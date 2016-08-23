@@ -66,18 +66,18 @@ detailed reasoning behind this project.
 Documentation
 -------------
 
-* [Installation and Dependencies](installation/)
-* [Getting Started](howto/)
-* [Configuration](configuration/)
-* [Troubleshooting](troubleshooting/)
-* [Source Code](source-code/)
-* [License, Copyright and Author](license/)
-* [Contact and Community](contact/)
-* [Plans, Known Issues, TODO](todo/)
-* [Bugs](bugs/)
-* [Quality Assurance](qa/)
-* [See Also](see-also/)
-* [Manual page unburden-home-dir(1)](unburden-home-dir.1/)
+* [Installation and Dependencies](installation)
+* [Getting Started](howto)
+* [Configuration](configuration)
+* [Troubleshooting](troubleshooting)
+* [Source Code](source-code)
+* [License, Copyright and Author](license)
+* [Contact and Community](contact)
+* [Plans, Known Issues, TODO](todo)
+* [Bugs](bugs)
+* [Quality Assurance](qa)
+* [See Also](see-also)
+* [Manual page unburden-home-dir(1)](unburden-home-dir.1)
 
 Talks about Unburden Your Home Directory
 ----------------------------------------
