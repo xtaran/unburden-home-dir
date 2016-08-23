@@ -48,7 +48,6 @@ of a perl script which optionally can also be called from a provided
 `Xsession` hook.
 
 The full documentation can be read online
-[at GitHub Pages](https://xtaran.github.io/unburden-home-dir/),
 [at ReadTheDocs](https://unburden-home-dir.readthedocs.io/),
 [at Gitbook](https://xtaran.gitbooks.io/unburden-home-dir/) or
 downloaded
