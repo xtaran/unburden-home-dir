@@ -1,4 +1,5 @@
 ---
+title: Bugs
 ---
 
 Bugs
