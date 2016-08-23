@@ -1,5 +1,6 @@
 ---
 title: Bugs
+layout: post
 ---
 
 Bugs
