@@ -1,0 +1,9 @@
+image: debian/unstable
+
+before_script:
+  - apt-get update -q
+  - apt-get dist-upgrade -qy
+  - apt-get build-dep -qy ./
+
+script:
+  - make test
