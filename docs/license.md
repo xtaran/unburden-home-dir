@@ -7,7 +7,7 @@ License, Copyright and Author
 Copyright and Author
 --------------------
 
-Copyright 2010-2015, [Axel Beckert](https://axel.beckert.ch/) <abe@deuxchevaux.org>
+Copyright 2010-2016, [Axel Beckert](https://axel.beckert.ch/) <abe@deuxchevaux.org>
 
 unburden-home-dir initially has been developed for usage at
 [Dept. of Physics](https://www.phys.ethz.ch/),

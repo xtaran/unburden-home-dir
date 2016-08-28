@@ -100,7 +100,7 @@ AUTHOR
 ------
 
 Unburden Home Dir is written and maintained by Axel Beckert
-<beckert@phys.ethz.ch>.
+<abe@deuxchevaux.org>.
 
 LICENSE
 -------
