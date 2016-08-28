@@ -13,13 +13,10 @@ git at either
 GitHub is used as primary hub, GitLab is updated in most cases
 automatically, too.
 
-The copy at
+The copies at
 
-* the [Git Repository at D-PHYS](http://git.phys.ethz.ch/?p=unburden-home-dir.git)
+* [at D-PHYS](http://git.phys.ethz.ch/?p=unburden-home-dir.git), and
+* [at Gitorious](https://gitorious.org/unburden-home-dir/unburden-home-dir.git/)
 
-is updated less often and the copy at
-
-* [Gitorious](https://gitorious.org/unburden-home-dir/unburden-home-dir.git/)
-
-is just a frozen archive at the state when it
-[has been shut down in June 2015](https://about.gitlab.com/2015/03/03/gitlab-acquires-gitorious/).
+are no more updated, should no more be used and may vanish completely
+in the future.

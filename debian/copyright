@@ -2,8 +2,6 @@ Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: unburden-home-dir
 Upstream-Contact: Axel Beckert <abe@deuxchevaux.org>
 Source: https://github.com/xtaran/unburden-home-dir
-        but can also be found at
-        http://git.phys.ethz.ch/?p=unburden-home-dir.git and
         https://gitlab.com/unburden-home-dir/unburden-home-dir
 
 Files: *
