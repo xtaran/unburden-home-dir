@@ -3,7 +3,8 @@ Unburden Your Home Directory
 
 [![Travis CI Build Status](https://travis-ci.org/xtaran/unburden-home-dir.svg)](https://travis-ci.org/xtaran/unburden-home-dir)
 [![Documentation Status](https://readthedocs.org/projects/unburden-home-dir/badge/?version=latest)](https://readthedocs.org/projects/unburden-home-dir/?badge=latest)
-[![Coverage Status](https://img.shields.io/coveralls/xtaran/unburden-home-dir.svg)](https://coveralls.io/r/xtaran/unburden-home-dir)
+[![Coverage by Coveralls](https://img.shields.io/coveralls/xtaran/unburden-home-dir.svg)](https://coveralls.io/r/xtaran/unburden-home-dir)
+[![Coverage by Codecov](https://codecov.io/gh/xtaran/unburden-home-dir/branch/master/graph/badge.svg)](https://codecov.io/gh/xtaran/unburden-home-dir)
 [![Gitbook Build Status](https://www.gitbook.com/button/status/book/xtaran/unburden-home-dir)](https://www.gitbook.com/book/xtaran/unburden-home-dir/activity)
 
 `unburden-home-dir` allows users to move cache files from browsers,

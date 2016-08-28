@@ -9,7 +9,8 @@ Testing and Continuous Integration
 
 [![Travis CI Build Status](https://travis-ci.org/xtaran/unburden-home-dir.svg)](https://travis-ci.org/xtaran/unburden-home-dir)
 [![Documentation Status](https://readthedocs.org/projects/unburden-home-dir/badge/?version=latest)](https://readthedocs.org/projects/unburden-home-dir/?badge=latest)
-[![Coverage Status](https://img.shields.io/coveralls/xtaran/unburden-home-dir.svg)](https://coveralls.io/r/xtaran/unburden-home-dir)
+[![Coverage by Coveralls](https://img.shields.io/coveralls/xtaran/unburden-home-dir.svg)](https://coveralls.io/r/xtaran/unburden-home-dir)
+[![Coverage by Codecov](https://codecov.io/gh/xtaran/unburden-home-dir/branch/master/graph/badge.svg)](https://codecov.io/gh/xtaran/unburden-home-dir)
 [![Gitbook Build Status](https://www.gitbook.com/button/status/book/xtaran/unburden-home-dir)](https://www.gitbook.com/book/xtaran/unburden-home-dir/activity)
 
 * [Travis CI Build Status](https://travis-ci.org/xtaran/unburden-home-dir)
@@ -30,6 +31,8 @@ Code Statistics and Coverage
 ----------------------------
 
 * [Coveralls.io Statement Coverage Status](https://coveralls.io/r/xtaran/unburden-home-dir)
+  (after each `git push`)
+* [Codecove Coverage Status](https://codecov.io/gh/xtaran/unburden-home-dir)
   (after each `git push`)
 * [Code Statistics on OpenHub (formerly Ohloh)](https://www.openhub.net/p/unburden-home-dir)
   (every few days)
