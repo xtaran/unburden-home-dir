@@ -12,6 +12,7 @@ perl:
   - "blead"
 
 matrix:
+  fast_finish: true
   include:
     - perl: "5.24-thr"
       env:
