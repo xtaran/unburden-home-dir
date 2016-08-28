@@ -30,8 +30,8 @@ matrix:
     - perl: "5.10-thr"
       env: DIST=trusty
       dist: trusty
-   allow_failures:
-     - perl: blead
+  allow_failures:
+    - perl: blead
 
 addons:
   apt:
