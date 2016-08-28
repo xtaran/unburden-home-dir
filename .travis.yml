@@ -53,7 +53,7 @@ script:
 
 after_success:
    - make coveralls
-
+   - make codecov
 
 notifications:
   irc: "irc.lugs.ch#kivamon"
