@@ -9,6 +9,7 @@ perl:
   - "5.12"
   - "5.10"
   - "dev"
+  - "blead"
 
 matrix:
   include:
@@ -29,6 +30,8 @@ matrix:
     - perl: "5.10-thr"
       env: DIST=trusty
       dist: trusty
+   allow_failures:
+     - perl: blead
 
 addons:
   apt:
