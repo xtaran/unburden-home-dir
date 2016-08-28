@@ -8,9 +8,7 @@ perl:
   - "5.14"
   - "5.12"
   - "5.10"
-# Devel::PPPort ≥ 3.33 needed for Devel::Cover on Perl 5.25, see
-# https://github.com/mhx/Devel-PPPort/issues/35
-#  - "dev"
+  - "dev"
 
 matrix:
   include:
