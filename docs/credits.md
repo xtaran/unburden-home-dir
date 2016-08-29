@@ -1,4 +1,5 @@
 ---
+title: Credits
 layout: page
 ---
 

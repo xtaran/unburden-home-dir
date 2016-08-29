@@ -1,4 +1,5 @@
 ---
+title: unburden-home-dir(1) man page
 layout: page
 ---
 

@@ -1,4 +1,5 @@
 ---
+title: Configuration Files
 layout: page
 ---
 

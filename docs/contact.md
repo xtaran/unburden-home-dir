@@ -1,4 +1,5 @@
 ---
+title: Contact and Community
 layout: page
 ---
 

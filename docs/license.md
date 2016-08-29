@@ -1,4 +1,5 @@
 ---
+title: License, Copyright and Author
 layout: page
 ---
 

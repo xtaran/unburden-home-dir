@@ -1,4 +1,5 @@
 ---
+title: Installation and Dependencies
 layout: page
 ---
 
