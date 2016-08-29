@@ -1,4 +1,5 @@
 ---
+layout: page
 ---
 
 Unburden Your Home Directory

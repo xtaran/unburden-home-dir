@@ -1,4 +1,5 @@
 ---
+layout: page
 ---
 
 unburden-home-dir(1) -- unburdens home directories from caches and trashes
