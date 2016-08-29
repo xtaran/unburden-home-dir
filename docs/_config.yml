@@ -1,5 +1,3 @@
 name: Unburden Your Home Directory
 markdown: kramdown
 theme: minima
-gems:
-  - jekyll-sitemap
