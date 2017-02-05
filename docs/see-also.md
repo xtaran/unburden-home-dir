@@ -18,6 +18,21 @@ ignore a software's `fsync` calls.
 Be careful. This may cause data loss in case of a power loss or an
 operating system crash. It's called "eat my data" for a reason.
 
+### Syncing browser profiles to tmpfs and back
+
+[profile-sync-daemon](https://github.com/graysky2/profile-sync-daemon)
+is a tiny pseudo-daemon designed to manage your browser's profile in
+tmpfs and to periodically sync it back to your physical disc
+(HDD/SSD). This is accomplished via a symlinking step and an
+innovative use of rsync to maintain back-up and synchronization
+between the two. One of the major design goals is a completely
+transparent user experience.
+
+Unfortunately it's said to
+[only works with systemd](https://github.com/graysky2/profile-sync-daemon#note-for-version-6)
+as init system. (On the other hand, it's not clear why you shouldn't
+be able to call it from a hand-written `.xsession` file.)
+
 ### Firefox/Gecko/XULRunner: toolkit.storage.synchronous
 
 One notorious case of an annoyingly amount of `fsync` calls is
