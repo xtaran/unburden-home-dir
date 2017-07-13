@@ -38,3 +38,8 @@ Code Statistics and Coverage
   (after each `git push`)
 * [Code Statistics on OpenHub (formerly Ohloh)](https://www.openhub.net/p/unburden-home-dir)
   (every few days)
+
+General Quality Assurrance
+--------------------------
+
+* [CII Best Practices Coverage](https://bestpractices.coreinfrastructure.org/projects/1116)

@@ -6,6 +6,7 @@ Unburden Your Home Directory
 [![Coverage by Coveralls](https://img.shields.io/coveralls/xtaran/unburden-home-dir.svg)](https://coveralls.io/r/xtaran/unburden-home-dir)
 [![Coverage by Codecov](https://codecov.io/gh/xtaran/unburden-home-dir/branch/master/graph/badge.svg)](https://codecov.io/gh/xtaran/unburden-home-dir)
 [![Gitbook Build Status](https://www.gitbook.com/button/status/book/xtaran/unburden-home-dir)](https://www.gitbook.com/book/xtaran/unburden-home-dir/activity)
+[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/1116/badge)](https://bestpractices.coreinfrastructure.org/projects/1116)
 [![GitPitch Slides](https://gitpitch.com/assets/badge.svg)](https://gitpitch.com/xtaran/unburden-home-dir)
 
 `unburden-home-dir` allows users to move cache files from browsers,
