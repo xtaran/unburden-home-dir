@@ -13,24 +13,24 @@ perl:
 
 matrix:
   fast_finish: true
-  include:
-    - perl: "5.24-thr"
-      env:
-        - CHECKBASHISMS=1
-        - DIST=trusty
-      dist: trusty
-      before_install:
-        - eval $(curl https://travis-perl.github.io/init)
-        - build-perl
-        - perl -V
-      script:
-        - make test
-    - perl: "5.20-thr"
-      env: DIST=precise
-      dist: precise
-    - perl: "5.10-thr"
-      env: DIST=trusty
-      dist: trusty
+#  include:
+#    - perl: "5.24-thr"
+#      env:
+#        - CHECKBASHISMS=1
+#        - DIST=trusty
+#      dist: trusty
+#      before_install:
+#        - eval $(curl https://travis-perl.github.io/init)
+#        - build-perl
+#        - perl -V
+#      script:
+#        - make test
+#    - perl: "5.20-thr"
+#      env: DIST=precise
+#      dist: precise
+#    - perl: "5.10-thr"
+#      env: DIST=trusty
+#      dist: trusty
   allow_failures:
     - perl: blead
 
