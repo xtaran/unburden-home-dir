@@ -30,7 +30,7 @@ You also might want to verify the signatures:
 
 But having fetched it via `apt`, it's indirectly signed by the very
 same PGP keys which also verify all retrieved packages before
-installation
+installation.
 
 Retrieving the Key from Debian Servers via HTTPS
 ------------------------------------------------
