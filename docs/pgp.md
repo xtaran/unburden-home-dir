@@ -39,7 +39,7 @@ If you trust the SSL certificates used on Debian's web servers, you
 can also
 [download this key directly from `debian-keyring`'s official Git repository over HTTPS](https://anonscm.debian.org/cgit/keyring/keyring.git/plain/debian-keyring-gpg/0x2FF9CD59612616B5)
 (hosted on an official Debian-maintained `.debian.org` server) or
-[download this key from the latest `debian-keyring` package over HTTPS from sources.debian.net].(https://sources.debian.net/data/main/d/debian-keyring/unstable/debian-keyring-gpg/0x2FF9CD59612616B5).
+[download this key from the latest `debian-keyring` package over HTTPS from sources.debian.net](https://sources.debian.net/data/main/d/debian-keyring/unstable/debian-keyring-gpg/0x2FF9CD59612616B5).
 (Please note that while the `.debian.net` is operated by the Debian
 Project, the individual hosts are usually not operated by the Debian
 Project but by a Debian Member or Contributor.)
