@@ -283,6 +283,10 @@ sub eq_or_diff_file {
     # on locale settings, it might be even some UTF-8 characters
     $output =~ s/[\`\x{2018}-\x{201f}]/\'/g;
 
+    # With coreutils 8.28 or so, "mv" started to emit its output with
+    # the word "renamed". Strip that to stay backwards compatible.
+    $output =~ s/^renamed //mg;
+
     unified_diff;
     eq_or_diff_text( $output, $wanted || '', "Check $desc" );
     ok( unlink($file), "Clean cache file ($desc)" );
