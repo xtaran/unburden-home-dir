@@ -15,6 +15,10 @@ git at either
 GitHub is used as primary hub, GitLab is updated in most cases
 automatically, too.
 
+The Git tags of recent
+[releases](https://github.com/xtaran/unburden-home-dir/releases) are
+[PGP-signed](pgp.md).
+
 The copies at
 
 * [at D-PHYS](http://git.phys.ethz.ch/?p=unburden-home-dir.git), and

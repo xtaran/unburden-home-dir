@@ -1,7 +1,8 @@
 unburden-home-dir (0.4.0.3) UNRELEASED; urgency=medium
 
-  * Document how to report security bugs by (PGP-encrypted)
-    e-mail. (Fulfils Core Infrastructure Best Practice.)
+  * Fulfils some more Core Infrastructure Documentation Best Practices.
+    + Document how to report security bugs by (PGP-encrypted) e-mail.
+    + Document PGP key(s) used in the project and how to retrieve it.
 
  -- Axel Beckert <abe@debian.org>  Fri, 13 Oct 2017 22:27:58 +0200
 

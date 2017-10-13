@@ -21,14 +21,30 @@ CPAN-compatible) is planned.
 Getting Unburden-Home-Dir
 -------------------------
 
-Besides installing from [source code](source-code.md), several Linux
-distributions ship unburden-home-dir as package:
+Several Linux distributions ship unburden-home-dir as package:
 
 * [Debian since 7.0 Wheezy](https://packages.debian.org/unburden-home-dir)
 * [Ubuntu since 12.10 Quantal](http://packages.ubuntu.com/unburden-home-dir)
 * [Korora 18 Flo](https://kororaproject.org/korora-18-flo-released/)
   ([GitHub repository](https://github.com/kororaproject/kp-unburden-home-dir))
 
+### Getting Release Archives
+
+You can also install unburden-home-dir from source code. If you
+prefer installing released versions, see the
+[releases on GitHub](https://github.com/xtaran/unburden-home-dir).
+
+The according Git tags (of recent releases) are signed with the
+PGP/GnuPG key `0x2517B724C5F6CA9953296E612FF9CD59612616B5` (or its
+most recent subkey). Please see the
+[Appendix "Retriving PGP Keys Used In The Project"](pgp.md) for
+how to retrieve this key.
+
+### Getting/Viewing the Current Development Snapshot
+
+If you want to review or download the source code at the current state
+of development, please see [the source code page](source-code.md) in
+the documentation.
 
 Release Version Numbers
 -----------------------
