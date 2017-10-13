@@ -1,3 +1,10 @@
+unburden-home-dir (0.4.0.3) UNRELEASED; urgency=medium
+
+  * Document how to report security bugs by (PGP-encrypted)
+    e-mail. (Fulfils Core Infrastructure Best Practice.)
+
+ -- Axel Beckert <abe@debian.org>  Fri, 13 Oct 2017 22:27:58 +0200
+
 unburden-home-dir (0.4.0.2) unstable; urgency=medium
 
   * Support autopkgtest v4.
