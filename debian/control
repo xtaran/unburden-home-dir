@@ -17,6 +17,7 @@ Build-Depends: debhelper (>= 10),
                libstring-random-perl <!nocheck>,
                libtest-differences-perl <!nocheck>,
                libtest-file-perl (>= 1.30) <!nocheck>,
+               libtest-perl-critic-perl <!nocheck>,
                lsof <!nocheck>,
 # Required for building the documentation
                mkdocs <!nodoc>,

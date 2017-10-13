@@ -6,6 +6,8 @@ unburden-home-dir (0.4.0.3) UNRELEASED; urgency=medium
   * Test suite: Run checkbashism also on share/common.sh and
     Xsession.d/25unburden-home-dir-xdg.
   * Test suite: Provide checkbashism as its own Make target.
+  * Use Perl::Critic as part of the test suite.
+    + Add libtest-perl-critic-perl as build-dependency.
 
  -- Axel Beckert <abe@debian.org>  Fri, 13 Oct 2017 22:27:58 +0200
 
