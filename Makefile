@@ -31,7 +31,9 @@ pureperltest:
 	perl -c bin/unburden-home-dir
 	prove $(PROVEFLAGS) t/*.t
 
-test: pureperltest
+test: pureperltest checkbashisms
+
+checkbashisms:
 	checkbashisms Xsession.d/* share/*.sh
 
 determine-coverage:
