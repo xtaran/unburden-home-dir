@@ -32,7 +32,7 @@ pureperltest:
 	prove $(PROVEFLAGS) t/*.t
 
 test: pureperltest
-	checkbashisms Xsession.d/95unburden-home-dir
+	checkbashisms Xsession.d/* share/*.sh
 
 determine-coverage:
 	cover -delete
