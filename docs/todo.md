@@ -50,6 +50,10 @@ Improvements
   CI). Maybe move it from `t/perlcritic.t` to `xt/perlcritic.t` and
   run the according Make target explicitly via `.travis.yml`.
 
+* Make requiring `IPC::Run` as optional as `lsof`. Maybe use
+  `Module::Load::Conditional`, `Module::Runtime` or `Module::Optional`
+  for that.
+
 Test Suite Coverage
 -------------------
 

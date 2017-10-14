@@ -38,6 +38,7 @@ use File::Touch;
 use File::Rsync;
 use File::Which;
 use IO::Handle;
+use IPC::Run qw(run);
 use String::Expand;
 use Data::Dumper;
 
@@ -394,15 +395,32 @@ sub parse_lsof_output {
 
 }
 
+sub backticks_with_error_handing {
+    my ($cmd_ref, $output_ref, $stderr_ref) = @_;
+    my $rc = run($cmd_ref, \undef, $output_ref, $stderr_ref);
+    # lsof exits with return code 1 if it couldn't find a process for
+    # any given file, i.e. nearly always exits with return code
+    # 1. Hence ignore it.
+    if (not($rc) and ($?>>8 != 1)) {
+        die('Running "'.join(' ', @$cmd_ref).'" returned '.($?>>8)."\n".
+             ($$output_ref ? "\nSTDOUT:\n\n".$$output_ref."\n" : '') .
+             ($$stderr_ref ? "\nSTDERR:\n\n".$$stderr_ref."\n" : ''));
+    }
+    return $rc;
+}
+
 # Check if files in to be moved directories are currently in use.
 sub files_in_use {
     my ($item) = @_;
     my $lsof_output = undef;
+    my $lsof_stderr = undef;
 
     if (-d $item) {
-        $lsof_output = `$LSOF_CMD -F c +D '$item'`;
+        my @cmd = ($LSOF_CMD, qw(-F c +D), $item);
+        backticks_with_error_handing(\@cmd, \$lsof_output, \$lsof_stderr);
     } elsif (-f _) {
-        $lsof_output = `$LSOF_CMD -F c '$item'`;
+        my @cmd = ($LSOF_CMD, qw(-F c), $item);
+        backticks_with_error_handing(\@cmd, \$lsof_output, \$lsof_stderr);
     } else {
         report_problem("checking open files in $item", "neither file nor directory");
         return;
