@@ -21,12 +21,19 @@ CPAN-compatible) is planned.
 Getting Unburden-Home-Dir
 -------------------------
 
+### Pre-Packaged
+
 Several Linux distributions ship unburden-home-dir as package:
 
 * [Debian since 7.0 Wheezy](https://packages.debian.org/unburden-home-dir)
 * [Ubuntu since 12.10 Quantal](http://packages.ubuntu.com/unburden-home-dir)
 * [Korora 18 Flo](https://kororaproject.org/korora-18-flo-released/)
   ([GitHub repository](https://github.com/kororaproject/kp-unburden-home-dir))
+
+#### Current Package Version List
+
+[![Packaging status unburden-home-dir](https://repology.org/badge/vertical-allrepos/unburden-home-dir.svg)](https://repology.org/metapackage/unburden-home-dir)
+[![Packaging status perl:unburden-home-dir](https://repology.org/badge/vertical-allrepos/perl:unburden-home-dir.svg)](https://repology.org/metapackage/perl:unburden-home-dir)
 
 ### Getting Release Archives
 

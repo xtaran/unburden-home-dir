@@ -9,6 +9,9 @@ Unburden Your Home Directory
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/1116/badge)](https://bestpractices.coreinfrastructure.org/projects/1116)
 [![GitPitch Slides](https://gitpitch.com/assets/badge.svg)](https://gitpitch.com/xtaran/unburden-home-dir)
 
+[![Packaging status unburden-home-dir](https://repology.org/badge/vertical-allrepos/unburden-home-dir.svg)](https://repology.org/metapackage/unburden-home-dir)
+[![Packaging status perl:unburden-home-dir](https://repology.org/badge/vertical-allrepos/perl:unburden-home-dir.svg)](https://repology.org/metapackage/perl:unburden-home-dir)
+
 `unburden-home-dir` allows users to move cache files from browsers,
 etc. off their home directory, i.e. on a local harddisk or tmpfs and
 replace them with a symbolic link to the new location (e.g. on `/tmp/`
