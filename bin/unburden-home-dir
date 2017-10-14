@@ -60,7 +60,7 @@ if (-r '/proc/mounts') {
     close($proc_mounts_fd);
 
     foreach my $mount (@mounts) {
-        my @mount = split(/\s+/, $mount);
+        my @mount = split( /\s+ /x, $mount);
         if ($mount[1] eq $runtime_dir) {
             $default_target = $runtime_dir;
             last;
@@ -170,7 +170,7 @@ foreach my $key (keys %OPTIONS) {
     elsif ($key eq 'u') { $REVERT   = 1; }
     elsif ($key eq 'F') { $USE_LSOF = 0; }
     elsif ($key eq 'f') {
-        eval { $FILTER = qr/$OPTIONS{f}/; };
+        eval { $FILTER = qr/ $OPTIONS{f} /x; };
         if ($@) {
             report_serious_problem("parameter to -f", $OPTIONS{f});
             exit 2;
@@ -190,7 +190,7 @@ foreach my $configfile (@CONFFILES) {
 }
 
 # Fix some values
-$UID =~ s/\s+//gs;
+$UID =~ s/ \s+ //gsx;
 
 # Expand environment variables
 expand_strings($CONFIG, \%ENV);
@@ -198,7 +198,7 @@ expand_strings($CONFIG, \%ENV);
 # Remove quotes and line-feeds from values
 foreach my $key (keys %$CONFIG) {
     chomp($CONFIG->{$key});
-    $CONFIG->{$key} =~ s/^([\'\"])(.*)\1$/$2/;
+    $CONFIG->{$key} =~ s/ ^ ([\'\"]) (.*) \1$ /$2/x;
 }
 
 # Set proper umask when creating files or directories. Save current
@@ -213,7 +213,7 @@ my $rsync = File::Rsync->new(
     outfun => sub {
         my $output = shift;
         chomp($output);
-        say $output unless $output =~ m(^sent |^total size|^\s*$);
+        say $output unless $output =~ m( ^sent\  | ^total\ size | ^\s*$ )x;
     },
     errfun => sub {
         # uncoverable subroutine
@@ -334,9 +334,9 @@ sub fix_dangling_links {
     # Accept existing symlinks or unburden-home-dir.list entries for
     # directories with or without trailing slash
     if ($is_dir) {
-        $link =~ s{/$}{};
-        $itemexpanded =~ s{/$}{};
-        $target =~ s{/$}{};
+        $link         =~ s{ /$ }{}x;
+        $itemexpanded =~ s{ /$ }{}x;
+        $target       =~ s{ /$ }{}x;
     }
 
     # Check if link target is wanted target
@@ -361,17 +361,17 @@ sub fix_dangling_links {
 sub parse_lsof_output {
     my ($output) = @_;
     chomp($output);
-    my @lines = split(/\n/, $output);
+    my @lines = split(/\n/x, $output);
 
     my $result = '';
     my $pid;
     my $cmd;
 
     foreach my $line (@lines) {
-        if ($line =~ /^p(.*)$/) {
+        if ($line =~ /^p(.*)$/x) {
             $pid = $1;
             $cmd = undef;
-        } elsif ($line =~ /^c(.*)$/) {
+        } elsif ($line =~ /^c(.*)$/x) {
             $cmd = $1;
             # uncoverable branch true
             unless ($pid) {
@@ -381,7 +381,7 @@ sub parse_lsof_output {
             }
             $result .= sprintf("  %5i (%s)\n", $pid, $cmd);
             $pid = undef;
-        } elsif ($line =~ /^f/) {
+        } elsif ($line =~ /^f/x) {
             # file descriptor, always selected in more recent versions
             # of lsof -- not interesting here, hence skipping.
             next;
@@ -559,8 +559,8 @@ sub calculate_target {
     my $replacement = shift;
     my $target = $CONFIG->{FILELAYOUT};
 
-    $target =~ s|%u|$UID|g;
-    $target =~ s|%s|$replacement|g;
+    $target =~ s| %u |$UID|gx;
+    $target =~ s| %s |$replacement|gx;
 
     return $CONFIG->{TARGETDIR}."/$target";
 }
@@ -574,12 +574,12 @@ sub fill_in_wildcard_matches {
     # written as (bourne) shell script.
 
     # Change from globbing to regexp
-    $itemglob =~ s/\?/(.)/g;
-    $itemglob =~ s/\*/(.*)/g;
+    $itemglob =~ s/ \? /(.)/gx;
+    $itemglob =~ s/ \* /(.*)/gx;
 
-    my @result = $itemexpanded =~ m($itemglob)g;
+    my @result = $itemexpanded =~ m( $itemglob )gx;
 
-    $target =~ s/\%(\d+)/$result[$1-1]/eg;
+    $target =~ s/ \%(\d+) /$result[$1-1]/egx;
 
     return $target;
 }
@@ -589,10 +589,10 @@ sub symlink_in_path {
     my $path = shift;
     # Remove home directory, i.e. check just from below the home directory
     # uncoverable branch false
-    if ($path =~ s($ENV{HOME}/?)()) {
+    if ($path =~ s( $ENV{HOME} /? )()x) {
         # Split up into components, but remove the last one (which we
         # are requested to handle, so we shouldn't check that now)
-        my @path_elements = split(m(/), $path);
+        my @path_elements = split(m(/)x, $path);
         pop(@path_elements);
 
         foreach my $i (0..$#path_elements) {
@@ -652,8 +652,8 @@ sub revert {
 
     if (-l $item_in_home) {
         my $link_target = readlink($item_in_home);
-        $itemexpanded =~ s{/$}{};
-        $link_target  =~ s{/$}{};
+        $itemexpanded =~ s{ /$ }{}x;
+        $link_target  =~ s{ /$ }{}x;
 
         if ($itemexpanded eq $link_target) {
             say "Removing symlink $item_in_home";
@@ -672,12 +672,13 @@ sub revert {
 sub exchange_wildcards_and_replacements {
     my ($wildcard, $replacement) = @_;
     my $i = 1;
-    while ($replacement =~ /\%(\d+)/) {
+    while ($replacement =~ / \% (\d+) /x) {
         my $number = $1;
         my $prev = $number-1;
-        $wildcard =~ s/^(([^*]*[*?]){$prev}[^*]*)([?*])/"$1\%".$i++/e;
+        $wildcard =~
+            s/^ ( ([^*]* [*?]){$prev} [^*]* ) ([?*]) / "$1\%" . $i++ /ex;
         my $wildcardtype = $3;
-        $replacement =~ s/\%(\d+)/$wildcardtype/;
+        $replacement =~ s/ \% (\d+) /$wildcardtype/x;
     }
     return ($wildcard, $replacement);
 }
@@ -685,7 +686,7 @@ sub exchange_wildcards_and_replacements {
 # Parse a single line of a .list file
 sub parse_list_file {
     my $line = shift;
-    return if $line =~ /^#|^ *$/;
+    return if $line =~ / ^\# | ^\ *$ /x;
     chomp($line);
 
     my ($action, $type, $item, $replacement) = split(' ', $line);
@@ -710,7 +711,7 @@ sub parse_list_file {
         return;
     }
 
-    if ( $item =~ m(^(\.\.)?/) ) {
+    if ( $item =~ m( ^ (\.\.)? / )x ) {
         warn "$item would be outside of the home directory, skipping...\n";
         return;
     }
