@@ -1,2 +1,9 @@
-severity = 4
+severity = 3
 verbose = 8
+exclude = ErrorHandling::RequireCarping ControlStructures::ProhibitCascadingIfElse
+
+# Raise max_mccabe by 5 each.
+[Subroutines::ProhibitExcessComplexity]
+max_mccabe = 25
+[Modules::ProhibitExcessMainComplexity]
+max_mccabe = 35

@@ -11,20 +11,20 @@ unburden-home-dir (0.4.0.3) UNRELEASED; urgency=medium
     + Add a .perlcriticrc* files to configure Perl::Critic.
     + Make Test::UBH perlcritic-severity-4-clean.
   * Make unburden-home-dir perlcritic-severity-4-clean.
+    + Solved by minor refactorings.
   * Unbreak GitBook generation by not using colons in page titles
     (i.e. by dropping the prefix "Appendix:" from docs/pgp.md).
-  * Use IPC::Run's run() instead of backticks for calling lsof.
-    + Add according dependecies on libipc-run-perl.
-    + Needed for perlcritic-severity-3-cleaness.
-  * Use /x flag on every regular expression and spinkle blanks over them.
-    + Needed for perlcritic-severity-3-cleaness.
-  * Use HEREDOC instead of multiline quoted strings.
-    + Needed for perlcritic-severity-3-cleaness.
-  * Don't use capture variables outside a regexp without a test.
-    + Needed for perlcritic-severity-3-cleaness.
-  * Use Try::Tiny instead of "eval { ...; }; if ($@) { ...; }".
-    + Add according dependecies on libtry-tiny-perl.
-    + Needed for perlcritic-severity-3-cleaness.
+  * Make unburden-home-dir perlcritic-severity-3-clean.
+    + Use IPC::Run's run() instead of backticks for calling lsof.
+      - Add according dependecies on libipc-run-perl.
+    + Use /x flag on all regular expressions and spinkle blanks over them.
+    + Use HEREDOC instead of multiline quoted strings.
+    + Don't use capture variables outside a regexp without a test.
+    + Use Try::Tiny instead of "eval { ...; }; if ($@) { ...; }".
+      - Add according dependecies on libtry-tiny-perl.
+    + Raise Perl::Critic's max_mccabe values slightly by 5.
+    + Ignore ErrorHandling::RequireCarping (no module) and
+      ControlStructures::ProhibitCascadingIfElse (compact enough).
 
  -- Axel Beckert <abe@debian.org>  Fri, 13 Oct 2017 22:27:58 +0200
 
