@@ -10,6 +10,7 @@ unburden-home-dir (0.4.0.3) UNRELEASED; urgency=medium
     + Add libtest-perl-critic-perl as build-dependency.
     + Add a .perlcriticrc* files to configure Perl::Critic.
     + Make Test::UBH perlcritic-severity-4-clean.
+  * Make unburden-home-dir perlcritic-severity-4-clean.
 
  -- Axel Beckert <abe@debian.org>  Fri, 13 Oct 2017 22:27:58 +0200
 

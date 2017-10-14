@@ -225,7 +225,7 @@ my $rsync = File::Rsync->new(
 my $which_lsof = which('lsof');
 # Extra check for crappy distributions which place lsof outside a
 # user's $PATH. Fixes GH#8.
-if (!$which_lsof and -x '/usr/sbin/lsof') {
+if (not($which_lsof) and -x '/usr/sbin/lsof') {
     $which_lsof = '/usr/sbin/lsof';
 }
 if (!$which_lsof) {
@@ -498,13 +498,13 @@ sub check_for_unexpected_type {
     my $is_file = type_is_file($type);
     my $is_dir  = type_is_directory($type);
 
-    if ($is_file and !-f $itemexpanded) {
+    if ($is_file and not(-f $itemexpanded)) {
         report_serious_problem($itemexpanded,
                                'Unexpected type (not a file)');
         return 1;
     }
 
-    if ($is_dir and !-d $itemexpanded) {
+    if ($is_dir and not(-d $itemexpanded)) {
         report_serious_problem($itemexpanded,
                                'Unexpected type (not a directory)');
         return 1;
@@ -587,6 +587,8 @@ sub symlink_in_path {
         # uncoverable statement
         report_serious_problem("Can't find home directory ($ENV{HOME}) in $path!");
     }
+
+    die 'Assertion: symlink_in_path() either return()ed or called report_serious_problem()';
 }
 
 # Handle replacement requests and check if they're sane
@@ -603,7 +605,7 @@ sub replace {
                                           calculate_target($replacement));
 
     # Check if the source exists
-    if ( ! -e $itemexpanded and ! -l $itemexpanded ) {
+    if ( not(-e $itemexpanded) and not(-l $itemexpanded) ) {
         possibly_create_non_existing_stuff($type, $itemexpanded, $target);
     }
     # Check if source is already a symlink
@@ -662,6 +664,62 @@ sub exchange_wildcards_and_replacements {
     return ($wildcard, $replacement);
 }
 
+# Parse a single line of a .list file
+sub parse_list_file {
+    my $line = shift;
+    return if $line =~ /^#|^ *$/;
+    chomp($line);
+
+    my ($action, $type, $item, $replacement) = split(' ', $line);
+    return unless defined $action;
+
+    # Expand environment variables in item and replacement only
+    $item        = expand_string($item,        \%ENV) if defined($item);
+    $replacement = expand_string($replacement, \%ENV) if defined($replacement);
+
+    if (not (defined($item) and defined($replacement) and
+             # $item can't be '' since $replacement is undef then
+             $replacement ne '')) {
+        warn "Can't parse '$line', skipping...";
+        return;
+    }
+    unless ( type_is_directory($type) or type_is_file($type) ) {
+        warn "Can't parse type '$type', must be 'd', 'D', 'f' or 'F', skipping...";
+        return;
+    }
+    if ( $action ne 'd' and $action ne 'r' and $action ne 'm'  ) {
+        warn "Can't parse action '$action', must be 'd', 'r' or 'm', skipping...";
+        return;
+    }
+
+    if ( $item =~ m(^(\.\.)?/) ) {
+        warn "$item would be outside of the home directory, skipping...\n";
+        return;
+    }
+
+    if ($REVERT) {
+        ($item, $replacement) =
+            exchange_wildcards_and_replacements($item, $replacement);
+
+        my $replacement_path = calculate_target($replacement);
+        for my $i (glob($replacement_path)) {
+            if (defined($FILTER)) {
+                return unless ($i =~ $FILTER);
+            }
+            revert($i, $item, $replacement);
+        }
+    } else {
+        for my $i (glob("$ENV{HOME}/$item")) {
+            if (defined($FILTER)) {
+                return unless ($i =~ $FILTER);
+            }
+            replace($type, $i, $item, $replacement, $action);
+        }
+    }
+
+    return;
+}
+
 # Main loop over all items in list files
 for my $list (@LISTFILES) {
     next unless -e $list;
@@ -675,55 +733,7 @@ for my $list (@LISTFILES) {
     # uncoverable branch true
     open($list_fh, '<', $list) or die "Can't open $list: $!";
     while (<$list_fh>) {
-        next if /^#|^ *$/;
-
-        chomp;
-        my ($action, $type, $item, $replacement) = split;
-
-        next unless defined $action;
-
-        # Expand environment variables in item and replacement only
-        $item        = expand_string($item,        \%ENV) if defined($item);
-        $replacement = expand_string($replacement, \%ENV) if defined($replacement);
-
-        if (not (defined($item) and defined($replacement) and
-                 # $item can't be '' since $replacement is undef then
-                 $replacement ne '')) {
-            warn "Can't parse '$_', skipping...";
-            next;
-        }
-        unless ( type_is_directory($type) or type_is_file($type) ) {
-            warn "Can't parse type '$type', must be 'd', 'D', 'f' or 'F', skipping...";
-            next;
-        }
-        if ( $action ne 'd' and $action ne 'r' and $action ne 'm'  ) {
-            warn "Can't parse action '$action', must be 'd', 'r' or 'm', skipping...";
-            next;
-        }
-
-        if ( $item =~ m(^(\.\.)?/) ) {
-            warn "$item would be outside of the home directory, skipping...\n";
-            next;
-        }
-
-        if ($REVERT) {
-            ($item, $replacement) = exchange_wildcards_and_replacements($item, $replacement);
-
-            my $replacement_path = calculate_target($replacement);
-            for my $i (glob($replacement_path)) {
-                if (defined($FILTER)) {
-                    next unless ($i =~ $FILTER);
-                }
-                revert($i, $item, $replacement);
-            }
-        } else {
-            for my $i (glob("$ENV{HOME}/$item")) {
-                if (defined($FILTER)) {
-                    next unless ($i =~ $FILTER);
-                }
-                replace($type, $i, $item, $replacement, $action);
-            }
-        }
+        parse_list_file($_);
     }
     close($list_fh);
 }
