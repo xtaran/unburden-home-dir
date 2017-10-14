@@ -759,10 +759,8 @@ for my $list (@LISTFILES) {
         next;
     }
 
-    # Clean up this and that
-    my $list_fh;
     # uncoverable branch true
-    open($list_fh, '<', $list) or die "Can't open $list: $!";
+    open(my $list_fh, '<', $list) or die "Can't open $list: $!";
     while (<$list_fh>) {
         parse_list_file($_);
     }
