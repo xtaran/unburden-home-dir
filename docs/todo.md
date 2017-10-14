@@ -46,6 +46,10 @@ Improvements
 * Call `rsync` in dry-run mode if `unburden-home-dir` is called in
   dry-run mode instead of not calling `rsync` at all in that case.
 
+* Don't run `Test::Perl::Critic` test by default (but run it on Travis
+  CI). Maybe move it from `t/perlcritic.t` to `xt/perlcritic.t` and
+  run the according Make target explicitly via `.travis.yml`.
+
 Test Suite Coverage
 -------------------
 

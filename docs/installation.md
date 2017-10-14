@@ -114,6 +114,7 @@ or packaging process) additionally needs:
 * [`String::Random`](https://metacpan.org/pod/String::Random)
 * [`Test::Differences`](https://metacpan.org/pod/Test::Differences)
 * [`Test::File`](https://metacpan.org/pod/Test::File)
+* [`Test::Perl::Critic`](https://metacpan.org/pod/Test::Perl::Critic)
 
 ### For Generating the Documentation
 
