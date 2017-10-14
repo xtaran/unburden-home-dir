@@ -36,8 +36,6 @@ use File::Which;
 use String::Random qw(random_string);
 use Data::Dumper;
 
-no warnings 'utf8';
-
 sub ubh_temp_dir {
     return File::Temp->newdir(DIR => 't');
 }
@@ -73,6 +71,7 @@ sub BUILD {
 sub done {
     my $t = shift;
     done_testing();
+    return;
 }
 
 # Calculated attributes based on BASE
@@ -92,27 +91,29 @@ sub find_ubh_bin {
 # Setup routines
 
 sub setup_test_environment {
-    my $t = shift;
-    $t->setup_test_environment_without_target(@_);
+    my ($t, @args) = @_;
+    $t->setup_test_environment_without_target(@args);
     $t->create_and_check_directory($t->TARGET,
                                    "test environment (target directory = ".
                                    $t->TARGET.")" );
+    return;
 }
 
 sub setup_test_environment_without_target {
-    my $t = shift;
-    foreach my $dir (@_) {
+    my ($t, @args) = @_;
+    foreach my $dir (@args) {
         $t->create_and_check_directory($t->HOME."/".($dir || ''),
                                        "test environment (home directory = ".
                                        $t->HOME."): ".($dir || '') );
     }
+    return;
 }
 
 sub create_and_check_directory {
-    my $t = shift;
-    my ($dir, $desc) = @_;
+    my ($t, $dir, $desc) = @_;
     ok( mkpath($dir, {}), "Create $desc" );
     ok( -d $dir, "$desc has been created" );
+    return;
 }
 
 sub default_config {
@@ -132,60 +133,57 @@ sub prepend_lsof_warning {
 }
 
 sub call_unburden_home_dir_common {
-    my $t   = shift;
-    my $ok  = shift;
-    my $cmd = shift;
+    my ($t, $ok, @cmd) = @_;
     die 'Assertion: call_unburden_home_dir* needs at least one non-empty parameter'
-        unless @_;
-    $cmd .= ' '.join(' ', @_);
+        unless @cmd;
+    my $cmd = join(' ', @cmd);
     if ($ok) {
-        $t->call_cmd($cmd);
+        return $t->call_cmd($cmd);
     } else {
-        $t->fail_cmd($cmd);
+        return $t->fail_cmd($cmd);
     }
 }
 
 sub call_unburden_home_dir {
-    my $t   = shift;
-    my $ok  = shift;
+    my ($t, $ok, @args) = @_;
     my $bin = find_ubh_bin;
     my $cmd = "perl $bin";
-    $t->call_unburden_home_dir_common($ok, $cmd, @_);
+    return $t->call_unburden_home_dir_common($ok, $cmd, @args);
 }
 
 sub call_unburden_home_dir_inc_path {
-    my $t = shift;
-    my $inc_path = shift;
+    my ($t, $inc_path, @args) = @_;
     my $bin = find_ubh_bin;
     my $cmd = "perl -I$inc_path $bin";
-    $t->call_unburden_home_dir_common(1, $cmd, @_, $t->default_parameters);
+    return
+        $t->call_unburden_home_dir_common(1, $cmd, @args, $t->default_parameters);
 }
 
 sub call_cmd {
-    my $t = shift;
-    my $cmd = shift;
+    my ($t, $cmd) = @_;
     ok( system($cmd . $t->shell_capture) == 0, "Call '$cmd'" );
+    return;
 }
 
 sub fail_cmd {
-    my $t = shift;
-    my $cmd = shift;
+    my ($t, $cmd) = @_;
     ok( ! system($cmd . $t->shell_capture) == 0, "'$cmd' fails" );
+    return;
 }
 
 sub call_unburden_home_dir_user {
-    my $t = shift;
-    $t->call_unburden_home_dir(1, @_, '-b '.$t->BASENAME)
+    my ($t, @args) = @_;
+    return $t->call_unburden_home_dir(1, @args, '-b '.$t->BASENAME)
 }
 
 sub call_unburden_home_dir_default {
-    my $t = shift;
-    $t->call_unburden_home_dir(1, @_, $t->default_parameters);
+    my ($t, @args) = @_;
+    return $t->call_unburden_home_dir(1, @args, $t->default_parameters);
 }
 
 sub fail_unburden_home_dir_default {
-    my $t = shift;
-    $t->call_unburden_home_dir(0, @_, $t->default_parameters);
+    my ($t, @args) = @_;
+    return $t->call_unburden_home_dir(0, @args, $t->default_parameters);
 }
 
 sub default_parameters {
@@ -194,46 +192,45 @@ sub default_parameters {
 }
 
 sub write_configs {
-    my $t = shift;
-    my ($list, $config) = @_;
+    my ($t, $list, $config) = @_;
     $t->write_config_file($t->BASE.'/list', $list || '',
                           'Write classic list ('.$t->BASE.'/list)');
     $t->write_config_file($t->BASE.'/config', $config || $t->default_config,
                           'Write classic config ('.$t->BASE.'/config)' );
+    return;
 }
 
 sub write_user_configs {
-    my $t = shift;
-    my ($list, $config) = @_;
+    my ($t, $list, $config) = @_;
     $t->write_config_file_to_home('.'.$t->BASENAME.'.list', $list || '',
                                   'Write classic list ('.$t->BASE.'/config)' );
     $t->write_config_file_to_home('.'.$t->BASENAME, $config || $t->default_config,
                                   'Write classic config (.'.$t->BASENAME.')' );
+    return;
 }
 
 sub write_xdg_configs {
-    my $t = shift;
-    my ($list, $config) = @_;
+    my ($t, $list, $config) = @_;
     ok( mkpath($t->HOME.'/.config/'.$t->BASENAME, {}), "Create test environment (XDG directory)" );
     $t->write_config_file_to_home('.config/'.$t->BASENAME.'/list', $list || '',
                                   'Write XDG list (.config/'.$t->BASENAME.'/list)' );
     $t->write_config_file_to_home('.config/'.$t->BASENAME.'/config', $config || $t->default_config,
                                   'Write XDG config (.config/'.$t->BASENAME.'/config)' );
+    return;
 }
 
 sub write_config_file_to_home {
-    my $t = shift;
-    my $file = shift;
-    $t->write_config_file($t->HOME.'/'.$file, @_);
+    my ($t, $file, @args) = @_;
+    return $t->write_config_file($t->HOME.'/'.$file, @args);
 }
 
 sub write_config_file {
-    my $t = shift;
-    my ($file, $contents, $desc) = @_;
+    my ($t, $file, $contents, $desc) = @_;
     BAIL_OUT('write_config_file: $file empty') unless $file;
     BAIL_OUT('write_config_file: $contents undefined') unless defined $contents;
 
     ok( $t->write_file($file, $contents), $desc || "Config file $file has been written" );
+    return;
 }
 
 sub shell_capture {
@@ -242,33 +239,30 @@ sub shell_capture {
 }
 
 sub eq_or_diff_stderr {
-    my $t = shift;
-    my ($wanted, $desc) = @_;
-    $t->eq_or_diff_file('stderr', $desc || 'STDERR', $wanted);
+    my ($t, $wanted, $desc) = @_;
+    return $t->eq_or_diff_file('stderr', $desc || 'STDERR', $wanted);
 }
 
 sub eq_lsof_warning_or_diff_stderr {
     my $t = shift;
-    $t->eq_or_diff_stderr($t->prepend_lsof_warning);
+    return $t->eq_or_diff_stderr($t->prepend_lsof_warning);
 }
 
 sub eq_or_diff_stdout {
-    my $t = shift;
-    my ($wanted, $desc) = @_;
-    $t->eq_or_diff_file('output', $desc || 'STDOUT' , $wanted);
+    my ($t, $wanted, $desc) = @_;
+    return $t->eq_or_diff_file('output', $desc || 'STDOUT' , $wanted);
 }
 
 sub eq_or_diff_file {
-    my $t = shift;
-    my ($file, $desc, $wanted) = @_;
+    my ($t, $file, $desc, $wanted) = @_;
     $file = $t->BASE."/$file";
     my $output = read_text($file);
 
     # Filter out lsof warnings caused by systemd
     my $trailing_newline = $output =~ /\n\z/;
     $output = join("\n", grep {
-                          !m{lsof: WARNING: can.?.t stat.. \w+ file system} and
-                          !m{Output information may be incomplete}
+                           not(m{lsof: WARNING: can.?.t stat.. \w+ file system}) and
+                           not(m{Output information may be incomplete})
                    } split("\n", $output));
     $output .= "\n" if $trailing_newline and $output ne '';
 
@@ -290,11 +284,12 @@ sub eq_or_diff_file {
     unified_diff;
     eq_or_diff_text( $output, $wanted || '', "Check $desc" );
     ok( unlink($file), "Clean cache file ($desc)" );
+    return;
 }
 
 sub write_file {
-    shift;
-    eval { write_text(@_); return 1; };
+    my ($dummy, @args) = @_;
+    return eval { write_text(@args); return 1; };
 }
 
 1;
