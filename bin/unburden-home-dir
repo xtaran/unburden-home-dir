@@ -103,7 +103,8 @@ sub VERSION_MESSAGE {
 sub HELP_MESSAGE {
     my ($fh, $getoptpkg, $getoptversion, $cmdlineargs) = @_;
 
-    say $fh "Usage: $0 [ -F | -n | -u | -b basename | (-c|-C) conffile | -f filter | (-l|-L) listfile ]
+    say $fh <<"HELP_TEXT";
+Usage: $0 [ -F | -n | -u | -b basename | (-c|-C) conffile | -f filter | (-l|-L) listfile ]
        $0 ( -h | --help | --version )
 
 Options with parameters:
@@ -135,7 +136,7 @@ Options without parameters:
   -h, --help show this help
 
   --version  show the program's version
-";
+HELP_TEXT
 
     return;
 }
