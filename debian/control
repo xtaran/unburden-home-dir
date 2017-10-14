@@ -12,6 +12,7 @@ Build-Depends: debhelper (>= 10),
                libfile-which-perl,
                libipc-run-perl,
                libstring-expand-perl,
+               libtry-tiny-perl,
 # Test suite dependencies
                libfile-slurper-perl <!nocheck>,
                libmoo-perl <!nocheck>,
@@ -39,6 +40,7 @@ Depends: libconfig-file-perl,
          libfile-which-perl,
          libipc-run-perl,
          libstring-expand-perl,
+         libtry-tiny-perl,
          ${misc:Depends},
          ${perl:Depends}
 Pre-Depends: dpkg (>= 1.15.7.2)

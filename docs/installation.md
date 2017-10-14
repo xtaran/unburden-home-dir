@@ -78,6 +78,7 @@ Required Run-Time Dependencies
 * [`File::Which`](https://metacpan.org/pod/File::Which)
 * [`IPC::Run`](https://metacpan.org/pod/IPC::Run)
 * [`String::Expand`](https://metacpan.org/pod/String::Expand)
+* [`Try::Tiny`](https://metacpan.org/pod/Try::Tiny)
 
 #### Availability in Debian
 

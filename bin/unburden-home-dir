@@ -40,6 +40,7 @@ use File::Which;
 use IO::Handle;
 use IPC::Run qw(run);
 use String::Expand;
+use Try::Tiny;
 use Data::Dumper;
 
 # Determine default value for target directory
@@ -171,11 +172,12 @@ foreach my $key (keys %OPTIONS) {
     elsif ($key eq 'u') { $REVERT   = 1; }
     elsif ($key eq 'F') { $USE_LSOF = 0; }
     elsif ($key eq 'f') {
-        eval { $FILTER = qr/ $OPTIONS{f} /x; };
-        if ($@) {
+        try {
+            $FILTER = qr/ $OPTIONS{f} /x;
+        } catch {
             report_serious_problem("parameter to -f", $OPTIONS{f});
             exit 2;
-        }
+        };
     }
 }
 

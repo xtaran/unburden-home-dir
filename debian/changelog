@@ -22,6 +22,9 @@ unburden-home-dir (0.4.0.3) UNRELEASED; urgency=medium
     + Needed for perlcritic-severity-3-cleaness.
   * Don't use capture variables outside a regexp without a test.
     + Needed for perlcritic-severity-3-cleaness.
+  * Use Try::Tiny instead of "eval { ...; }; if ($@) { ...; }".
+    + Add according dependecies on libtry-tiny-perl.
+    + Needed for perlcritic-severity-3-cleaness.
 
  -- Axel Beckert <abe@debian.org>  Fri, 13 Oct 2017 22:27:58 +0200
 
