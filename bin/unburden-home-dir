@@ -676,10 +676,19 @@ sub exchange_wildcards_and_replacements {
     while ($replacement =~ / \% (\d+) /x) {
         my $number = $1;
         my $prev = $number-1;
-        $wildcard =~
-            s/^ ( ([^*]* [*?]){$prev} [^*]* ) ([?*]) / "$1\%" . $i++ /ex;
-        my $wildcardtype = $3;
-        $replacement =~ s/ \% (\d+) /$wildcardtype/x;
+        my $wildcardtype = undef;
+        my $wildcard_re = qr/^ ( ([^*]* [*?]){$prev} [^*]* ) ([?*]) /x;
+        if ($wildcard =~ $wildcard_re) {
+            $wildcardtype = $3;
+            $wildcard =~ s/ $wildcard_re / "$1\%" . $i++ /ex;
+            $replacement =~ s/ \% (\d+) /$wildcardtype/x;
+        } else {
+            die "Assertion: exchange_wildcards_and_replacements():\n".
+                "'$replacement' =~ / \% (\\d+) /x\n".
+                "but\n".
+                "$wildcard =~ $wildcard_re\n".
+                "didn't.\n";
+        }
     }
     return ($wildcard, $replacement);
 }
