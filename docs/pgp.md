@@ -1,5 +1,5 @@
 ---
-title: Appendix: Retriving PGP Keys Used In The Project
+title: Retriving PGP Keys Used In The Project
 layout: page
 ---
 
