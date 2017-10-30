@@ -8,7 +8,7 @@ unburden-home-dir (0.4.0.3) UNRELEASED; urgency=medium
   * Test suite: Provide checkbashism as its own Make target.
   * Use Perl::Critic as part of the test suite.
     + Add libtest-perl-critic-perl as build-dependency.
-    + Add a .perlcriticrc* files to configure Perl::Critic.
+    + Add .perlcriticrc* files to configure Perl::Critic.
     + Make Test::UBH perlcritic-severity-4-clean.
   * Make unburden-home-dir perlcritic-severity-4-clean.
     + Solved by minor refactorings.
