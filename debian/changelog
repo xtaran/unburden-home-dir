@@ -27,6 +27,8 @@ unburden-home-dir (0.4.0.3) UNRELEASED; urgency=medium
       ControlStructures::ProhibitCascadingIfElse (compact enough).
   * Add repology package list badges to README.md + docs/installation.md.
   * Set "Rules-Requires-Root: no".
+  * Set "Multi-Arch: foreign" for unburden-home-dir-doc as suggested by
+    the Multi-Arch hinter.
 
  -- Axel Beckert <abe@debian.org>  Fri, 13 Oct 2017 22:27:58 +0200
 
