@@ -1,23 +1,33 @@
 unburden-home-dir (0.4.0.3) UNRELEASED; urgency=medium
 
+  Documentation:
+
   * Fulfils some more Core Infrastructure Documentation Best Practices.
     + Document how to report security bugs by (PGP-encrypted) e-mail.
     + Document PGP key(s) used in the project and how to retrieve it.
+  * Unbreak GitBook generation by not using colons in page titles
+    (i.e. by dropping the prefix "Appendix:" from docs/pgp.md).
+  * Add repology package list badges to README.md + docs/installation.md.
+
+  Test Suite (adds new test/build dependency Perl::Critic):
+
   * Test suite: Run checkbashism also on share/common.sh and
     Xsession.d/25unburden-home-dir-xdg.
   * Test suite: Provide checkbashism as its own Make target.
   * Use Perl::Critic as part of the test suite.
     + Add libtest-perl-critic-perl as build-dependency.
     + Add .perlcriticrc* files to configure Perl::Critic.
-    + Make Test::UBH perlcritic-severity-4-clean.
+
+  Code Refactoring (adds new dependencies IPC::Run and Try::Tiny):
+
+  * Make Test::UBH perlcritic-severity-4-clean.
   * Make unburden-home-dir perlcritic-severity-4-clean.
     + Solved by minor refactorings.
-  * Unbreak GitBook generation by not using colons in page titles
-    (i.e. by dropping the prefix "Appendix:" from docs/pgp.md).
   * Make unburden-home-dir perlcritic-severity-3-clean.
     + Use IPC::Run's run() instead of backticks for calling lsof.
       - Add according dependencies on libipc-run-perl.
-    + Use /x flag on all regular expressions and spinkle blanks over them.
+    + Use /x flag on all regular expressions and sprinkle blanks over
+      them.
     + Use HEREDOC instead of multiline quoted strings.
     + Don't use capture variables outside a regexp without a test.
     + Use Try::Tiny instead of "eval { ...; }; if ($@) { ...; }".
@@ -25,7 +35,9 @@ unburden-home-dir (0.4.0.3) UNRELEASED; urgency=medium
     + Raise Perl::Critic's max_mccabe values slightly by 5.
     + Ignore ErrorHandling::RequireCarping (no module) and
       ControlStructures::ProhibitCascadingIfElse (compact enough).
-  * Add repology package list badges to README.md + docs/installation.md.
+
+  Debian Packaging:
+
   * Set "Rules-Requires-Root: no".
   * Set "Multi-Arch: foreign" for unburden-home-dir-doc as suggested by
     the Multi-Arch hinter.
