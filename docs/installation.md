@@ -33,7 +33,6 @@ Several Linux distributions ship unburden-home-dir as package:
 #### Current Package Version List
 
 [![Packaging status unburden-home-dir](https://repology.org/badge/vertical-allrepos/unburden-home-dir.svg)](https://repology.org/metapackage/unburden-home-dir)
-[![Packaging status perl:unburden-home-dir](https://repology.org/badge/vertical-allrepos/perl:unburden-home-dir.svg)](https://repology.org/metapackage/perl:unburden-home-dir)
 
 ### Getting Release Archives
 
