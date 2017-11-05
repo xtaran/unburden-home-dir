@@ -1,4 +1,4 @@
-unburden-home-dir (0.4.1) UNRELEASED; urgency=medium
+unburden-home-dir (0.4.1) unstable; urgency=low
 
   Default/Example Configuration:
 
@@ -45,7 +45,7 @@ unburden-home-dir (0.4.1) UNRELEASED; urgency=medium
   * Set "Multi-Arch: foreign" for unburden-home-dir-doc as suggested by
     the Multi-Arch hinter.
 
- -- Axel Beckert <abe@debian.org>  Fri, 13 Oct 2017 22:27:58 +0200
+ -- Axel Beckert <abe@debian.org>  Mon, 06 Nov 2017 00:30:38 +0100
 
 unburden-home-dir (0.4.0.2) unstable; urgency=medium
 
