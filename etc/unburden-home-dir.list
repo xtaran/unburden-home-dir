@@ -6,8 +6,8 @@ m D .ccache ccache
 # Common browser caches
 m d .config/google-chrome/*/Thumbnails google-chrome-thumbnails-%1
 m f .config/google-chrome/*/Thumbnails-journal google-chrome-thumbnails-journal-%1
-m d .config/chromium/*/Thumbnails google-chrome-thumbnails-%1
-m f .config/chromium/*/Thumbnails-journal google-chrome-thumbnails-journal-%1
+m d .config/chromium/*/Thumbnails chromium-thumbnails-%1
+m f .config/chromium/*/Thumbnails-journal chromium-thumbnails-journal-%1
 m d .mozilla/default/*/Cache mozilla-default-cache-%1
 m d .mozilla/default/*/startupCache mozilla-default-startup-cache-%1
 m d .mozilla/firefox/*/Cache firefox-cache-%1

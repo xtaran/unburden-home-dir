@@ -3,6 +3,7 @@ unburden-home-dir (0.4.0.3) UNRELEASED; urgency=medium
   Default/Example Configuration:
 
   * Switch Chrome/Chromium "Thumbnails" type from file to directory.
+  * Don't merge Chromium Thumbnails into Chrome Thumbnails.
 
   Documentation:
 
