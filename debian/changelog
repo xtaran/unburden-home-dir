@@ -1,5 +1,9 @@
 unburden-home-dir (0.4.0.3) UNRELEASED; urgency=medium
 
+  Default/Example Configuration:
+
+  * Switch Chrome/Chromium "Thumbnails" type from file to directory.
+
   Documentation:
 
   * Fulfils some more Core Infrastructure Documentation Best Practices.
