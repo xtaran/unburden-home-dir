@@ -13,7 +13,7 @@ pages:
   - Quality Assurance: qa.md
   - See Also: see-also.md
   - "Appendix: Manual page unburden-home-dir(1)": unburden-home-dir.1.md
-  - "Appendix: Retriving PGP Keys Used In The Project": pgp.md
+  - "Appendix: Retrieving PGP Keys Used In The Project": pgp.md
 theme: readthedocs
 repo_url: https://github.com/xtaran/unburden-home-dir
 site_author: Axel Beckert

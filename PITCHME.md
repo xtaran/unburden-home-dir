@@ -39,7 +39,7 @@ Unburden (Your) Home Dir(ectory)!
 * Automatically (re)creates symbolic links
 * Can be configured where to put and how to name the files instead
 * Can be called by your X session upon login
-* Supports workstation setups with common home and seperate local disks
+* Supports workstation setups with common home and separate local disks
 * Supports `tmpfs`
 * Works non-interactively
 

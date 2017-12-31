@@ -1,5 +1,5 @@
 ---
-title: Retriving PGP Keys Used In The Project
+title: Retrieving PGP Keys Used In The Project
 layout: page
 ---
 
@@ -7,7 +7,7 @@ PGP Keys Used In The Project
 ----------------------------
 
 The PGP/GnuPG key used for signing Git tags and reporting security
-bugs in a encrypted way isthe key
+bugs in an encrypted way is the key
 `0x2517B724C5F6CA9953296E612FF9CD59612616B5` (or its most recent
 subkey).
 

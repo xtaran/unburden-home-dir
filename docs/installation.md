@@ -43,7 +43,7 @@ prefer installing released versions, see the
 The according Git tags (of recent releases) are signed with the
 PGP/GnuPG key `0x2517B724C5F6CA9953296E612FF9CD59612616B5` (or its
 most recent subkey). Please see the
-[Appendix "Retriving PGP Keys Used In The Project"](pgp.md) for
+[Appendix "Retrieving PGP Keys Used In The Project"](pgp.md) for
 how to retrieve this key.
 
 ### Getting/Viewing the Current Development Snapshot

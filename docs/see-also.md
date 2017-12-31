@@ -65,14 +65,14 @@ calls in dpkg and APT.
 If there's too much I/O and CPU usage during `apt-get update` due to
 downloading and merging a lots of diffs, you may want to set
 `Acquire::PDiffs` to `false` to always download the whole package list
-instead of just diffs. Of couse this only makes sense if you have a
+instead of just diffs. Of course this only makes sense if you have a
 decent network connection.
 
 #### I/O during upgrading packages
 
 dpkg cares about a consistent state of files when unpacking packages,
 so it instructs the kernel to sync stuff to disk quite often, too. It
-hough has an option named `--force-unsafe-io` to turn this safety off.
+though has an option named `--force-unsafe-io` to turn this safety off.
 
 From dpkg's man-page about `--force-unsafe-io`:
 

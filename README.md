@@ -45,7 +45,7 @@ This is helpful at least in the following cases:
   that case it's an alternative to keeping the blacklist in your
   backup software up-to-date.
 
-* Another pragmatic use case may be to stay — as an user — within a
+* Another pragmatic use case may be to stay — as a user — within a
   given disk quota. :-)
 
 This project initially started as an `Xsession` hook. It now consists

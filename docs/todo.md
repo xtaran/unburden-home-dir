@@ -124,7 +124,7 @@ software more suitable to distribution via CPAN.
   (i.e. Markdown or POD, but no DocBook) for different output formats
   (primarily HTML and [ng]roff aka Unix man-pages).
 
-* HTML documents should have a index/ToC of all the documentation, not
+* HTML documents should have an index/ToC of all the documentation, not
   only a ToC for the current file. (Example: MkDocs, ReadTheDocs)
 
 * A documentation build should be triggerable via Github

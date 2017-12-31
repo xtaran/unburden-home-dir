@@ -13,4 +13,4 @@
 * [Quality Assurance](docs/qa.md)
 * [See Also](docs/see-also.md)
 * [Appendix: Manual page unburden-home-dir(1)](docs/unburden-home-dir.1.md)
-* [Appendix: Retriving PGP Keys Used In The Project](docs/pgp.md)
+* [Appendix: Retrieving PGP Keys Used In The Project](docs/pgp.md)
