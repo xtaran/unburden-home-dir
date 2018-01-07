@@ -1,3 +1,10 @@
+unburden-home-dir (0.4.1.1) UNRELEASED; urgency=medium
+
+  [ Jakub Wilk ]
+  * Fix a bunch of typos.
+
+ -- Axel Beckert <abe@debian.org>  Sun, 07 Jan 2018 04:57:15 +0100
+
 unburden-home-dir (0.4.1) unstable; urgency=low
 
   Default/Example Configuration:
