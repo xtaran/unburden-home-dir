@@ -104,7 +104,8 @@ Description: Remove or move cache files automatically from user's home
 Package: unburden-home-dir-doc
 Architecture: all
 Depends: ${misc:Depends}
-Recommends: fonts-font-awesome
+Recommends: fonts-font-awesome,
+            libjs-mustache
 Enhances: unburden-home-dir
 Replaces: unburden-home-dir (<< 0.4.0.1)
 Breaks: unburden-home-dir (<< 0.4.0.1)
