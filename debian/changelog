@@ -1,4 +1,4 @@
-unburden-home-dir (0.4.1.1) UNRELEASED; urgency=medium
+unburden-home-dir (0.4.1.1) unstable; urgency=medium
 
   [ Jakub Wilk ]
   * Fix a bunch of typos.
@@ -13,7 +13,7 @@ unburden-home-dir (0.4.1.1) UNRELEASED; urgency=medium
   * Switch to debhelper compatibility level 11.
     + Update versioned debhelper build-dependency accordingly.
 
- -- Axel Beckert <abe@debian.org>  Sun, 07 Jan 2018 04:57:15 +0100
+ -- Axel Beckert <abe@debian.org>  Thu, 05 Jul 2018 23:16:43 +0200
 
 unburden-home-dir (0.4.1) unstable; urgency=low
 
