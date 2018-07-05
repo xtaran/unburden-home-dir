@@ -10,6 +10,8 @@ unburden-home-dir (0.4.1.1) UNRELEASED; urgency=medium
   * Build-Conflict with libperl-critic-freenode-perl for now.
   * Replace /usr/share/doc/unburden-home-dir/html/search/mustache.min.js
     with symlink in unburden-home-dir-doc and recommend libjs-mustache.
+  * Switch to debhelper compatibility level 11.
+    + Update versioned debhelper build-dependency accordingly.
 
  -- Axel Beckert <abe@debian.org>  Sun, 07 Jan 2018 04:57:15 +0100
 
