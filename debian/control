@@ -26,6 +26,7 @@ Build-Depends: debhelper (>= 10),
                moreutils <!nodoc>,
 # Required for building the man pages
                ronn | ruby-ronn (<< 0.7.3-5.1~) <!nodoc>
+Build-Conflicts: libperl-critic-freenode-perl
 Standards-Version: 4.1.3
 Homepage: https://github.com/xtaran/unburden-home-dir
 Vcs-Git: https://github.com/xtaran/unburden-home-dir.git

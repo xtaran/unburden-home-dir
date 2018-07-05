@@ -7,6 +7,7 @@ unburden-home-dir (0.4.1.1) UNRELEASED; urgency=medium
   * Declare compliance with Debian Policy 4.1.3. (No other changes.)
   * Update build-dependency from "ruby-ronn" to "ronn | ruby-ronn (<<
     0.7.3-5.1~)" due to short-term package split-up. (Closes: #903073)
+  * Build-Conflict with libperl-critic-freenode-perl for now.
 
  -- Axel Beckert <abe@debian.org>  Sun, 07 Jan 2018 04:57:15 +0100
 
