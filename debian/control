@@ -22,7 +22,7 @@ Build-Depends: debhelper (>= 11~),
                libtest-perl-critic-perl <!nocheck>,
                lsof <!nocheck>,
 # Required for building the documentation
-               mkdocs <!nodoc>,
+               mkdocs (>= 1.0.4) <!nodoc>,
                moreutils <!nodoc>,
 # Required for building the man pages
                ronn | ruby-ronn (<< 0.7.3-5.1~) <!nodoc>
@@ -103,7 +103,7 @@ Description: Remove or move cache files automatically from user's home
 
 Package: unburden-home-dir-doc
 Architecture: all
-Depends: ${misc:Depends}
+Depends: ${misc:Depends}, ${mkdocs:Depends}
 Recommends: fonts-font-awesome,
             libjs-mustache
 Enhances: unburden-home-dir
