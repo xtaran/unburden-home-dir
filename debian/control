@@ -28,7 +28,7 @@ Build-Depends: debhelper-compat (= 13),
 # Required for building the man pages
                ronn | ruby-ronn (<< 0.7.3-5.1~) <!nodoc>
 Build-Conflicts: libperl-critic-freenode-perl
-Standards-Version: 4.1.5
+Standards-Version: 4.5.1
 Homepage: https://github.com/xtaran/unburden-home-dir
 Vcs-Git: https://github.com/xtaran/unburden-home-dir.git
 Vcs-Browser: https://github.com/xtaran/unburden-home-dir
