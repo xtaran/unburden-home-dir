@@ -14,7 +14,7 @@ html/index.html: mkdocs.yml Makefile docs/*.md
 cleanthedocs: docs
 	find html -name '*.html' | while read file; do \
 		egrep -v '<link [^>]*href=.https?://[^/"]*/[^>]*>|<(img|script)[^>]*src="(https?:)?//|<link rel="stylesheet" href="\.\.?/css/highlight\.css">' "$$file" | \
-		pcregrep -Mv '<script[^>]*>[^<]*</script>' | \
+		pcregrep -Mv '<script[^>]*>[^<]*</script>|<(form|input).*?>|</form>' | \
 		sponge "$$file"; \
 		sed -e 's:href="./\([^"]*\)/">:href="./\1/index.html">:g' -i $$file; \
 	done
