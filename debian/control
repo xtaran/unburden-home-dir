@@ -2,7 +2,7 @@ Source: unburden-home-dir
 Section: utils
 Priority: optional
 Maintainer: Axel Beckert <abe@debian.org>
-Build-Depends: debhelper (>= 11~),
+Build-Depends: debhelper-compat (= 13),
                devscripts,
                dpkg-dev (>= 1.17.14),
                libconfig-file-perl,

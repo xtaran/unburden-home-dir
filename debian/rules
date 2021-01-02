@@ -15,7 +15,7 @@ override_dh_auto_build:
 override_dh_installman:
 else
 override_dh_install:
-	dh_install --fail-missing
+	dh_install
 	rm -rf debian/unburden-home-dir-doc/usr/share/doc/unburden-home-dir/html/fonts \
 	       debian/unburden-home-dir-doc/usr/share/doc/unburden-home-dir/html/__pycache__ \
 	       debian/unburden-home-dir-doc/usr/share/doc/unburden-home-dir/html/__init__.py \
