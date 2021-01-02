@@ -3,6 +3,10 @@ unburden-home-dir (0.4.1.2) UNRELEASED; urgency=medium
   * Bump debhelper compatibility level to 13.
     + Build-depend on "debhelper-compat (= 13)" to replace debian/compat.
     + Drop --fail-missing from dh_install, it's now dh_missing's default.
+  * Extend Makefile to also remove cloudflare crap and generally any
+    occurrences of unneeded <script> tags from mkdocs-generated
+    documentation. Documentation just doesn't need this! Thanks Lintian!
+    + Uses pcregrep to catch multiline <script> tags. Add it as build-dep.
 
  -- Axel Beckert <abe@debian.org>  Sat, 02 Jan 2021 05:39:44 +0100
 

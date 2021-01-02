@@ -13,8 +13,9 @@ html/index.html: mkdocs.yml Makefile docs/*.md
 # lintian warnings about privacy breaches.
 cleanthedocs: docs
 	find html -name '*.html' | while read file; do \
-		egrep -v '<link href=.https?://fonts.googleapis.com/|<(img|script)[^>]*src="(https?:)?//|<script[^>]*src="\.\.?/js/|<link rel="stylesheet" href="\.\.?/css/highlight\.css">' "$$file" | \
-			sponge "$$file"; \
+		egrep -v '<link [^>]*href=.https?://[^/"]*/[^>]*>|<(img|script)[^>]*src="(https?:)?//|<link rel="stylesheet" href="\.\.?/css/highlight\.css">' "$$file" | \
+		pcregrep -Mv '<script[^>]*>[^<]*</script>' | \
+		sponge "$$file"; \
 		sed -e 's:href="./\([^"]*\)/">:href="./\1/index.html">:g' -i $$file; \
 	done
 	rm -rf html/js/ html/css/highlight.css
