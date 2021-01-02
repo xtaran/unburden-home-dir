@@ -19,7 +19,8 @@ override_dh_install:
 	rm -rf debian/unburden-home-dir-doc/usr/share/doc/unburden-home-dir/html/fonts \
 	       debian/unburden-home-dir-doc/usr/share/doc/unburden-home-dir/html/__pycache__ \
 	       debian/unburden-home-dir-doc/usr/share/doc/unburden-home-dir/html/__init__.py \
-	       debian/unburden-home-dir-doc/usr/share/doc/unburden-home-dir/html/search/mustache.min.js
+	       debian/unburden-home-dir-doc/usr/share/doc/unburden-home-dir/html/search/mustache.min.js \
+	       debian/unburden-home-dir-doc/usr/share/doc/unburden-home-dir/html/sitemap*
 	ln -vis /usr/share/fonts-font-awesome/fonts debian/unburden-home-dir-doc/usr/share/doc/unburden-home-dir/html/fonts
 	ln -vis /usr/share/javascript/mustache/mustache.min.js debian/unburden-home-dir-doc/usr/share/doc/unburden-home-dir/html/search/mustache.min.js
 endif
