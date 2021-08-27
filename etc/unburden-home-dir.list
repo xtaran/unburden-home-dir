@@ -1,3 +1,14 @@
+###############################################################################################
+# This is a configuration of folders, that unburden-home-dir will symlink to TARGETDIR
+# All lines must be with columns using this order:
+# Action Type Path Identifier
+# Columns description
+# Action - d/r or m: delete/remove or move; the first two are equivalent
+# Type  - d, D, f or F: directory or file, capital letter means "create it if it doesn’t exist"
+# Path - path, relative to $HOME to move off to some other location
+# Identifier - optional identifier for file or directory in the other location
+###############################################################################################
+
 # Generic cache locations
 m D .cache cache
 m D .thumbnails thumbnails
