@@ -3,6 +3,7 @@ unburden-home-dir (0.4.1.3) UNRELEASED; urgency=medium
   * Minor documentation updates. (Updated links to 3rd parties, removed
     no more working GitPitch stuff, etc.)
   * Update tests unnecessarily broken by usrmerge. (Closes: #997507)
+  * Travis CI: stop testing again Perl "dev". It no more seems to exist.
 
  -- Axel Beckert <abe@debian.org>  Wed, 13 Jan 2021 16:45:51 +0100
 
