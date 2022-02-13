@@ -32,15 +32,15 @@ sending incremental file list
 created directory ".$t->TP."-foobar-fnord
 ./
 bla
-Symlinking ".$t->TP."-foobar-fnord ->  ".$t->HOME."/.foobar/fnord
+Symlinking ".$t->TP."-foobar-fnord -> ".$t->HOME."/.foobar/fnord
 Moving ".$t->HOME."/.foobar/gnarz -> ".$t->TP."-foobar-gnarz
 sending incremental file list
 ./
 goo
-Symlinking ".$t->TP."-foobar-gnarz ->  ".$t->HOME."/.foobar/gnarz
+Symlinking ".$t->TP."-foobar-gnarz -> ".$t->HOME."/.foobar/gnarz
 Moving ".$t->HOME."/.foobar/foo -> ".$t->TP."-foobar-foo
 '".$t->HOME."/.foobar/foo' -> '".$t->TP."-foobar-foo'
-Symlinking ".$t->TP."-foobar-foo ->  ".$t->HOME."/.foobar/foo
+Symlinking ".$t->TP."-foobar-foo -> ".$t->HOME."/.foobar/foo
 ";
 $t->eq_or_diff_stdout($wanted);
 

@@ -33,7 +33,7 @@ $wanted = "Moving ".$t->HOME."/.foobar/fnord/bla -> ".$t->TP."-foobar-fnord-bla
 sending incremental file list
 created directory ".$t->TP."-foobar-fnord-bla
 ./
-Symlinking ".$t->TP."-foobar-fnord-bla ->  ".$t->HOME."/.foobar/fnord/bla
+Symlinking ".$t->TP."-foobar-fnord-bla -> ".$t->HOME."/.foobar/fnord/bla
 ";
 
 $t->eq_or_diff_stdout($wanted);
