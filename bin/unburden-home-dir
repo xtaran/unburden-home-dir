@@ -493,11 +493,11 @@ sub create_object_of_type {
 sub create_symlink {
     my ($itemexpanded, $target) = @_;
 
-    say "Symlinking $target ->  $itemexpanded";
+    say "Symlinking $target -> $itemexpanded";
     unless ($DRYRUN) {
         # uncoverable branch true
         symlink($target, $itemexpanded)
-            or die "Couldn't symlink $target ->  $itemexpanded: $!";
+            or die "Couldn't symlink $target -> $itemexpanded: $!";
     }
     return;
 }
