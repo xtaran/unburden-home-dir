@@ -131,4 +131,4 @@ installations or `etc/` in the source tar ball for example files.
 User Contributed Examples and Setups
 ------------------------------------
 
-* [Reburden on Logout](http://www.mancoosi.org/~abate/unburden-my-home-dir#comment-299)
+* [Reburden on Logout](https://web.archive.org/web/20160411153731/www.mancoosi.org/~abate/unburden-my-home-dir#comment-299)
