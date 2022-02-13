@@ -14,7 +14,7 @@ $t->call_unburden_home_dir_default('-n');
 
 my $wanted = "Create parent directories for ".$t->TP."-barba-blatest-foobar
 Moving ".$t->HOME."/.foobar/blatest/barba -> ".$t->TP."-barba-blatest-foobar
-Symlinking ".$t->TP."-barba-blatest-foobar -> ".$t->HOME."/.foobar/blatest/barba
+Symlinking ".$t->HOME."/.foobar/blatest/barba -> ".$t->TP."-barba-blatest-foobar
 ";
 
 $t->eq_or_diff_stdout($wanted);
