@@ -26,7 +26,7 @@ use warnings;
 use 5.010;
 
 # Globally define version
-our $VERSION = '0.4.1.3';
+our $VERSION = '0.4.2';
 
 # Load Modules
 use Config::File;
@@ -563,6 +563,7 @@ sub calculate_target {
     my $target = $CONFIG->{FILELAYOUT};
 
     $target =~ s| %u |$UID|gx;
+    $target =~ s| %i |$<|gx;
     $target =~ s| %s |$replacement|gx;
 
     return $CONFIG->{TARGETDIR}."/$target";

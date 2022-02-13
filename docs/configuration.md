@@ -42,14 +42,27 @@ The files may contain one or more of the following settings:
 
 * `TARGETDIR`: To where the files should be unburdened,
   e.g. `TARGETDIR=/tmp` or`TARGETDIR=/scratch`
-* `FILELAYOUT`: File name template for the target locations. `%u` is
-  replaced by the user name, `%s` by the target identifier defined in
-  the list file. Examples: `FILELAYOUT='.unburden-%u/%s'`,
-  `FILELAYOUT='unburden/%u/%s'`
+* `FILELAYOUT`: File name template for the target locations.
+* `UNBURDEN_HOME`: For per user activation of unburden-home-dir upon X
+  login, `UNBURDEN_HOME=yes` (see above) may be used in the per-user
+  configuration files, too.
 
-For per user activation of unburden-home-dir upon X login,
-`UNBURDEN_HOME=yes` (see above) may be used in the per-user
-configuration files, too.
+### Format Strings
+
+The `FILELAYOUT` variable knows about these format strings replaced by
+the according values from the user running `unburden-home-dir`:
+
+* `%u` is replaced by the user name.
+* `%i` is replaced by the user id.
+* `%s` is replaced by the target identifier defined in
+  the list file.
+
+### Examples
+
+* `FILELAYOUT='.unburden-%u/%s'`
+* `FILELAYOUT='unburden/%u/%s'`
+* `FILELAYOUT='%i/unburden/%s` (Example for `TARGETDIR=/run/user`)
+
 
 List Files
 ----------
