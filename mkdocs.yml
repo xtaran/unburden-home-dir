@@ -1,5 +1,5 @@
 site_name: Unburden Your Home Directory
-pages:
+nav:
   - Project Home: index.md
   - Installation and Dependencies: installation.md
   - Getting Started: howto.md
