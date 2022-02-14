@@ -10,7 +10,7 @@ html/index.html: mkdocs.yml Makefile docs/*.md
 	env LC_ALL=C.UTF-8 mkdocs build --clean
 
 # Avoid any inclusion of either external or embedded JS code. Avoids
-# lintian warnings about privacy breaches.
+# privacy breaches (and lintian correctly warns about this).
 cleanthedocs: docs
 	find html -name '*.html' | while read file; do \
 		egrep -v '<link [^>]*href=.https?://[^/"]*/[^>]*>|<(img|script)[^>]*src="(https?:)?//|<link rel="stylesheet" href="\.\.?/css/highlight\.css">' "$$file" | \
