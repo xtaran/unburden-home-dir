@@ -1,7 +1,7 @@
 Unburden Your Home Directory
 ============================
 
-[![Travis CI Build Status](https://app.travis-ci.com/xtaran/unburden-home-dir.svg?branch=master)](https://app.travis-ci.com/github/xtaran/unburden-home-dir)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/xtaran/unburden-home-dir/CI?style=plastic)](https://github.com/xtaran/unburden-home-dir/actions/workflows/actions.yml)
 [![Documentation Status](https://readthedocs.org/projects/unburden-home-dir/badge/?version=latest)](https://readthedocs.org/projects/unburden-home-dir/?badge=latest)
 [![Coverage by Coveralls](https://img.shields.io/coveralls/xtaran/unburden-home-dir.svg)](https://coveralls.io/r/xtaran/unburden-home-dir)
 [![Coverage by Codecov](https://codecov.io/gh/xtaran/unburden-home-dir/branch/master/graph/badge.svg)](https://codecov.io/gh/xtaran/unburden-home-dir)
