@@ -55,6 +55,9 @@ jobs:
       - run: sudo apt-get install -y devscripts
       - run: make checkbashisms
   codecov:
+    # Only run code coverage if the build actually succeeded
+    needs: build
+    environment: github-actions
     runs-on: 'ubuntu-latest'
     name: Run Codecov stats
     steps:
@@ -67,4 +70,7 @@ jobs:
           install-modules-args: --verbose --notest --skip-satisfied
           install-modules: Config::File File::BaseDir File::Rsync File::Touch File::Which IPC::Run Moo Test::Differences Test::File Test::Perl::Critic String::Random String::Expand Try::Tiny File::Slurper Devel::Cover::Report::Codecov
       - run: perl -V
-      - run: make codecov
+      - name: Run coverage test and upload to CodeCov
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        run: make codecov
