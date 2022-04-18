@@ -52,8 +52,9 @@ if (-r '/proc/mounts') {
     my $runtime_dir = '/run/user';
     if (defined($ENV{XDG_RUNTIME_DIR})) { # defined() doesn't autovivicate
         $runtime_dir = $ENV{XDG_RUNTIME_DIR};
+    } else {
+        $runtime_dir .= "/$<"; # typically something like /run/user/1000
     }
-    $runtime_dir .= "/$<"; # typically something like /run/user/1000
 
     open(my $proc_mounts_fd, '<', '/proc/mounts')
         or die "Can't open /proc/mounts despite it exists: $!";
