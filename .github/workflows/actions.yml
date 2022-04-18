@@ -48,17 +48,17 @@ jobs:
       - run: perl -V
       - run: env RELEASE_TESTING=1 AUTOMATED_TESTING=1 AUTHOR_TESTING=1 HARNESS_OPTIONS=j10:c HARNESS_TIMER=1 make pureperltest
   checkbashisms:
-    needs: build
     runs-on: "ubuntu-latest"
     name: Check for bashisms
     steps:
+      - uses: actions/checkout@v3
       - run: sudo apt-get install -y devscripts
       - run: make checkbashisms
   codecov:
-    needs: build
     runs-on: 'ubuntu-latest'
     name: Run Codecov stats
     steps:
+      - uses: actions/checkout@v3
       - name: Set up perl
         uses: shogo82148/actions-setup-perl@v1
         with:
