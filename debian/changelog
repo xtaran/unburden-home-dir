@@ -12,6 +12,7 @@ unburden-home-dir (0.4.2) UNRELEASED; urgency=medium
     #1009432)
   * Rephrase a comment in Makefile to be more precise.
   * Drop no more working Travis CI in favour of GitHub Actions.
+  * Fix issues under test environments which have set $XDG_CONFIG_HOME.
 
  -- Axel Beckert <abe@debian.org>  Sun, 13 Feb 2022 21:58:14 +0100
 

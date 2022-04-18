@@ -56,6 +56,7 @@ sub BUILD {
 
     # Set a debug environment
     $ENV{HOME} = $t->HOME;
+    $ENV{XDG_CONFIG_HOME} = $t->HOME."/.config";
     $ENV{LANG} = 'C';
 
     # For testing environment variable expansion inside the
