@@ -54,12 +54,12 @@ jobs:
       - uses: actions/checkout@v3
       - run: sudo apt-get install -y devscripts
       - run: make checkbashisms
-  codecov:
+  coverage:
     # Only run code coverage if the build actually succeeded
     needs: build
     environment: github-actions
     runs-on: 'ubuntu-latest'
-    name: Run Codecov stats
+    name: Run coverage checks
     steps:
       - uses: actions/checkout@v3
       - name: Set up perl
@@ -68,10 +68,10 @@ jobs:
           perl-version: "latest"
           install-modules-with: cpanm
           install-modules-args: --verbose --notest --skip-satisfied
-          install-modules: Config::File File::BaseDir File::Rsync File::Touch File::Which IPC::Run Moo Test::Differences Test::File Test::Perl::Critic String::Random String::Expand Try::Tiny File::Slurper Devel::Cover Devel::Cover::Report::Codecovbash
+          install-modules: Config::File File::BaseDir File::Rsync File::Touch File::Which IPC::Run Moo Test::Differences Test::File Test::Perl::Critic String::Random String::Expand Try::Tiny File::Slurper Devel::Cover Devel::Cover::Report::Codecovbash Devel::Cover::Report::Coveralls
       - run: perl -V
-      - name: Run coverage test and upload to CodeCov
-        run: make codecovbash
+      - name: Run coverage tests
+        run: make codecovbash coveralls
       - uses: codecov/codecov-action@v2
         with:
           files: cover_db/codecov.json
