@@ -68,7 +68,7 @@ jobs:
           perl-version: "latest"
           install-modules-with: cpanm
           install-modules-args: --verbose --notest --skip-satisfied
-          install-modules: Config::File File::BaseDir File::Rsync File::Touch File::Which IPC::Run Moo Test::Differences Test::File Test::Perl::Critic String::Random String::Expand Try::Tiny File::Slurper Devel::Cover::Report::Codecovbash
+          install-modules: Config::File File::BaseDir File::Rsync File::Touch File::Which IPC::Run Moo Test::Differences Test::File Test::Perl::Critic String::Random String::Expand Try::Tiny File::Slurper Devel::Cover Devel::Cover::Report::Codecovbash
       - run: perl -V
       - name: Run coverage test and upload to CodeCov
         run: make codecovbash
