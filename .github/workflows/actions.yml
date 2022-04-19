@@ -71,6 +71,8 @@ jobs:
           install-modules: Config::File File::BaseDir File::Rsync File::Touch File::Which IPC::Run Moo Test::Differences Test::File Test::Perl::Critic String::Random String::Expand Try::Tiny File::Slurper Devel::Cover::Report::Codecovbash
       - run: perl -V
       - name: Run coverage test and upload to CodeCov
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: make codecovbash
+      - uses: codecov/codecov-action@v2
+        with:
+          files: cover_db/codecov.json
+          verbose: true
