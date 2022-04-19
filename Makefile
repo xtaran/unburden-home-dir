@@ -49,6 +49,8 @@ coveralls: determine-coverage
 	cover -report coveralls
 codecov: determine-coverage
 	cover -report codecov
+codecovbash: determine-coverage
+	cover -report codecovbash
 
 install: unburden-home-dir.1
 	install -d $(DESTDIR)/etc/X11/Xsession.d/
