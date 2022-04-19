@@ -43,14 +43,14 @@ determine-coverage:
 	prove --exec 'env    TMPDIR=/foo XDG_RUNTIME_DIR=/bar PERL5OPT=-MDevel::Cover=-ignore_re,^t/ perl' t/*.t
 
 cover: determine-coverage
-	cover -report html_basic
+	cover -select bin/unburden-home-dir -report html_basic
 
 coveralls: determine-coverage
-	cover -report coveralls
+	cover -select bin/unburden-home-dir -report coveralls
 codecov: determine-coverage
-	cover -report codecov
+	cover -select bin/unburden-home-dir -report codecov
 codecovbash: determine-coverage
-	cover -report codecovbash
+	cover -select bin/unburden-home-dir -report codecovbash
 
 install: unburden-home-dir.1
 	install -d $(DESTDIR)/etc/X11/Xsession.d/
