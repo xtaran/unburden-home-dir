@@ -1,4 +1,4 @@
-unburden-home-dir (0.4.2) UNRELEASED; urgency=medium
+unburden-home-dir (0.4.2) unstable; urgency=medium
 
   * Support %i in the FILELAYOUT configuration variable to insert the
     current numerical user id to allow one using /run/user/<numerical_id>/ as
@@ -15,7 +15,7 @@ unburden-home-dir (0.4.2) UNRELEASED; urgency=medium
     + Switch to using "cover -report codecovbash" instead of "… codecov".
   * Fix issues under test environments which have set $XDG_CONFIG_HOME.
 
- -- Axel Beckert <abe@debian.org>  Sun, 13 Feb 2022 21:58:14 +0100
+ -- Axel Beckert <abe@debian.org>  Tue, 26 Apr 2022 23:47:06 +0200
 
 unburden-home-dir (0.4.1.3) unstable; urgency=medium
 
