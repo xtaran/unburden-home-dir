@@ -31,9 +31,9 @@ jobs:
           - "5.14"
           - "5.12"
           - "5.10"
-        include:
-          - os: "macos-latest"
-            perl: "latest"
+#        include:
+#          - os: "macos-latest"
+#            perl: "latest"
     name: Perl ${{ matrix.perl }} on ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
