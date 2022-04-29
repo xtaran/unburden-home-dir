@@ -1,5 +1,16 @@
+unburden-home-dir (0.4.2.1) UNRELEASED; urgency=medium
+
+  * Mention Marcel Partap's bug fix from pull request #20 in the previous
+    changelog entry.
+
+ -- Axel Beckert <abe@debian.org>  Sat, 30 Apr 2022 00:06:43 +0200
+
 unburden-home-dir (0.4.2) unstable; urgency=medium
 
+  [ Marcel Partap ]
+  * Only append UID if XDG_RUNTIME_DIR is unset. (GH #20)
+
+  [ Axel Beckert ]
   * Support %i in the FILELAYOUT configuration variable to insert the
     current numerical user id to allow one using /run/user/<numerical_id>/ as
     TARGETDIR.
