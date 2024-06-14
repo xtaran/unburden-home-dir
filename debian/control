@@ -24,7 +24,6 @@ Build-Depends: debhelper-compat (= 13),
 # Required for building the documentation
                mkdocs <!nodoc>,
                moreutils <!nodoc>,
-               pcregrep <!nodoc>,
 # Required for building the man pages
                ronn | ruby-ronn (<< 0.7.3-5.1~) <!nodoc>
 Build-Conflicts: libperl-critic-freenode-perl
