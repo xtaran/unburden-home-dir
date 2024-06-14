@@ -4,6 +4,8 @@ unburden-home-dir (0.4.2.1) UNRELEASED; urgency=medium
     changelog entry.
   * Replace pcregrep (which hasn't been ported from libpcre3 to libpcre2)
     by a pure Perl oneliner. Drop according build-dep. (Closes: #1073114)
+  * Also Build-Conflict against renamed package
+    libperl-critic-community-perl.
 
  -- Axel Beckert <abe@debian.org>  Sat, 30 Apr 2022 00:06:43 +0200
 
