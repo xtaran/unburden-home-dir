@@ -6,6 +6,8 @@ unburden-home-dir (0.4.2.1) UNRELEASED; urgency=medium
     by a pure Perl oneliner. Drop according build-dep. (Closes: #1073114)
   * Also Build-Conflict against renamed package
     libperl-critic-community-perl.
+  * .perlcriticrc: Exclude ValuesAndExpressions::ProhibitFiletest_f (from
+    the Perl::Critic::Pulp collection) as the use -f is intentional.
 
  -- Axel Beckert <abe@debian.org>  Sat, 30 Apr 2022 00:06:43 +0200
 

@@ -1,6 +1,6 @@
 severity = 3
 verbose = 8
-exclude = ErrorHandling::RequireCarping ControlStructures::ProhibitCascadingIfElse
+exclude = ErrorHandling::RequireCarping ControlStructures::ProhibitCascadingIfElse ValuesAndExpressions::ProhibitFiletest_f
 
 # Raise max_mccabe by 5 each.
 [Subroutines::ProhibitExcessComplexity]
