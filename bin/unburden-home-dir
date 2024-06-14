@@ -688,7 +688,7 @@ sub exchange_wildcards_and_replacements {
             $replacement =~ s/ \% (\d+) /$wildcardtype/x;
         } else {
             die "Assertion: exchange_wildcards_and_replacements():\n".
-                "'$replacement' =~ / \% (\\d+) /x\n".
+                "'$replacement' =~ / % (\\d+) /x\n".
                 "but\n".
                 "$wildcard =~ $wildcard_re\n".
                 "didn't.\n";

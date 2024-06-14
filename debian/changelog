@@ -8,6 +8,7 @@ unburden-home-dir (0.4.2.1) UNRELEASED; urgency=medium
     libperl-critic-community-perl.
   * .perlcriticrc: Exclude ValuesAndExpressions::ProhibitFiletest_f (from
     the Perl::Critic::Pulp collection) as the use -f is intentional.
+  * Remove unneeded backslash before percent sign in double quoted string.
 
  -- Axel Beckert <abe@debian.org>  Sat, 30 Apr 2022 00:06:43 +0200
 
