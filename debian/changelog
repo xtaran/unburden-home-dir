@@ -12,6 +12,7 @@ unburden-home-dir (0.4.2.1) UNRELEASED; urgency=medium
   * debian/rules: Also replace /usr/share/doc/u…-h…-d…/html/css/fonts with
     a symlink to /usr/share/fonts-font-awesome/fonts. Fixes reoccured
     font-in-non-font-package and font-outside-font-dir lintian warnings.
+  * Bracketize lintian overrides.
 
  -- Axel Beckert <abe@debian.org>  Sat, 30 Apr 2022 00:06:43 +0200
 

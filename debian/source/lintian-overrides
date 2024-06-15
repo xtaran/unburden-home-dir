@@ -1,3 +1,3 @@
 # False positive, this is just the code to be backwards compatible
-source: uses-deprecated-adttmp debian/tests/prove (line 9)
-source: uses-deprecated-adttmp debian/tests/prove (line 10)
+source: uses-deprecated-adttmp [debian/tests/prove:9]
+source: uses-deprecated-adttmp [debian/tests/prove:10]
