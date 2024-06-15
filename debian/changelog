@@ -9,6 +9,9 @@ unburden-home-dir (0.4.2.1) UNRELEASED; urgency=medium
   * .perlcriticrc: Exclude ValuesAndExpressions::ProhibitFiletest_f (from
     the Perl::Critic::Pulp collection) as the use -f is intentional.
   * Remove unneeded backslash before percent sign in double quoted string.
+  * debian/rules: Also replace /usr/share/doc/u…-h…-d…/html/css/fonts with
+    a symlink to /usr/share/fonts-font-awesome/fonts. Fixes reoccured
+    font-in-non-font-package and font-outside-font-dir lintian warnings.
 
  -- Axel Beckert <abe@debian.org>  Sat, 30 Apr 2022 00:06:43 +0200
 
